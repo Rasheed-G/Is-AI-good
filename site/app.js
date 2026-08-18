@@ -276,7 +276,7 @@ function esc(str) {
 // POST target must be a small serverless function (Cloudflare Pages / Netlify / Vercel) that
 // holds the token and does the real spam checks (Turnstile + per-IP rate limit). To go live:
 // set FEEDBACK_ENDPOINT below and have that endpoint accept { type, comment, email, page, ts }.
-const FEEDBACK_ENDPOINT = null;      // e.g. "/api/feedback" once the proxy exists
+const FEEDBACK_ENDPOINT = "/api/feedback";   // Cloudflare Pages Function — functions/api/feedback.js
 const FB_MIN_INTERVAL_MS = 30000;    // client throttle: one send per 30s (a courtesy, not security)
 
 (function initFeedback() {
