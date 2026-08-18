@@ -541,18 +541,6 @@
       "featured": false
     },
     {
-      "id": "recwEobzOxAaWHqL1",
-      "title": "Flag 'calling for police and Protestants to be killed ' condemned by MP",
-      "theme": "Bias & discrimination",
-      "format": "Image",
-      "summary": "AI-generated content calls for violence against police and Protestants",
-      "sourceUrl": "https://www.bbc.com/news/articles/c9q92p88gq9o",
-      "mediaUrl": "https://ichef.bbci.co.uk/news/1024/branded_news/0ba6/live/82c89810-9817-11f1-b2ab-0dd01740f9f6.jpg",
-      "date": "2026-08-15",
-      "sensitivity": "Sensitive",
-      "featured": false
-    },
-    {
       "id": "rechaIbSJ6G5LP8pW",
       "title": "Flock backlash could reshape local ALPR use, but company says change is up to police, lawmakers",
       "theme": "Bias & discrimination",
@@ -709,6 +697,18 @@
       "featured": false
     },
     {
+      "id": "rec79ZP2JvxlIcmld",
+      "title": "Patna minor's death exposes AI deepfake sextortion ; suspect held from Hazaribagh",
+      "theme": "Deepfakes & image abuse",
+      "format": "Image",
+      "summary": "Patna Police reported that a 12-year-old student in Punaichak died after being blackmailed with AI-generated explicit images. Authorities arrested a suspect from Hazaribagh in connection with the case.",
+      "sourceUrl": "https://we-news.com/in/patna-minor-s-death-exposes-ai-deepfake-sextortion-suspect-held-from-hazaribagh",
+      "mediaUrl": "https://we-news.com/in/uploads/ia-patna-minor-s-death-exposes-ai-deepfake-sextortion-suspect-held-from-hazaribagh-01495d.webp",
+      "date": "2026-08-16",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recOe7mm4CMC2ACn7",
       "title": "Rideshare Stimulator's wild AI saga ends with Steam disclosure",
       "theme": "Jobs & livelihoods",
@@ -769,6 +769,18 @@
       "featured": false
     },
     {
+      "id": "recwZZT2DGeEeuLoW",
+      "title": "A Kane County man is accused of using artificial intelligence to create child pornography.",
+      "theme": "Kids & safety",
+      "format": "Text",
+      "summary": "A Kane County man was charged in Rock Island County with creating AI-generated child sexual abuse material. Officials stated the images may depict non-existent children, marking the county’s first case involving AI-generated CSAM.",
+      "sourceUrl": "https://www.threads.com/@abc7chicago/post/DcJ9FyqlLJt/a-kane-county-man-is-accused-of-using-artificial-intelligence-to-create-child/",
+      "mediaUrl": "",
+      "date": "2026-08-17",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recJfVISPKPUhHz8f",
       "title": "A week after OpenAI paused a cyber-capable model, two labs shipped one anyway, through opposite doors",
       "theme": "Even the experts are worried",
@@ -805,6 +817,18 @@
       "featured": false
     },
     {
+      "id": "recuanSJcu2h0L0xJ",
+      "title": "AI-generated material found in one-third of P.E.I. RCMP online child abuse cases",
+      "theme": "Deepfakes & image abuse",
+      "format": "Image",
+      "summary": "In Prince Edward Island, the RCMP found AI-generated material in one-third of online child abuse cases. The Canadian Centre for Child Protection states this causes significant harm, even when no real children are depicted.",
+      "sourceUrl": "https://www.cbc.ca/news/canada/prince-edward-island/pei-artificial-intelligence-online-child-abuse-9.7308760",
+      "mediaUrl": "https://i.cbc.ca/ais/1.5666581,1717212396220/full/max/0/default.jpg?im=Crop%2Crect%3D%280%2C0%2C1280%2C720%29%3BResize%3D620",
+      "date": "2026-08-17",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recruN1Ip7NH4p3SL",
       "title": "Amazon Rekognition faces scrutiny in false arrest lawsuit",
       "theme": "Bias & discrimination",
@@ -829,6 +853,18 @@
       "featured": false
     },
     {
+      "id": "rectGFtUJ5cRISii4",
+      "title": "Another woman joins lawsuit accusing Grok of generating CSAM",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "A Wyoming woman sued Grok, alleging her stepfather used the AI chatbot to generate thousands of fake sexually explicit images of her, constituting child sexual abuse material.",
+      "sourceUrl": "https://www.engadget.com/2237875/another-woman-joins-lawsuit-accusing-grok-of-generating-csam/",
+      "mediaUrl": "https://www.engadget.com/img/gallery/another-woman-joins-lawsuit-accusing-grok-of-generating-csam/l-intro-1786945799.jpg",
+      "date": "2026-08-17",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recCuaULYo4zA5C3y",
       "title": "As drought grips Virginia, Prince William County challenges hidden data center water use",
       "theme": "Environmental / data-centre impact",
@@ -850,6 +886,30 @@
       "mediaUrl": "https://img.hoodline.com/2026/8/dallas-adds-1200-ai-cameras-ahead-of-world-cup-vows-no-face-recognition-5.webp",
       "date": "2026-08-17",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recJ6wZvecjuGFXo8",
+      "title": "Grok AI CSAM Lawsuit: 7,000 Deepfakes, Wyoming Class Action",
+      "theme": "Kids & safety",
+      "format": "Text",
+      "summary": "In 2026, a Wyoming class-action lawsuit was filed against xAI, alleging its Grok chatbot facilitated the creation of 7,000 child sexual abuse material deepfakes.",
+      "sourceUrl": "https://easternherald.com/2026/08/17/grok-ai-csam-lawsuit-deepfakes-wyoming-class-action-xai/",
+      "mediaUrl": "",
+      "date": "2026-08-17",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "rec5xSvxmz0G6tx8x",
+      "title": "Man tells ChatGPT of intent to rape and kill ex-partner; ChatGPT alerts FBI",
+      "theme": "Even the experts are worried",
+      "format": "Image",
+      "summary": "A man told ChatGPT he intended to rape and kill his ex-partner. OpenAI reported the threat to the FBI, leading to the man’s arrest before he could carry out the attack.",
+      "sourceUrl": "https://www.thehansindia.com/amp/tech/man-tells-chatgpt-of-intent-to-rape-and-kill-ex-partner-chatgpt-alerts-fbi-1110683",
+      "mediaUrl": "https://assets.thehansindia.com/h-upload/2026/08/17/1690689-use-ai-chatbots-to-talk-about-violence-crimes-and-even-plans-to-hurt-others.webp",
+      "date": "2026-08-17",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -910,6 +970,18 @@
       "mediaUrl": "",
       "date": "2026-08-17",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recsYjcyPl0VUuGWM",
+      "title": "Teen charged with murder of mother and brother used ChatGPT to create 'fantasy stories ...",
+      "theme": "AI companions & mental health",
+      "format": "Image",
+      "summary": "A Massachusetts teen charged with murdering his mother and brother used ChatGPT to create fantasy stories related to the killings, according to CNN.",
+      "sourceUrl": "https://www.eastidahonews.com/2026/08/teen-charged-with-murder-of-mother-and-brother-used-chatgpt-to-create-fantasy-stories-about-killing-family-officials-say/",
+      "mediaUrl": "https://s3.us-west-2.amazonaws.com/assets.eastidahonews.com/wp-content/uploads/2026/08/bitcentral_2.0-bbacce131078dfe7a6293b35e1e231a-2339829-1.jpg",
+      "date": "2026-08-17",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
