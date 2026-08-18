@@ -1,0 +1,15 @@
+# Secrets — never commit these
+.env.local
+.env*.local
+
+# Python cache
+__pycache__/
+*.pyc
+
+# One-off operational restore point (old card summaries before the copy rewrite)
+scripts/summary_backup.json
+
+# Dependencies / build output (for later)
+node_modules/
+dist/
+.vercel/

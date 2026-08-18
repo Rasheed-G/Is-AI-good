@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <title>Is AI Good?</title>
+  <meta name="description" content="Real, sourced stories of the dangers and risks of AI — how it is harming and affecting real people, in their original format and linked back to source." />
+  <link rel="stylesheet" href="styles.css?v=20260817" />
+  <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed).
+       SETUP: after deploying, create a Web Analytics site in the Cloudflare dashboard,
+       copy the beacon token, and replace PASTE_CLOUDFLARE_TOKEN_HERE below with it.
+       Until the real token is set it simply reports nothing — harmless. -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "PASTE_CLOUDFLARE_TOKEN_HERE"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="masthead">Is&nbsp;AI<span class="l2">Good?<span class="cur" aria-hidden="true"></span></span></h1>
+      <p class="strap">Real stories on the dangers and risks of AI</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search stories…" aria-label="Search stories" autocomplete="off" />
+      <label class="toggle">
+        <input type="checkbox" id="sensToggle" />
+        <span class="track" aria-hidden="true"></span>
+        Show sensitive topics
+      </label>
+      <div id="themes" class="theme-filters" role="group" aria-label="Filter by theme"></div>
+    </div>
+
+    <p id="count" class="count" aria-live="polite"></p>
+
+    <section id="grid" class="grid hide-sensitive" aria-label="Stories"></section>
+
+    <p id="empty" class="empty" hidden>No stories match your search.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Every story links to its original source. Summaries are written to be factual and neutral.
+         Spotted something wrong, or want a story taken down? This is a work in progress.</p>
+    </div>
+  </footer>
+
+  <!-- Floating feedback button + modal. The form works client-side; SENDING is inert until
+       FEEDBACK_ENDPOINT is set in app.js (a static page must never ship an Airtable write
+       token — sending needs a server-side proxy). Honeypot + length caps are baked in here;
+       real spam protection (Turnstile + per-IP rate limit) belongs in that endpoint later. -->
+  <button id="fbOpen" class="fb-open" type="button" aria-haspopup="dialog" aria-controls="fbPanel">
+    <span aria-hidden="true">✍</span> Feedback
+  </button>
+  <div id="fbPanel" class="fb-panel" role="dialog" aria-modal="true" aria-labelledby="fbTitle" hidden>
+    <div class="fb-card">
+      <div class="fb-head">
+        <h2 id="fbTitle">Send feedback</h2>
+        <button id="fbClose" class="fb-close" type="button" aria-label="Close feedback">✕</button>
+      </div>
+      <p class="fb-intro">This site is a work in progress — tell us what's useful, what's broken, or what's wrong.</p>
+      <form id="fbForm" novalidate>
+        <label class="fb-field">
+          <span>Type</span>
+          <select name="type" id="fbType">
+            <option value="Bug">Something's broken (bug)</option>
+            <option value="Suggestion">Suggestion</option>
+            <option value="Content issue">Content issue (wrong / should be removed)</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <label class="fb-field">
+          <span>Your feedback</span>
+          <textarea name="comment" id="fbComment" rows="4" maxlength="1000" required
+            placeholder="What did you think? What's broken or wrong?"></textarea>
+        </label>
+        <label class="fb-field">
+          <span>Email <em>(optional — only if you'd like a reply)</em></span>
+          <input type="email" name="email" id="fbEmail" maxlength="120" autocomplete="email" placeholder="you@example.com" />
+        </label>
+        <!-- honeypot: off-screen, hidden from humans; a bot that fills it gets silently dropped -->
+        <div class="fb-hp" aria-hidden="true">
+          <label>Leave this field empty
+            <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <p id="fbNote" class="fb-note" role="status" aria-live="polite"></p>
+        <button id="fbSubmit" class="fb-submit" type="submit">Send feedback</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ?v= is a cache-buster: bump the date when app.js/styles.css change so browsers re-fetch. -->
+  <script src="app.js?v=20260817"></script>
+</body>
+</html>

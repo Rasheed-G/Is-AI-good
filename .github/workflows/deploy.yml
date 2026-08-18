@@ -1,0 +1,59 @@
+name: Publish & deploy
+
+# The editorial gate + site build, committed back so the static host redeploys.
+#   publish.py  -> Approved and (auto) Safe Candidates become Published; Sensitive held
+#   build_data.py -> pulls Published rows into site/stories.json
+#   commit      -> pushing site/stories.json triggers the host's auto-deploy
+#
+# Runs:
+#   * after each harvest completes (workflow_run) — new content goes live promptly
+#   * every 6 hours (schedule) — picks up manual approvals of Sensitive items and
+#     removals (Status set to Rejected) made in Airtable between harvests
+#   * on demand (workflow_dispatch) — e.g. to push a removal live immediately
+#
+# HOST WIRING (one-time, owner, host-side — no code here): connect the repo to a
+# free static host (Cloudflare Pages / Netlify / Vercel), set the site directory
+# to `site/`, no build command. Each commit this workflow pushes then auto-deploys.
+on:
+  workflow_run:
+    workflows: ["Daily harvest", "Weekly sweep"]
+    types: [completed]
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Publish (editorial gate)
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          AUTOPUBLISH: "1"
+          PYTHONUNBUFFERED: "1"
+        run: python -u scripts/publish.py
+      - name: Build site data
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          PYTHONUNBUFFERED: "1"
+        run: python -u scripts/build_data.py
+      - name: Commit refreshed stories.json (triggers host deploy)
+        run: |
+          git config user.name "harvest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add site/stories.json
+          git diff --cached --quiet || git commit -m "Auto: refresh published stories [skip ci]"
+          git push
+# Publish & deploy workflow for AI Harm Watch.
