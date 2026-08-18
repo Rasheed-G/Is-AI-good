@@ -6,7 +6,7 @@
   <meta name="robots" content="index,follow" />
   <title>Is AI Good?</title>
   <meta name="description" content="Real, sourced stories of the dangers and risks of AI — how it is harming and affecting real people, in their original format and linked back to source." />
-  <link rel="stylesheet" href="styles.css?v=20260818" />
+  <link rel="stylesheet" href="styles.css?v=20260819" />
   <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed).
        SETUP: after deploying, create a Web Analytics site in the Cloudflare dashboard,
        copy the beacon token, and replace 9a041a5e0e46412bb8195564e5b1f1d7 below with it.
@@ -31,6 +31,13 @@
         <span class="track" aria-hidden="true"></span>
         Show sensitive topics
       </label>
+      <!-- Mobile-only toggle: the 13 theme chips fill a phone's first screen, so on
+           narrow viewports they collapse behind this button (which shows the active
+           theme). Hidden on desktop, where the chips stay always-visible. -->
+      <button id="themeToggle" class="theme-toggle" type="button" aria-expanded="false" aria-controls="themes">
+        <span class="tt-label">Theme: <strong id="themeCurrent">All</strong></span>
+        <span class="tt-caret" aria-hidden="true">▾</span>
+      </button>
       <div id="themes" class="theme-filters" role="group" aria-label="Filter by theme"></div>
     </div>
 
@@ -93,6 +100,6 @@
   </div>
 
   <!-- ?v= is a cache-buster: bump the date when app.js/styles.css change so browsers re-fetch. -->
-  <script src="app.js?v=20260818"></script>
+  <script src="app.js?v=20260819"></script>
 </body>
 </html>

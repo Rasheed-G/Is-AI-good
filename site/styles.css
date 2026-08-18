@@ -76,6 +76,25 @@ a { color: inherit; }
 .chip.active { background: var(--ink); color: #fff; }
 .chip:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 2px; }
 
+/* Mobile theme-filter collapse. The 13 chips fill a phone's first screen, so below
+   the breakpoint the chip row hides behind #themeToggle (which names the active theme)
+   and expands on tap. The button is hidden on desktop, where the chips stay visible. */
+.theme-toggle { display: none; }
+@media (max-width: 640px) {
+  .theme-toggle {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%;
+    border: 2px solid var(--ink); background: var(--surface); color: var(--ink);
+    padding: 10px 14px; font-family: var(--mono); font-size: .8rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .03em; cursor: pointer; text-align: left;
+  }
+  .theme-toggle .tt-label strong { color: var(--orange-ink); }
+  .theme-toggle .tt-caret { flex: none; transition: transform .15s; }
+  .theme-toggle[aria-expanded="true"] .tt-caret { transform: rotate(180deg); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 2px; }
+  .theme-filters { display: none; margin-top: 8px; }
+  .theme-filters.open { display: flex; }
+}
+
 /* sensitive toggle */
 .toggle {
   display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none;

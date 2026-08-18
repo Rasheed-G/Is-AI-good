@@ -18,6 +18,8 @@ const $count = document.getElementById("count");
 const $empty = document.getElementById("empty");
 const $search = document.getElementById("search");
 const $sens = document.getElementById("sensToggle");
+const $themeToggle = document.getElementById("themeToggle");
+const $themeCurrent = document.getElementById("themeCurrent");
 
 init();
 
@@ -38,6 +40,12 @@ async function init() {
   }, 200));
   $sens.addEventListener("change", () => { showSensitive = $sens.checked; render(); });
 
+  // Mobile: the theme chips collapse behind #themeToggle; tapping it expands/hides them.
+  $themeToggle.addEventListener("click", () => {
+    const open = $themes.classList.toggle("open");
+    $themeToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
   // Share (event-delegated) — system share sheet on mobile, clipboard on desktop.
   $grid.addEventListener("click", onShareClick);
 
@@ -56,6 +64,10 @@ function buildThemeChips() {
     b.addEventListener("click", () => {
       activeTheme = t;
       document.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c.textContent === t));
+      // Keep the mobile toggle's label in sync, then collapse the chip list (no-op on desktop).
+      $themeCurrent.textContent = t;
+      $themes.classList.remove("open");
+      $themeToggle.setAttribute("aria-expanded", "false");
       render();
     });
     $themes.appendChild(b);
