@@ -11,7 +11,7 @@ Call 3 is the production case: same fixed rubric, different item each time.
 Run in the CLOUD (Groq 403s the owner's local IP). Reads .env.local itself.
 No secrets are printed.
 """
-import os, sys, json, pathlib
+import os, sys, json, time, pathlib
 
 # --- self-load .env.local (KEY=VALUE lines), never print values ---------------
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -74,27 +74,31 @@ def show(tag, rec):
     print(f"  cached_tokens     : {cached}")
     print(f"  completion_tokens : {u.get('completion_tokens')}")
     print(f"  total_tokens      : {u.get('total_tokens')}")
+    print(f"  prompt_time       : {u.get('prompt_time')}")
     print(f"  full usage        : {json.dumps(u)}")
 
 
-print("Probing Groq prompt caching on", H.JUDGE_MODEL, "...")
-H.groq_judge(post_a)                      # call 1 — cold
-H.groq_judge(post_a)                      # call 2 — identical
-H.groq_judge(post_b)                      # call 3 — same rubric, different item
+GAP = 10  # seconds between calls — mimic production JUDGE_SLEEP so the cache can warm
+print(f"Probing Groq prompt caching on {H.JUDGE_MODEL} (calls {GAP}s apart) ...")
+H.groq_judge(post_a); time.sleep(GAP)     # call 1 — cold
+H.groq_judge(post_a); time.sleep(GAP)     # call 2 — identical prompt
+H.groq_judge(post_b); time.sleep(GAP)     # call 3 — same rubric, different item
+H.groq_judge(post_a)                      # call 4 — A again, cache fully warm
 
-labels = ["call1 A cold", "call2 A identical", "call3 B same-rubric"]
+labels = ["call1 A cold", "call2 A identical", "call3 B same-rubric", "call4 A warm"]
 for lbl, rec in zip(labels, records):
     show(lbl, rec)
 
 print("\n--- verdict ---")
-if len(records) >= 3:
-    c2 = (records[1]["usage"].get("prompt_tokens_details") or {}).get("cached_tokens", 0) or 0
-    c3 = (records[2]["usage"].get("prompt_tokens_details") or {}).get("cached_tokens", 0) or 0
-    print(f"call2 cached_tokens = {c2} (identical prompt)")
-    print(f"call3 cached_tokens = {c3} (production case: same rubric, new item)")
-    if c3 and c3 > 0:
-        print("=> CACHING WORKS on our rubric prefix. The ~rubric tokens above are NOT "
-              "counted toward the rate-limit bucket on repeat calls.")
-    else:
-        print("=> No cache hit on call3 — rubric prefix likely under the model min "
-              "cacheable length; would need to pad/restructure the prefix.")
+def cached_of(i):
+    return (records[i]["usage"].get("prompt_tokens_details") or {}).get("cached_tokens", 0) or 0
+for i, lbl in enumerate(labels):
+    if i < len(records):
+        print(f"{lbl}: cached_tokens={cached_of(i)}  prompt_time={records[i]['usage'].get('prompt_time')}")
+warm = max((cached_of(i) for i in range(1, len(records))), default=0)
+if warm > 0:
+    print(f"=> CACHING WORKS: up to {warm} prefix tokens cached on a warm call. Those are NOT "
+          "counted toward the rate-limit bucket, so the fixed rubric is ~free after the first call.")
+else:
+    print("=> Still no cache hit even with spacing. Groq is not caching our judge prefix "
+          "(no prompt_tokens_details returned). Prefix-caching won't help the token budget here.")
