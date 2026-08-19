@@ -50,10 +50,13 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/build_data.py
       - name: Commit refreshed stories.json (triggers host deploy)
+        # NOTE: no [skip ci] in the message. Cloudflare Pages treats [skip ci] as a
+        # skip-build token, which suppressed the very deploy this commit exists to fire.
+        # No workflow here triggers on: push, so there is no Actions loop to guard against.
         run: |
           git config user.name "harvest-bot"
           git config user.email "actions@users.noreply.github.com"
           git add site/stories.json
-          git diff --cached --quiet || git commit -m "Auto: refresh published stories [skip ci]"
+          git diff --cached --quiet || git commit -m "Auto: refresh published stories"
           git push
 # Publish & deploy workflow for AI Harm Watch.
