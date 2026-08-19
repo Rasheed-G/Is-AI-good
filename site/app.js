@@ -18,6 +18,8 @@ const $count = document.getElementById("count");
 const $empty = document.getElementById("empty");
 const $search = document.getElementById("search");
 const $sens = document.getElementById("sensToggle");
+const $filtersToggle = document.getElementById("filtersToggle");
+const $filtersPanel = document.getElementById("filtersPanel");
 const $themeToggle = document.getElementById("themeToggle");
 const $themeCurrent = document.getElementById("themeCurrent");
 
@@ -40,7 +42,13 @@ async function init() {
   }, 200));
   $sens.addEventListener("change", () => { showSensitive = $sens.checked; render(); });
 
-  // Mobile: the theme chips collapse behind #themeToggle; tapping it expands/hides them.
+  // Mobile: search, the sensitive toggle, and the theme filters collapse behind
+  // #filtersToggle; tapping it expands/hides the whole panel.
+  $filtersToggle.addEventListener("click", () => {
+    const open = $filtersPanel.classList.toggle("open");
+    $filtersToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  // Mobile: within the panel, the theme chips nest behind their own #themeToggle.
   $themeToggle.addEventListener("click", () => {
     const open = $themes.classList.toggle("open");
     $themeToggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -64,7 +72,7 @@ function buildThemeChips() {
     b.addEventListener("click", () => {
       activeTheme = t;
       document.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c.textContent === t));
-      // Keep the mobile toggle's label in sync, then collapse the chip list (no-op on desktop).
+      // Keep the theme sub-toggle's label in sync, then collapse the chip list (no-op on desktop).
       $themeCurrent.textContent = t;
       $themes.classList.remove("open");
       $themeToggle.setAttribute("aria-expanded", "false");

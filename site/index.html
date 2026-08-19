@@ -6,7 +6,7 @@
   <meta name="robots" content="index,follow" />
   <title>Is AI Good?</title>
   <meta name="description" content="Real, sourced stories of the dangers and risks of AI — how it is harming and affecting real people, in their original format and linked back to source." />
-  <link rel="stylesheet" href="styles.css?v=20260819.1" />
+  <link rel="stylesheet" href="styles.css?v=20260819.2" />
   <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed).
        SETUP: after deploying, create a Web Analytics site in the Cloudflare dashboard,
        copy the beacon token, and replace PASTE_CLOUDFLARE_TOKEN_HERE below with it.
@@ -25,20 +25,29 @@
 
   <main class="wrap">
     <div class="controls">
-      <input id="search" type="search" placeholder="Search stories…" aria-label="Search stories" autocomplete="off" />
-      <label class="toggle">
-        <input type="checkbox" id="sensToggle" />
-        <span class="track" aria-hidden="true"></span>
-        Show sensitive topics
-      </label>
-      <!-- Mobile-only toggle: the 13 theme chips fill a phone's first screen, so on
-           narrow viewports they collapse behind this button (which shows the active
-           theme). Hidden on desktop, where the chips stay always-visible. -->
-      <button id="themeToggle" class="theme-toggle" type="button" aria-expanded="false" aria-controls="themes">
-        <span class="tt-label">Theme: <strong id="themeCurrent">All</strong></span>
+      <!-- Mobile-only master toggle: search, the sensitive-topics switch, and the 13 theme
+           chips together fill a phone's first screen, so on narrow viewports they all collapse
+           into #filtersPanel behind this one button. Hidden on desktop, where the controls
+           stay always-visible. -->
+      <button id="filtersToggle" class="filters-toggle" type="button" aria-expanded="false" aria-controls="filtersPanel">
+        <span class="ft-label">Search &amp; filters</span>
         <span class="tt-caret" aria-hidden="true">▾</span>
       </button>
-      <div id="themes" class="theme-filters" role="group" aria-label="Filter by theme"></div>
+      <div id="filtersPanel" class="filters-panel">
+        <input id="search" type="search" placeholder="Search stories…" aria-label="Search stories" autocomplete="off" />
+        <label class="toggle">
+          <input type="checkbox" id="sensToggle" />
+          <span class="track" aria-hidden="true"></span>
+          Show sensitive topics
+        </label>
+        <!-- Mobile-only sub-toggle: the 13 theme chips nest one level deeper behind this
+             button (which shows the active theme). Hidden on desktop, where chips stay visible. -->
+        <button id="themeToggle" class="theme-toggle" type="button" aria-expanded="false" aria-controls="themes">
+          <span class="tt-label">Theme: <strong id="themeCurrent">All</strong></span>
+          <span class="tt-caret" aria-hidden="true">▾</span>
+        </button>
+        <div id="themes" class="theme-filters" role="group" aria-label="Filter by theme"></div>
+      </div>
     </div>
 
     <p id="count" class="count" aria-live="polite"></p>
@@ -100,6 +109,6 @@
   </div>
 
   <!-- ?v= is a cache-buster: bump the date when app.js/styles.css change so browsers re-fetch. -->
-  <script src="app.js?v=20260819.1"></script>
+  <script src="app.js?v=20260819.2"></script>
 </body>
 </html>

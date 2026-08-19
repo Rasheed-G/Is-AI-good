@@ -76,21 +76,32 @@ a { color: inherit; }
 .chip.active { background: var(--ink); color: #fff; }
 .chip:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 2px; }
 
-/* Mobile theme-filter collapse. The 13 chips fill a phone's first screen, so below
-   the breakpoint the chip row hides behind #themeToggle (which names the active theme)
-   and expands on tap. The button is hidden on desktop, where the chips stay visible. */
-.theme-toggle { display: none; }
+/* Mobile controls collapse. Search, the sensitive toggle, and the theme filters together
+   fill a phone's first screen, so below the breakpoint they collapse into #filtersPanel
+   behind the #filtersToggle button — and the 13 theme chips nest one level deeper behind
+   their own #themeToggle. On desktop both buttons are hidden and the panel is transparent
+   (display:contents), so the controls lay out exactly as before. */
+.filters-toggle, .theme-toggle { display: none; }
+.filters-panel { display: contents; }
 @media (max-width: 640px) {
-  .theme-toggle {
+  .controls { flex-direction: column; align-items: stretch; }
+  .filters-toggle, .theme-toggle {
     display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%;
     border: 2px solid var(--ink); background: var(--surface); color: var(--ink);
     padding: 10px 14px; font-family: var(--mono); font-size: .8rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: .03em; cursor: pointer; text-align: left;
   }
   .theme-toggle .tt-label strong { color: var(--orange-ink); }
-  .theme-toggle .tt-caret { flex: none; transition: transform .15s; }
+  .filters-toggle .tt-caret, .theme-toggle .tt-caret { flex: none; transition: transform .15s; }
+  .filters-toggle[aria-expanded="true"] .tt-caret,
   .theme-toggle[aria-expanded="true"] .tt-caret { transform: rotate(180deg); }
+  .filters-toggle:focus-visible,
   .theme-toggle:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 2px; }
+  .filters-panel { display: none; }
+  .filters-panel.open { display: flex; flex-direction: column; gap: 12px; align-items: stretch; margin-top: 8px; }
+  /* In the panel's vertical column the flex:1 1 240px basis would become a 240px HEIGHT,
+     making the search box huge — pin it back to its natural single-row height. */
+  #search { flex: 0 0 auto; }
   .theme-filters { display: none; margin-top: 8px; }
   .theme-filters.open { display: flex; }
 }
