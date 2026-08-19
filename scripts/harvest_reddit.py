@@ -83,11 +83,21 @@ REDDIT_SLEEP = 12         # seconds between Reddit fetches. NB: cloud IPs get IP
 # Per-stage Groq pacing. Each model has its own 8K-TPM bucket, so stages don't share a budget;
 # spacing just keeps each stage under its own TPM. Tune per model in the refine phase.
 TRIAGE_SLEEP = 9          # 20b, batched ~1–2K tok/call
-JUDGE_SLEEP  = 8          # 120b, ~900 tok/call
+JUDGE_SLEEP  = 8          # 120b, ~900 tok/call (single-item path)
 COPY_SLEEP   = 6          # qwen, ~700 tok/call, low volume (keepers only)
 GROQ_SLEEP = JUDGE_SLEEP  # back-compat alias
-MAX_RUNTIME_MIN = 44      # hard wall-clock budget (CI timeout is 50m): stop gracefully + log.
-                          # Raised 38→44 to fit the added Stage-A/Stage-C calls.
+# Stage B (judge) batching — send N items per call under ONE rubric copy (like Stage A). The
+# ~1,090-token rubric travels once per batch instead of once per item, cutting judge tokens ~58%
+# and ~doubling throughput under the TPM ceiling (A/B validated 2026-08-19: 12/12 keep-agreement
+# on clear items; borderline errors mostly systematic but low-stakes). JUDGE_BATCH=1 (env) reverts
+# to the proven single-item path instantly — no code change.
+JUDGE_BATCH = int(os.environ.get("JUDGE_BATCH", "4"))
+JUDGE_BATCH_SLEEP = int(os.environ.get("JUDGE_BATCH_SLEEP", "15"))  # sec between batch calls;
+                          # batch-tok/sec ≈ the old single 8s spacing, so TPM headroom is unchanged.
+MAX_RUNTIME_MIN = 55      # hard wall-clock budget (CI timeout is 65m): stop gracefully + log.
+                          # 38→44 to fit the added Stage-A/Stage-C calls; 44→55 once judging went
+                          # batched (public repo = unlimited Actions minutes) so a FULL survivor
+                          # pool gets judged with margin instead of the old early-stop at 44m.
 UA = "AIHarmWatch/0.1 (personal research tool; contact: owner)"
 BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
@@ -802,26 +812,11 @@ def _origin_line(post):
     return "Source: " + (f"{prov} — {lbl}" if (prov and lbl) else (prov or lbl or "unknown"))
 
 # --- Stage B: the editorial judge (gpt-oss-120b) ----------------------------
-def groq_judge(post):
-    """Stage B — classify + grade. Returns (verdict_dict_or_None, tokens, status).
-    NO summary here: Stage C (write_summary) writes the card copy for keepers only,
-    so the judge's scarce budget isn't spent writing prose for rejected items."""
-    # Social clips (IG/TikTok/YouTube) reach us as a short indexed caption — the STORY is the
-    # video, which the judge can't see. Tell it so, so it doesn't reject on thinness alone; the
-    # scope/coherence bar still applies fully.
-    clip_note = ""
-    if is_social_clip(post.get("external_url", "") or ""):
-        clip_note = ("\n\nNOTE: This item is a short social-video clip (Instagram / TikTok / "
-                     "YouTube). The text below is only a brief caption the platform indexed — the "
-                     "actual content is the VIDEO, which you cannot see. Judge it on the topic and "
-                     "whether it points at a real AI risk/harm; do NOT force kind=\"none\" merely "
-                     "because the caption is short or thin. Apply the same SCOPE and COHERENCE "
-                     "tests as every other item.")
-    prompt = f"""You are the editorial judge for "AI Harm Watch", a public site documenting REAL stories of people/communities negatively affected by AI, plus real AI incidents and credible expert reporting on AI harms. Audience: the general public.
-
-Judge the content item below in two steps — it may be a Reddit post, a news article, a YouTube video, a Google-Alert hit, or an incident-database entry. Return STRICT JSON only, no prose.
-
-STEP 1 — classify "kind":
+# The calibrated decision rules (STEP 1/2 + GUARDRAIL + SCOPE + COHERENCE) — the SINGLE source
+# of truth for judge behaviour, shared verbatim by the single judge and the batched judge so the
+# two can never drift. Only the I/O envelope (single item + single schema vs many items + array)
+# differs between them; the rules the model applies are identical.
+JUDGE_RUBRIC = """STEP 1 — classify "kind":
 - "human-impact": a real, identifiable person or community harmed by AI (deepfake victim, scam loss, wrongful arrest, job loss), INCLUDING a genuine FIRST-PERSON account of emotional, psychological, or relational harm from AI (e.g. dependence on an AI companion, chatbot mental-health effects). Firsthand lived experience only — not speculation or someone theorising about others.
 - "incident": a specific, verifiable AI-related event — a named AI-platform breach/hack/leak, a model failure causing harm, a large-scale deepfake/fraud campaign.
 - "expert-analysis": a journalist or researcher explaining a REAL AI harm/finding/trend — OR a striking statistic about AI harm (e.g. "AI-driven fraud up 1,400%") BUT ONLY if it attributes a credible source (a named report, study, agency, or news outlet). An unsourced statistic with no attribution is hype, not analysis.
@@ -841,7 +836,28 @@ SCOPE — the test for EVERY item: does it help a general reader understand a RE
 - A generic cybersecurity vulnerability/breach with NO AI role (AI merely name-dropped).
 - AI that is INCIDENTAL — merely mentioned or present with no role in the harm. But KEEP when AI is actively USED as a tool to plan, generate, or carry out the harm (an AI-generated manifesto for a planned attack; using a chatbot to rehearse a killing) — that illustrates a real danger. Bare correlation ("happened to use ChatGPT") is not enough; instrumental use or a causal role IS.
 
-COHERENCE — if the Title and the Body describe DIFFERENT events (the headline is about one topic and the body about another), set kind="none" and say so in reason. We cannot publish a card whose title and content disagree.{clip_note}
+COHERENCE — if the Title and the Body describe DIFFERENT events (the headline is about one topic and the body about another), set kind="none" and say so in reason. We cannot publish a card whose title and content disagree."""
+
+def groq_judge(post):
+    """Stage B — classify + grade. Returns (verdict_dict_or_None, tokens, status).
+    NO summary here: Stage C (write_summary) writes the card copy for keepers only,
+    so the judge's scarce budget isn't spent writing prose for rejected items."""
+    # Social clips (IG/TikTok/YouTube) reach us as a short indexed caption — the STORY is the
+    # video, which the judge can't see. Tell it so, so it doesn't reject on thinness alone; the
+    # scope/coherence bar still applies fully.
+    clip_note = ""
+    if is_social_clip(post.get("external_url", "") or ""):
+        clip_note = ("\n\nNOTE: This item is a short social-video clip (Instagram / TikTok / "
+                     "YouTube). The text below is only a brief caption the platform indexed — the "
+                     "actual content is the VIDEO, which you cannot see. Judge it on the topic and "
+                     "whether it points at a real AI risk/harm; do NOT force kind=\"none\" merely "
+                     "because the caption is short or thin. Apply the same SCOPE and COHERENCE "
+                     "tests as every other item.")
+    prompt = f"""You are the editorial judge for "AI Harm Watch", a public site documenting REAL stories of people/communities negatively affected by AI, plus real AI incidents and credible expert reporting on AI harms. Audience: the general public.
+
+Judge the content item below in two steps — it may be a Reddit post, a news article, a YouTube video, a Google-Alert hit, or an incident-database entry. Return STRICT JSON only, no prose.
+
+{JUDGE_RUBRIC}{clip_note}
 
 Return:
 {{
@@ -864,6 +880,62 @@ Body: {post['selftext'] or '(no body text)'}"""
     except Exception as e:
         print(f"  ! judge JSON parse error: {e}")
         return None, tokens, "error"
+
+def groq_judge_batch(batch):
+    """Stage B, BATCHED — judge up to JUDGE_BATCH items in ONE call sharing a single copy of
+    JUDGE_RUBRIC (the ~1,090-token rubric travels once, not once per item ⇒ ~58% fewer judge
+    tokens). Same calibrated rules as the single judge; only the I/O envelope differs.
+    Returns (verdicts, tokens, status): `verdicts` is a list aligned to `batch`, each a verdict
+    dict or None (an item the model omitted / unparseable); status is 'ok' | 'rate_limited' |
+    'error'. Callers single-re-judge any None and fall back to the single path on a whole-batch
+    failure, so batching can never silently lose an item."""
+    lines, any_clip = [], False
+    for i, p in enumerate(batch):
+        clip = is_social_clip(p.get("external_url", "") or "")
+        any_clip = any_clip or clip
+        mark = " [social-video clip]" if clip else ""
+        body = (p.get("selftext") or "")[:1500] or "(no body text)"
+        lines.append(f'[{i}]{mark} {_origin_line(p)} | Title: {p["title"]} | Body: {body}')
+    clip_hint = ("\nItems marked [social-video clip] are a short indexed caption over a video you "
+                 "cannot see (Instagram / TikTok / YouTube): judge those on topic + the SCOPE/"
+                 "COHERENCE tests, do NOT force kind=\"none\" merely because the caption is thin.\n"
+                 if any_clip else "")
+    prompt = f"""You are the editorial judge for "AI Harm Watch", a public site documenting REAL stories of people/communities negatively affected by AI, plus real AI incidents and credible expert reporting on AI harms. Audience: the general public.
+
+Judge EACH numbered item below independently in two steps — an item may be a Reddit post, a news article, a YouTube video, a Google-Alert hit, or an incident-database entry. Return STRICT JSON only, no prose.
+
+{JUDGE_RUBRIC}
+{clip_hint}
+Return one object PER ITEM, matching each item's [i] number:
+{{"results": [
+  {{"i": <the item's number>,
+    "kind": "human-impact" | "incident" | "expert-analysis" | "none",
+    "grounded": true/false,
+    "theme": one of {THEMES} or "none",
+    "relevance": 0-100,
+    "sensitivity": "Safe" | "Sensitive",
+    "reason": "one short line: why kept or rejected"}}
+]}}
+Judge EVERY item; return exactly one object per item.
+
+ITEMS:
+{chr(10).join(lines)}"""
+    content, tokens, status = groq_chat(JUDGE_MODEL, prompt)
+    if content is None:
+        return [None] * len(batch), tokens, status   # rate_limited or error
+    try:
+        results = json.loads(content).get("results", [])
+        by_i = {}
+        for o in results:
+            if isinstance(o, dict) and "i" in o:
+                try:
+                    by_i[int(o["i"])] = o
+                except (ValueError, TypeError):
+                    pass
+        return [by_i.get(k) for k in range(len(batch))], tokens, "ok"
+    except Exception as e:
+        print(f"  ! judge batch JSON parse error: {e}")
+        return [None] * len(batch), tokens, "error"
 
 def groq_triage(post):
     """Back-compat shim for regrade.py (which imports groq_triage). Delegates to the
@@ -1251,11 +1323,12 @@ def write_run(s):
         "Tokens A (triage)": s.get("tok_triage", 0),
         "Tokens B (judge)": s.get("tok_judge", 0),
         "Tokens C (copy)": s.get("tok_copy", 0),
+        "Judge mode": s.get("judge_mode", ""),
     }
     # Token fields may not exist in the base yet (added via Airtable UI or metadata API later).
     # A 422 UNKNOWN_FIELD_NAME names one absent field at a time; pop the named one and retry,
     # so the run row still logs with whatever token columns DO exist.
-    OPTIONAL = ("Tokens", "Tokens A (triage)", "Tokens B (judge)", "Tokens C (copy)")
+    OPTIONAL = ("Tokens", "Tokens A (triage)", "Tokens B (judge)", "Tokens C (copy)", "Judge mode")
     def _post(fx):
         http_json(f"https://api.airtable.com/v0/{BASE}/{RUNS_TABLE}",
                   headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}", "Content-Type": "application/json"},
@@ -1405,54 +1478,89 @@ def main():
     # pick the best-per-theme rather than the first-per-theme. (Copy is written only for the
     # final picks, further down — never for an item that a higher-scoring rival displaces.)
     passed = []          # [{"p":post, "t":verdict, "rel":int, "theme":str}, …]
+    # Pre-dedup: drop same-title cross-posts BEFORE batching, so batch slots aren't spent on dupes
+    # and the [i] indices stay clean.
+    to_judge = []
     for p in posts:
+        norm = norm_title(p["title"])        # outlet-stripped, so cross-outlet reprints collide
+        if norm in seen_titles:
+            continue
+        seen_titles.add(norm)
+        to_judge.append(p)
+    batched = JUDGE_BATCH > 1
+    sleep_between = JUDGE_BATCH_SLEEP if batched else JUDGE_SLEEP
+    n_batches, stop = 0, False
+    print(f"  Stage-B judge ({JUDGE_MODEL}): {'batched ×' + str(JUDGE_BATCH) if batched else 'single'}"
+          f" — {len(to_judge)} survivors to judge")
+    # Judge EVERY survivor (batched by JUDGE_BATCH), collecting all that pass the bar; SELECTION
+    # happens after so we pick best-per-theme, not first-per-theme.
+    for start in range(0, len(to_judge), JUDGE_BATCH):
         if judged >= MAX_JUDGE:              # safety ceiling only; normally never hit
             print(f"  ! MAX_JUDGE ({MAX_JUDGE}) reached — stopping.")
             break
         if time.time() > deadline:
             print("  ! Time budget reached during judging — stopping early.")
             break
-        norm = norm_title(p["title"])        # outlet-stripped, so cross-outlet reprints collide
-        if norm in seen_titles:              # skip same-title cross-posts within this run
-            continue
-        seen_titles.add(norm)
-        # Stage B — the judge (gpt-oss-120b).
-        t, tok, status = groq_judge(p)
+        chunk = to_judge[start:start + JUDGE_BATCH]
+        # Stage B — the judge (gpt-oss-120b): one call per batch (or per item when JUDGE_BATCH=1).
+        if batched:
+            verdicts, tok, status = groq_judge_batch(chunk)
+        else:
+            v, tok, status = groq_judge(chunk[0]); verdicts = [v]
         tok_judge += tok
-        tag = " [in-base]" if (dedup_keys(p) & known) else ""
-        # A transient 429 (bucket briefly exhausted) is NOT a failure: back off, skip this
-        # item, and keep going — never let it trip the abort. Only a PERSISTENT streak of
-        # rate-limits (the daily cap genuinely hit) stops the run, so we don't grind for nothing.
+        n_batches += 1
+        # A transient 429 (bucket briefly exhausted) is NOT a failure: back off, skip this chunk,
+        # keep going. Only a PERSISTENT streak (the daily cap genuinely hit) stops the run.
         if status == "rate_limited":
             consec_rl += 1
-            print(f"  ~ rate-limited, skipping (not judged): {p['title'][:50]}{tag}")
-            time.sleep(JUDGE_SLEEP)
+            print(f"  ~ rate-limited, skipping {len(chunk)} item(s) (not judged)")
+            time.sleep(sleep_between)
             if consec_rl >= 5:
                 print("  ! Judge rate-limited persistently — likely daily cap; stopping early.")
                 break
             continue
         consec_rl = 0
-        judged += 1
-        time.sleep(JUDGE_SLEEP)              # spread judge calls under its 8K-TPM bucket
-        if not t:                            # genuine error (bad HTTP / unparseable)
-            errors += 1
-            consec_err += 1
-            print(f"  ? ERROR                  {p['title'][:55]}{tag}")
-            if consec_err >= 4:              # judge truly down/blocked — stop grinding, log, exit
-                print("  ! Judge failing repeatedly — stopping early (blocked or down).")
-                break
-            continue
-        consec_err = 0
-        passes = judge_passes(t)
-        if dry:
-            n_keep += passes; n_rej += (not passes)
-            verd = "KEEP  " if passes else "reject"
-            print(f"  {verd} [{int(t.get('relevance',0)):>3}] {t.get('kind','?'):<15}{tag} "
-                  f"{p['title'][:50]} :: {t.get('reason','')[:55]}")
-        if not passes:
-            continue
-        theme = t.get("theme") if t.get("theme") in THEMES else "(none)"
-        passed.append({"p": p, "t": t, "rel": int(t.get("relevance", 0)), "theme": theme})
+        # Whole-batch parse failure → fall back to the proven single path for this chunk, so a
+        # malformed batch degrades gracefully instead of dropping every item in it.
+        if batched and status == "error" and not any(verdicts):
+            for k, p in enumerate(chunk):
+                sv, stok, sstat = groq_judge(p); tok_judge += stok
+                verdicts[k] = sv if sstat == "ok" else None
+                time.sleep(JUDGE_SLEEP)
+        for k, p in enumerate(chunk):
+            t = verdicts[k] if k < len(verdicts) else None
+            # An item the model omitted from an otherwise-parsed batch → one single re-judge, so
+            # batching never silently loses a story (rare — array parsing was 100% in testing).
+            if t is None and batched and status == "ok":
+                sv, stok, sstat = groq_judge(p); tok_judge += stok
+                t = sv if sstat == "ok" else None
+                time.sleep(JUDGE_SLEEP)
+            tag = " [in-base]" if (dedup_keys(p) & known) else ""
+            judged += 1
+            if not t:                        # genuine error (bad HTTP / unparseable / omitted)
+                errors += 1
+                consec_err += 1
+                print(f"  ? ERROR                  {p['title'][:55]}{tag}")
+                if consec_err >= 4:          # judge truly down/blocked — stop grinding, log, exit
+                    print("  ! Judge failing repeatedly — stopping early (blocked or down).")
+                    stop = True
+                    break
+                continue
+            consec_err = 0
+            passes = judge_passes(t)
+            if dry:
+                n_keep += passes; n_rej += (not passes)
+                verd = "KEEP  " if passes else "reject"
+                print(f"  {verd} [{int(t.get('relevance',0)):>3}] {t.get('kind','?'):<15}{tag} "
+                      f"{p['title'][:50]} :: {t.get('reason','')[:55]}")
+            if not passes:
+                continue
+            theme = t.get("theme") if t.get("theme") in THEMES else "(none)"
+            passed.append({"p": p, "t": t, "rel": int(t.get("relevance", 0)), "theme": theme})
+        if stop:
+            break
+        time.sleep(sleep_between)            # pace under the judge's TPM bucket between batches
+    print(f"  Stage-B judged {judged}/{len(to_judge)} survivors across {n_batches} call(s).")
 
     # --- SELECTION: keep the best per theme, then cap overall (see select_best) ---
     selected, dropped_by_cap = select_best(passed)
@@ -1460,9 +1568,10 @@ def main():
           f"(best {MAX_PER_THEME}/theme; {dropped_by_cap} lower-scoring in-scope items dropped).")
 
     def _tok_line():                         # per-bucket metering vs each model's 200K/day cap
+        per = f", {tok_judge // judged}/judge" if judged else ""
         print(f"  Groq tokens this run: {tok_triage + tok_judge + tok_copy} total — "
               f"A/pre-triage {tok_triage} ({TRIAGE_MODEL}), "
-              f"B/judge {tok_judge} ({JUDGE_MODEL}), C/copy {tok_copy} ({COPY_MODEL}).")
+              f"B/judge {tok_judge} ({JUDGE_MODEL}{per}), C/copy {tok_copy} ({COPY_MODEL}).")
 
     if dry:
         _tok_line()
@@ -1508,6 +1617,7 @@ def main():
         "fetched": fetched_total, "judged": judged, "kept": len(kept), "errors": errors,
         "tokens": total_tokens,
         "tok_triage": tok_triage, "tok_judge": tok_judge, "tok_copy": tok_copy,
+        "judge_mode": f"batch-{JUDGE_BATCH}" if JUDGE_BATCH > 1 else "single",
     })
     print(f"\nDone. Mode={mode}. {read_ok}/{len(sources)} sources read, {judged} judged, "
           f"{errors} errors, {total_tokens} Groq tokens, wrote {len(kept)} new Candidate rows. Logged to Runs table.")
