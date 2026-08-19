@@ -94,10 +94,12 @@ GROQ_SLEEP = JUDGE_SLEEP  # back-compat alias
 JUDGE_BATCH = int(os.environ.get("JUDGE_BATCH", "4"))
 JUDGE_BATCH_SLEEP = int(os.environ.get("JUDGE_BATCH_SLEEP", "15"))  # sec between batch calls;
                           # batch-tok/sec ≈ the old single 8s spacing, so TPM headroom is unchanged.
-MAX_RUNTIME_MIN = 55      # hard wall-clock budget (CI timeout is 65m): stop gracefully + log.
-                          # 38→44 to fit the added Stage-A/Stage-C calls; 44→55 once judging went
-                          # batched (public repo = unlimited Actions minutes) so a FULL survivor
-                          # pool gets judged with margin instead of the old early-stop at 44m.
+MAX_RUNTIME_MIN = 70      # hard wall-clock budget (CI timeout is 80m): stop gracefully + log.
+                          # 38→44 (added Stage-A/C); 44→70 once judging went batched — the ceiling
+                          # only CAPS a run (a normal run ends when work is done), so on the public
+                          # repo (unlimited Actions minutes) a generous ceiling costs nothing on
+                          # normal days and guarantees a FULL survivor pool is judged even if fetch
+                          # or the pool runs large. Runaway is bounded by the rate-limit/error bails.
 UA = "AIHarmWatch/0.1 (personal research tool; contact: owner)"
 BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
