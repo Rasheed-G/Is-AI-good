@@ -49,22 +49,11 @@ HDRS = {"Authorization": f"Bearer {H.AIRTABLE_TOKEN}"}
 API = f"https://api.airtable.com/v0/{H.BASE}/{H.TABLE}"
 BACKUP = ROOT / "scripts" / "summary_backup.json"   # {id: old summary} — restore point
 
-# When the fetch returns the WRONG page (nav boilerplate, a different story, a paywall),
-# the model rightly refuses and emits a META-comment ABOUT the source instead of a summary.
-# Those are not card copy — skip them and keep the existing summary. Match tell-tale phrases
-# that never appear in a real card summary (which describes the event directly).
-META_MARKERS = (
-    "provided source", "source text", "the source text", "no factual summary",
-    "cannot be generated", "can be generated", "no summary can", "does not illustrate",
-    "not an ai risk", "not an ai incident", "not an ai story", "website navigation",
-    "boilerplate", "this item describes", "this does not", "lacks a specific",
-    "no specific incident", "insufficient information", "unable to summarize",
-)
-
-
-def looks_like_meta(text):
-    t = text.lower()
-    return any(m in t for m in META_MARKERS)
+# When the fetch returns the WRONG page (nav boilerplate, a different story, a paywall), the
+# model rightly refuses and emits a META-comment ABOUT the source instead of a summary. Those
+# are not card copy — skip them and keep the existing summary. The markers + detector now live
+# in harvest_reddit (single source of truth), so the live path and this bulk rewrite agree.
+looks_like_meta = H.looks_like_meta
 
 
 def published_rows():

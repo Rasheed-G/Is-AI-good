@@ -926,6 +926,42 @@ def pretriage(posts, deadline):
     return survivors, spent
 
 # --- Stage C: card copy for keepers only (qwen3.6-27b) -----------------------
+COPY_MIN_BODY = 200        # below this a feed snippet is too thin to summarise from → fetch the full article first
+
+# When handed a thin body the copy model rightly REFUSES and emits a meta-comment ABOUT the
+# source ("The provided source is incomplete…") instead of a summary. That text is not card
+# copy — it must never be stored. Shared verbatim with rewrite_summaries.py (single source of
+# truth) so the live path and the bulk rewrite catch the exact same refusals.
+META_MARKERS = (
+    "provided source", "source text", "the source text", "no factual summary",
+    "cannot be generated", "can be generated", "no summary can", "does not illustrate",
+    "not an ai risk", "not an ai incident", "not an ai story", "website navigation",
+    "boilerplate", "this item describes", "this does not", "lacks a specific",
+    "no specific incident", "insufficient information", "unable to summarize",
+    "impossible to write", "lacks specific", "lacks the necessary", "summary criteria",
+)
+
+def looks_like_meta(text):
+    """True if the copy model returned a comment about the source rather than a real summary."""
+    t = (text or "").lower()
+    return any(m in t for m in META_MARKERS)
+
+def _article_text(url):
+    """Full article body (og:description + <p> text) for a feed/article URL — gives Stage C a
+    real body when the feed snippet is too thin to summarise from (the failure that let refusal
+    text reach live cards). Best-effort: returns '' on any error so the caller keeps the snippet."""
+    try:
+        raw = http_text(url, headers={"User-Agent": BROWSER_UA})
+    except Exception:
+        return ""
+    raw = re.sub(r"(?is)<(script|style|noscript).*?</\1>", " ", raw)
+    m = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|description)["\']'
+                  r'[^>]+content=["\']([^"\']+)', raw, re.I)
+    desc = html.unescape(m.group(1)) if m else ""
+    paras = re.findall(r"(?is)<p[^>]*>(.*?)</p>", raw)
+    text = " ".join(html.unescape(re.sub(r"(?s)<[^>]+>", " ", p)) for p in paras)
+    return re.sub(r"\s+", " ", (desc + " " + text).strip())
+
 def copy_prompt(post, body):
     """The Stage-C card-copy prompt — the SINGLE source of truth for card voice, shared by
     the live harvester (write_summary) and the one-off bulk rewrite (rewrite_summaries.py) so
@@ -952,12 +988,23 @@ def write_summary(post):
     Returns (summary, tokens). Never blank: on any failure, falls back to a trimmed
     body/title so the card always has text."""
     body = (post.get("selftext") or "").strip()
+    # A thin feed snippet is what made qwen refuse and leak meta-text onto live cards. When the
+    # body is too short, fetch the real article body first (best-effort, skipped for social clips
+    # whose "body" is the video itself). enrich_media re-opens the page later for media only.
+    if len(body) < COPY_MIN_BODY:
+        url = article_url(post)
+        if url.lower().startswith("http") and not is_social_clip(url):
+            full = _article_text(url)
+            if len(full) > len(body):
+                body = full
     prompt = copy_prompt(post, body)
     # reasoning_effort='none' → qwen answers directly (~87 tok) instead of thinking (~950 tok).
-    content, tokens, _status = groq_chat(COPY_MODEL, prompt, json_mode=False, reasoning_effort="none")
-    if content and content.strip():
-        return content.strip().strip('"').strip(), tokens
-    return (body[:200] or post["title"])[:200], tokens   # fail-safe: never leave a card blank
+    content, tokens, status = groq_chat(COPY_MODEL, prompt, json_mode=False, reasoning_effort="none")
+    new = (content or "").strip().strip('"').strip()
+    # Store the summary only if it's a real one — never a refusal/meta-comment or an error echo.
+    if status == "ok" and new and not looks_like_meta(new):
+        return new, tokens
+    return (body[:200] or post["title"])[:200], tokens   # fail-safe: never a blank/refusal card
 
 def _is_clip_item(it):
     """True if a passed item is an embeddable social clip (its external link is an
