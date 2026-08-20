@@ -198,29 +198,42 @@ function enhanceEmbeds() {
   scheduleDeadEmbedSweep();
 }
 
-// A social-video card with no title/summary is worthless if its embed doesn't load
-// (post deleted, geoblocked, or the platform script blocked). Best-effort: after the
-// embed scripts have had time to replace the blockquote with an iframe, drop any
-// social-video card whose embed never materialised into a real-height iframe. Imperfect
-// by nature — a platform "post unavailable" placeholder still has height and survives —
-// so it's a first pass, not a guarantee (owner removes stragglers manually).
+// A social-video card hides its title + summary and lets the embed stand alone — but the
+// embed often DOESN'T render: Instagram/TikTok serve a collapsed ~98px stub to logged-out
+// third-party pages (and geoblocked/deleted posts show nothing either). That would leave a
+// blank card. These are alert-discovered posts with a real headline, summary, and a working
+// permalink, so instead of DROPPING the story we fall the card back to a normal text card:
+// reveal the (only visually-hidden) title + summary, swap the dead embed for the theme
+// placeholder, and keep the existing "View source →" link — which points at the post, so the
+// reader still gets the story and a click-through to the live original. Runs 8s after render,
+// once the embed scripts have had time to resize a genuinely-live embed past the stub height.
 let sweepTimer = null;
 function scheduleDeadEmbedSweep() {
   if (!$grid.querySelector(".card.social-video")) return;
   clearTimeout(sweepTimer);
-  // 8s: generous enough that a slow-but-live embed isn't false-dropped (worse than a dead
-  // one lingering, which the owner clears manually). Live IG/TikTok iframes render in ~2–3s.
+  // 8s: generous enough that a slow-but-live embed isn't false-degraded. A live IG/TikTok
+  // iframe resizes to its post height within ~2–3s; a stub stays at its ~98px default.
   sweepTimer = setTimeout(sweepDeadEmbeds, 8000);
 }
 function sweepDeadEmbeds() {
-  let removed = 0;
+  let changed = 0;
   $grid.querySelectorAll(".card.social-video").forEach(card => {
     const box = card.querySelector(".card-media.social");
     if (!box) return;
     const iframe = box.querySelector("iframe");
-    if (!iframe || iframe.offsetHeight < 100) { card.remove(); removed++; }  // never rendered / collapsed
+    if (!iframe || iframe.offsetHeight < 100) { degradeToTextCard(card, box); changed++; }  // stub / never rendered
   });
-  if (removed) updateCount();
+  if (changed) updateCount();
+}
+// Convert a dead-embed social card into a normal text card, in place: un-hide the title +
+// summary (they were only `.vh` visually-hidden) and replace the empty embed with the theme
+// placeholder cover. The card's "View source →" link (the post permalink) is left untouched.
+function degradeToTextCard(card, box) {
+  card.classList.remove("social-video");
+  card.querySelectorAll(".vh").forEach(el => el.classList.remove("vh"));
+  const theme = ((card.querySelector(".pill.theme") || {}).textContent || "Story").toUpperCase();
+  box.outerHTML =
+    `<div class="card-media placeholder" aria-hidden="true"><span class="ph-label">${esc(theme)}</span></div>`;
 }
 
 // ---- Card ------------------------------------------------------------------
@@ -231,7 +244,8 @@ function card(s) {
   // Instagram / TikTok clips speak for themselves — the video IS the content, so an AI
   // summary of a video we can't verify adds nothing. On those cards we hide the title +
   // summary (kept in the DOM, visually-hidden, so search and screen readers still see them)
-  // and let the embed stand alone. A dead embed is then useless → sweepDeadEmbeds() drops it.
+  // and let the embed stand alone. If the embed doesn't render, sweepDeadEmbeds() falls the
+  // card back to a normal text card (title + summary + View-source link) rather than dropping it.
   const socialVideo = !!media && (media.kind === "instagram" || media.kind === "tiktok");
   el.className = "card" + (isSensitive(s) ? " sensitive" : "") + (socialVideo ? " social-video" : "");
 
