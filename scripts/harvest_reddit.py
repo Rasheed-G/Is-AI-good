@@ -92,8 +92,11 @@ GROQ_SLEEP = JUDGE_SLEEP  # back-compat alias
 # on clear items; borderline errors mostly systematic but low-stakes). JUDGE_BATCH=1 (env) reverts
 # to the proven single-item path instantly — no code change.
 JUDGE_BATCH = int(os.environ.get("JUDGE_BATCH", "4"))
-JUDGE_BATCH_SLEEP = int(os.environ.get("JUDGE_BATCH_SLEEP", "15"))  # sec between batch calls;
-                          # batch-tok/sec ≈ the old single 8s spacing, so TPM headroom is unchanged.
+JUDGE_BATCH_SLEEP = int(os.environ.get("JUDGE_BATCH_SLEEP", "20"))  # sec between batch calls.
+                          # A batch ≈ 4×~650 = ~2.6K tok; at the old 15s that's ~10.3K tok/min,
+                          # OVER the 120b's 8K-TPM bucket — the 08-20 run thrashed ~20 min in 30s
+                          # backoff and left 29/189 survivors unjudged. 20s (~7.8K tok/min) keeps
+                          # it just under the ceiling. Retune if tok/judge or JUDGE_BATCH changes.
 MAX_RUNTIME_MIN = 70      # hard wall-clock budget (CI timeout is 80m): stop gracefully + log.
                           # 38→44 (added Stage-A/C); 44→70 once judging went batched — the ceiling
                           # only CAPS a run (a normal run ends when work is done), so on the public
