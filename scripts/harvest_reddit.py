@@ -97,6 +97,10 @@ JUDGE_BATCH_SLEEP = int(os.environ.get("JUDGE_BATCH_SLEEP", "20"))  # sec betwee
                           # OVER the 120b's 8K-TPM bucket — the 08-20 run thrashed ~20 min in 30s
                           # backoff and left 29/189 survivors unjudged. 20s (~7.8K tok/min) keeps
                           # it just under the ceiling. Retune if tok/judge or JUDGE_BATCH changes.
+ENRICH_RETRY_DELAY = int(os.environ.get("ENRICH_RETRY_DELAY", "15"))  # sec to wait before the
+                          # one post-write retry of media on rows that came out bare (see
+                          # reenrich_new_rows). Long enough for a transient block/throttle to clear;
+                          # scoped to THIS run's new rows only, so it stays cheap.
 MAX_RUNTIME_MIN = 70      # hard wall-clock budget (CI timeout is 80m): stop gracefully + log.
                           # 38→44 (added Stage-A/C); 44→70 once judging went batched — the ceiling
                           # only CAPS a run (a normal run ends when work is done), so on the public
@@ -1119,13 +1123,63 @@ def select_best(passed):
     return selected, dropped
 
 def create_records(records):
+    """POST the new rows in chunks of 10; return the created records (each with its id +
+    stored fields), in the SAME order they were sent — Airtable preserves request order, so
+    created[i] corresponds to records[i]. The caller uses the ids to retry media (see
+    reenrich_new_rows)."""
+    created = []
     for i in range(0, len(records), 10):
         chunk = records[i:i+10]
         body = json.dumps({"records": chunk, "typecast": True}).encode()
-        http_json(f"https://api.airtable.com/v0/{BASE}/{TABLE}",
-                  headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}",
-                           "Content-Type": "application/json"},
-                  data=body, method="POST")
+        resp = http_json(f"https://api.airtable.com/v0/{BASE}/{TABLE}",
+                         headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}",
+                                  "Content-Type": "application/json"},
+                         data=body, method="POST")
+        created.extend(resp.get("records", []))
+    return created
+
+
+def reenrich_new_rows(created, posts):
+    """Give the rows THIS run just wrote a SECOND shot at heading media — scoped to this
+    run's new stories only, never a whole-table sweep.
+
+    Harvest-time enrichment (build_fields -> enrich_media) is one-shot: a page that's
+    momentarily blocked/slow/throttled when the row is first built leaves the card bare with
+    no retry, so it shows the placeholder forever even though the og:image is reachable
+    seconds later. Here we wait a short beat (ENRICH_RETRY_DELAY), then re-open ONLY the
+    just-created rows that came out with no Media URL and PATCH any that now yield an
+    image/video - BEFORE publish.py promotes them to Published, so a card that CAN carry an
+    image gets one before it goes live. `created[i]` pairs with `posts[i]` (same order).
+    Best-effort throughout: any fetch/PATCH failure leaves the row exactly as it was."""
+    bare = [(rec, p) for rec, p in zip(created, posts)
+            if not (rec.get("fields", {}).get("Media URL") or "").strip()
+            and (rec.get("fields", {}).get("Format") or "Text") == "Text"]
+    if not bare:
+        return
+    print(f"  Re-enrich: {len(bare)} new card(s) came out bare; retrying media in "
+          f"{ENRICH_RETRY_DELAY}s (this run's rows only)...")
+    time.sleep(ENRICH_RETRY_DELAY)
+    updates = []
+    for rec, p in bare:
+        try:
+            fmt, media = enrich_media(p, "Text", "")
+        except Exception as e:
+            print(f"    . re-enrich skipped {p.get('title', '')[:40]} ({getattr(e, 'code', e)})")
+            continue
+        if media:
+            updates.append({"id": rec["id"], "fields": {"Media URL": media, "Format": fmt}})
+    for i in range(0, len(updates), 10):
+        try:
+            http_json(f"https://api.airtable.com/v0/{BASE}/{TABLE}",
+                      headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}",
+                               "Content-Type": "application/json"},
+                      data=json.dumps({"records": updates[i:i+10], "typecast": True}).encode(),
+                      method="PATCH")
+        except Exception as e:
+            print(f"    . re-enrich PATCH failed ({getattr(e, 'code', e)})")
+            return
+    if updates:
+        print(f"  Re-enrich: recovered media for {len(updates)}/{len(bare)} new card(s).")
 
 # --- main -------------------------------------------------------------------
 def judge_passes(t):
@@ -1475,6 +1529,7 @@ def main():
     posts, tok_triage = pretriage(posts, deadline)
 
     kept, seen_titles, judged, errors, n_keep, n_rej = [], set(), 0, 0, 0, 0
+    kept_posts = []                          # post objects parallel to `kept`, for the media retry
     consec_err, consec_rl = 0, 0             # genuine-error streak vs rate-limit streak (tracked apart)
     # Per-model token metering: each stage runs on its OWN 200K/day bucket, so track them apart
     # (a single lumped number can't tell you which bucket is nearing its cap).
@@ -1602,6 +1657,7 @@ def main():
         fields = build_fields(it["p"], it["t"], summary)
         dedup_sigs.append((norm_title(it["p"]["title"]), (summary or "").lower().strip()))  # catch same-run reprints too
         kept.append({"fields": fields})
+        kept_posts.append(it["p"])   # keep the post alongside so reenrich_new_rows can retry bare cards
         print(f"  + [{it['rel']}] {it['t'].get('kind')}/{it['theme']} — {it['p']['title'][:60]}")
     if n_reprint:
         print(f"  Cross-run dedup: {n_reprint} reprint(s) of existing stories skipped.")
@@ -1609,7 +1665,8 @@ def main():
     total_tokens = tok_triage + tok_judge + tok_copy
 
     if kept:
-        create_records(kept)
+        created = create_records(kept)
+        reenrich_new_rows(created, kept_posts)   # second, patient media attempt on THIS run's bare rows
     # Per-source yield → Sources table. "Found" = this source's share of the judging pool it
     # supplied (snapshotted above, BEFORE pre-triage); "Kept" = how many it landed. Lets the
     # owner see which alerts/feeds/subs earn their place vs which are noise. (kept carries each
