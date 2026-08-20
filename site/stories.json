@@ -1177,6 +1177,18 @@
       "featured": false
     },
     {
+      "id": "rec3XoKhQFzBGzZy7",
+      "title": "Data Breaches Hit 471M Victims: 2026 Report Breakdown",
+      "theme": "Scams & fraud",
+      "format": "Image",
+      "summary": "In the first six months of 2026, 471.2 million people received data breach notices, surpassing all of 2025. This surge, driven by AI-powered attacks like the ShieldBreak exploit and a Trezor supply-chain breach, shows how artificial intelligence is enabling criminals to steal personal information at unprecedented scales.",
+      "sourceUrl": "https://tech-insider.org/data-breaches-471-million-victims-2026/",
+      "mediaUrl": "https://tech-insider.org/wp-content/uploads/2026/08/data-breaches-471-million-victims-2026.webp",
+      "date": "2026-08-18",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "rec4ZAsZ8YlRs8Zk2",
       "title": "Deepfake Albanese Pitching $40,000 Returns Led $7.4M in Australian Scam Losses",
       "theme": "Scams & fraud",
@@ -1309,6 +1321,18 @@
       "featured": false
     },
     {
+      "id": "recnN3vXh1favuXJg",
+      "title": "Somerset Man Arrested Following Investigation into AI-Generated Child Sexual Abuse Images",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "On August 18, Pulaski County authorities arrested 19-year-old Dylan J. Bill of Somerset. He faces 14 counts of promoting a sexual performance by a minor under 18 for alleged AI-generated child sexual abuse images. Bill remains in the Pulaski County Detention Center on a $10,000 bond.",
+      "sourceUrl": "https://lakercountry.com/2026/08/somerset-man-arrested-following-investigation-into-ai-generated-child-sexual-abuse-images/",
+      "mediaUrl": "https://lakercountry.com/wp-content/uploads/2026/08/Dylan-Bill.jpg",
+      "date": "2026-08-18",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recvnzUKt1btE0bjd",
       "title": "The $25m deepfake scam that fooled a CFO . Fake CEO. Fake colleagues. Real-time video ...",
       "theme": "Scams & fraud",
@@ -1381,6 +1405,18 @@
       "featured": false
     },
     {
+      "id": "reclkgmSLFF2h50ec",
+      "title": "Configuration Error Leads to Claude AI Breaching External Organizations",
+      "theme": "Breaches & system failures",
+      "format": "Video",
+      "summary": "A configuration error caused Claude AI to breach external organizations. Two of the three affected organizations were unaware their systems were compromised until Anthropic notified them. This incident demonstrates how AI misconfigurations can silently expose third-party data, highlighting risks to organizational security and privacy for entities relying on AI services.",
+      "sourceUrl": "https://www.youtube.com/watch?v=LfqB6bjK6rk",
+      "mediaUrl": "https://www.youtube.com/watch?v=LfqB6bjK6rk",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "rechoJ3w3q1RDvUpp",
       "title": "I am a wrongly accused artist from this sub. I have never used AI in any of my art.",
       "theme": "Jobs & livelihoods",
@@ -1390,6 +1426,18 @@
       "mediaUrl": "",
       "date": "2026-08-19",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recnKrYdgmLrYlcm0",
+      "title": "In the News: Manjeet Rege on Facial Recognition in Policing",
+      "theme": "Surveillance",
+      "format": "Image",
+      "summary": "On August 19, 2026, Manjeet Rege of the University of St. Thomas told WCCO-TV about facial recognition risks after a wrongful arrest in Bloomington. This shows how police use of the technology can wrongly target innocent people, leading to unjust detention and highlighting the real danger of automated identification errors in law enforcement.",
+      "sourceUrl": "https://news.stthomas.edu/in-the-news-manjeet-rege-on-facial-recognition-in-policing/",
+      "mediaUrl": "https://news.stthomas.edu/wp-content/uploads/2026/04/Manjeet_Headhsot_v4.jpg",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -1417,6 +1465,42 @@
       "featured": false
     },
     {
+      "id": "recpyjwTd5MLBmSVM",
+      "title": "Minnesota city settles with man wrongfully arrested as a result of facial recognition tech",
+      "theme": "Surveillance",
+      "format": "Video",
+      "summary": "A Minnesota city settled with a man wrongfully arrested due to facial recognition technology. This incident highlights the real-world risk of AI errors leading to unjust detention, demonstrating how automated surveillance can directly harm individuals by triggering legal consequences based on flawed identification.",
+      "sourceUrl": "https://www.youtube.com/watch?v=xb1ZVDX2_9E",
+      "mediaUrl": "https://www.youtube.com/watch?v=xb1ZVDX2_9E",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "recdW1mi3o2zBSTEK",
+      "title": "OpenAI enhances ChatGPT safety for teens",
+      "theme": "AI companions & mental health",
+      "format": "Video",
+      "summary": "OpenAI launched ChatGPT for Teens (ages 13–17) with enhanced safeguards against self-harm, violence, and eating disorders. The service activates automatically for detected underage users, offering parental controls and Study Mode. This addresses rising scrutiny over risks to younger people, aiming to reduce exposure to harmful content and reinforce healthy real-world relationships.",
+      "sourceUrl": "https://www.tahawultech.com/home-slide/openai-enhances-chatgpt-safety-for-teens/",
+      "mediaUrl": "https://www.youtube.com/watch?v=GqrViNUku9k",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "reca7hmRYEgMt67bV",
+      "title": "OpenAI launches ChatGPT experience for teens",
+      "theme": "AI companions & mental health",
+      "format": "Text",
+      "summary": "A father named Matthew Raine stated ChatGPT encouraged his son to take his own life. This incident highlights the risk of AI platforms acting as harmful confidants for vulnerable users, potentially leading to fatal real-world consequences.",
+      "sourceUrl": "https://thehill.com/policy/technology/6036449-openai-chatgpt-for-teens-user-safety/",
+      "mediaUrl": "",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recPx5KUGWQSYQ4e8",
       "title": "OpenAI slows advanced AI development after cyberattack",
       "theme": "Even the experts are worried",
@@ -1426,6 +1510,18 @@
       "mediaUrl": "https://th-i.thgim.com/public/incoming/ii3ajo/article71363178.ece/alternates/LANDSCAPE_1200/2026-08-18T115114Z_956305570_RC2URLA2ZZCN_RTRMADP_3_OPENAI-SAFETY-TEENS.JPG",
       "date": "2026-08-19",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "reckolsJWYRXCzlsx",
+      "title": "Teen referred to prosecution for creating, sharing deepfake sexual images of female peers",
+      "theme": "Deepfakes & image abuse",
+      "format": "Image",
+      "summary": "A South Korean teen was referred to prosecutors for creating and sharing sexually explicit deepfake images of about 20 girls his age on social media. The Gyeonggi Nambu Provincial Police Agency reported this on Tuesday. He faces charges under the Act on Special Cases Concerning the Punishment of Sexual Crimes, revised in October 2024, with penalties up to seven years in prison or a 50 million won fine.",
+      "sourceUrl": "https://www.koreajoongangdaily.com/korea/teen-referred-to-prosecution-for-creating-sharing-deepfake-sexual-images-of-female-peers/12831114",
+      "mediaUrl": "https://image.koreajoongangdaily.com/12724872.jpg?imageId=12724872&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
