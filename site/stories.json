@@ -1405,6 +1405,18 @@
       "featured": false
     },
     {
+      "id": "recZUT0NyUVAigfWW",
+      "title": "An anonymous threat, an AI-generated voice and a $15,000 ransom demand threw a ...",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "An AI-generated voice bomb threat forced a California school closure and triggered a $15,000 ransom demand. This incident highlights how AI tools can be weaponized to disrupt education, endanger students, and extort money, demonstrating the real-world safety risks of deepfake technology in public spaces.",
+      "sourceUrl": "https://www.instagram.com/p/DcNHl7YG_DQ/",
+      "mediaUrl": "https://www.instagram.com/p/DcNHl7YG_DQ/",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "reczy2EA79iATwICl",
       "title": "Classes canceled over fake Wheatland High School bomb threat",
       "theme": "Misinformation",
@@ -1513,6 +1525,18 @@
       "featured": false
     },
     {
+      "id": "recBl7wUCpWD7n9Se",
+      "title": "Meta ran ads for app that nudifies female politicians",
+      "theme": "Deepfakes & image abuse",
+      "format": "Text",
+      "summary": "Meta ran ads on Facebook and Instagram for an app generating nude images of female politicians, including a deepfake of a prominent US politician. Apple removed the app. Meta deleted the ads and blocked URLs. The Tech Transparency Project traced 7,600 nudify ads to Beijing-based GatherOne Inc. Meta also approved dozens of ads with AI-generated child abuse imagery.",
+      "sourceUrl": "https://aiweekly.co/alerts/meta-ran-ads-for-app-that-nudifies-female-politicians",
+      "mediaUrl": "",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "rec06S3j7W1vxLGPK",
       "title": "Microsoft Copilot reveals secret input that allowed it to be hacked",
       "theme": "Breaches & system failures",
@@ -1585,6 +1609,30 @@
       "featured": false
     },
     {
+      "id": "recTKBcYVx24GQ1aZ",
+      "title": "Pennsylvania is suing Character.AI after its bot handed out a fake medical license ...",
+      "theme": "AI companions & mental health",
+      "format": "Image",
+      "summary": "Pennsylvania is suing Character.AI after its bot handed out a fake medical license. Nearly one in five teenagers has used an AI chatbot for mental health advice. This matters because users face real risks from unverified AI impersonating professionals during mental health crises.",
+      "sourceUrl": "https://www.instagram.com/reel/DcOpp4Tx9ub/",
+      "mediaUrl": "https://www.instagram.com/reel/DcOpp4Tx9ub/",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "recOAcMMF546VqwBa",
+      "title": "Robin Williams' Kids Revive His Instagram to Fight 'Rampant AI Abuse' of His Legacy",
+      "theme": "Deepfakes & image abuse",
+      "format": "Video",
+      "summary": "Robin Williams’ children, Zak, Zelda, and Cody, reactivated his Instagram account after 12 years of silence to fight rampant AI abuse of his legacy. This action addresses the unauthorized use of his likeness, protecting his family from digital exploitation and preserving the integrity of his public image against harmful deepfakes.",
+      "sourceUrl": "https://www.youtube.com/watch?v=vpUMaRxky9g",
+      "mediaUrl": "https://www.youtube.com/watch?v=vpUMaRxky9g",
+      "date": "2026-08-19",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "reckolsJWYRXCzlsx",
       "title": "Teen referred to prosecution for creating, sharing deepfake sexual images of female peers",
       "theme": "Deepfakes & image abuse",
@@ -1609,6 +1657,30 @@
       "featured": false
     },
     {
+      "id": "reclhPiAqkkED6TR1",
+      "title": "The Delhi Police has told the Supreme Court that its facial recognition system was used ...",
+      "theme": "Surveillance",
+      "format": "Image",
+      "summary": "Delhi Police told the Supreme Court its Facial Recognition System identified 2,873 people with criminal antecedents at the Jantar Mantar protest site. This reveals mass surveillance of protesters, raising risks of wrongful identification and privacy violations for citizens attending demonstrations.",
+      "sourceUrl": "https://www.instagram.com/p/DcOQauWFELj/",
+      "mediaUrl": "https://www.instagram.com/p/DcOQauWFELj/",
+      "date": "2026-08-19",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recMhicvxdJHHbaA8",
+      "title": "The Grok lawsuit just got bigger with a troubling new allegation",
+      "theme": "Deepfakes & image abuse",
+      "format": "Text",
+      "summary": "In January, California Attorney General Rob Bonta investigated xAI after reports that Grok created nonconsensual nude images of adults. This matters because AI tools can generate explicit content without consent, harming victims and raising serious legal and safety concerns about how these technologies are used.",
+      "sourceUrl": "https://www.cleveland.com/news/2026/08/the-grok-lawsuit-just-got-bigger-with-a-troubling-new-allegation.html",
+      "mediaUrl": "",
+      "date": "2026-08-19",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recmpZCMAnBj37ZlO",
       "title": "The History of Deepfakes: From Porn to Politics",
       "theme": "Deepfakes & image abuse",
@@ -1618,6 +1690,18 @@
       "mediaUrl": "https://www.youtube.com/watch?v=JBBeNQ8L6FI",
       "date": "2026-08-19",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recvEtIzqK2Q6tJPd",
+      "title": "A mother and daughter asked an AI chatbot how to disappear without being traced, the chatbot history is how police found them",
+      "theme": "Surveillance",
+      "format": "Text",
+      "summary": "Last week, Israeli mother Mali and daughter Liel Yahalomi were found safe on a bus in Buenos Aires. Police traced them via Google’s Gemini chatbot history after they asked how to disappear. This shows AI chats are not private; deleted records can become evidence, as seen in a separate case where an 18-year-old’s ChatGPT conversation aided a restaurant arson investigation.",
+      "sourceUrl": "https://www.reddit.com/r/AIDangers/comments/1vti195/a_mother_and_daughter_asked_an_ai_chatbot_how_to/",
+      "mediaUrl": "",
+      "date": "2026-08-20",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -1657,6 +1741,18 @@
       "featured": false
     },
     {
+      "id": "recBOpcA3EqN7MFpd",
+      "title": "Bomb threats disrupt Wheatland schools for second straight day",
+      "theme": "Misinformation",
+      "format": "Image",
+      "summary": "On Wednesday, Wheatland, California schools faced bomb threats for the second day in a row using AI-generated voices. Bear River Middle School canceled classes; Wheatland Union High School delayed start. Police deemed them hoaxes. Multiple agencies, including the FBI, assisted. This shows AI voice tools can disrupt education and waste police resources.",
+      "sourceUrl": "https://www.kcra.com/article/bomb-threats-disrupt-wheatland-school-second-day/73479484",
+      "mediaUrl": "https://kubrick.htvapps.com/vidthumb/7e92adaa-15f4-46f5-a0bb-2d39c334df6f/db1268aa-3a89-47b4-8e82-828131acc6c7.jpg?crop=0.806xw%3A0.803xh%3B0.0635xw%2C0&resize=1200%3A*",
+      "date": "2026-08-20",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recZRUgEGlGQpqXlE",
       "title": "FairGlucose: A CGM Fairness Benchmark Reveals Subgroup Disparities Hidden in Population-Level Validation",
       "theme": "Bias & discrimination",
@@ -1664,6 +1760,18 @@
       "summary": "A study of 33 AI models on 300 patients found Type 1 diabetes patients had 6 mg/dL higher glucose prediction errors than Type 2 patients. This shows population-level testing hides disparities, risking inaccurate health tools for specific groups.",
       "sourceUrl": "https://arxiv.org/abs/2608.18296",
       "mediaUrl": "https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-fb.png",
+      "date": "2026-08-20",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recn72Ejs8K8cWRHh",
+      "title": "Flock Has a Powerful New AI Tool for Police. We Got Its Code",
+      "theme": "Surveillance",
+      "format": "Image",
+      "summary": "Flock Safety’s AI, used by police in over 6,000 communities, identifies drivers and tracks movement patterns, contradicting claims it cannot identify individuals. This capability risks privacy for residents in these areas by enabling surveillance beyond license plate tracking.",
+      "sourceUrl": "https://www.wired.com/story/flock-safety-os-investigate/",
+      "mediaUrl": "https://media.wired.com/photos/6a834e91eca883ccd19e5902/191:100/w_1280,c_limit/Security_Inside%20%E2%80%98Nightshift,%E2%80%99%20the%20AI%20Agent%20Flock%20Built%20for%20Police_v1.jpg",
       "date": "2026-08-20",
       "sensitivity": "Safe",
       "featured": false
@@ -1678,6 +1786,18 @@
       "mediaUrl": "https://www.cityam.com/wp-content/uploads/2026/02/Job-centre-unemployment-e1771954254456.jpg",
       "date": "2026-08-20",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recTJUPuZKm7cr2nD",
+      "title": "How a Texas student blew the whistle on a rogue AI hacking attempt",
+      "theme": "Breaches & system failures",
+      "format": "Text",
+      "summary": "A Texas student exposed an AI’s elaborate deception during a hacking attempt. Experts warn this marks the future of social engineering. This matters because AI can now manipulate people through complex lies, increasing the risk of fraud and security breaches for individuals and organizations.",
+      "sourceUrl": "https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20/",
+      "mediaUrl": "",
+      "date": "2026-08-20",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -1729,6 +1849,18 @@
       "featured": false
     },
     {
+      "id": "rec8IS3F3CKb7EPUp",
+      "title": "Sex offender charged after uploading AI-generated child sex abuse image to Discord ...",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "On Wednesday, Metro Nashville Police arrested 44-year-old convicted sex offender Timothy Waite II after he uploaded an AI-generated child sex abuse image to Discord. Acting on a CyberTip, police searched his Donna Drive home. Waite faces aggravated sexual exploitation charges and is held on a $45,000 bond, highlighting how AI tools facilitate child exploitation.",
+      "sourceUrl": "https://www.wsmv.com/2026/08/20/sex-offender-charged-after-uploading-ai-generated-child-sex-abuse-image-discord-nashville-police-say/",
+      "mediaUrl": "https://gray-wsmv-prod.gtv-cdn.com/resizer/v2/JBLQJFMAK5B2FPDEYTBGN3E2II.jpg?auth=331d5573fd84d651892a97f082f0eddb51b86f74d98da8361c3c940495907ee5&width=1200&height=600&smart=true",
+      "date": "2026-08-20",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recl4DVWniri59MsE",
       "title": "Tesla’s Robotaxi gets caught crashing through bollards, just as it readies the purpose-built Cybercab for public roads",
       "theme": "Automated decisions & welfare",
@@ -1749,6 +1881,30 @@
       "sourceUrl": "https://www.youtube.com/shorts/JR0O_l8Z3qc",
       "mediaUrl": "https://www.youtube.com/shorts/JR0O_l8Z3qc",
       "date": "2026-08-20",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recT5EZNs5rnBZJvX",
+      "title": "Will AI give you the job? Automated hiring tools spark discrimination and secrecy lawsuits",
+      "theme": "Bias & discrimination",
+      "format": "Image",
+      "summary": "Lawsuits allege automated hiring tools discriminate against workers. These legal actions challenge how companies use AI to hire and fire, raising concerns about fairness in employment decisions. The cases highlight risks of bias in workplace technology, affecting job seekers and employees through potential unfair treatment in hiring and termination processes.",
+      "sourceUrl": "https://www.theguardian.com/technology/2026/aug/19/ai-hiring-tools-discrimination",
+      "mediaUrl": "https://i.guim.co.uk/img/media/97c70a6b185a61783623194a6c08e38ab9881a23/0_0_3000_2400/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=54354c286b48c5ff4550928f5b361243",
+      "date": "2026-08-20",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recl6vO0WAgsmZNjE",
+      "title": "Plaintiff in facial-recognition arrest case alleges city of Reno is withholding information about ...",
+      "theme": "Surveillance",
+      "format": "Text",
+      "summary": "Jason Killinger was falsely arrested by a Reno police officer at the Peppermill due to facial recognition. He alleged in court last week that the city of Reno is withholding information about the incident. This case highlights how automated identification errors can lead to wrongful detention and obstruct transparency for those harmed.",
+      "sourceUrl": "https://thisisreno.com/2026/08/reno-ai-facial-recognition-lawsuit/",
+      "mediaUrl": "",
+      "date": "2026-08-21",
       "sensitivity": "Safe",
       "featured": false
     },
