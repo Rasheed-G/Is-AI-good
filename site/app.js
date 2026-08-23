@@ -12,6 +12,14 @@ let activeTheme = "All";
 let query = "";
 let showSensitive = false;
 
+// Pagination: render the grid in batches instead of all at once, so performance
+// (initial paint + the whole-grid rebuild on every search keystroke) stays flat as
+// the story count grows. currentList = the full filtered list; shown = how many of
+// it are in the DOM. "Load more" appends the next PAGE.
+const PAGE = 30;
+let currentList = [];
+let shown = 0;
+
 const $grid = document.getElementById("grid");
 const $themes = document.getElementById("themes");
 const $count = document.getElementById("count");
@@ -22,6 +30,7 @@ const $filtersToggle = document.getElementById("filtersToggle");
 const $filtersPanel = document.getElementById("filtersPanel");
 const $themeToggle = document.getElementById("themeToggle");
 const $themeCurrent = document.getElementById("themeCurrent");
+const $loadMore = document.getElementById("loadMore");
 
 init();
 
@@ -56,6 +65,8 @@ async function init() {
 
   // Share (event-delegated) — system share sheet on mobile, clipboard on desktop.
   $grid.addEventListener("click", onShareClick);
+
+  $loadMore.addEventListener("click", appendNext);
 
   render();
 }
@@ -96,14 +107,30 @@ function isSensitive(s) { return s.sensitivity === "Sensitive"; }
 
 function render() {
   const base = ALL.filter(matchBase);
-  const list = base.filter(s => showSensitive || !isSensitive(s));
+  currentList = base.filter(s => showSensitive || !isSensitive(s));
 
+  // Reset to the first page whenever the filter/search/theme changes.
   $grid.innerHTML = "";
-  list.forEach(s => $grid.appendChild(card(s)));
-  $empty.hidden = list.length > 0;
+  shown = 0;
+  appendNext();
+
+  $empty.hidden = currentList.length > 0;
 
   lastHidden = showSensitive ? 0 : base.filter(isSensitive).length;
-  setCount(list.length, lastHidden);
+  setCount(currentList.length, lastHidden);
+}
+
+// Append the next PAGE cards of currentList to the grid (built in a fragment so the
+// DOM is touched once), then show/hide the "Load more" button and process any embeds
+// in the newly-added cards.
+function appendNext() {
+  const end = Math.min(shown + PAGE, currentList.length);
+  const frag = document.createDocumentFragment();
+  for (let i = shown; i < end; i++) frag.appendChild(card(currentList[i]));
+  $grid.appendChild(frag);
+  shown = end;
+
+  $loadMore.hidden = shown >= currentList.length;
 
   enhanceEmbeds();
 }

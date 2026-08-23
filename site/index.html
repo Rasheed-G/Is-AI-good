@@ -6,7 +6,7 @@
   <meta name="robots" content="index,follow" />
   <title>Is AI Good?</title>
   <meta name="description" content="Real stories on the dangers and risks of AI" />
-  <link rel="stylesheet" href="styles.css?v=20260819.2" />
+  <link rel="stylesheet" href="styles.css?v=20260823" />
   <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed).
        SETUP: after deploying, create a Web Analytics site in the Cloudflare dashboard,
        copy the beacon token, and replace PASTE_CLOUDFLARE_TOKEN_HERE below with it.
@@ -53,6 +53,10 @@
     <p id="count" class="count" aria-live="polite"></p>
 
     <section id="grid" class="grid hide-sensitive" aria-label="Stories"></section>
+
+    <div class="load-more-wrap">
+      <button id="loadMore" class="load-more" type="button" hidden>Load more</button>
+    </div>
 
     <p id="empty" class="empty" hidden>No stories match your search.</p>
   </main>
@@ -102,6 +106,6 @@
   </div>
 
   <!-- ?v= is a cache-buster: bump the date when app.js/styles.css change so browsers re-fetch. -->
-  <script src="app.js?v=20260820.3"></script>
+  <script src="app.js?v=20260823"></script>
 </body>
 </html>
