@@ -215,10 +215,6 @@ a { color: inherit; }
 .load-more:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
 .load-more[hidden] { display: none; }
 
-/* ---- Footer ---- */
-.site-footer { border-top: 3px solid var(--ink); background: var(--surface); }
-.site-footer p { color: var(--muted); font-size: .85rem; padding: 24px 0; max-width: 70ch; }
-
 /* ---- Feedback (floating button + modal) ---- */
 .fb-open {
   position: fixed; right: 18px; bottom: 18px; z-index: 50;
