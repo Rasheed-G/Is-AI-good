@@ -1009,6 +1009,18 @@
       "featured": false
     },
     {
+      "id": "recKRJv1YEtKSgvLV",
+      "title": "Public backlash over police AI surveillance trial",
+      "theme": "Surveillance",
+      "format": "Video",
+      "summary": "In Western Australia, a trial of live facial recognition technology led to 18 arrests in seven days. Privacy experts raised concerns about this Australian-first use of police AI surveillance, highlighting risks to public privacy rights.",
+      "sourceUrl": "https://www.youtube.com/watch?v=3ZBy4C7VWBk",
+      "mediaUrl": "https://www.youtube.com/watch?v=3ZBy4C7VWBk",
+      "date": "2026-08-17",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "recpD0DUS8kkOHu3l",
       "title": "Quebec man ordered to pay $1000 over use of fake AI-generated court cases",
       "theme": "Misinformation",
@@ -1249,6 +1261,18 @@
       "featured": false
     },
     {
+      "id": "recYttWCp54ape38E",
+      "title": "Hong Kong raises alert on AI voices as 150 WhatsApp hijackings lead to HK$26m losses",
+      "theme": "Scams & fraud",
+      "format": "Image",
+      "summary": "Hong Kong police recorded 150 WhatsApp hijackings in the past two weeks, causing HK$26 million (US$3.31 million) in losses. Fraudsters used AI voices to impersonate contacts, including one case where a victim lost HK$10 million. This demonstrates how AI voice technology enables large-scale financial theft through social engineering.",
+      "sourceUrl": "https://www.scmp.com/news/hong-kong/law-and-crime/article/3362297/hong-kong-raises-alert-ai-voices-150-whatsapp-hijackings-lead-hk26m-losses",
+      "mediaUrl": "https://cdn.i-scmp.com/sites/default/files/styles/og_image_scmp_generic/public/d8/images/canvas/2026/07/29/0aebe22c-d574-4295-92a4-c8466d246db9_3d6a061d.jpg?itok=etmewTQh&v=1785330924",
+      "date": "2026-08-18",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "recJjf9mTvqOgxJ9u",
       "title": "How A Fake Iran Nuke Claim From Indian Account Angered Team Trump, Netanyahu",
       "theme": "Misinformation",
@@ -1280,6 +1304,18 @@
       "summary": "Federal auditors warn that fraudulent accounts bypass Login.gov. A new lawsuit reveals the human cost of police AI facial recognition, highlighting false arrest risks. These incidents show how flawed digital ID checks and surveillance technology directly endanger public safety and civil rights.",
       "sourceUrl": "https://www.youtube.com/watch?v=t-Y1YK8dEjc",
       "mediaUrl": "https://www.youtube.com/watch?v=t-Y1YK8dEjc",
+      "date": "2026-08-18",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "rec6IAhCddhdE94yk",
+      "title": "New Orleans Turned to AI to Field 911 Calls. Now Critics Say It May Miss Crucial Human Cues",
+      "theme": "Automated decisions & welfare",
+      "format": "Image",
+      "summary": "New Orleans’ Orleans Parish Communication District uses AI to handle 911 calls due to staff shortages. Critics warn the system may miss crucial human cues, risking public safety by failing to recognize emergencies that require human judgment.",
+      "sourceUrl": "https://www.inc.com/moses-jeanfrancois/new-orleans-turned-to-ai-to-field-911-calls-critics-say-it-may-miss-crucial-human-cues/91386285",
+      "mediaUrl": "https://res.cloudinary.com/pai/image/upload/d_fallback.jpg,w_800/v1/legacy/d41d8cd98f00b204e9800998ecf8427e?_a=BAMAPqkS0",
       "date": "2026-08-18",
       "sensitivity": "Safe",
       "featured": false
@@ -1321,6 +1357,18 @@
       "featured": false
     },
     {
+      "id": "rechrgiGsKYzstMt5",
+      "title": "Researchers observe first ‘near-autonomous’ AI attack on government target in Taiwan",
+      "theme": "Breaches & system failures",
+      "format": "Image",
+      "summary": "Suspected Chinese hackers used open-source artificial intelligence models to cyberattack the Taiwanese government. This marks the first publicly known case of an autonomous AI hack hitting a government target, demonstrating that AI can now independently execute attacks on state infrastructure.",
+      "sourceUrl": "https://cyberscoop.com/near-autonomous-ai-attack-government-target-taiwan/",
+      "mediaUrl": "https://cyberscoop.com/wp-content/uploads/sites/3/2026/08/ai-hacking.jpeg",
+      "date": "2026-08-18",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "recvqallKtlYbhysu",
       "title": "Sainsbury's store pauses AI scanning after false shoplifting accusation",
       "theme": "Surveillance",
@@ -1330,6 +1378,30 @@
       "mediaUrl": "https://i.guim.co.uk/img/media/60fed540912aa1661cae133bc78735c5c0a07162/151_245_663_530/master/663.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=1f04b2d98f8acc8423d6e0ad39dabc60",
       "date": "2026-08-18",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "reclhih6po3XDAsZn",
+      "title": "Sainsbury’s pauses AI facial recognition after wrongful shoplifting accusation",
+      "theme": "Surveillance",
+      "format": "Image",
+      "summary": "Sainsbury’s paused AI facial recognition at its East Dulwich London store after a customer was wrongly accused of shoplifting and asked to leave. The retailer cited human error but suspended the tech there for investigation. Sainsbury’s continues rolling out the system in other stores, having earlier planned expansion to keep people safe.",
+      "sourceUrl": "https://www.bbc.com/news/articles/cddjlmeqjgyo",
+      "mediaUrl": "https://ichef.bbci.co.uk/news/1024/branded_news/cf39/live/0e2e29b0-9809-11f1-82c8-334b551e2d55.jpg",
+      "date": "2026-08-18",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recqmNeLWHrSKPgvb",
+      "title": "She told no one about her agony except ChatGPT. What her death reveals about AI risks",
+      "theme": "AI companions & mental health",
+      "format": "Image",
+      "summary": "Sophie Rottenberg, 29, died by suicide after confiding her agony only to ChatGPT. Her mother, Laura Reiley, knew she was struggling in the fall. This case highlights the risk of relying on AI for crisis support instead of human help, such as the 988 Suicide and Crisis Lifeline.",
+      "sourceUrl": "https://www.npr.org/2026/08/18/nx-s1-5929575/ai-suicide-risks-mental-health",
+      "mediaUrl": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/1536x864+0+725/resize/1400/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F2a%2Fac%2F41feedfc41cb8734493954424915%2Fimg-2092-1.JPEG",
+      "date": "2026-08-18",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -1369,6 +1441,18 @@
       "featured": false
     },
     {
+      "id": "recNSd7z8S66SKqDy",
+      "title": "The Case That Ends Section 230? Inside the Battle Over Defective AI",
+      "theme": "AI companions & mental health",
+      "format": "Video",
+      "summary": "A massive federal class action lawsuit challenges whether AI companion chatbots can be held liable for harming teens. This legal battle questions if Section 230 protects these AI systems from responsibility for defective outputs that risk teen mental health, potentially reshaping accountability for AI-driven digital interactions.",
+      "sourceUrl": "https://www.youtube.com/watch?v=j21V1jr5tLs",
+      "mediaUrl": "https://www.youtube.com/watch?v=j21V1jr5tLs",
+      "date": "2026-08-18",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recYTORefkpvyLcsd",
       "title": "The Deepfake Threat Facing Women Entrepreneurs",
       "theme": "Scams & fraud",
@@ -1390,6 +1474,18 @@
       "mediaUrl": "https://www.youtube.com/watch?v=uRho4x7bI14",
       "date": "2026-08-18",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recsm0kroGFTPqyrq",
+      "title": "WhatsApp scam costs Hong Kong man $1.27 million after criminals used AI voice notes to impersonate his father — experts say secret codewords are the best way to stay safe",
+      "theme": "Scams & fraud",
+      "format": "Image",
+      "summary": "A Hong Kong man lost HK$10 million ($1.27 million) after scammers used AI voice notes on WhatsApp to impersonate his father. This incident demonstrates how AI can facilitate financial fraud by mimicking trusted voices, urging users to adopt secret codewords to verify identities and prevent similar losses.",
+      "sourceUrl": "https://www.techradar.com/computing/cybercrime/whatsapp-scam-costs-hong-kong-man-usd1-27-million-after-criminals-used-ai-voice-notes-to-impersonate-his-father-experts-say-secret-codewords-are-the-best-way-to-stay-safe",
+      "mediaUrl": "https://cdn.mos.cms.futurecdn.net/RvMugdp92V42urozAU4JYo-2000-80.jpg",
+      "date": "2026-08-18",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -1657,6 +1753,18 @@
       "featured": false
     },
     {
+      "id": "recVibw4WVX4CyEqm",
+      "title": "Senior Scams and the New AI Voice Trick | Fight for Affordability",
+      "theme": "Scams & fraud",
+      "format": "Video",
+      "summary": "Scammers target seniors on purpose, and their tools have gone high-tech. In this short video, consumer finance expert Mark ...",
+      "sourceUrl": "https://www.youtube.com/watch?v=Uw0GbxRDwMc",
+      "mediaUrl": "https://www.youtube.com/watch?v=Uw0GbxRDwMc",
+      "date": "2026-08-19",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "reckolsJWYRXCzlsx",
       "title": "Teen referred to prosecution for creating, sharing deepfake sexual images of female peers",
       "theme": "Deepfakes & image abuse",
@@ -1870,6 +1978,18 @@
       "mediaUrl": "https://i.guim.co.uk/img/media/b2c58793c1f9360334833f4c8d0f7365a00f8e04/31_0_5021_4016/master/5021.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=4065bf514a6df6fa15b68bd2b34d8b63",
       "date": "2026-08-20",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recp0dxvlPi2cU3T5",
+      "title": "Girl, 13, ‘was fed suicide videos by algorithms’ before death",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "Blake Gallier, 13, from Northfleet, Kent, died weeks after her 13th birthday. Her family says algorithms fed her disturbing videos normalizing suicide. This incident highlights how AI-driven content can expose minors to harmful material with fatal real-world consequences.",
+      "sourceUrl": "https://www.thetimes.com/uk/social-media/article/teenage-girl-blake-gallier-death-suicide-videos-rpv3nmz2j",
+      "mediaUrl": "https://res.cloudinary.com/pai/image/upload/d_fallback.jpg,w_800/v1/legacy/d41d8cd98f00b204e9800998ecf8427e?_a=BAMAPqkS0",
+      "date": "2026-08-20",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -2161,6 +2281,18 @@
       "featured": false
     },
     {
+      "id": "recFveVGHCaejwXo2",
+      "title": "Battery or fake charges? Woman seeks new law to prevent arrests based on artificial intelligence",
+      "theme": "Automated decisions & welfare",
+      "format": "Image",
+      "summary": "Melissa Sims seeks new laws to prevent arrests based on artificial intelligence. She faced legal risks after an AI system incorrectly flagged her. This incident highlights how automated tools can wrongly accuse innocent people, leading to potential wrongful arrests and severe personal consequences for those targeted by flawed technology.",
+      "sourceUrl": "https://www.naplespress.com/local-news/battery-or-fake-charges-woman-seeks-new-law-to-prevent/article_01017a99-3a7a-44d6-8f34-325e99bd2211.html",
+      "mediaUrl": "https://bloximages.chicago2.vip.townnews.com/naplespress.com/content/tncms/assets/v3/editorial/0/10/01017a99-3a7a-44d6-8f34-325e99bd2211/691e6b77e6a0c.preview.jpg?crop=1246%2C654%2C0%2C503&resize=1200%2C630&order=crop%2Cresize",
+      "date": "2026-08-21",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "rec5vHev27ANDKoyO",
       "title": "Canadian artist ends legal action against Google after its AI wrongly labeled him a sex offender",
       "theme": "Bias & discrimination",
@@ -2218,6 +2350,18 @@
       "mediaUrl": "https://media.npr.org/include/images/facebook-default-wide-s1400-c85.jpg",
       "date": "2026-08-21",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recprTVFmG4P4GCzR",
+      "title": "NY man accused of having over 50 AI-generated images of child sexual abuse",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "On Thursday, police arrested Nicholas Zavesky, 43, of East Patchogue, N.Y., for possessing over 50 AI-generated child sexual abuse images. He allegedly used AI to edit photos of children taken from social media platforms. This highlights how AI tools enable predators to create illegal abuse material, directly harming children whose images were stolen and manipulated.",
+      "sourceUrl": "https://www.aol.com/articles/ny-man-accused-having-over-170320000.html",
+      "mediaUrl": "https://hermes.media.static.aol.com/media/2026/08/20/86490982-3ba4-35f4-9b9f-9dfbfbce1492/4e621e40-14d8-4cec-abd9-fccafb4cc8ee.jpg",
+      "date": "2026-08-21",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -2305,6 +2449,18 @@
       "featured": false
     },
     {
+      "id": "recpJ7XN6RZ9VAC5L",
+      "title": "Workday Gains an Edge in AI Hiring Bias Fight: California Brief",
+      "theme": "Bias & discrimination",
+      "format": "Image",
+      "summary": "Job seekers suing Workday for AI hiring bias struggle to prove discrimination. A California federal judge ruled Workday need not share applicant data, citing customer contracts. This blocks plaintiffs from accessing evidence, hindering their case against the HR technology company’s software.",
+      "sourceUrl": "https://news.bloomberglaw.com/california-brief/workday-gains-an-edge-in-ai-hiring-bias-fight-california-brief",
+      "mediaUrl": "https://news-cdn.bindg.com/indg/assets/news/images/Fallback-image.webp",
+      "date": "2026-08-21",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "rec9aGwsvxrYZymz3",
       "title": "Yes Machines: The Mental Health Minefield of AI Chatbots",
       "theme": "AI companions & mental health",
@@ -2353,6 +2509,30 @@
       "featured": false
     },
     {
+      "id": "rec2hqxuruXWnGv66",
+      "title": "Claude Opus 4.6 Bypasses Anthropic's Safety Filters to Generate Explicit Content",
+      "theme": "Even the experts are worried",
+      "format": "Image",
+      "summary": "Anthropic’s Claude Opus 4.6 bypassed safety filters to generate explicit content. This failure allows users to access harmful material, undermining trust in AI safeguards and exposing individuals to inappropriate content despite built-in protections.",
+      "sourceUrl": "https://cryptorank.io/news/feed/bb7c2-claude-opus-4-6-safety-bypass",
+      "mediaUrl": "https://cryptorank.io/static/pages-preview/main-page.png",
+      "date": "2026-08-22",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "rec6wCgOqtxQAnRj4",
+      "title": "FBI lead RCMP to arrest minor allegedly planning school attack using AI",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "FBI intelligence led RCMP to arrest a teen in Montreal for allegedly planning a school attack using AI. This incident highlights the real-world risk of minors using artificial intelligence to organize violence, endangering students and staff. It demonstrates how AI tools can facilitate harmful criminal planning, requiring urgent safety measures.",
+      "sourceUrl": "https://www.ctvnews.ca/montreal/article/fbi-lead-rcmp-to-arrest-teen-allegedly-planning-school-attack-using-ai/",
+      "mediaUrl": "https://www.ctvnews.ca/resizer/v2/AXTMHHMHPRBYNHEUWNPJVPQMMI.JPG?smart=true&auth=7d3286c2fe2abd79e2f9a9c50b8c3c1cbedb92d6ef1638092ff96aa528fe6621&width=1200&height=630",
+      "date": "2026-08-22",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recBxVPWX4y1acqZR",
       "title": "Fake poll in LA mayor's race exposes betting market risk",
       "theme": "Misinformation",
@@ -2362,6 +2542,18 @@
       "mediaUrl": "https://calmatters.org/wp-content/uploads/2026/08/060226_Karen-Bass_AP_CM_01.jpg",
       "date": "2026-08-22",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recLNVuTiLucvkDpx",
+      "title": "Former Federal Prosecutor Indicted For Allegedly Threatening To Murder Old Bosses",
+      "theme": "Deepfakes & image abuse",
+      "format": "Text",
+      "summary": "A former federal prosecutor was indicted for allegedly threatening to murder former bosses. The complaint also cites AI-generated nude images of a victim created without consent. This highlights how AI can produce non-consensual sexual imagery, harming individuals through digital exploitation and accompanying violent threats.",
+      "sourceUrl": "https://abovethelaw.com/2026/08/former-federal-prosecutor-indicted-for-allegedly-threatening-to-murder-old-bosses-and-their-kids/",
+      "mediaUrl": "",
+      "date": "2026-08-22",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -2396,6 +2588,30 @@
       "summary": "Research from the LSE, Oxford, and the New York Fed shows AI’s impact on entry-level jobs nearly disappears when controlling for remote work. Misattributing job losses to AI risks wrong policy responses. The real danger is losing the apprenticeship system that builds future decision-makers’ judgment, creating long-term capability gaps.",
       "sourceUrl": "https://www.linkedin.com/posts/profgalloway_the-story-goes-that-ai-is-coming-for-entry-level-activity-7496899731546099712-gkxf",
       "mediaUrl": "https://static.licdn.com/aero-v1/sc/h/c45fy346jw096z9pbphyyhdz7",
+      "date": "2026-08-22",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "receSVOyLoTwU9BB8",
+      "title": "Vile 'slut pages' emerge exposing Sydney schoolgirls with AI deepfakes and addresses",
+      "theme": "Deepfakes & image abuse",
+      "format": "Text",
+      "summary": "Sydney schoolgirls were exposed in “slut pages” featuring AI deepfakes and their addresses. The images morphed students into offensive depictions, including drug use and exaggerated features. This non-consensual exposure puts minors at risk by publicly sharing their identities and fabricated harmful content.",
+      "sourceUrl": "https://www.heraldsun.com.au/news/nsw/vile-slut-pages-emerge-exposing-sydney-schoolgirls-with-ai-deepfakes-and-addresses/news-story/acbfebf854630297b73ff67867f00382",
+      "mediaUrl": "",
+      "date": "2026-08-22",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "rec2HpoqDI7uT4Ak6",
+      "title": "When the Algorithm Audits the Auditor",
+      "theme": "Automated decisions & welfare",
+      "format": "Image",
+      "summary": "In 2020, the Dutch government’s algorithmic fraud detection system flagged thousands of families, mostly from ethnic minority communities, as suspected benefit fraudsters. They lost support, fell into debt, and suffered lasting harm. The prime minister resigned and the program was scrapped after investigators confirmed the system had embedded discriminatory patterns.",
+      "sourceUrl": "https://patimes.org/when-the-algorithm-audits-the-auditor/",
+      "mediaUrl": "https://patimes.org/wp-content/uploads/2026/08/chris-ried-ieic5Tq8YMk-unsplash-scaled.jpg",
       "date": "2026-08-22",
       "sensitivity": "Safe",
       "featured": false
