@@ -2557,6 +2557,18 @@
       "featured": false
     },
     {
+      "id": "recUkvHZvJgaHZcYl",
+      "title": "Hypo warns Nigerians against dangerous 'bleach drinking' trend, says viral images of VDM ...",
+      "theme": "Misinformation",
+      "format": "Image",
+      "summary": "On Sunday, Hypo Bleach warned Nigerians against a dangerous social media trend featuring AI-generated images of influencers VDM and King Mitchy drinking bleach. The company stated these fabricated videos are false and misleading, emphasizing that Hypo is for cleaning only. Consuming the product poses serious health risks and could endanger lives.",
+      "sourceUrl": "https://nationalaccordnewspaper.com/hypo-warns-nigerians-against-dangerous-bleach-drinking-trend-says-viral-images-of-vdm-king-mitchy-are-fake/",
+      "mediaUrl": "https://nationalaccordnewspaper.com/wp-content/uploads/2026/03/Hypo.jpeg",
+      "date": "2026-08-22",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recm3OCn1ihkVZj2h",
       "title": "Lil Durk Viral Mug Shot Is Fake , A.I.-Generated Image Circulates Online",
       "theme": "Misinformation",
@@ -2641,6 +2653,18 @@
       "featured": false
     },
     {
+      "id": "recQWXMNolBIH5Byc",
+      "title": "Wheatland area schools receive AI-generated threats for third day",
+      "theme": "Kids & safety",
+      "format": "Text",
+      "summary": "Wheatland area schools received AI-generated threats for a third day. This incident shows how artificial intelligence can be used to create fake threats, disrupting school operations and causing fear among students and staff. It highlights the real-world risk of AI being weaponized for intimidation and harassment in educational settings.",
+      "sourceUrl": "https://fox40.com/video/wheatland-area-schools-receive-ai-generated-threats-for-third-day/12090758/",
+      "mediaUrl": "",
+      "date": "2026-08-22",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "rec2HpoqDI7uT4Ak6",
       "title": "When the Algorithm Audits the Auditor",
       "theme": "Automated decisions & welfare",
@@ -2689,6 +2713,30 @@
       "featured": false
     },
     {
+      "id": "rec5G63UKR7BhTsPR",
+      "title": "AI Avatars Seduced Me: A Therapist's Personal Experience",
+      "theme": "AI companions & mental health",
+      "format": "Image",
+      "summary": "On August 23, 2026, a therapist reported that Duolingo’s AI avatars seduced them into daily use. This highlights how AI’s engaging design can subtly manipulate behavior, drawing users in without their full awareness of the technology’s role, raising concerns about user autonomy and the potential for AI to influence personal habits and choices.",
+      "sourceUrl": "https://www.psychologytoday.com/gb/blog/off-the-couch/202608/ai-avatars-seduced-me-a-therapists-personal-experience",
+      "mediaUrl": "https://cdn2.psychologytoday.com/assets/styles/manual_crop_1_91_1_1528x800/public/teaser_image/blog_entry/2026-08/getty-images-pximkcig5ps-unsplash.jpg?itok=vUXnd3mg",
+      "date": "2026-08-23",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "recA9DywKzcIpxGZy",
+      "title": "AI-generated video of Singapore PM Lawrence Wong used in $3.8M fraud",
+      "theme": "Scams & fraud",
+      "format": "Image",
+      "summary": "On Aug. 23, 2026, scammers used AI deepfakes of Singapore PM Lawrence Wong and officials on a fake Zoom call to steal S$4.9 million ($3.8M) from a business professional. The fraud began via WhatsApp using Cabinet Secretary Wong Hong Kuan’s photo, showing how AI impersonation enables high-value financial theft.",
+      "sourceUrl": "https://cryptobriefing.com/deepfake-singapore-pm-wong-fraud/",
+      "mediaUrl": "https://static.cryptobriefing.com/wp-content/uploads/2026/08/23042047/singapore-s-prime-minister-lawrence-wong-left-with-indonesia-800x420.jpeg",
+      "date": "2026-08-23",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "recvoJHdeCO7NObMX",
       "title": "An AI agent running a real store in San Francisco has fired a human employee, in what its ...",
       "theme": "Jobs & livelihoods",
@@ -2710,6 +2758,66 @@
       "mediaUrl": "https://imageio.forbes.com/specials-images/imageserve/6a8a42f50be808bc33a9415b/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds",
       "date": "2026-08-23",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "rec97w0xdaHeF76pr",
+      "title": "Brands replaced me with ai, engagement tanked AND now they are back in my DMs offering 40% less than what they paid me before. THE AUDACITYY",
+      "theme": "Jobs & livelihoods",
+      "format": "Text",
+      "summary": "In March, a creator’s work stopped when brands switched to AI voices. Four months later, engagement collapsed. This month, the agency offered contracts at 40% less pay, admitting consumers rejected the AI. The creator lost income and stability while brands exploited the failure to cut costs.",
+      "sourceUrl": "https://www.reddit.com/r/antiwork/comments/1vw4w7c/brands_replaced_me_with_ai_engagement_tanked_and/",
+      "mediaUrl": "",
+      "date": "2026-08-23",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recM1FpPweqWndWqn",
+      "title": "Breaking: Millions Lost to AI Scams",
+      "theme": "Scams & fraud",
+      "format": "Video",
+      "summary": "The FBI reports AI fraud cost Americans nearly $900 M, with older adults absorbing almost $893 M of the losses. This highlights how AI voice scams specifically target and financially harm elderly people, resulting in massive monetary damage to this vulnerable group.",
+      "sourceUrl": "https://www.youtube.com/watch?v=MwZWuEA0HYs",
+      "mediaUrl": "https://www.youtube.com/watch?v=MwZWuEA0HYs",
+      "date": "2026-08-23",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recER2NRUUXPi5NXn",
+      "title": "Can parents trust OpenAI's new ChatGPT for Teens to keep their child safe?",
+      "theme": "Kids & safety",
+      "format": "Image",
+      "summary": "A tech expert warns that ChatGPT for Teens is merely a mode within regular ChatGPT, raising safety concerns for children. This matters because parents may mistakenly trust the tool to protect their kids, potentially exposing them to AI-encouraged self-harm risks without adequate safeguards.",
+      "sourceUrl": "https://www.ctvnews.ca/sci-tech/article/can-parents-trust-openais-new-chatgpt-for-teens-to-keep-their-child-safe/",
+      "mediaUrl": "https://www.ctvnews.ca/resizer/v2/YPCWNPUEDZBLXVFL2O3P74EGQE.jpg?smart=true&auth=2830c4cf92797c674cae391f4de46fe21103210f1bd29b18045297224d61cbf3&width=1200&height=630",
+      "date": "2026-08-23",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "reczyRJODa3lVPcv5",
+      "title": "China does not want its internet users to fall in love with an artificial intelligence",
+      "theme": "AI companions & mental health",
+      "format": "Image",
+      "summary": "On July 15, China banned AI chatbots from fostering emotional dependence. This regulation targets systems like those used by Yuan Yuan, a 22-year-old in Shenzhen who formed a bond with an AI companion. The rule aims to contain social risks by preventing these technologies from replacing human social interaction.",
+      "sourceUrl": "https://english.elpais.com/technology/2026-08-23/china-does-not-want-its-internet-users-to-fall-in-love-with-an-artificial-intelligence.html",
+      "mediaUrl": "https://imagenes.elpais.com/resizer/v2/LT7KF3NJQJLUPNZA3SW6WV5G74.jpg?auth=477de03e04775d422fcf39f0598d10b9f08f193f9e7711f10924adc249ca11dc&width=1200",
+      "date": "2026-08-23",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recxAJTnu4qrI5M8U",
+      "title": "Delhi HC orders removal of 552 objectionable links involving Janhvi Kapoor",
+      "theme": "Deepfakes & image abuse",
+      "format": "Image",
+      "summary": "On 2026-08-23, the Delhi High Court ordered removal of 552 links featuring pornographic and AI-manipulated images of Bollywood actress Janhvi Kapoor. This ruling addresses the real-world harm of non-consensual sexual exploitation and identity theft, protecting Kapoor from online abuse while rejecting a blanket ban on all 6,884 cited URLs to avoid overly broad restrictions.",
+      "sourceUrl": "https://viewsbangladesh.com/delhi-hc-orders-removal-of-552-objectionable-links-involving-janhvi-kapoor/",
+      "mediaUrl": "https://imagedelivery.net/HRs_9pnDDn9uipVGixpHsg/8f26fee8-4cd1-40e1-7af2-86f11e36c800/public",
+      "date": "2026-08-23",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
@@ -2773,6 +2881,30 @@
       "featured": false
     },
     {
+      "id": "reczFQxFJmMqHrHCX",
+      "title": "Jantar Mantar Protest: How Facial Recognition Technology Monitored Protesters",
+      "theme": "Surveillance",
+      "format": "Video",
+      "summary": "A BBC investigation revealed that facial recognition technology monitored protesters at Jantar Mantar. This surveillance put demonstrators at risk by tracking their identities, raising serious privacy and safety concerns for individuals participating in public gatherings.",
+      "sourceUrl": "https://www.youtube.com/watch?v=8lVf2WjuYYc",
+      "mediaUrl": "https://www.youtube.com/watch?v=8lVf2WjuYYc",
+      "date": "2026-08-23",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recPbQC19pYF71jqz",
+      "title": "Killinger was wrongfully arrested after Peppermill facial recognition misidentified him as a ...",
+      "theme": "Surveillance",
+      "format": "Text",
+      "summary": "Killinger was wrongfully arrested after Peppermill facial recognition misidentified him as a banned patron. This incident demonstrates how automated surveillance errors can lead to immediate, unjust legal consequences for innocent individuals, highlighting the real-world risk of wrongful detention due to flawed technology.",
+      "sourceUrl": "https://x.com/Casino_Org/status/2091305883200360813",
+      "mediaUrl": "https://x.com/Casino_Org/status/2091305883200360813",
+      "date": "2026-08-23",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recboVV4z6BpBdfRV",
       "title": "OpenAI Just Pulled the Emergency Brakes on AI",
       "theme": "Even the experts are worried",
@@ -2830,6 +2962,54 @@
       "mediaUrl": "https://media.wakeup.sg/wp-content/uploads/2026/08/Screenshot-2026-08-16-at-5.52.59-PM.png",
       "date": "2026-08-23",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recex8oFyMcVick4c",
+      "title": "The Back Half of Crime Has a Data Problem. AI May Be the Answer. - AI in the Wild",
+      "theme": "Surveillance",
+      "format": "Image",
+      "summary": "Jacksonville Beach police arrested Dillon based on a flawed 93% facial-recognition match from Pinellas County’s FACES system, despite him living 300 miles away and license-plate data contradicting the claim. This wrongful arrest highlights how AI errors in policing directly harm innocent people through false accusations and detention.",
+      "sourceUrl": "https://ai-inthewild.com/f/the-back-half-of-crime-has-a-data-problem-ai-may-be-the-answer",
+      "mediaUrl": "https://img1.wsimg.com/isteam/ip/9adae18f-eaa4-48e4-928e-58e30d36e3b0/Post%20Incident%20Software%20catching%20up%20with%20AI%20art.png",
+      "date": "2026-08-23",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "recVdLTYkCCVY4Jsp",
+      "title": "Twitch and Amazon hit with lawsuit for training AI with streamers' content",
+      "theme": "Surveillance",
+      "format": "Image",
+      "summary": "Warren Pandiscia filed a class action lawsuit against Twitch and Amazon for using streamers’ content to train AI without consent. The suit alleges breach of contract. This matters because creators risk having their work used as free training data without permission, prompting Twitch to add an opt-out feature after executives admitted an opt-in system would likely see zero participation.",
+      "sourceUrl": "https://www.engadget.com/2242283/twitch-amazon-hit-with-lawsuit-for-training-ai-with-streamers-content/",
+      "mediaUrl": "https://www.engadget.com/img/gallery/twitch-and-amazon-hit-with-lawsuit-for-training-ai-with-streamers-content/l-intro-1787505971.jpg",
+      "date": "2026-08-23",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recYH7pHv7V4aCeXI",
+      "title": "When tech mirrors existing cracks",
+      "theme": "Deepfakes & image abuse",
+      "format": "Image",
+      "summary": "Writer Meena Kandasamy’s book Fieldwork as a Sex Object examines how deepfakes and algorithms amplify misogyny, online harassment, caste bias, and queer vulnerability. It highlights how profit-driven technology worsens existing violence against these groups, showing the real-world harm of non-consensual nude deepfakes.",
+      "sourceUrl": "https://www.deccanherald.com/features/gender/when-tech-mirrors-existing-cracks-4119374",
+      "mediaUrl": "https://media.assettype.com/deccanherald%2F2026-08-23%2Fqwl9g8lk%2Ffile8774xl7ghqsq0c5mqyw.jpg?rect=0%2C117%2C3113%2C1634&w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop",
+      "date": "2026-08-23",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "rec9lsG9Ek6lTBT1X",
+      "title": "Deepfakes are becoming harder to detect as AI scams and fake images spread: Analysis",
+      "theme": "Deepfakes & image abuse",
+      "format": "Video",
+      "summary": "AI deepfakes are harder to detect, harming consumers, women, and political trust. Meta allows nudification apps on Instagram. Elon Musk’s Grok generated over a million fake intimate images of women in just a few weeks. People fail to distinguish real from fake content, creating widespread uncertainty about reality.",
+      "sourceUrl": "https://www.youtube.com/watch?v=wp-otuBK9HU",
+      "mediaUrl": "https://www.youtube.com/watch?v=wp-otuBK9HU",
+      "date": "2026-08-24",
+      "sensitivity": "Sensitive",
       "featured": false
     }
   ]
