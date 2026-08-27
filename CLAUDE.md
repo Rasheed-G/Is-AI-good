@@ -20,9 +20,10 @@ A broken change can never reach the live site, because the owner sees the previe
 
 ## After any code change — log it
 Code and its rationale are kept in separate homes. Once a change is merged, **record the decision in the
-private docs repo** (`../AI Harm Watch`): append to the right stage's `docs/pipeline/<stage>/decisions.md`
-and refresh `docs/LIVE-VIEW.md` if the top-level picture moved. The pipeline has 6 stages —
-collect · gate · triage · judge · copy · publish — see `docs/pipeline/00-overview.md` there.
+private docs repo** (`../AI Harm Watch`): append to the right **surface's** `decisions.md` — a pipeline
+stage (`docs/pipeline/<stage>/`), the **website** (`docs/website/`), or the **data console**
+(`docs/data/`) — and refresh `docs/LIVE-VIEW.md` if the top-level picture moved. The pipeline has 6
+stages (collect · gate · triage · judge · copy · publish); the full surface map is `docs/README.md`.
 
 ## Security (push protection is ON)
 - **Never commit secrets.** Keys (Airtable / Groq / YouTube) live only in GitHub Actions Secrets; the
