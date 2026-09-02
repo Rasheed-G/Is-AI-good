@@ -30,7 +30,7 @@ TABLE = "tblnfUTaXWRD3VYk6"
 # and llama-3.1-8b-instant were BOTH deprecated (shutdown ~08/16/26) — do not resurrect.
 TRIAGE_MODEL = "openai/gpt-oss-20b"    # Stage A: cheap recall-biased junk drop (batched)
 JUDGE_MODEL  = "openai/gpt-oss-120b"   # Stage B: keep/reject + theme + score + sensitivity
-COPY_MODEL   = "qwen/qwen3.6-27b"      # Stage C: card summary, keepers only
+COPY_MODEL   = "qwen/qwen3.8-27b"      # Stage C: card summary, keepers only (qwen3.6-27b decommissioned 09/14/26)
 GROQ_MODEL = JUDGE_MODEL               # back-compat alias for any external caller
 
 # Sources (subreddits / keywords / feeds) live in the Airtable "Sources" table so the
@@ -1006,7 +1006,7 @@ def pretriage(posts, deadline):
           f"{f'; {len(rest)} past MAX_TRIAGE passed through' if rest else ''}).")
     return survivors, spent
 
-# --- Stage C: card copy for keepers only (qwen3.6-27b) -----------------------
+# --- Stage C: card copy for keepers only (qwen3.8-27b) -----------------------
 COPY_MIN_BODY = 200        # below this a feed snippet is too thin to summarise from → fetch the full article first
 
 # When handed a thin body the copy model rightly REFUSES and emits a meta-comment ABOUT the
