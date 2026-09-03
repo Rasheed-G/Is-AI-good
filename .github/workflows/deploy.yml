@@ -7,8 +7,13 @@ name: Publish & deploy
 #
 # Runs:
 #   * after each harvest completes (workflow_run) — new content goes live promptly
-#   * every 6 hours (schedule) — picks up manual approvals of Sensitive items and
-#     removals (Status set to Rejected) made in Airtable between harvests
+#   * once a day (schedule, 06:00 UTC) — picks up manual approvals of Sensitive
+#     items and removals (Status set to Rejected) made in Airtable between harvests.
+#     Was every 6 hours, but each run re-reads the whole Published table (~8 Airtable
+#     calls at 100 rows/page), so 4×/day was the top Airtable API-call consumer and
+#     pushed the Free-plan workspace over its monthly limit. Once daily keeps us well
+#     under; new harvested content still ships promptly via the workflow_run trigger,
+#     and an urgent manual edit can go live at once via workflow_dispatch below.
 #   * on demand (workflow_dispatch) — e.g. to push a removal live immediately
 #
 # HOST WIRING (one-time, owner, host-side — no code here): connect the repo to a
@@ -19,7 +24,7 @@ on:
     workflows: ["Daily harvest", "Weekly sweep"]
     types: [completed]
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 6 * * *"
   workflow_dispatch: {}
 
 permissions:
