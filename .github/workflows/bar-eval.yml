@@ -1,0 +1,37 @@
+name: B.A.R. character check
+
+# Reads B.A.R.'s replies to a fixed set of prompts (scripts/bar_eval.mjs) using the real endpoint
+# code and the real model, and prints them to this run's log. Runs whenever the character or the
+# endpoint changes, on any branch — so a persona edit can be read before its PR is merged — and on
+# demand. Runs here, not locally, because Groq blocks the owner's network.
+# Cost: ~17 calls on the Groq free tier per model compared.
+on:
+  push:
+    paths:
+      - "functions/api/bar.js"
+      - "scripts/bar_eval.mjs"
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "Comma-separated models to compare (blank = default)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run the prompts
+        env:
+          BAR_PROVIDER: groq
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          BAR_EVAL_MODELS: ${{ github.event.inputs.models || 'openai/gpt-oss-120b,qwen/qwen3.8-27b' }}
+        run: node scripts/bar_eval.mjs
