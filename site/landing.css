@@ -3,15 +3,12 @@
 .header-bar-top { margin-bottom: 18px; }
 
 /* ---- "You've probably wondered" ---- */
-/* Same centred 1080px column as the masthead, but the content inside is kept narrower and left-aligned,
-   so it lines up with the masthead's left edge. */
-.intro > *, .steps > * { max-width: 760px; }
 .intro { padding-top: 52px; padding-bottom: 28px; }
 .intro h2 {
   margin: 0 0 18px; font-family: var(--display); font-weight: 700; color: var(--ink);
   font-size: clamp(1.7rem, 4.4vw, 2.5rem); line-height: 1.12; letter-spacing: -.02em;
 }
-.intro p { max-width: 680px; margin: 0 0 18px; font-size: 1.06rem; line-height: 1.65; color: var(--muted); }
+.intro p { margin: 0 0 18px; font-size: 1.06rem; line-height: 1.65; color: var(--muted); }
 .intro .intro-questions {
   font-family: var(--display); font-weight: 500; font-size: clamp(1.15rem, 2.6vw, 1.5rem);
   line-height: 1.4; color: var(--ink);
