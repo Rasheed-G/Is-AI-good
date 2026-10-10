@@ -281,10 +281,10 @@ a { color: inherit; }
 .menu-btn:hover, .menu-btn[aria-expanded="true"] { background: var(--ink); color: #fff; }
 /* Three horizontal bars (drawn with a gradient so they follow the button's text colour) */
 .menu-btn .bars {
-  display: block; width: 22px; height: 16px;
-  background: linear-gradient(currentColor 0 0) 0 0 / 100% 2px no-repeat,
-              linear-gradient(currentColor 0 0) 0 50% / 100% 2px no-repeat,
-              linear-gradient(currentColor 0 0) 0 100% / 100% 2px no-repeat;
+  display: block; width: 22px; height: 18px;
+  background: linear-gradient(currentColor 0 0) 0 0 / 100% 4px no-repeat,
+              linear-gradient(currentColor 0 0) 0 50% / 100% 4px no-repeat,
+              linear-gradient(currentColor 0 0) 0 100% / 100% 4px no-repeat;
 }
 .menu-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .menu-panel {
