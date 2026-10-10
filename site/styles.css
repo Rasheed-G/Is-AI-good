@@ -269,3 +269,45 @@ a { color: inherit; }
 .fb-submit:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
 
 @media (max-width: 480px) { .fb-open { right: 12px; bottom: 12px; } }
+
+/* ---- Menu (shared by the landing page and /news/) ---- */
+.header-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.menu-wrap { position: relative; flex: none; }
+.menu-btn {
+  font-family: var(--mono); font-weight: 700; font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .03em; color: var(--ink); background: transparent;
+  border: 2px solid var(--ink); padding: 8px 14px; cursor: pointer;
+}
+.menu-btn:hover, .menu-btn[aria-expanded="true"] { background: var(--ink); color: #fff; }
+.menu-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.menu-panel {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 40; min-width: 260px;
+  background: var(--surface); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+  display: flex; flex-direction: column;
+}
+.menu-panel[hidden] { display: none; }
+.menu-panel a, .menu-panel span {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 12px 14px; font-family: var(--mono); font-size: .8rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .02em; color: var(--ink); text-decoration: none;
+  border-top: 2px solid var(--ink);
+}
+.menu-panel > :first-child { border-top: 0; }
+.menu-panel a:hover { background: var(--orange); }
+.menu-panel a[aria-current="page"] { background: var(--ink); color: #fff; }
+.menu-panel a:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: -4px; }
+.menu-panel span[aria-disabled="true"] { color: var(--mut2); cursor: default; }
+.menu-panel em { font-style: normal; font-size: .62rem; border: 1.5px solid currentColor; padding: 1px 6px; white-space: nowrap; }
+
+/* ---- Small header used on /news/ (the landing page owns the big masthead) ---- */
+.site-header.compact { padding: 16px 0 22px; }
+.mini-mark {
+  font-family: var(--mono); font-weight: 700; font-size: 1.05rem; letter-spacing: -.02em;
+  color: var(--ink); text-decoration: none;
+}
+.mini-mark .cur { width: .5em; height: .8em; }
+.page-title {
+  margin: 22px 0 0; color: var(--ink); font-family: var(--mono); font-weight: 700;
+  line-height: 1; letter-spacing: -.03em; font-size: clamp(30px, 6vw, 56px);
+}
+.site-header.compact .strap { margin-top: 12px; }
