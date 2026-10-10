@@ -34,9 +34,12 @@
   /* room on the right/bottom so the hard shadows aren't clipped */
   padding: 2px 12px 14px 0; -webkit-overflow-scrolling: touch;
 }
+/* No scrollbar: the dots below do the navigating (swipe and arrow keys still work). */
+.step-track { scrollbar-width: none; }
+.step-track::-webkit-scrollbar { display: none; }
 .step-track:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 4px; }
 .step-card {
-  flex: 0 0 85%; scroll-snap-align: start; min-height: 340px;
+  flex: 0 0 100%; scroll-snap-align: start; min-height: 340px;
   display: flex; flex-direction: column; gap: 10px; padding: 24px;
   background: var(--surface); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
 }
@@ -62,9 +65,24 @@
   border: 2px solid var(--ink); padding: 8px 14px;
 }
 @media (max-width: 640px) {
-  .step-card { flex-basis: 88%; min-height: 300px; padding: 20px; }
+  .step-card { min-height: 300px; padding: 20px; }
 }
 @media (prefers-reduced-motion: no-preference) { .step-track { scroll-behavior: smooth; } }
+
+/* ---- Dots under the cards ---- */
+.step-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.step-dot {
+  /* big tap target, small visible dot */
+  position: relative; width: 28px; height: 28px; display: block; text-decoration: none;
+}
+.step-dot::after {
+  content: ""; position: absolute; inset: 7px; border-radius: 50%;
+  border: 2px solid var(--ink); background: transparent;
+}
+.step-dot.active::after { background: var(--ink); }
+.step-dot:hover::after { background: var(--orange); }
+.step-dot.active:hover::after { background: var(--ink); }
+.step-dot:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 0; }
 
 /* ---- Closing ---- */
 .closing { padding-top: 48px; padding-bottom: 80px; }

@@ -2,7 +2,7 @@
 // The buttons are real links (#step-…), so they still work with JavaScript off.
 (function () {
   const track = document.getElementById("stepTrack");
-  const buttons = Array.from(document.querySelectorAll(".step-btn"));
+  const buttons = Array.from(document.querySelectorAll(".step-btn, .step-dot"));
   if (!track || !buttons.length) return;
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
