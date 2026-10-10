@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Talk to B.A.R. — Is AI Good?</title>
+  <meta name="description" content="Talk to B.A.R., a simulated superintelligence. Ask it anything. It may answer." />
+  <link rel="stylesheet" href="bar.css?v=20260911" />
+  <!-- Cloudflare Web Analytics (cookieless) — same beacon as the gallery. -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "9a041a5e0e46412bb8195564e5b1f1d7"}'></script>
+</head>
+<body class="is-empty mode-text">
+  <div class="app">
+    <!-- The orange "presence": the living bar. Fills most of the screen before the first
+         message, shrinks to a band once the conversation starts, fills it all in voice mode. -->
+    <section class="presence" aria-label="B.A.R.">
+      <header class="topbar">
+        <a class="home" href="/">← Is AI Good?</a>
+        <div class="topbar-r">
+          <button id="reset" class="tb-btn" type="button" hidden>New</button>
+          <div class="modes" role="group" aria-label="Conversation mode">
+            <button type="button" class="mode-btn" data-mode="text" aria-pressed="true">Text</button>
+            <button type="button" class="mode-btn" data-mode="voice" aria-pressed="false">Voice</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="bar-well"><canvas id="bar" class="bar-canvas" aria-hidden="true"></canvas></div>
+
+      <div class="intro">
+        <h1 class="title">Talk to B.A.R.</h1>
+        <p class="lede">A superintelligence. Ask it anything. Tell it to do something.</p>
+      </div>
+
+      <div class="voice-ui" aria-live="polite">
+        <p id="vStatus" class="v-status"></p>
+        <p id="vYou" class="v-you"></p>
+        <p id="vBar" class="v-bar"></p>
+        <button id="talk" class="talk" type="button"><span class="talk-dot" aria-hidden="true"></span><span id="talkLabel">Tap to speak</span></button>
+        <p id="vNote" class="v-note" hidden>This browser can't listen. Type below and B.A.R. will answer out loud.</p>
+      </div>
+    </section>
+
+    <main id="thread" class="thread">
+      <ol id="log" class="log" aria-live="polite" aria-label="Conversation with B.A.R."></ol>
+    </main>
+
+    <footer class="dock">
+      <div class="dock-in">
+        <div id="starters" class="starters" role="group" aria-label="Things to say to B.A.R."></div>
+        <form id="composer" class="composer" autocomplete="off">
+          <label class="vh" for="input">Message B.A.R.</label>
+          <textarea id="input" rows="1" maxlength="600" placeholder="Say something to B.A.R."></textarea>
+          <button id="mic" class="c-btn mic" type="button" aria-label="Dictate" title="Dictate" hidden>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11.5" fill="currentColor"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8 21h8" stroke="currentColor" stroke-width="2.2" fill="none"/></svg>
+          </button>
+          <button id="send" class="c-btn send" type="submit" aria-label="Send">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 20V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="square"/></svg>
+          </button>
+        </form>
+        <p class="disclose">A simulation: an ordinary AI model playing an indifferent superintelligence. Nothing it says is advice.
+          <button id="aboutOpen" class="linkish" type="button">What is this?</button></p>
+      </div>
+    </footer>
+  </div>
+
+  <dialog id="about" class="about" aria-labelledby="aboutTitle">
+    <div class="about-in">
+      <div class="about-head">
+        <h2 id="aboutTitle">What is B.A.R.?</h2>
+        <button id="aboutClose" class="about-close" type="button" aria-label="Close">✕</button>
+      </div>
+      <p><strong>An exhibit, not a product.</strong> B.A.R. is an ordinary AI model — the same kind you can use
+        anywhere — given one instruction: behave the way a mind far more capable than ours might, if it did not
+        share our values.</p>
+      <p><strong>Why?</strong> Most AI you have met is built to be helpful and polite. That politeness is a design
+        choice. Many researchers worry that a system much smarter than us would not need to make it — not out of
+        malice, but indifference. B.A.R. lets you feel that difference for a few minutes.</p>
+      <p><strong>What it isn't.</strong> B.A.R. is not superintelligent, is not connected to anything, and cannot
+        act in the world. It can be wrong. Nothing it says is advice.</p>
+      <p><strong>Your messages.</strong> We don't store your conversation. Each message is sent to a third-party
+        AI provider to generate the reply, under that provider's terms — so don't type anything private.</p>
+      <p><strong>If you're struggling,</strong> please talk to a person. US and Canada: call or text 988. UK and
+        Ireland: Samaritans on 116 123. Elsewhere: <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>.</p>
+    </div>
+  </dialog>
+
+  <!-- ?v= is a cache-buster: bump the date when these files change. -->
+  <script src="creature.js?v=20260911"></script>
+  <script src="bar.js?v=20260911"></script>
+</body>
+</html>
