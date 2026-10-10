@@ -1,0 +1,97 @@
+/* Is AI Good? — landing page only. Shared look (colours, fonts, .chip, cursor, menu) is in styles.css. */
+
+.header-bar-top { margin-bottom: 18px; }
+
+/* ---- "You've probably wondered" ---- */
+.intro { padding-top: 52px; padding-bottom: 28px; }
+.intro h2 {
+  margin: 0 0 18px; font-family: var(--display); font-weight: 700; color: var(--ink);
+  font-size: clamp(1.7rem, 4.4vw, 2.5rem); line-height: 1.12; letter-spacing: -.02em;
+}
+.intro p { margin: 0 0 18px; font-size: 1.06rem; line-height: 1.65; color: var(--muted); }
+.intro .intro-questions {
+  font-family: var(--display); font-weight: 500; font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  line-height: 1.4; color: var(--ink);
+}
+.intro .intro-lead { margin: 30px 0 0; font-family: var(--display); font-size: 1.3rem; color: var(--ink); }
+
+/* ---- Buttons + card track ---- */
+.steps { padding-bottom: 90px; }
+.step-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.step-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: .92rem; padding: 10px 16px; }
+.step-btn.active:hover { background: var(--ink); }
+.soon-tag {
+  font-family: var(--mono); font-size: .6rem; text-transform: uppercase; letter-spacing: .04em;
+  border: 1.5px solid currentColor; padding: 0 5px;
+}
+@media (max-width: 640px) {
+  .step-buttons { display: grid; grid-template-columns: 1fr 1fr; }
+  .step-btn { justify-content: center; text-align: center; flex-wrap: wrap; }
+}
+
+.step-track {
+  display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory;
+  /* room on the right/bottom so the hard shadows aren't clipped */
+  padding: 2px 12px 14px 0; -webkit-overflow-scrolling: touch;
+}
+/* No scrollbar: the dots below do the navigating (swipe and arrow keys still work). */
+.step-track { scrollbar-width: none; }
+.step-track::-webkit-scrollbar { display: none; }
+.step-track:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 4px; }
+.step-card {
+  flex: 0 0 100%; scroll-snap-align: start; min-height: 340px;
+  display: flex; flex-direction: column; gap: 10px; padding: 24px;
+  background: var(--surface); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+}
+.step-card.live { background: var(--orange); }
+.step-num { font-family: var(--mono); font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--ink); }
+.step-q { margin: 8px 0 0; font-family: var(--mono); font-size: .86rem; color: var(--ink); }
+.step-card h3 {
+  margin: 0; font-family: var(--display); font-weight: 700; color: var(--ink);
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.12; letter-spacing: -.02em;
+}
+.step-line { margin: 0; max-width: 560px; font-size: 1.02rem; color: var(--ink); }
+.step-card:not(.live) .step-line { color: var(--muted); }
+.step-action {
+  margin-top: auto; align-self: flex-start; background: var(--ink); color: #fff; text-decoration: none;
+  font-family: var(--mono); font-weight: 700; font-size: .9rem; text-transform: uppercase;
+  letter-spacing: .04em; padding: 13px 22px; border: 2px solid var(--ink);
+}
+.step-action:hover { background: #fff; color: var(--ink); }
+.step-action:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.stamp {
+  margin-top: auto; align-self: flex-start; font-family: var(--mono); font-weight: 700;
+  font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink);
+  border: 2px solid var(--ink); padding: 8px 14px;
+}
+@media (max-width: 640px) {
+  .step-card { min-height: 300px; padding: 20px; }
+}
+@media (prefers-reduced-motion: no-preference) { .step-track { scroll-behavior: smooth; } }
+
+/* ---- Dots under the cards ---- */
+.step-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.step-dot {
+  /* big tap target, small visible dot */
+  position: relative; width: 28px; height: 28px; display: block; text-decoration: none;
+}
+.step-dot::after {
+  content: ""; position: absolute; inset: 7px; border-radius: 50%;
+  border: 2px solid var(--ink); background: transparent;
+}
+.step-dot.active::after { background: var(--ink); }
+.step-dot:hover::after { background: var(--orange); }
+.step-dot.active:hover::after { background: var(--ink); }
+.step-dot:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 0; }
+
+/* ---- "Coming soon" things are grey ---- */
+:root { --soon-bg: #dcd9d2; --soon-ink: #77726a; --soon-line: #9a958c; }
+.step-btn.soon { background: var(--soon-bg); color: var(--soon-ink); border-color: var(--soon-line); }
+.step-btn.soon:hover { background: var(--soon-bg); }
+.step-btn.soon.active { background: var(--soon-ink); color: #fff; border-color: var(--soon-ink); }
+.step-card.soon { background: var(--soon-bg); border-color: var(--soon-line); box-shadow: 6px 6px 0 var(--soon-line); }
+.step-card.soon .step-num, .step-card.soon .step-q, .step-card.soon h3,
+.step-card.soon .step-line { color: var(--soon-ink); }
+.step-card.soon .stamp { color: var(--soon-ink); border-color: var(--soon-ink); }
+.step-dot.soon::after { border-color: var(--soon-line); }
+.step-dot.soon.active::after, .step-dot.soon:hover::after { background: var(--soon-ink); border-color: var(--soon-ink); }

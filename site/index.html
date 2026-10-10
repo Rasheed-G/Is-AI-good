@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="index,follow" />
   <title>Is AI Good?</title>
-  <meta name="description" content="Real stories on the dangers and risks of AI" />
-  <link rel="stylesheet" href="styles.css?v=20260823" />
-  <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed).
-       SETUP: after deploying, create a Web Analytics site in the Cloudflare dashboard,
-       copy the beacon token, and replace PASTE_CLOUDFLARE_TOKEN_HERE below with it.
-       Until the real token is set it simply reports nothing — harmless. -->
+  <meta name="description" content="Real stories, clear explanations and the big questions about AI, so you can make up your own mind." />
+  <link rel="stylesheet" href="/styles.css?v=20261010h" />
+  <link rel="stylesheet" href="/landing.css?v=20261010h" />
+  <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed). -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "9a041a5e0e46412bb8195564e5b1f1d7"}'></script>
   <!-- End Cloudflare Web Analytics -->
@@ -18,94 +16,83 @@
 <body>
   <header class="site-header">
     <div class="wrap">
+      <div class="header-bar header-bar-top">
+        <span></span>
+        <div class="menu-wrap">
+          <button id="menuBtn" class="menu-btn" type="button" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu"><span class="bars" aria-hidden="true"></span></button>
+          <nav id="menuPanel" class="menu-panel" aria-label="Site menu" hidden>
+            <a href="/" aria-current="page">Home</a>
+            <a href="/news/">What's happening with AI</a>
+            <span aria-disabled="true">Learn about AI <em>Coming soon</em></span>
+            <span aria-disabled="true">What it means for you <em>Coming soon</em></span>
+            <span aria-disabled="true">How you can help <em>Coming soon</em></span>
+          </nav>
+        </div>
+      </div>
       <h1 class="masthead">Is&nbsp;AI<span class="l2">Good?<span class="cur" aria-hidden="true"></span></span></h1>
-      <p class="strap">Real stories on the dangers and risks of AI</p>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="controls">
-      <!-- Mobile-only master toggle: search, the sensitive-topics switch, and the 13 theme
-           chips together fill a phone's first screen, so on narrow viewports they all collapse
-           into #filtersPanel behind this one button. Hidden on desktop, where the controls
-           stay always-visible. -->
-      <button id="filtersToggle" class="filters-toggle" type="button" aria-expanded="false" aria-controls="filtersPanel">
-        <span class="ft-label">Search &amp; filters</span>
-        <span class="tt-caret" aria-hidden="true">▾</span>
-      </button>
-      <div id="filtersPanel" class="filters-panel">
-        <input id="search" type="search" placeholder="Search stories…" aria-label="Search stories" autocomplete="off" />
-        <label class="toggle">
-          <input type="checkbox" id="sensToggle" />
-          <span class="track" aria-hidden="true"></span>
-          Show sensitive topics
-        </label>
-        <!-- Mobile-only sub-toggle: the 13 theme chips nest one level deeper behind this
-             button (which shows the active theme). Hidden on desktop, where chips stay visible. -->
-        <button id="themeToggle" class="theme-toggle" type="button" aria-expanded="false" aria-controls="themes">
-          <span class="tt-label">Theme: <strong id="themeCurrent">All</strong></span>
-          <span class="tt-caret" aria-hidden="true">▾</span>
-        </button>
-        <div id="themes" class="theme-filters" role="group" aria-label="Filter by theme"></div>
+  <main>
+    <section class="intro wrap">
+      <h2>You've probably wondered about AI.</h2>
+      <p class="intro-questions">Is it as smart as people say? Will it change my job? How does it really work?</p>
+      <p>You're not alone. Most people have questions about AI, and the honest answers aren't simple. This site won't tell you what to think. It gives you real stories, clear explanations and the big questions, so you can make up your own mind.</p>
+      <p class="intro-lead"><strong>Where do you want to start?</strong></p>
+    </section>
+
+    <section class="steps wrap" aria-label="Where to start">
+      <div class="step-buttons">
+        <a class="chip step-btn active" href="#step-news" data-target="step-news" aria-current="true">What's happening</a>
+        <a class="chip step-btn soon" href="#step-learn" data-target="step-learn">Learn about AI <span class="soon-tag">Soon</span></a>
+        <a class="chip step-btn soon" href="#step-you" data-target="step-you">What it means for you <span class="soon-tag">Soon</span></a>
+        <a class="chip step-btn soon" href="#step-help" data-target="step-help">How you can help <span class="soon-tag">Soon</span></a>
       </div>
-    </div>
 
-    <p id="count" class="count" aria-live="polite"></p>
+      <div id="stepTrack" class="step-track" tabindex="0" aria-label="Four ways to start">
+        <section id="step-news" class="step-card live" aria-labelledby="step-news-h">
+          <span class="step-num">01</span>
+          <p class="step-q">"What is AI actually doing out there?"</p>
+          <h3 id="step-news-h">See what's happening</h3>
+          <p class="step-line">Real stories of AI going wrong, each linked to its original source.</p>
+          <a class="step-action" href="/news/">Read the stories</a>
+        </section>
 
-    <section id="grid" class="grid hide-sensitive" aria-label="Stories"></section>
+        <section id="step-learn" class="step-card soon" aria-labelledby="step-learn-h">
+          <span class="step-num">02</span>
+          <p class="step-q">"How does it actually work?"</p>
+          <h3 id="step-learn-h">Learn about AI</h3>
+          <p class="step-line">How AI works, how it's built, and the key ideas behind it.</p>
+          <span class="stamp">Coming soon</span>
+        </section>
 
-    <div class="load-more-wrap">
-      <button id="loadMore" class="load-more" type="button" hidden>Load more</button>
-    </div>
+        <section id="step-you" class="step-card soon" aria-labelledby="step-you-h">
+          <span class="step-num">03</span>
+          <p class="step-q">"What could this mean for me?"</p>
+          <h3 id="step-you-h">Understand what it means for you</h3>
+          <p class="step-line">Learn about what could be at stake.</p>
+          <span class="stamp">Coming soon</span>
+        </section>
 
-    <p id="empty" class="empty" hidden>No stories match your search.</p>
+        <section id="step-help" class="step-card soon" aria-labelledby="step-help-h">
+          <span class="step-num">04</span>
+          <p class="step-q">"Can I do anything about it?"</p>
+          <h3 id="step-help-h">How you can help</h3>
+          <p class="step-line">You don't need to be an AI expert. Making AI safe needs people from every background, including yours.</p>
+          <span class="stamp">Coming soon</span>
+        </section>
+      </div>
+      <div class="step-dots" role="group" aria-label="Choose a card">
+        <a class="step-dot active" href="#step-news" data-target="step-news" aria-label="Card 1 of 4: What's happening" aria-current="true"></a>
+        <a class="step-dot soon" href="#step-learn" data-target="step-learn" aria-label="Card 2 of 4: Learn about AI"></a>
+        <a class="step-dot soon" href="#step-you" data-target="step-you" aria-label="Card 3 of 4: What it means for you"></a>
+        <a class="step-dot soon" href="#step-help" data-target="step-help" aria-label="Card 4 of 4: How you can help"></a>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Floating feedback button + modal. The form works client-side; SENDING is inert until
-       FEEDBACK_ENDPOINT is set in app.js (a static page must never ship an Airtable write
-       token — sending needs a server-side proxy). Honeypot + length caps are baked in here;
-       real spam protection (Turnstile + per-IP rate limit) belongs in that endpoint later. -->
-  <button id="fbOpen" class="fb-open" type="button" aria-haspopup="dialog" aria-controls="fbPanel">
-    <span aria-hidden="true">✍</span> Feedback
-  </button>
-  <div id="fbPanel" class="fb-panel" role="dialog" aria-modal="true" aria-labelledby="fbTitle" hidden>
-    <div class="fb-card">
-      <div class="fb-head">
-        <h2 id="fbTitle">Send feedback</h2>
-        <button id="fbClose" class="fb-close" type="button" aria-label="Close feedback">✕</button>
-      </div>
-      <p class="fb-intro">This site is a work in progress — tell us what's useful, what's broken, or what's wrong.</p>
-      <form id="fbForm" novalidate>
-        <label class="fb-field">
-          <span>Type</span>
-          <select name="type" id="fbType">
-            <option value="Bug">Something's broken (bug)</option>
-            <option value="Suggestion">Suggestion</option>
-            <option value="Content issue">Content issue (wrong / should be removed)</option>
-            <option value="Other">Other</option>
-          </select>
-        </label>
-        <label class="fb-field">
-          <span>Your feedback</span>
-          <textarea name="comment" id="fbComment" rows="4" maxlength="1000" required
-            placeholder="What did you think? What's broken or wrong?"></textarea>
-        </label>
-        <label class="fb-field">
-          <span>Email <em>(optional — only if you'd like a reply)</em></span>
-          <input type="email" name="email" id="fbEmail" maxlength="120" autocomplete="email" placeholder="you@example.com" />
-        </label>
-        <!-- honeypot: off-screen, hidden from humans; a bot that fills it gets silently dropped -->
-        <div class="fb-hp" aria-hidden="true">
-          <label>Leave this field empty
-            <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-        </div>
-        <p id="fbNote" class="fb-note" role="status" aria-live="polite"></p>
-        <button id="fbSubmit" class="fb-submit" type="submit">Send feedback</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ?v= is a cache-buster: bump the date when app.js/styles.css change so browsers re-fetch. -->
-  <script src="app.js?v=20260823"></script>
+  <script src="/menu.js?v=20261010h"></script>
+  <script src="/landing.js?v=20261010h"></script>
 </body>
 </html>
