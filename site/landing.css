@@ -72,5 +72,3 @@
   margin: 0; font-family: var(--display); font-weight: 700; color: var(--ink);
   font-size: clamp(1.4rem, 3.6vw, 2.2rem); line-height: 1.2; letter-spacing: -.02em;
 }
-.closing-line .cur { margin-left: .12em; }
-.closing-note { margin: 16px 0 0; max-width: 560px; font-size: .88rem; color: var(--mut2); }
