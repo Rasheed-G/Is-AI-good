@@ -663,9 +663,23 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .what-we-do strong { font-family: var(--display); color: var(--ink); }
 .text-page .what-now { margin: 1em 0 0; color: var(--muted); }
 
-/* The big picture: three short points, each with a thick orange line beside it */
-.big-picture p { margin: 0 0 1.1em; padding-left: 18px; border-left: 6px solid var(--orange); }
-.big-picture strong { display: block; margin-bottom: 4px; font-family: var(--display); font-size: 1.2rem; color: var(--ink); }
+/* The big picture: three steps of one short story (today, if it grows, the response), joined by arrows.
+   Side by side on computers, stacked with down arrows on phones. */
+.big-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 40px; }
+.text-page .big-steps li + li { margin-top: 0; }
+.big-steps li { position: relative; display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 6px solid var(--orange); }
+.big-steps li:last-child { border-top-color: var(--ink); }
+.step-label { font-family: var(--mono); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--orange-ink); }
+.big-steps li:last-child .step-label { color: var(--ink); }
+.big-steps strong { font-family: var(--display); font-size: 1.25rem; line-height: 1.25; color: var(--ink); }
+.big-steps li > span:last-child { font-size: 1rem; line-height: 1.5; color: var(--text); }
+.big-steps li:not(:last-child)::after {
+  content: "↓" / ""; position: absolute; left: 0; bottom: -36px; font-family: var(--mono); font-weight: 700; font-size: 1.6rem; line-height: 1; color: var(--ink);
+}
+@media (min-width: 760px) {
+  .big-steps { grid-template-columns: repeat(3, 1fr); gap: 0 44px; }
+  .big-steps li:not(:last-child)::after { content: "→" / ""; left: auto; right: -34px; bottom: auto; top: 44px; }
+}
 
 /* Where to start: the stories link, then (separately) the themes */
 .text-page a.path { display: block; text-decoration: none; color: var(--ink); }
