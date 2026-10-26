@@ -460,3 +460,82 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
   .btn-main:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
   .btn-main:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
 }
+
+/* ==== Theme page (first: /impact/work/). Text column like a text page; story cards go full width ==== */
+.eyebrow {
+  margin: 26px 0 0; font-family: var(--mono); font-weight: 700; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--ink);
+}
+.eyebrow + .page-title { margin-top: 8px; }
+.theme-page .text-page + .text-page, .theme-page .theme-stories + .text-page { padding-top: 12px; }
+.takeaway {
+  margin: 1.6em 0 .4em; padding: 18px 22px; background: var(--surface);
+  border: 2px solid var(--ink); border-left: 10px solid var(--orange); box-shadow: 4px 4px 0 var(--ink);
+}
+.takeaway p { margin: 0; font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1.3; color: var(--ink); }
+.section-title { margin: 1.4em 0 .6em; color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 1.5rem; line-height: 1.2; }
+.theme-stories { padding-top: 26px; }
+.theme-stories .grid { padding-bottom: 20px; }
+.text-page ul, .text-page ol { margin: 0 0 1em; padding-left: 1.3em; }
+.text-page li + li { margin-top: .5em; }
+.text-page h3 { margin: 1.4em 0 .4em; color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 1.2rem; }
+
+/* "Was this new to you?": one optional click */
+.new-to-you { margin: 2.2em 0 1em; padding: 18px 20px; background: var(--surface); border: 2px solid var(--ink); }
+.text-page .new-to-you-q { margin: 0 0 12px; font-size: 1.15rem; }
+.new-to-you-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.new-to-you-btns button {
+  padding: 9px 16px; font-family: var(--mono); font-weight: 700; font-size: .82rem; text-transform: uppercase;
+  letter-spacing: .03em; color: var(--ink); background: var(--surface); border: 2px solid var(--ink); cursor: pointer;
+}
+.new-to-you-btns button:hover:not(:disabled) { background: var(--orange); }
+.new-to-you-btns button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.new-to-you-btns button:disabled { cursor: default; }
+.new-to-you-btns button:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+.new-to-you-note { margin: 10px 0 0; font-weight: 600; }
+.new-to-you-note:empty { display: none; }
+
+/* Sections closed until opened ("go deeper", questions) */
+.text-page details { border-top: 2px solid var(--ink); }
+.text-page details:last-of-type { border-bottom: 2px solid var(--ink); }
+.deeper { margin-top: 1.2em; }
+.text-page summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 2px; cursor: pointer; list-style: none;
+}
+.text-page summary::-webkit-details-marker { display: none; }
+.text-page summary::after { content: "+" / ""; flex: none; font-family: var(--mono); font-weight: 700; font-size: 1.4rem; color: var(--ink); }
+.text-page details[open] > summary::after { content: "–" / ""; }
+.text-page summary:hover { background: rgba(255, 106, 0, .12); }
+.text-page summary:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+.text-page summary h2, .text-page summary h3 { margin: 0; }
+.text-page details > :not(summary) { margin-left: 2px; }
+.text-page details[open] { padding-bottom: 10px; }
+.faq { margin-bottom: 2em; }
+.faq summary h3 { font-size: 1.08rem; }
+
+/* Main sign-up (theme pages, front door); the footer one is left out on these pages */
+.signup-main {
+  margin: 2.4em 0; padding: 22px 22px 18px; background: var(--ink); color: #fff;
+  box-shadow: 6px 6px 0 var(--orange);
+}
+.text-page .signup-main h2 { margin: 0 0 14px; color: #fff; font-size: 1.3rem; }
+.signup-main .signup-row { max-width: none; }
+.signup-main .signup-btn:focus-visible { outline-color: #fff; }
+.signup-small { margin: 10px 0 0; font-size: .88rem; color: #e6e2da; }
+.text-page .signup-main a { color: #fff; }
+.text-page .signup-main a:hover { background: var(--orange); color: var(--ink); }
+
+.sources { font-size: .95rem; }
+.sources li { overflow-wrap: anywhere; }
+.send-colleague { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 2em; }
+.link-btn {
+  padding: 7px 14px; font-family: var(--mono); font-weight: 700; font-size: .78rem; text-transform: uppercase;
+  letter-spacing: .03em; color: var(--ink); background: var(--surface); border: 2px solid var(--ink);
+  cursor: pointer; text-decoration: none;
+}
+.text-page a.link-btn { text-decoration: none; }
+.link-btn:hover, .text-page a.link-btn:hover { background: var(--orange); }
+.link-btn:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+.copy-note { font-size: .9rem; overflow-wrap: anywhere; }
+.copy-note:empty { display: none; }
