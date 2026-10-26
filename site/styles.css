@@ -512,14 +512,15 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .text-page h3 { margin: 1.4em 0 .4em; color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 1.2rem; }
 
 /* "Was this new to you?": one optional click */
-.new-to-you { margin: 2.2em 0 1em; padding: 18px 20px; background: var(--orange); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+/* Calm on purpose: an optional click, not the page's main action */
+.new-to-you { margin: 2.2em 0 1em; padding: 16px 20px; background: var(--surface); border: 2px solid var(--ink); border-left: 10px solid var(--orange); }
 .text-page .new-to-you-q { margin: 0 0 12px; font-size: 1.15rem; }
 .new-to-you-btns { display: flex; flex-wrap: wrap; gap: 10px; }
 .new-to-you-btns button {
   padding: 9px 16px; font-family: var(--mono); font-weight: 700; font-size: .82rem; text-transform: uppercase;
   letter-spacing: .03em; color: var(--ink); background: var(--surface); border: 2px solid var(--ink); cursor: pointer;
 }
-.new-to-you-btns button:hover:not(:disabled) { background: var(--paper); }
+.new-to-you-btns button:hover:not(:disabled) { background: var(--orange); }
 .new-to-you-btns button[aria-pressed="true"] { background: var(--ink); color: #fff; }
 .new-to-you-btns button:disabled { cursor: default; }
 .new-to-you-btns button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
@@ -557,6 +558,15 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .text-page .signup-main a { color: #fff; }
 .text-page .signup-main a:hover { background: var(--orange); color: var(--ink); }
 
-.sources { font-size: .95rem; margin-top: 2em; }
+.sources { font-size: .92rem; margin-top: 2.6em; }
+.text-page .sources-title {
+  font-family: var(--mono); font-weight: 700; font-size: .9rem; text-transform: uppercase; letter-spacing: .05em;
+}
+.text-page .sources summary { padding: 10px 2px; }
+.sources li:target { background: rgba(255, 106, 0, .18); }
+
+/* In-text citations: quiet links to the source list */
+.text-page a.cite { text-decoration-style: dotted; text-decoration-thickness: 1.5px; color: inherit; }
+.text-page a.cite:hover { background: rgba(255, 106, 0, .25); }
 .sources li { overflow-wrap: anywhere; }
 
