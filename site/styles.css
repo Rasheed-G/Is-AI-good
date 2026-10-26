@@ -544,17 +544,20 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .faq { margin-bottom: 2em; }
 .faq summary h3 { font-size: 1.08rem; }
 
-/* Main sign-up (theme pages, front door); the footer one is left out on these pages */
+/* Main sign-up (theme pages, front door): orange, plain, last thing on the page.
+   The footer one is left out on these pages. */
 .signup-main {
-  margin: 2.4em 0; padding: 22px 22px 18px; background: var(--ink); color: #fff;
-  box-shadow: 6px 6px 0 var(--orange);
+  margin: 2.4em 0; padding: 20px 22px 16px; background: var(--orange); color: var(--ink);
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
 }
-.text-page .signup-main h2 { margin: 0 0 14px; color: #fff; font-size: 1.3rem; }
-.signup-main .signup-row { max-width: none; }
-.signup-main .signup-btn:focus-visible { outline-color: #fff; }
-.signup-small { margin: 10px 0 0; font-size: .88rem; color: #e6e2da; }
-.text-page .signup-main a { color: #fff; }
-.text-page .signup-main a:hover { background: var(--orange); color: var(--ink); }
+.text-page .signup-main h2 { margin: 0 0 12px; color: var(--ink); font-size: 1.2rem; }
+.signup-main .signup-row { max-width: 520px; }
+.signup-main .signup-btn { background: var(--ink); color: #fff; }
+.signup-main .signup-btn:hover { background: #333; }
+.signup-main .signup-btn:focus-visible, .signup-main input:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.signup-small { margin: 10px 0 0; font-size: .85rem; color: var(--ink); }
+.text-page .signup-main a { color: var(--ink); }
+.text-page .signup-main a:hover { background: var(--surface); }
 
 .sources { font-size: .92rem; margin-top: 2.6em; }
 .text-page .sources-title {
