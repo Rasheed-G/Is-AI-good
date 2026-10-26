@@ -1,0 +1,62 @@
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <!-- signup -->
+      <form class="signup signup-quiet" action="/api/subscribe" method="post" novalidate>
+        <label class="signup-label" for="footerEmail">Get updates by email.</label>
+        <div class="signup-row">
+          <input id="footerEmail" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="Your email" />
+          <button class="signup-btn" type="submit">Sign up</button>
+        </div>
+        <!-- honeypot: hidden from people; a bot that fills it gets silently dropped -->
+        <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <p class="signup-note" role="status" aria-live="polite"></p>
+      </form>
+      <!-- /signup -->
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/how-we-choose/">How we choose stories</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <p class="footer-feedback"><a href="/contact/" data-feedback aria-haspopup="dialog">Have feedback? Tell us</a></p>
+    </div>
+  </footer>
+  <!-- Feedback form, opened by "Have feedback? Tell us" and any data-feedback link (site/frame.js) -->
+  <div id="fbPanel" class="fb-panel" role="dialog" aria-modal="true" aria-labelledby="fbTitle" hidden>
+    <div class="fb-card">
+      <div class="fb-head">
+        <h2 id="fbTitle">Send feedback</h2>
+        <button id="fbClose" class="fb-close" type="button" aria-label="Close feedback">✕</button>
+      </div>
+      <p class="fb-intro">This site is a work in progress. Tell us what's useful, what's broken, or what's wrong.</p>
+      <form id="fbForm" novalidate>
+        <label class="fb-field">
+          <span>Type</span>
+          <select name="type" id="fbType">
+            <option value="Bug">Something's broken (bug)</option>
+            <option value="Suggestion">Suggestion</option>
+            <option value="Content issue">Content issue (wrong / should be removed)</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <label class="fb-field">
+          <span>Your feedback</span>
+          <textarea name="comment" id="fbComment" rows="4" maxlength="1000" required
+            placeholder="What did you think? What's broken or wrong?"></textarea>
+        </label>
+        <label class="fb-field">
+          <span>Email <em>(optional, only if you'd like a reply)</em></span>
+          <input type="email" name="email" id="fbEmail" maxlength="120" autocomplete="email" placeholder="you@example.com" />
+        </label>
+        <!-- honeypot: off-screen, hidden from humans; a bot that fills it gets silently dropped -->
+        <div class="fb-hp" aria-hidden="true">
+          <label>Leave this field empty
+            <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <p id="fbNote" class="fb-note" role="status" aria-live="polite"></p>
+        <button id="fbSubmit" class="fb-submit" type="submit">Send feedback</button>
+      </form>
+    </div>
+  </div>

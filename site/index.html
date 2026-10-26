@@ -4,77 +4,137 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="index,follow" />
-  <title>Is AI Good?</title>
-  <meta name="description" content="Real stories on the dangers and risks of AI" />
-  <link rel="stylesheet" href="styles.css?v=20260823" />
-  <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed).
-       SETUP: after deploying, create a Web Analytics site in the Cloudflare dashboard,
-       copy the beacon token, and replace PASTE_CLOUDFLARE_TOKEN_HERE below with it.
-       Until the real token is set it simply reports nothing — harmless. -->
+  <title>Is AI Good? Understand AI's risks and take a first step</title>
+  <meta name="description" content="Real stories and clear explanations of AI's harms today and where they could lead, for professionals from outside tech." />
+  <!-- frame:head -->
+  <link rel="stylesheet" href="/styles.css?v=20261027e" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script>document.documentElement.classList.add("js");</script>
+  <script defer src="/frame.js?v=20261027e"></script>
+  <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed) -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "9a041a5e0e46412bb8195564e5b1f1d7"}'></script>
-  <!-- End Cloudflare Web Analytics -->
+  <meta property="og:site_name" content="Is AI Good?" />
+  <meta property="og:title" content="Is AI Good? Understand AI's risks and take a first step" />
+  <meta property="og:description" content="Real stories and clear explanations of AI's harms today and where they could lead, for professionals from outside tech." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://isaigood.org/" />
+  <meta property="og:image" content="https://isaigood.org/share.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Is AI Good?" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- /frame:head -->
 </head>
-<body>
-  <header class="site-header">
+<body class="home">
+  <header class="site-header compact home-header">
     <div class="wrap">
+      <!-- frame:header -->
+      <a class="skip-link" href="#main">Skip to content</a>
+      <div class="header-bar">
+        <a class="mini-mark" href="/" aria-current="page">Is&nbsp;AI&nbsp;Good?<span class="cur" aria-hidden="true"></span></a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="siteNav"><span class="bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span></button>
+        <nav id="siteNav" class="site-nav" aria-label="Main">
+          <ul class="nav-list">
+            <li><a class="nav-link" href="/" aria-current="page">Home</a></li>
+            <li class="nav-group">
+              <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="navImpact">The impact of AI <span class="caret" aria-hidden="true">▾</span></button>
+              <ul id="navImpact" class="nav-sub">
+                <li><a href="/impact/work/">Jobs &amp; livelihoods</a></li>
+                <li><a href="/news/">News &amp; Stories</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link" href="/about/">About us</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- /frame:header -->
       <h1 class="masthead">Is&nbsp;AI<span class="l2">Good?<span class="cur" aria-hidden="true"></span></span></h1>
-      <p class="strap">Real stories on the dangers and risks of AI</p>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="controls">
-      <!-- Mobile-only master toggle: search, the sensitive-topics switch, and the 13 theme
-           chips together fill a phone's first screen, so on narrow viewports they all collapse
-           into #filtersPanel behind this one button. Hidden on desktop, where the controls
-           stay always-visible. -->
-      <button id="filtersToggle" class="filters-toggle" type="button" aria-expanded="false" aria-controls="filtersPanel">
-        <span class="ft-label">Search &amp; filters</span>
-        <span class="tt-caret" aria-hidden="true">▾</span>
-      </button>
-      <div id="filtersPanel" class="filters-panel">
-        <input id="search" type="search" placeholder="Search stories…" aria-label="Search stories" autocomplete="off" />
-        <label class="toggle">
-          <input type="checkbox" id="sensToggle" />
-          <span class="track" aria-hidden="true"></span>
-          Show sensitive topics
-        </label>
-        <!-- Mobile-only sub-toggle: the 13 theme chips nest one level deeper behind this
-             button (which shows the active theme). Hidden on desktop, where chips stay visible. -->
-        <button id="themeToggle" class="theme-toggle" type="button" aria-expanded="false" aria-controls="themes">
-          <span class="tt-label">Theme: <strong id="themeCurrent">All</strong></span>
-          <span class="tt-caret" aria-hidden="true">▾</span>
-        </button>
-        <div id="themes" class="theme-filters" role="group" aria-label="Filter by theme"></div>
-      </div>
-    </div>
+  <main id="main">
+    <div class="wrap theme-page"><div class="text-page home-page">
+      <p class="home-lead">Is AI Good? helps experienced professionals from outside tech understand AI's risks and take a first step to help make it safe.</p>
+      <p class="home-lead">AI can do a lot of good. Whether it is good depends on how it's built and used.</p>
+      <h2 class="sec-title">The big picture</h2>
+      <ol class="big-steps">
+        <li>
+          <span class="step-label">Today</span>
+          <strong>AI is already causing harm.</strong>
+          <span>People are losing work, being scammed by cloned voices and being judged by systems that get it wrong. Reported AI incidents reached 362 in 2025. Before 2022 there were fewer than 100 a year (<a class="cite" href="https://hai.stanford.edu/ai-index/2026-ai-index-report/responsible-ai">Stanford AI Index, 2026</a>).</span>
+        </li>
+        <li>
+          <span class="step-label">If it grows</span>
+          <strong>It could become much more serious.</strong>
+          <span>As AI gets more capable, these harms could grow into ones we can't undo. In a survey of 2,778 AI researchers, 38% to 51% put at least a 10% chance on outcomes as bad as human extinction (<a class="cite" href="https://jair.org/index.php/jair/article/view/19087">Grace and others, 2025</a>).</span>
+        </li>
+        <li>
+          <span class="step-label">The response</span>
+          <strong>People are working to make it safe.</strong>
+          <span>The work increasingly needs people who know how to build, run and grow organisations.</span>
+        </li>
+      </ol>
 
-    <p id="count" class="count" aria-live="polite"></p>
-
-    <section id="grid" class="grid hide-sensitive" aria-label="Stories"></section>
-
-    <div class="load-more-wrap">
-      <button id="loadMore" class="load-more" type="button" hidden>Load more</button>
-    </div>
-
-    <p id="empty" class="empty" hidden>No stories match your search.</p>
+      <h2 class="sec-title">What we do</h2>
+      <p class="what-now">We're building this one step at a time. Today you can start with the harms.</p>
+      <ol class="what-we-do">
+        <li class="wwd-live">
+          <strong>Show the harm AI is causing today</strong>Through real stories and clear explanations of what it means for people and their work.
+          <span class="wwd-paths">
+            <a class="path" href="/impact/work/">
+              <span class="path-q">How AI is changing jobs and livelihoods <span aria-hidden="true">→</span></span>
+              <span class="path-line">What's happening to work today, and what it could mean for yours.</span>
+            </a>
+            <a class="path" href="/news/">
+              <span class="path-q">Read the latest stories <span aria-hidden="true">→</span></span>
+              <span class="path-line">Real stories from around the world, each linked to its original source.</span>
+            </a>
+          </span>
+        </li>
+        <li><strong>Explain where it could lead</strong>Including why some of the people building AI are worried.</li>
+        <li><strong>Help you learn how AI works</strong>Including the risks that come with it, so you can make up your own mind.</li>
+        <li><strong>Help you find where someone with your experience fits</strong>Then take a first step to help make AI safe.</li>
+      </ol>
+    </div></div>
   </main>
 
-  <!-- Floating feedback button + modal. The form works client-side; SENDING is inert until
-       FEEDBACK_ENDPOINT is set in app.js (a static page must never ship an Airtable write
-       token — sending needs a server-side proxy). Honeypot + length caps are baked in here;
-       real spam protection (Turnstile + per-IP rate limit) belongs in that endpoint later. -->
-  <button id="fbOpen" class="fb-open" type="button" aria-haspopup="dialog" aria-controls="fbPanel">
-    <span aria-hidden="true">✍</span> Feedback
-  </button>
+  <!-- frame:footer -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <!-- signup -->
+      <form class="signup signup-quiet" action="/api/subscribe" method="post" novalidate>
+        <label class="signup-label" for="footerEmail">Get updates by email.</label>
+        <div class="signup-row">
+          <input id="footerEmail" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="Your email" />
+          <button class="signup-btn" type="submit">Sign up</button>
+        </div>
+        <!-- honeypot: hidden from people; a bot that fills it gets silently dropped -->
+        <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <p class="signup-note" role="status" aria-live="polite"></p>
+      </form>
+      <!-- /signup -->
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/how-we-choose/">How we choose stories</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <p class="footer-feedback"><a href="/contact/" data-feedback aria-haspopup="dialog">Have feedback? Tell us</a></p>
+    </div>
+  </footer>
+  <!-- Feedback form, opened by "Have feedback? Tell us" and any data-feedback link (site/frame.js) -->
   <div id="fbPanel" class="fb-panel" role="dialog" aria-modal="true" aria-labelledby="fbTitle" hidden>
     <div class="fb-card">
       <div class="fb-head">
         <h2 id="fbTitle">Send feedback</h2>
         <button id="fbClose" class="fb-close" type="button" aria-label="Close feedback">✕</button>
       </div>
-      <p class="fb-intro">This site is a work in progress — tell us what's useful, what's broken, or what's wrong.</p>
+      <p class="fb-intro">This site is a work in progress. Tell us what's useful, what's broken, or what's wrong.</p>
       <form id="fbForm" novalidate>
         <label class="fb-field">
           <span>Type</span>
@@ -91,7 +151,7 @@
             placeholder="What did you think? What's broken or wrong?"></textarea>
         </label>
         <label class="fb-field">
-          <span>Email <em>(optional — only if you'd like a reply)</em></span>
+          <span>Email <em>(optional, only if you'd like a reply)</em></span>
           <input type="email" name="email" id="fbEmail" maxlength="120" autocomplete="email" placeholder="you@example.com" />
         </label>
         <!-- honeypot: off-screen, hidden from humans; a bot that fills it gets silently dropped -->
@@ -104,8 +164,7 @@
       </form>
     </div>
   </div>
-
-  <!-- ?v= is a cache-buster: bump the date when app.js/styles.css change so browsers re-fetch. -->
-  <script src="app.js?v=20260823"></script>
+  <!-- /frame:footer -->
+  <script src="/theme.js?v=20261027e"></script>
 </body>
 </html>
