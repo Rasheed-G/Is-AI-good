@@ -9,7 +9,9 @@ page by this script. Each page marks where the pieces go with comment pairs:
 
 Use "frame:footer-nosignup" instead on pages that carry the main sign-up themselves (one sign-up
 per page). Links to the page itself get aria-current="page", and a menu group containing the
-current page is marked too.
+current page is marked too. The head also gets share previews (the title, description and image
+shown when a page is shared on LinkedIn or by message), taken from each page's own <title> and
+description.
 
 Edit the pieces in scripts/frame/, then run:   python scripts/build_frame.py
 Check nothing is out of date (e.g. before a PR): python scripts/build_frame.py --check
@@ -24,6 +26,9 @@ FRAME = ROOT / "scripts" / "frame"
 
 SIGNUP = re.compile(r"[ \t]*<!-- signup -->.*?<!-- /signup -->\n", re.S)
 GROUP = re.compile(r'<button class="nav-group-btn"(.*?)</ul>', re.S)
+SITE_URL = "https://isaigood.org"
+TITLE = re.compile(r"<title>(.*?)</title>", re.S)
+DESC = re.compile(r'<meta name="description" content="(.*?)" />', re.S)
 SLOT = re.compile(r"(<!-- frame:(head|header|footer|footer-nosignup) -->\n)(.*?)([ \t]*<!-- /frame:\2 -->)", re.S)
 
 
@@ -49,9 +54,27 @@ def mark_current(html, path):
     )
 
 
+def share_preview(text, path):
+    title = TITLE.search(text).group(1).replace(" | Is AI Good?", "")
+    desc = DESC.search(text)
+    lines = [
+        '<meta property="og:site_name" content="Is AI Good?" />',
+        f'<meta property="og:title" content="{title}" />',
+        f'<meta property="og:description" content="{desc.group(1)}" />' if desc else None,
+        '<meta property="og:type" content="website" />',
+        f'<meta property="og:url" content="{SITE_URL}{path}" />' if path else None,
+        f'<meta property="og:image" content="{SITE_URL}/share.png" />',
+        '<meta property="og:image:width" content="1200" />',
+        '<meta property="og:image:height" content="630" />',
+        '<meta property="og:image:alt" content="Is AI Good?" />',
+        '<meta name="twitter:card" content="summary_large_image" />',
+    ]
+    return "".join(f"  {l}\n" for l in lines if l)
+
+
 def stamp(text, path):
     pieces = {
-        "head": piece("head"),
+        "head": piece("head") + share_preview(text, path),
         "header": mark_current(piece("header"), path),
         "footer": mark_current(piece("footer"), path),
     }

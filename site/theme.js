@@ -1,6 +1,6 @@
 // Is AI Good? — theme pages (e.g. /impact/work/). Uses cards.js for the story cards.
 //   * "What it looks like": the stories named in #themeStories[data-ids], drawn as news-page cards
-//   * "Was this new to you?": one click, counted per page (round 7 wires /api/new-to-you)
+//   * "Was this new to you?": one click, counted per page (sent to /api/new-to-you, functions/api/new-to-you.js)
 //   * tabs for the go-deeper sections (one shown at a time; arrow keys move between tabs)
 //   * links to a closed section or another tab open it
 //   * section headings: the orange bar grows in as each one comes into view (not with reduced motion)
