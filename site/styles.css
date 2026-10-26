@@ -14,7 +14,7 @@
 
 :root {
   --orange: #FF6A00;
-  --orange-ink: #D24E00;   /* deeper orange for small text on white */
+  --orange-ink: #B84500;   /* deeper orange for small text: 4.8:1 on paper, 5.4:1 on white (WCAG AA) */
   --ink: #0A0A0A;
   --paper: #F4F1EA;
   --surface: #ffffff;
@@ -645,6 +645,8 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .home .site-nav, .home .menu-btn { margin-left: auto; }
 .home-header { padding-bottom: 40px; }
 .home-header .masthead { margin-top: 18px; }
+/* Who it's for, straight under the name (the About page's first line) */
+.home-tagline { max-width: 680px; margin: 18px 0 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.1rem, 2.4vw, 1.35rem); line-height: 1.35; color: var(--ink); }
 /* The opening line and "What we do": a black band under the orange name, so it can't be missed */
 .home-header { padding-bottom: 30px; }
 .home-intro { margin-top: 2.6em; background: var(--ink); color: #fff; padding: 34px 0 38px; border-top: 8px solid var(--orange); border-bottom: 8px solid var(--orange); }
@@ -665,7 +667,11 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 }
 .what-we-do strong { display: block; margin-bottom: 6px; font-family: var(--display); font-size: 1.15rem; line-height: 1.25; color: var(--ink); }
 @media (max-width: 719px) { .what-we-do { grid-template-columns: 1fr; } }
-.text-page .what-now { margin: 1em 0 0; color: var(--muted); }
+.text-page .what-now { margin: 0 0 1em; color: var(--muted); }
+/* Cards 2 to 4 aren't built yet, so they're quieter: no shadow, grey edge and number */
+.what-we-do li:not(:first-child) { background: transparent; border-color: var(--mut2); box-shadow: none; color: var(--muted); }
+.what-we-do li:not(:first-child)::before { background: transparent; border-color: var(--mut2); color: var(--muted); }
+.what-we-do li:not(:first-child) strong { color: var(--muted); }
 
 /* The big picture: three steps of one short story (today, if it grows, the response), joined by arrows.
    Side by side on computers, stacked with down arrows on phones. */
@@ -685,14 +691,15 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
   .big-steps li:not(:last-child)::after { content: "→" / ""; left: auto; right: -34px; bottom: auto; top: 44px; }
 }
 
-/* Where to start: the stories link, then (separately) the themes */
+/* Where to start: the themes (Jobs first, the page built for professionals), then the stories link */
 .text-page a.path { display: block; text-decoration: none; color: var(--ink); }
 .path-q { display: block; margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.35rem, 3vw, 1.75rem); line-height: 1.2; color: var(--ink); }
 .text-page a.path .path-q { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--orange); text-underline-offset: 5px; }
 .text-page a.path:hover .path-q { background: var(--orange); text-decoration-color: var(--ink); }
 .path-line { display: block; margin-top: 6px; color: var(--muted); }
 .text-page a.path:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 4px; }
-.by-theme { margin: 2em 0 0; padding-top: 1.2em; border-top: 2px solid var(--ink); }
+.by-theme { margin: 0 0 2em; }
+.by-theme + a.path { display: block; padding-top: 1.2em; border-top: 2px solid var(--ink); }
 .text-page .by-theme h3 { margin: 0 0 14px; font-size: clamp(1.35rem, 3vw, 1.75rem); }
 /* Same look as "Read the latest stories": big, with a thick orange underline */
 .text-page .path-q-plain { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--orange); text-underline-offset: 5px; }
