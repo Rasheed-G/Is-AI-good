@@ -229,8 +229,8 @@ PAGE = """<!doctype html>
   <meta name="description" content="Our theory of change. How we think Is AI Good? can help experienced professionals take a first step into AI safety, how sure we are, and how we'll know." />
   <!-- frame:head -->
   <!-- /frame:head -->
-  <link rel="stylesheet" href="/approach/approach.css?v=20261027a" />
-  <script defer src="/approach/approach.js?v=20261027a"></script>
+  <link rel="stylesheet" href="/approach/approach.css?v=20261027b" />
+  <script defer src="/approach/approach.js?v=20261027b"></script>
 </head>
 <body class="approach-page">
   <header class="site-header compact">
@@ -245,7 +245,7 @@ PAGE = """<!doctype html>
 
   <div class="wrap approach-layout">
     <nav class="on-page" aria-label="On this page">
-      <details class="on-page-box" open>
+      <details class="on-page-box">
         <summary>On this page</summary>
         <ol>
 {nav}

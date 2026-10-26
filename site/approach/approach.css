@@ -32,8 +32,10 @@
 @media (min-width: 1100px) {
   .approach-layout { display: grid; grid-template-columns: 240px minmax(0, 720px); gap: 56px; align-items: start; }
   .on-page { top: 20px; margin: 44px 0 0; background: none; border: 0; }
-  .on-page-box summary { padding: 0 0 10px; cursor: default; pointer-events: none; }
-  .on-page-box summary::after { content: none; }
+  .on-page-box summary { padding: 0 0 10px; }
+  /* With scripts on, the list is always open beside the text, so the heading isn't a button */
+  .js .on-page-box summary { cursor: default; pointer-events: none; }
+  .js .on-page-box summary::after { content: none; }
   .on-page ol { padding: 0; max-height: calc(100vh - 80px); }
   .text-page.approach { padding-top: 44px; }
 }
