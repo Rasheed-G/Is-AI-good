@@ -8,7 +8,8 @@
 //     because raw iframes to these platforms render blank or mis-sized.
 
 let ALL = [];
-let activeTheme = "All";
+// Themes the reader has picked; empty = all themes. Several can be on at once.
+const activeThemes = new Set();
 let query = "";
 let showSensitive = false;
 
@@ -78,24 +79,37 @@ function buildThemeChips() {
   $themes.innerHTML = "";
   themes.forEach(t => {
     const b = document.createElement("button");
-    b.className = "chip" + (t === activeTheme ? " active" : "");
+    b.type = "button";
+    b.className = "chip";
     b.textContent = t;
     b.addEventListener("click", () => {
-      activeTheme = t;
-      document.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c.textContent === t));
-      // Keep the theme sub-toggle's label in sync, then collapse the chip list (no-op on desktop).
-      $themeCurrent.textContent = t;
-      $themes.classList.remove("open");
-      $themeToggle.setAttribute("aria-expanded", "false");
+      if (t === "All") activeThemes.clear();
+      else if (activeThemes.has(t)) activeThemes.delete(t);
+      else activeThemes.add(t);
+      syncChips();
       render();
     });
     $themes.appendChild(b);
   });
+  syncChips();
+}
+
+// Mark the picked chips ("All" when none are picked) and keep the phone sub-toggle's label in step.
+// The chip list stays open on phones so several themes can be picked in a row.
+function syncChips() {
+  $themes.querySelectorAll(".chip").forEach(c => {
+    const on = c.textContent === "All" ? activeThemes.size === 0 : activeThemes.has(c.textContent);
+    c.classList.toggle("active", on);
+    c.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  $themeCurrent.textContent = activeThemes.size === 0 ? "All"
+    : activeThemes.size === 1 ? [...activeThemes][0]
+    : `${activeThemes.size} themes`;
 }
 
 // Theme + text match, ignoring the sensitive toggle (used for counting too).
 function matchBase(s) {
-  const themeOk = activeTheme === "All" || s.theme === activeTheme;
+  const themeOk = activeThemes.size === 0 || activeThemes.has(s.theme);
   const q = query;
   const searchOk = !q ||
     (s.title || "").toLowerCase().includes(q) ||
@@ -295,78 +309,3 @@ function esc(str) {
   return String(str).replace(/[&<>"']/g, c =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
-
-// ---- Feedback (floating button + modal) ------------------------------------
-// The form is fully functional client-side. SENDING is inert until FEEDBACK_ENDPOINT is set
-// to a server-side proxy URL — a static page must never carry an Airtable write token, so the
-// POST target must be a small serverless function (Cloudflare Pages / Netlify / Vercel) that
-// holds the token and does the real spam checks (Turnstile + per-IP rate limit). To go live:
-// set FEEDBACK_ENDPOINT below and have that endpoint accept { type, comment, email, page, ts }.
-const FEEDBACK_ENDPOINT = "/api/feedback";   // Cloudflare Pages Function — functions/api/feedback.js
-const FB_MIN_INTERVAL_MS = 30000;    // client throttle: one send per 30s (a courtesy, not security)
-
-(function initFeedback() {
-  const openBtn = document.getElementById("fbOpen");
-  const panel = document.getElementById("fbPanel");
-  if (!openBtn || !panel) return;
-  const closeBtn = document.getElementById("fbClose");
-  const form = document.getElementById("fbForm");
-  const note = document.getElementById("fbNote");
-  const submit = document.getElementById("fbSubmit");
-  const comment = document.getElementById("fbComment");
-  let lastFocus = null;
-
-  function open() {
-    lastFocus = document.activeElement;
-    panel.hidden = false;
-    document.addEventListener("keydown", onKey);
-    document.getElementById("fbType").focus();
-  }
-  function close() {
-    panel.hidden = true;
-    document.removeEventListener("keydown", onKey);
-    setMsg("", "");
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-  function onKey(e) { if (e.key === "Escape") close(); }
-  function setMsg(text, cls) { note.textContent = text; note.className = "fb-note" + (cls ? " " + cls : ""); }
-
-  openBtn.addEventListener("click", open);
-  closeBtn.addEventListener("click", close);
-  // Click the dimmed backdrop (not the card) to close.
-  panel.addEventListener("click", e => { if (e.target === panel) close(); });
-
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    // Honeypot: real users never see this field; if it's filled, it's a bot — pretend success.
-    if (form.website.value.trim()) { setMsg("Thanks!", "ok"); form.reset(); return; }
-    const text = comment.value.trim();
-    if (text.length < 3) { setMsg("Please add a little detail before sending.", "err"); comment.focus(); return; }
-    const email = form.email.value.trim();
-    if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setMsg("That email doesn't look right — or leave it blank.", "err"); form.email.focus(); return; }
-
-    const last = +localStorage.getItem("fbLast") || 0;
-    if (Date.now() - last < FB_MIN_INTERVAL_MS) { setMsg("You just sent feedback — thank you! Give it a moment.", "err"); return; }
-
-    const payload = { type: form.type.value, comment: text, email, page: location.href, ts: new Date().toISOString() };
-
-    if (!FEEDBACK_ENDPOINT) {   // not wired yet — validate + acknowledge honestly, send nothing
-      setMsg("Feedback isn't connected yet — the form works, but sending goes live once the site is hosted. Thanks for trying it!", "ok");
-      return;
-    }
-    submit.disabled = true; setMsg("Sending…", "");
-    try {
-      const res = await fetch(FEEDBACK_ENDPOINT, {
-        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error(res.status);
-      localStorage.setItem("fbLast", String(Date.now()));
-      setMsg("Thank you — your feedback was sent.", "ok");
-      form.reset();
-    } catch (_) {
-      setMsg("Couldn't send just now — please try again in a moment.", "err");
-    } finally {
-      submit.disabled = false;
-    }
-  });
-})();
