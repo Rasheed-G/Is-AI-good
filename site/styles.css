@@ -347,16 +347,17 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 }
 
 /* ==== Site footer (scripts/frame/footer.html) ==== */
+/* Black band so the footer stands apart from the page; white text, orange sign-up button */
 .site-footer {
-  margin-top: 72px; padding: 32px 0 44px; border-top: 8px solid var(--ink);
-  background: var(--paper); color: var(--muted); font-size: .92rem;
+  margin-top: 72px; padding: 36px 0 48px;
+  background: var(--ink); color: #fff; font-size: .92rem;
 }
 .footer-inner > * { margin: 0; }
 .footer-inner > * + * { margin-top: 18px; }
 .signup { position: relative; }
 .signup-label {
   display: block; margin-bottom: 8px; font-family: var(--mono); font-weight: 700; font-size: .82rem;
-  text-transform: uppercase; letter-spacing: .03em; color: var(--ink);
+  text-transform: uppercase; letter-spacing: .03em; color: inherit;
 }
 .signup-row { display: flex; flex-wrap: wrap; gap: 8px; max-width: 460px; }
 .signup-row input {
@@ -364,23 +365,22 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
   border: 2px solid var(--ink); background: var(--surface); color: var(--text);
 }
 .signup-row input::placeholder { color: var(--mut2); }
-.signup-row input:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+.signup-row input:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
 .signup-btn {
-  padding: 10px 16px; font-family: var(--mono); font-weight: 700; font-size: .82rem;
+  padding: 10px 18px; font-family: var(--mono); font-weight: 700; font-size: .82rem;
   text-transform: uppercase; letter-spacing: .03em; color: var(--ink);
-  background: var(--surface); border: 2px solid var(--ink); cursor: pointer;
+  background: var(--orange); border: 2px solid var(--ink); cursor: pointer;
 }
-.signup-btn:hover { background: var(--orange); }
-.signup-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.signup-btn:hover { background: #ff8a33; }
+.signup-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 .signup-btn:disabled { opacity: .6; cursor: wait; }
-.signup-note { margin: 8px 0 0; color: var(--ink); font-weight: 600; }
+.signup-note { margin: 8px 0 0; color: inherit; font-weight: 600; }
 .signup-note:empty { display: none; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .footer-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
-.footer-links a, .footer-mistake a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-.footer-links a:hover, .footer-mistake a:hover { background: var(--orange); }
-.footer-links a:focus-visible, .footer-mistake a:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
-.footer-small { color: var(--mut2); font-size: .85rem; }
+.footer-links a, .footer-feedback a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.footer-links a:hover, .footer-feedback a:hover { background: var(--orange); color: var(--ink); }
+.footer-links a:focus-visible, .footer-feedback a:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
 
 /* ==== Text page (About, How we choose stories, Contact, Privacy) ==== */
 .page-title {
