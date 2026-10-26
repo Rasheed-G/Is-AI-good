@@ -645,11 +645,11 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 /* The big masthead is the name, so the small one in the bar is left out here */
 .home .mini-mark { display: none; }
 .home .site-nav, .home .menu-btn { margin-left: auto; }
-.home-header { padding-bottom: 34px; }
+.home-header { padding-bottom: 30px; }
 .home-header .masthead { margin-top: 18px; }
-/* Who it's for (the About page's first line), then the honest answer to the name */
-.home-tagline { max-width: 680px; margin: 18px 0 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.1rem, 2.4vw, 1.35rem); line-height: 1.35; color: var(--ink); }
-.home-tagline-2 { margin-top: 10px; }
+/* Who it's for and the honest answer to the name: the opening paragraph of the body, larger than body text
+   (owner, 2026-10-26: no sentences in the header) */
+.text-page .home-lead { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.4; color: var(--ink); }
 /* Section headings: ink bar, not orange (the heading isn't clickable) */
 .home .sec-title::before { background: var(--ink); box-shadow: none; }
 
