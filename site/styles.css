@@ -646,21 +646,25 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .home-header { padding-bottom: 40px; }
 .home-header .masthead { margin-top: 18px; }
 /* The opening line and "What we do": a black band under the orange name, so it can't be missed */
-.home-header { border-bottom: 0; padding-bottom: 30px; }
-.home-intro { background: var(--ink); color: #fff; padding: 34px 0 38px; border-bottom: 8px solid var(--orange); }
+.home-header { padding-bottom: 30px; }
+.home-intro { margin-top: 2.6em; background: var(--ink); color: #fff; padding: 34px 0 38px; border-top: 8px solid var(--orange); border-bottom: 8px solid var(--orange); }
 .home-intro .home-lead {
   max-width: 820px; margin: 0; font-family: var(--display); font-weight: 700;
   font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.22; letter-spacing: -.01em; color: #fff;
 }
-/* What we do: what the finished site is for, three numbered points */
-.what-we-do { list-style: none; counter-reset: wwd; margin: 0; padding: 0; display: grid; gap: 14px; }
+/* What we do: what the finished site is for, as four numbered cards, two by two (like the Jobs key points) */
+.what-we-do { list-style: none; counter-reset: wwd; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .text-page .what-we-do li + li { margin-top: 0; }
-.what-we-do li { counter-increment: wwd; position: relative; min-height: 2rem; padding-left: 3rem; font-size: 1.1rem; line-height: 1.45; }
-.what-we-do li::before {
-  content: counter(wwd); position: absolute; left: 0; top: -1px; display: grid; place-items: center; width: 2rem; height: 2rem;
-  background: var(--orange); border: 2px solid var(--ink); color: var(--ink); font-family: var(--mono); font-weight: 700; font-size: .95rem;
+.what-we-do li {
+  counter-increment: wwd; padding: 18px 18px 16px; background: var(--surface);
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font-size: 1rem; line-height: 1.5;
 }
-.what-we-do strong { font-family: var(--display); color: var(--ink); }
+.what-we-do li::before {
+  content: counter(wwd); display: grid; place-items: center; width: 2.1rem; height: 2.1rem; margin-bottom: 12px;
+  background: var(--orange); border: 2px solid var(--ink); color: var(--ink); font-family: var(--mono); font-weight: 700;
+}
+.what-we-do strong { display: block; margin-bottom: 6px; font-family: var(--display); font-size: 1.15rem; line-height: 1.25; color: var(--ink); }
+@media (max-width: 719px) { .what-we-do { grid-template-columns: 1fr; } }
 .text-page .what-now { margin: 1em 0 0; color: var(--muted); }
 
 /* The big picture: three steps of one short story (today, if it grows, the response), joined by arrows.
