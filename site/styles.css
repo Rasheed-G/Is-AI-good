@@ -654,7 +654,8 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .home .sec-title::before { background: var(--ink); box-shadow: none; }
 
 /* The big picture: three steps of one short story (today, if it grows, the response), joined by arrows.
-   Side by side on computers, stacked with down arrows on phones. */
+   Stacked as rows on every screen, with down arrows between (owner, 2026-10-26); on computers the label sits
+   on the left and the text on the right. */
 .big-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 40px; }
 .text-page .big-steps li + li { margin-top: 0; }
 .big-steps li { position: relative; display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 4px solid var(--ink); }
@@ -665,8 +666,9 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
   content: "↓" / ""; position: absolute; left: 0; bottom: -36px; font-family: var(--mono); font-weight: 700; font-size: 1.6rem; line-height: 1; color: var(--ink);
 }
 @media (min-width: 760px) {
-  .big-steps { grid-template-columns: repeat(3, 1fr); gap: 0 44px; }
-  .big-steps li:not(:last-child)::after { content: "→" / ""; left: auto; right: -34px; bottom: auto; top: 44px; }
+  .big-steps li { display: grid; grid-template-columns: 150px 1fr; column-gap: 24px; row-gap: 6px; }
+  .big-steps .step-label { grid-row: 1 / span 2; padding-top: 5px; }
+  .big-steps li > strong, .big-steps li > span:last-child { grid-column: 2; }
 }
 
 /* What we do: four numbered cards. Card 1 is live and holds where to start; 2 to 4 aren't built yet, so
