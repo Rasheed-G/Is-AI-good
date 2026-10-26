@@ -1,17 +1,26 @@
 // Is AI Good? — gallery. Loads stories.json (built from Airtable) and renders a
 // searchable, theme-filterable grid, newest first. No build tools.
 //
-// Media embedding:
-//   YouTube  -> plain iframe (reliable)
+// Media embedding (videos and posts load only when the reader clicks, so no other
+// company's player or script runs, or sets cookies, until they choose it):
+//   YouTube  -> thumbnail + "Play on YouTube"; click swaps in a youtube-nocookie iframe
+//   C-SPAN   -> cover + "Play on C-SPAN"; click swaps in its iframe
 //   Image    -> <img>
-//   Instagram / TikTok / X -> their OFFICIAL embed scripts (blockquote + JS),
-//     because raw iframes to these platforms render blank or mis-sized.
+//   Instagram / TikTok / X -> cover + "Open on …"; click swaps in the blockquote and loads that
+//     platform's OFFICIAL embed script, because raw iframes to these platforms render blank or mis-sized.
+//
+// The page can open on chosen themes: /news/?theme=jobs-livelihoods (several: comma-separated).
 
 let ALL = [];
 // Themes the reader has picked; empty = all themes. Several can be on at once.
 const activeThemes = new Set();
 let query = "";
 let showSensitive = false;
+
+// Themes that have their own page: their cards link to it ("Read more on … →").
+const THEME_PAGES = {
+  "Jobs & livelihoods": { url: "/impact/work/", label: "AI and your work" },
+};
 
 // Pagination: render the grid in batches instead of all at once, so performance
 // (initial paint + the whole-grid rebuild on every search keystroke) stays flat as
@@ -46,6 +55,7 @@ async function init() {
   // Most recent first; undated stories sort to the end.
   ALL.sort((a, b) => dateVal(b.date) - dateVal(a.date));
 
+  themesFromUrl();
   buildThemeChips();
   $search.addEventListener("input", debounce(() => {
     query = $search.value.toLowerCase().trim(); render();
@@ -66,6 +76,7 @@ async function init() {
 
   // Share (event-delegated) — system share sheet on mobile, clipboard on desktop.
   $grid.addEventListener("click", onShareClick);
+  $grid.addEventListener("click", onEmbedClick);
 
   $loadMore.addEventListener("click", appendNext);
 
@@ -87,11 +98,30 @@ function buildThemeChips() {
       else if (activeThemes.has(t)) activeThemes.delete(t);
       else activeThemes.add(t);
       syncChips();
+      themesToUrl();
       render();
     });
     $themes.appendChild(b);
   });
   syncChips();
+}
+
+// Theme names as they appear in an address: "Jobs & livelihoods" -> "jobs-livelihoods".
+function slug(name) { return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+
+function themesFromUrl() {
+  const wanted = (new URLSearchParams(location.search).get("theme") || "").split(",").filter(Boolean);
+  if (!wanted.length) return;
+  const bySlug = {};
+  ALL.forEach(s => { if (s.theme) bySlug[slug(s.theme)] = s.theme; });
+  wanted.forEach(w => { if (bySlug[w]) activeThemes.add(bySlug[w]); });
+}
+function themesToUrl() {
+  const params = new URLSearchParams(location.search);
+  if (activeThemes.size) params.set("theme", [...activeThemes].map(slug).join(","));
+  else params.delete("theme");
+  const q = params.toString().replace(/%2C/g, ",");
+  history.replaceState(null, "", location.pathname + (q ? "?" + q : "") + location.hash);
 }
 
 // Mark the picked chips ("All" when none are picked) and keep the phone sub-toggle's label in step.
@@ -145,8 +175,6 @@ function appendNext() {
   shown = end;
 
   $loadMore.hidden = shown >= currentList.length;
-
-  enhanceEmbeds();
 }
 
 let lastHidden = 0;
@@ -175,16 +203,30 @@ function detectMedia(s) {
   return null;
 }
 
+const PLATFORM = { youtube: "YouTube", cspan: "C-SPAN", instagram: "Instagram", tiktok: "TikTok", twitter: "X" };
+
+// What a card shows before the reader clicks: a picture (YouTube thumbnail) or a cover, plus
+// one button. The real embed is only built in embedHtml(), on click.
 function mediaHtml(m) {
+  if (m.kind === "image")
+    return `<div class="card-media image"><img loading="lazy" src="${esc(m.src)}" alt=""></div>`;
+  const name = PLATFORM[m.kind];
+  const verb = m.kind === "youtube" || m.kind === "cspan" ? "Play" : "Open";
+  const pic = m.kind === "youtube"
+    ? `<img class="facade-img" loading="lazy" src="https://i.ytimg.com/vi/${esc(m.id)}/hqdefault.jpg" alt="">`
+    : `<span class="ph-label" aria-hidden="true">${esc(name)}</span>`;
+  return `<div class="card-media facade ${m.kind === "youtube" ? "has-img" : "placeholder"}" data-embed="${esc(JSON.stringify(m))}">
+    ${pic}<button class="embed-load" type="button">${verb} on ${esc(name)}</button></div>`;
+}
+
+function embedHtml(m) {
   switch (m.kind) {
     case "youtube":
-      return `<div class="card-media youtube"><iframe loading="lazy"
-        src="https://www.youtube.com/embed/${m.id}" title="Embedded video" allowfullscreen
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`;
-    case "image":
-      return `<div class="card-media image"><img loading="lazy" src="${esc(m.src)}" alt=""></div>`;
+      return `<div class="card-media youtube"><iframe
+        src="https://www.youtube-nocookie.com/embed/${esc(m.id)}?autoplay=1" title="Embedded video" allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`;
     case "cspan":
-      return `<div class="card-media youtube"><iframe loading="lazy"
+      return `<div class="card-media youtube"><iframe
         src="https://www.c-span.org/video/standalone/?c${esc(m.id)}" title="Embedded C-SPAN video"
         allowfullscreen></iframe></div>`;
     case "instagram":
@@ -199,6 +241,22 @@ function mediaHtml(m) {
         <a href="${esc(m.url)}"></a></blockquote></div>`;
   }
   return "";
+}
+
+// Click on "Play on …" / "Open on …": swap the cover for the real embed, then let the
+// platform's script (if it has one) process it. Instagram/TikTok clips then hide the card's
+// title + summary, since the clip is the content.
+function onEmbedClick(e) {
+  const btn = e.target.closest(".embed-load");
+  if (!btn) return;
+  const well = btn.closest(".facade");
+  const m = JSON.parse(well.dataset.embed);
+  const cardEl = well.closest(".card");
+  well.outerHTML = embedHtml(m);
+  if (m.kind === "instagram" || m.kind === "tiktok") cardEl.classList.add("social-video");
+  enhanceEmbeds();
+  const frame = cardEl.querySelector("iframe");
+  if (frame) frame.focus();
 }
 
 // Cards whose source has no embeddable media (bot-blocked article, no image, self-post)
@@ -252,8 +310,8 @@ function card(s) {
   // summary (kept in the DOM, visually-hidden, so search and screen readers still see them)
   // and let the embed stand alone. The card is never removed — if the embed can't render, the
   // platform shows its own placeholder, and the title/summary stay in the DOM for search/a11y.
-  const socialVideo = !!media && (media.kind === "instagram" || media.kind === "tiktok");
-  el.className = "card" + (isSensitive(s) ? " sensitive" : "") + (socialVideo ? " social-video" : "");
+  // (Clips only hide their text once loaded; see onEmbedClick.)
+  el.className = "card" + (isSensitive(s) ? " sensitive" : "");
 
   el.innerHTML += media ? mediaHtml(media) : placeholderHtml(s);
 
@@ -269,12 +327,14 @@ function card(s) {
       ? `<a class="source" href="${esc(s.sourceUrl)}" target="_blank" rel="noopener noreferrer">View source →</a>`
       : "");
 
-  const textCls = socialVideo ? " vh" : "";   // vh = visually hidden (kept for search/a11y)
+  const page = THEME_PAGES[s.theme];
+  const readMore = page ? `<a class="read-more" href="${page.url}">Read more on ${esc(page.label)} →</a>` : "";
   el.innerHTML += `
     <div class="card-body">
       <div class="card-tags">${tags.join("")}</div>
-      <h2 class="card-title${textCls}">${esc(s.title || "")}</h2>
-      <p class="summary${textCls}">${esc(s.summary || "")}</p>
+      <h2 class="card-title">${esc(s.title || "")}</h2>
+      <p class="summary">${esc(s.summary || "")}</p>
+      ${readMore}
       <div class="card-foot">${foot}</div>
     </div>`;
   return el;

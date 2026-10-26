@@ -187,6 +187,33 @@ a { color: inherit; }
 .vh { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
       overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .card.social-video .card-body { padding-top: 12px; gap: 12px; }
+.card.social-video .card-title, .card.social-video .summary {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Click to load: a picture or cover with one button; the real player/post loads on click */
+.card-media.facade { position: relative; }
+.card-media.facade.placeholder { flex-direction: column; gap: 16px; }
+.card-media.facade.has-img { aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+.card-media.facade .facade-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.embed-load {
+  font-family: var(--mono); font-weight: 700; font-size: .78rem; letter-spacing: .04em; text-transform: uppercase;
+  padding: 10px 16px; color: var(--ink); background: var(--orange);
+  border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); cursor: pointer;
+}
+.card-media.facade.has-img .embed-load { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.embed-load:hover { background: #ff8a33; }
+.embed-load:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.card-media.facade.has-img .embed-load:focus-visible { outline-color: #fff; }
+
+/* "Read more on AI and your work →" on cards whose theme has its own page */
+.read-more {
+  align-self: flex-start; margin: -6px 0 15px; font-weight: 700; font-size: .88rem; color: var(--ink);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.read-more:hover { background: var(--orange); }
+.read-more:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
 
 /* footer actions — share beside view source, split 50/50 */
 .card-foot { margin-top: auto; border-top: 2px solid var(--ink); display: flex; }
