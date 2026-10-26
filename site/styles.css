@@ -510,7 +510,9 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 
 /* "Was this new to you?": one optional click */
 /* Calm on purpose: an optional click, not the page's main action */
-.new-to-you { margin: 2.2em 0 1em; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+/* Its own short pause between the core and "Go deeper": a line above and below, nothing else */
+.new-to-you { margin: 2.4em 0 1.4em; padding: 16px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+  border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
 .text-page .new-to-you-q { margin: 0; font-size: 1.1rem; }
 .new-to-you-note { flex-basis: 100%; }
 .new-to-you-btns { display: flex; flex-wrap: wrap; gap: 10px; }
