@@ -130,7 +130,8 @@ function enhanceEmbeds(root = document) {
 
 // ---- Card ------------------------------------------------------------------
 
-function card(s) {
+// opts.readMore = false leaves out the "Read more" link (e.g. on the theme page it points to).
+function card(s, opts = {}) {
   const el = document.createElement("article");
   const media = detectMedia(s);
   // Instagram / TikTok clips speak for themselves — the video IS the content, so an AI
@@ -155,7 +156,7 @@ function card(s) {
       ? `<a class="source" href="${esc(s.sourceUrl)}" target="_blank" rel="noopener noreferrer">View source →</a>`
       : "");
 
-  const page = THEME_PAGES[s.theme];
+  const page = opts.readMore === false ? null : THEME_PAGES[s.theme];
   const readMore = page ? `<a class="read-more" href="${page.url}">${esc(page.text)} →</a>` : "";
   el.innerHTML += `
     <div class="card-body">

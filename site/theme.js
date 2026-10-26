@@ -1,7 +1,8 @@
 // Is AI Good? — theme pages (e.g. /impact/work/). Uses cards.js for the story cards.
 //   * "What it looks like": the stories named in #themeStories[data-ids], drawn as news-page cards
 //   * "Was this new to you?": one click, counted per page (round 7 wires /api/new-to-you)
-//   * links to a closed section (#how-big) open it; "Copy link" copies the page address
+//   * links to a closed section open it
+//   * section headings: the orange bar grows in as each one comes into view (not with reduced motion)
 (function () {
   // ---- Story cards ----
   const $stories = document.getElementById("themeStories");
@@ -12,7 +13,7 @@
       .then((data) => {
         const byId = {};
         (data.stories || []).forEach((s) => { byId[s.id] = s; });
-        ids.forEach((id) => { if (byId[id]) $stories.appendChild(card(byId[id])); });
+        ids.forEach((id) => { if (byId[id]) $stories.appendChild(card(byId[id], { readMore: false })); });
       })
       .catch(() => {
         $stories.innerHTML = "<p class='empty'>Could not load stories. <a href='/news/'>See the news page</a>.</p>";
@@ -48,11 +49,13 @@
   window.addEventListener("hashchange", openTarget);
   openTarget();
 
-  // ---- Send to a colleague: copy link ----
-  document.querySelectorAll("[data-copy-link]").forEach((btn) => btn.addEventListener("click", async () => {
-    const note = btn.parentElement.querySelector(".copy-note");
-    const url = location.origin + location.pathname;
-    try { await navigator.clipboard.writeText(url); note.textContent = "Link copied."; }
-    catch (_) { note.textContent = url; }
-  }));
+  // ---- Section headings: bar grows in when seen ----
+  const heads = document.querySelectorAll(".sec-title");
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("sec-anim");
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("seen"); io.unobserve(e.target); }
+    }), { rootMargin: "0px 0px -15% 0px" });
+    heads.forEach((h) => io.observe(h));
+  }
 })();
