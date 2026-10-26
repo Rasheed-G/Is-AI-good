@@ -32,11 +32,15 @@ def piece(name):
 
 
 def page_path(f):
+    if f.name == "404.html":
+        return None  # served at any missing address, so no link is "current"
     rel = f.relative_to(SITE).parent.as_posix()
     return "/" if rel == "." else f"/{rel}/"
 
 
 def mark_current(html, path):
+    if path is None:
+        return html
     html = html.replace(f'href="{path}"', f'href="{path}" aria-current="page"')
     return GROUP.sub(
         lambda m: m.group(0).replace('class="nav-group-btn"', 'class="nav-group-btn is-current"', 1)

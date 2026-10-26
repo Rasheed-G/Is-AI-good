@@ -399,6 +399,25 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .text-page a:not(.btn-main):hover { background: var(--orange); }
 .text-page a:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
 .next-step { margin-top: 2.4em; }
+.text-page .updated { color: var(--muted); font-size: 1rem; }
+
+/* Steps: numbered boxes joined by arrows, top to bottom (e.g. "How a story gets here") */
+.steps { list-style: none; margin: 1.2em 0 1.6em; padding: 0; }
+.steps li {
+  position: relative; display: flex; gap: 16px; align-items: flex-start;
+  padding: 16px 18px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+}
+.steps li + li { margin-top: 38px; }
+.steps li:not(:last-child)::after {
+  content: "↓" / ""; position: absolute; left: 0; width: 76px; bottom: -36px; text-align: center;
+  font-family: var(--mono); font-weight: 700; font-size: 1.7rem; line-height: 1; color: var(--ink);
+}
+.step-num {
+  flex: none; display: grid; place-items: center; width: 2.2rem; height: 2.2rem;
+  background: var(--orange); border: 2px solid var(--ink);
+  font-family: var(--mono); font-weight: 700; font-size: 1.05rem; color: var(--ink);
+}
+.steps p { margin: 0; font-size: 1.05rem; line-height: 1.5; }
 .btn-main {
   display: inline-block; padding: 14px 24px; font-family: var(--mono); font-weight: 700; font-size: .9rem;
   letter-spacing: .04em; text-transform: uppercase; color: var(--ink); background: var(--orange);
