@@ -1,7 +1,8 @@
 // Is AI Good? — theme pages (e.g. /impact/work/). Uses cards.js for the story cards.
 //   * "What it looks like": the stories named in #themeStories[data-ids], drawn as news-page cards
 //   * "Was this new to you?": one click, counted per page (round 7 wires /api/new-to-you)
-//   * links to a closed section open it
+//   * tabs for the go-deeper sections (one shown at a time; arrow keys move between tabs)
+//   * links to a closed section or another tab open it
 //   * section headings: the orange bar grows in as each one comes into view (not with reduced motion)
 (function () {
   // ---- Story cards ----
@@ -40,11 +41,41 @@
     }));
   });
 
-  // ---- Links to a closed section open it ----
+  // ---- Tabs ----
+  // Without scripts every panel shows with its own heading; with them, one panel at a time.
+  const tabs = Array.from(document.querySelectorAll('.tablist [role="tab"]'));
+  function selectTab(tab, focus) {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  if (tabs.length) {
+    document.documentElement.classList.add("has-tabs");
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => selectTab(tab, false));
+      tab.addEventListener("keydown", (e) => {
+        const n = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (n === undefined) return;
+        e.preventDefault();
+        selectTab(tabs[(n + tabs.length) % tabs.length], true);
+      });
+    });
+    selectTab(tabs.find((t) => t.getAttribute("aria-selected") === "true") || tabs[0], false);
+  }
+
+  // ---- Links to a closed section or another tab open it ----
   function openTarget() {
     const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    const details = el && (el.tagName === "DETAILS" ? el : el.closest("details"));
-    if (details) { details.open = true; el.scrollIntoView(); }
+    if (!el) return;
+    const details = el.tagName === "DETAILS" ? el : el.closest("details");
+    if (details) details.open = true;
+    const panel = el.closest('[role="tabpanel"]');
+    if (panel) selectTab(document.getElementById(panel.getAttribute("aria-labelledby")), false);
+    if (details || panel) (panel && el === panel ? panel.closest(".tabs") : el).scrollIntoView();
   }
   window.addEventListener("hashchange", openTarget);
   openTarget();
