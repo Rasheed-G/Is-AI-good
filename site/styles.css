@@ -640,47 +640,25 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 }
 
 /* ==== Front door (/) ==== */
+/* One rule here (owner, 2026-10-26): orange and shadows only for the name and for things you can click;
+   everything else is ink on paper. */
 /* The big masthead is the name, so the small one in the bar is left out here */
 .home .mini-mark { display: none; }
 .home .site-nav, .home .menu-btn { margin-left: auto; }
-.home-header { padding-bottom: 40px; }
+.home-header { padding-bottom: 34px; }
 .home-header .masthead { margin-top: 18px; }
-/* Who it's for, straight under the name (the About page's first line) */
+/* Who it's for (the About page's first line), then the honest answer to the name */
 .home-tagline { max-width: 680px; margin: 18px 0 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.1rem, 2.4vw, 1.35rem); line-height: 1.35; color: var(--ink); }
-/* The opening line and "What we do": a black band under the orange name, so it can't be missed */
-.home-header { padding-bottom: 30px; }
-.home-intro { margin-top: 2.6em; background: var(--ink); color: #fff; padding: 34px 0 38px; border-top: 8px solid var(--orange); border-bottom: 8px solid var(--orange); }
-.home-intro .home-lead {
-  max-width: 820px; margin: 0; font-family: var(--display); font-weight: 700;
-  font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.22; letter-spacing: -.01em; color: #fff;
-}
-/* What we do: what the finished site is for, as four numbered cards, two by two (like the Jobs key points) */
-.what-we-do { list-style: none; counter-reset: wwd; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.text-page .what-we-do li + li { margin-top: 0; }
-.what-we-do li {
-  counter-increment: wwd; padding: 18px 18px 16px; background: var(--surface);
-  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font-size: 1rem; line-height: 1.5;
-}
-.what-we-do li::before {
-  content: counter(wwd); display: grid; place-items: center; width: 2.1rem; height: 2.1rem; margin-bottom: 12px;
-  background: var(--orange); border: 2px solid var(--ink); color: var(--ink); font-family: var(--mono); font-weight: 700;
-}
-.what-we-do strong { display: block; margin-bottom: 6px; font-family: var(--display); font-size: 1.15rem; line-height: 1.25; color: var(--ink); }
-@media (max-width: 719px) { .what-we-do { grid-template-columns: 1fr; } }
-.text-page .what-now { margin: 0 0 1em; color: var(--muted); }
-/* Cards 2 to 4 aren't built yet, so they're quieter: no shadow, grey edge and number */
-.what-we-do li:not(:first-child) { background: transparent; border-color: var(--mut2); box-shadow: none; color: var(--muted); }
-.what-we-do li:not(:first-child)::before { background: transparent; border-color: var(--mut2); color: var(--muted); }
-.what-we-do li:not(:first-child) strong { color: var(--muted); }
+.home-tagline-2 { margin-top: 10px; }
+/* Section headings: ink bar, not orange (the heading isn't clickable) */
+.home .sec-title::before { background: var(--ink); box-shadow: none; }
 
 /* The big picture: three steps of one short story (today, if it grows, the response), joined by arrows.
    Side by side on computers, stacked with down arrows on phones. */
 .big-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 40px; }
 .text-page .big-steps li + li { margin-top: 0; }
-.big-steps li { position: relative; display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 6px solid var(--orange); }
-.big-steps li:last-child { border-top-color: var(--ink); }
-.step-label { font-family: var(--mono); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--orange-ink); }
-.big-steps li:last-child .step-label { color: var(--ink); }
+.big-steps li { position: relative; display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 4px solid var(--ink); }
+.step-label { font-family: var(--mono); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .big-steps strong { font-family: var(--display); font-size: 1.25rem; line-height: 1.25; color: var(--ink); }
 .big-steps li > span:last-child { font-size: 1rem; line-height: 1.5; color: var(--text); }
 .big-steps li:not(:last-child)::after {
@@ -691,26 +669,37 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
   .big-steps li:not(:last-child)::after { content: "→" / ""; left: auto; right: -34px; bottom: auto; top: 44px; }
 }
 
-/* Where to start: the themes (Jobs first, the page built for professionals), then the stories link */
-.text-page a.path { display: block; text-decoration: none; color: var(--ink); }
-.path-q { display: block; margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.35rem, 3vw, 1.75rem); line-height: 1.2; color: var(--ink); }
-.text-page a.path .path-q { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--orange); text-underline-offset: 5px; }
-.text-page a.path:hover .path-q { background: var(--orange); text-decoration-color: var(--ink); }
-.path-line { display: block; margin-top: 6px; color: var(--muted); }
-.text-page a.path:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 4px; }
-.by-theme { margin: 0 0 2em; }
-.by-theme + a.path { display: block; padding-top: 1.2em; border-top: 2px solid var(--ink); }
-.text-page .by-theme h3 { margin: 0 0 14px; font-size: clamp(1.35rem, 3vw, 1.75rem); }
-/* Same look as "Read the latest stories": big, with a thick orange underline */
-.text-page .path-q-plain { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--orange); text-underline-offset: 5px; }
-/* Theme buttons look like the theme tags on story cards, so the names read as the same thing */
-.theme-btns { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-.text-page .theme-btns li + li { margin-top: 0; }
-.text-page .theme-btns a {
-  display: inline-block; padding: 8px 12px; font-family: var(--sans); font-weight: 700; font-size: .92rem;
-  color: var(--ink); background: var(--orange); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); text-decoration: none;
+/* What we do: four numbered cards. Card 1 is live and holds where to start; 2 to 4 aren't built yet, so
+   they're quieter (grey edge and number). No shadows: the cards aren't clickable, the links inside are. */
+.text-page .what-now { margin: 0 0 1em; color: var(--muted); }
+/* Line up the lists with the headings (text pages indent lists by default) */
+.text-page .big-steps, .text-page .what-we-do { padding-left: 0; }
+.what-we-do { list-style: none; counter-reset: wwd; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.text-page .what-we-do li + li { margin-top: 0; }
+.what-we-do li {
+  counter-increment: wwd; padding: 16px 16px 14px; border: 2px solid var(--mut2); color: var(--muted); font-size: 1rem; line-height: 1.5;
 }
-.text-page .theme-btns a:hover { background: var(--ink); color: #fff; }
-.text-page .theme-btns a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.what-we-do li::before {
+  content: counter(wwd); display: grid; place-items: center; width: 2.1rem; height: 2.1rem; margin-bottom: 12px;
+  border: 2px solid var(--mut2); color: var(--muted); font-family: var(--mono); font-weight: 700;
+}
+.what-we-do strong { display: block; margin-bottom: 6px; font-family: var(--display); font-size: 1.1rem; line-height: 1.25; color: var(--muted); }
+.what-we-do li.wwd-live { grid-column: 1 / -1; padding: 20px 20px 22px; background: var(--surface); border: 2px solid var(--ink); color: var(--text); }
+.what-we-do li.wwd-live::before { background: var(--ink); border-color: var(--ink); color: #fff; }
+.what-we-do li.wwd-live strong { font-size: 1.3rem; color: var(--ink); }
+@media (max-width: 719px) { .what-we-do { grid-template-columns: 1fr; } }
+
+/* Where to start, inside card 1: the strongest things on the page (orange, shadow, they're the clicks) */
+.wwd-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+@media (max-width: 719px) { .wwd-paths { grid-template-columns: 1fr; } }
+.text-page a.path {
+  display: block; padding: 16px 18px; text-decoration: none; color: var(--ink);
+  background: var(--orange); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+}
+.text-page a.path:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+.text-page a.path:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.text-page a.path:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+.path-q { display: block; margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.15rem, 2.4vw, 1.3rem); line-height: 1.2; color: var(--ink); }
+.path-line { display: block; margin-top: 6px; font-size: 1rem; line-height: 1.45; color: var(--ink); }
 .home .signup-main { margin-top: 3em; }
 .signup-intro { margin: -4px 0 12px; }
