@@ -1,0 +1,26 @@
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <!-- signup -->
+      <form class="signup signup-quiet" action="/api/subscribe" method="post" novalidate>
+        <label class="signup-label" for="footerEmail">Get updates by email.</label>
+        <div class="signup-row">
+          <input id="footerEmail" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="Your email" />
+          <button class="signup-btn" type="submit">Sign up</button>
+        </div>
+        <!-- honeypot: hidden from people; a bot that fills it gets silently dropped -->
+        <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <p class="signup-note" role="status" aria-live="polite"></p>
+      </form>
+      <!-- /signup -->
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/how-we-choose/">How we choose stories</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+      <p class="footer-mistake"><a href="/contact/">Spotted a mistake? Tell us</a></p>
+      <p class="footer-small">Is AI Good? is self-funded and run by Rasheed Giwa.</p>
+    </div>
+  </footer>

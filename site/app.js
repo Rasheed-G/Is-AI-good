@@ -36,7 +36,7 @@ init();
 
 async function init() {
   try {
-    const res = await fetch("stories.json", { cache: "no-store" });
+    const res = await fetch("/stories.json", { cache: "no-store" });
     ALL = (await res.json()).stories || [];
   } catch (e) {
     $grid.innerHTML = "<p class='empty'>Could not load stories.</p>";
