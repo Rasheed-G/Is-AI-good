@@ -1,0 +1,159 @@
+/* Our approach (/approach/): the theory of change page. Built from the ToC by scripts/build_approach.py.
+   Shared look comes from /styles.css; this file adds the side menu, the journey map, the funnel,
+   the "how sure" strip, gate blocks and tables. */
+
+/* ---- Layout: side menu on computers, a "jump to" bar on phones ---- */
+.approach-layout { display: block; }
+.text-page.approach { max-width: 720px; padding-top: 28px; }
+.text-page .toc-version { margin: 0 0 .3em; color: var(--muted); font-size: 1rem; }
+.text-page .toc-version + :not(.toc-version) { margin-top: 1.6em; }
+
+.reading-progress { position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 30; pointer-events: none; }
+.reading-progress span { display: block; height: 100%; width: 0; background: var(--ink); }
+
+.on-page { position: sticky; top: 0; z-index: 20; margin: 0 -20px; background: var(--paper); border-bottom: 2px solid var(--ink); }
+.on-page-box summary {
+  display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; cursor: pointer; list-style: none;
+  font-family: var(--mono); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink);
+}
+.on-page-box summary::-webkit-details-marker { display: none; }
+.on-page-box summary::after { content: "▾" / ""; }
+.on-page-box[open] summary::after { content: "▴" / ""; }
+.on-page-box summary:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: -3px; }
+.on-page ol { list-style: none; margin: 0; padding: 0 20px 14px; max-height: 60vh; overflow-y: auto; }
+.on-page li a {
+  display: block; padding: 6px 10px; border-left: 3px solid transparent; color: var(--ink);
+  font-size: .95rem; line-height: 1.35; text-decoration: none;
+}
+.on-page li a:hover { background: rgba(255, 106, 0, .14); }
+.on-page li a:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 0; }
+.on-page li a[aria-current="true"] { border-left-color: var(--orange); background: var(--surface); font-weight: 700; }
+
+@media (min-width: 1100px) {
+  .approach-layout { display: grid; grid-template-columns: 240px minmax(0, 720px); gap: 56px; align-items: start; }
+  .on-page { top: 20px; margin: 44px 0 0; background: none; border: 0; }
+  .on-page-box summary { padding: 0 0 10px; cursor: default; pointer-events: none; }
+  .on-page-box summary::after { content: none; }
+  .on-page ol { padding: 0; max-height: calc(100vh - 80px); }
+  .text-page.approach { padding-top: 44px; }
+}
+
+/* ---- Text pieces ---- */
+.text-page .toc-sec { scroll-margin-top: 64px; }
+.text-page .toc-sec h2, .text-page [id^="gate-"], .text-page [id^="s"], .text-page [id^="source-"] { scroll-margin-top: 64px; }
+.text-page .toc-sec > h2 { padding-top: .4em; border-top: 4px solid var(--ink); }
+.text-page blockquote.toc-brief {
+  margin: 0 0 1.4em; padding: 18px 20px 6px; background: var(--surface); border: 2.5px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+}
+.text-page .toc-brief ul { padding-left: 1.1em; }
+.text-page .toc-brief li + li { margin-top: .4em; }
+.text-page .work-stops {
+  margin: 1.6em 0; padding: 14px 16px; border-top: 4px dashed var(--ink); border-bottom: 4px dashed var(--ink);
+  background: rgba(255, 106, 0, .12);
+}
+.text-page .table-wrap { margin: 0 0 1.2em; overflow-x: auto; border: 2px solid var(--ink); background: var(--surface); }
+.text-page .table-wrap:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+.text-page table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .9rem; line-height: 1.45; }
+.text-page th { background: var(--ink); color: #fff; text-align: left; font-weight: 700; }
+.text-page th, .text-page td { padding: 8px 10px; vertical-align: top; border-bottom: 1px solid #d8d3c8; }
+.text-page tr:last-child td { border-bottom: 0; }
+
+/* ---- Gate blocks and closed sections ---- */
+.text-page .gates { margin-top: 1.2em; }
+.text-page details.gate > summary, .text-page details.more > summary {
+  display: grid; grid-template-columns: 1fr auto; column-gap: 12px; align-items: center;
+}
+.text-page details.gate > summary::after, .text-page details.more > summary::after { grid-column: 2; grid-row: 1 / span 2; }
+.text-page .gate summary h3 { font-size: 1.15rem; line-height: 1.3; }
+.text-page .gate-sub { grid-column: 1; margin: 4px 0 0; color: var(--muted); font-size: 1rem; }
+.text-page .gate-body, .text-page details.more > :not(summary) { padding: 4px 2px 0; }
+.text-page details.more summary h3 { font-size: 1.15rem; }
+.text-page details + details { border-top: 2px solid var(--ink); }
+.text-page .sources ol { font-size: .92rem; padding-left: 2.2em; }
+.text-page .sources li:target, .text-page li[id^="source-"]:target { background: rgba(255, 106, 0, .18); }
+.text-page .sources li { overflow-wrap: anywhere; }
+
+/* ---- Journey map (the ToC's diagram, clickable) ---- */
+.journey-map { margin: 1.6em 0 2.4em; scroll-margin-top: 64px; }
+.text-page .map-hint { margin: 0 0 10px; font-family: var(--mono); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink); }
+.map-group { padding: 14px; border: 2.5px solid var(--ink); }
+.map-ours { background: var(--orange); }
+.map-others { background: var(--surface); }
+.text-page .map-group-title { margin: 0 0 10px; font-family: var(--mono); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink); }
+.text-page .map-gates { list-style: none; margin: 0; padding: 0; }
+.text-page .map-gates li + li { margin-top: 22px; }
+.map-gate { position: relative; }
+.map-gate + .map-gate::before {
+  content: "↓" / ""; position: absolute; top: -22px; left: 18px; font-family: var(--mono); font-weight: 700; line-height: 22px; color: var(--ink);
+}
+.text-page a.map-gate-btn {
+  display: flex; gap: 12px; align-items: center; padding: 10px 12px; background: var(--surface); color: var(--ink);
+  border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); font-weight: 600; line-height: 1.3; text-decoration: none;
+}
+.text-page a.map-gate-btn:hover { background: var(--paper); }
+.text-page a.map-gate-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.text-page a.map-gate-btn[aria-expanded="true"] { background: var(--ink); color: #fff; }
+.map-num {
+  flex: none; display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border: 2px solid var(--ink);
+  background: var(--orange); color: var(--ink); font-family: var(--mono); font-weight: 700; font-size: .95rem;
+}
+.text-page .map-stop {
+  margin: 0; padding: 12px 0; text-align: center; font-family: var(--mono); font-weight: 700; font-size: .85rem;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--ink);
+}
+.map-stop span { display: inline-block; padding: 4px 10px; border-top: 3px dashed var(--ink); border-bottom: 3px dashed var(--ink); }
+.text-page .map-routes { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; padding: 0; }
+.text-page .map-routes li { margin: 0; padding: 6px 10px; border: 2px solid var(--ink); background: var(--paper); font-weight: 600; font-size: 1rem; }
+.text-page .map-box { position: relative; margin: 0; padding: 10px 12px; border: 2px solid var(--ink); font-size: 1rem; line-height: 1.4; }
+.text-page .map-box + .map-box { margin-top: 22px; }
+.text-page .map-box::before { content: "↓" / ""; position: absolute; top: -22px; left: 18px; font-family: var(--mono); font-weight: 700; line-height: 22px; }
+.text-page .map-goal { background: var(--ink); color: #fff; font-weight: 700; }
+
+/* The gate opened from the map, shown under the gate */
+.map-panel {
+  margin: 10px 0 0; padding: 14px 16px 6px; background: var(--surface); border: 2px solid var(--ink);
+  font-size: 1.02rem; line-height: 1.55;
+}
+.text-page .map-panel h3 { margin: 0 0 .5em; font-size: 1.15rem; }
+.text-page .map-panel h3:focus { outline: none; }
+.map-panel-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 10px; }
+.map-panel-actions button {
+  padding: 8px 14px; font-family: var(--mono); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em;
+  background: var(--paper); color: var(--ink); border: 2px solid var(--ink); cursor: pointer;
+}
+.map-panel-actions button.next { background: var(--orange); }
+.map-panel-actions button:hover { background: var(--ink); color: #fff; }
+.map-panel-actions button:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+
+/* ---- The funnel (Section 6) ---- */
+.funnel, .sure-strip { margin: 0 0 1.4em; padding: 14px 16px; background: var(--surface); border: 2px solid var(--ink); }
+.text-page .funnel figcaption, .text-page .sure-strip figcaption { margin: 0 0 10px; font-weight: 700; font-size: 1rem; color: var(--ink); line-height: 1.35; }
+.text-page .funnel-rows { list-style: none; margin: 0; padding: 0; }
+.text-page .funnel-rows li { display: grid; grid-template-columns: 4.2em 1fr 2.2em; gap: 10px; align-items: center; margin: 0; font-size: .9rem; }
+.text-page .funnel-rows li + li { margin-top: 6px; }
+.funnel-track { height: 16px; background: var(--paper); }
+.funnel-bar { display: block; height: 100%; width: var(--w); background: var(--orange); border-right: 2px solid var(--ink); }
+.funnel-rows li:last-child .funnel-bar { background: var(--ink); }
+.funnel-num { text-align: right; font-family: var(--mono); font-weight: 700; }
+.js .funnel:not(.is-drawn) .funnel-bar { width: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .funnel-bar { transition: width .6s ease-out; }
+  .funnel-rows li:nth-child(n) .funnel-bar { transition-delay: calc(var(--i, 0) * 80ms); }
+}
+
+/* ---- How sure we are (Section 5) ---- */
+.text-page .sure-strip ol { list-style: none; margin: 0; padding: 0; }
+.text-page .sure-strip li {
+  display: grid; grid-template-columns: 4.6em auto 1fr; gap: 4px 12px; align-items: baseline; margin: 0; padding: 6px 0;
+  font-size: .95rem; line-height: 1.4; border-top: 1px solid #d8d3c8;
+}
+.text-page .sure-strip li:first-child { border-top: 0; }
+.text-page .sure-strip a { font-weight: 700; }
+.pips { display: inline-flex; gap: 3px; transform: translateY(1px); }
+.pip { width: 12px; height: 12px; border: 2px solid var(--ink); background: var(--surface); }
+.pip.on { background: var(--orange); }
+@media (max-width: 559px) {
+  .text-page .sure-strip li { grid-template-columns: 4.6em 1fr; }
+  .sure-text { grid-column: 1 / -1; }
+}
+.text-page .map-panel .gate-sub { margin: 0 0 .8em; }
