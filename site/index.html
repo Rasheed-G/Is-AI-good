@@ -7,12 +7,12 @@
   <title>Is AI Good? Understand AI's risks and take a first step</title>
   <meta name="description" content="Real stories and clear explanations of AI's harms today and where they could lead, for professionals from outside tech." />
   <!-- frame:head -->
-  <link rel="stylesheet" href="/styles.css?v=20261026t" />
+  <link rel="stylesheet" href="/styles.css?v=20261026v" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <script>document.documentElement.classList.add("js");</script>
-  <script defer src="/frame.js?v=20261026t"></script>
+  <script defer src="/frame.js?v=20261026v"></script>
   <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed) -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "9a041a5e0e46412bb8195564e5b1f1d7"}'></script>
@@ -44,15 +44,9 @@
     </div>
   </header>
 
-  <section class="home-intro" aria-labelledby="h-intro">
+  <section class="home-intro" aria-label="Our goal">
     <div class="wrap">
-      <p id="h-intro" class="home-lead">We're here to help professionals from outside tech understand AI, the risks that come with building it, and how it can be made safe.</p>
-      <h2 class="home-intro-title">What we do</h2>
-      <ol class="what-we-do">
-        <li>We collect real stories of the harm AI is causing today, each linked to its source.</li>
-        <li>We explain what it means for people and their work, one theme at a time.</li>
-        <li>We're building guides on where this could lead, and how someone like you can help.</li>
-      </ol>
+      <p class="home-lead">We're here to help professionals from outside tech understand AI, the risks that come with building it, and how it can be made safe.</p>
     </div>
   </section>
 
@@ -64,6 +58,14 @@
         <p><strong>It could become much more serious.</strong> As AI gets more capable, some leading researchers warn that harms like these could grow into ones we can't undo.</p>
         <p><strong>People are working to make it safe, and they need more help.</strong> Governments, researchers and new organisations are acting. The work increasingly needs people who know how to build, run and grow organisations.</p>
       </div>
+
+      <h2 class="sec-title">What we do</h2>
+      <ol class="what-we-do">
+        <li><strong>Show the harm AI is causing today</strong>, through real stories and clear explanations of what it means for people and their work.</li>
+        <li><strong>Explain where it could lead</strong>, and why some of the people building AI are worried.</li>
+        <li><strong>Help you find where someone with your experience fits</strong>, and take a first step to help make AI safe.</li>
+      </ol>
+      <p class="what-now">We're building this one step at a time. Today you can start with the harms.</p>
 
       <h2 class="sec-title">Start here</h2>
       <a class="path" href="/news/">
@@ -77,28 +79,24 @@
           <li><a href="/impact/work/">Jobs &amp; livelihoods</a></li>
         </ul>
       </section>
-
-      <section id="signup" class="signup-main" aria-labelledby="h-signup">
-        <h2 id="h-signup">Get updates by email</h2>
-        <p class="signup-intro">Hear when we publish the next part and when our newsletter starts.</p>
-        <form class="signup" action="/api/subscribe" method="post" novalidate>
-          <label class="visually-hidden" for="mainEmail">Your email</label>
-          <div class="signup-row">
-            <input id="mainEmail" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="Your email" />
-            <button class="signup-btn" type="submit">Sign up</button>
-          </div>
-          <!-- honeypot: hidden from people; a bot that fills it gets silently dropped -->
-          <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
-          <p class="signup-note" role="status" aria-live="polite"></p>
-          <p class="signup-small">We'll ask you to confirm by email. Unsubscribe any time. <a href="/privacy/">How we use your email</a></p>
-        </form>
-      </section>
     </div>
   </main>
 
-  <!-- frame:footer-nosignup -->
+  <!-- frame:footer -->
   <footer class="site-footer">
     <div class="wrap footer-inner">
+      <!-- signup -->
+      <form class="signup signup-quiet" action="/api/subscribe" method="post" novalidate>
+        <label class="signup-label" for="footerEmail">Get updates by email.</label>
+        <div class="signup-row">
+          <input id="footerEmail" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="Your email" />
+          <button class="signup-btn" type="submit">Sign up</button>
+        </div>
+        <!-- honeypot: hidden from people; a bot that fills it gets silently dropped -->
+        <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <p class="signup-note" role="status" aria-live="polite"></p>
+      </form>
+      <!-- /signup -->
       <nav aria-label="Footer">
         <ul class="footer-links">
           <li><a href="/about/">About us</a></li>
@@ -147,7 +145,7 @@
       </form>
     </div>
   </div>
-  <!-- /frame:footer-nosignup -->
-  <script src="/theme.js?v=20261026t"></script>
+  <!-- /frame:footer -->
+  <script src="/theme.js?v=20261026v"></script>
 </body>
 </html>

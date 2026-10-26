@@ -652,17 +652,16 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
   max-width: 820px; margin: 0; font-family: var(--display); font-weight: 700;
   font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.22; letter-spacing: -.01em; color: #fff;
 }
-.home-intro-title {
-  margin: 28px 0 12px; font-family: var(--mono); font-weight: 700; font-size: .85rem;
-  text-transform: uppercase; letter-spacing: .06em; color: var(--orange);
-}
-.what-we-do { list-style: none; counter-reset: wwd; margin: 0; padding: 0; max-width: 820px; display: grid; gap: 12px; }
-.what-we-do li { counter-increment: wwd; display: flex; gap: 14px; align-items: baseline; font-size: 1.1rem; line-height: 1.45; }
+/* What we do: what the finished site is for, three numbered points */
+.what-we-do { list-style: none; counter-reset: wwd; margin: 0; padding: 0; display: grid; gap: 14px; }
+.text-page .what-we-do li + li { margin-top: 0; }
+.what-we-do li { counter-increment: wwd; position: relative; min-height: 2rem; padding-left: 3rem; font-size: 1.1rem; line-height: 1.45; }
 .what-we-do li::before {
-  content: counter(wwd); flex: none; display: grid; place-items: center; width: 1.9rem; height: 1.9rem;
-  background: var(--orange); color: var(--ink); font-family: var(--mono); font-weight: 700; font-size: .95rem;
-  transform: translateY(.3rem);
+  content: counter(wwd); position: absolute; left: 0; top: -1px; display: grid; place-items: center; width: 2rem; height: 2rem;
+  background: var(--orange); border: 2px solid var(--ink); color: var(--ink); font-family: var(--mono); font-weight: 700; font-size: .95rem;
 }
+.what-we-do strong { font-family: var(--display); color: var(--ink); }
+.text-page .what-now { margin: 1em 0 0; color: var(--muted); }
 
 /* The big picture: three short points, each with a thick orange line beside it */
 .big-picture p { margin: 0 0 1.1em; padding-left: 18px; border-left: 6px solid var(--orange); }
