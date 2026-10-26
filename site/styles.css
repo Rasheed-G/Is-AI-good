@@ -120,11 +120,10 @@ a { color: inherit; }
 .toggle input:focus-visible + .track { outline: 2px solid var(--orange-ink); outline-offset: 2px; }
 
 .count { color: var(--mut2); font-family: var(--mono); font-size: .74rem; margin: 18px 0 10px; }
-/* One line under the count, linking to How we choose stories (trust up front) */
-.choose-line { max-width: 760px; margin: -2px 0 18px; color: var(--muted); font-size: .92rem; line-height: 1.5; }
-.choose-line a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.choose-line a:hover { background: var(--orange); }
-.choose-line a:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+/* The count line also links to How we choose stories: there, but not dominant */
+.count a { color: inherit; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.count a:hover { background: var(--orange); color: var(--ink); }
+.count a:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
 
 /* ---- Grid ---- */
 .grid {
