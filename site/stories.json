@@ -3053,7 +3053,7 @@
       "title": "AI is hitting entry-level jobs hardest, Stanford study finds",
       "theme": "Jobs & livelihoods",
       "format": "Image",
-      "summary": "A Stanford study published in August 2026 found that young employment in AI-impacted fields dropped 19% compared to AI-resistant occupations. This confirms AI is displacing entry-level workers, harming young job seekers while older workers remain largely unaffected.",
+      "summary": "A Stanford study of US payroll data finds that 22 to 25 year olds in the jobs most exposed to AI are being hired less, while older workers in the same jobs are not. The researchers say the pattern fits AI, but they can't yet prove AI is the cause.",
       "sourceUrl": "https://arstechnica.com/ai/2026/08/ai-is-hitting-entry-level-jobs-hardest-stanford-study-finds/",
       "mediaUrl": "https://cdn.arstechnica.net/wp-content/uploads/2026/08/GettyImages-2211086231-1152x648.jpg",
       "date": "2026-08-24",
@@ -5265,6 +5265,18 @@
       "sourceUrl": "https://the420.in/sbi-warns-ai-voice-cloning-cyber-fraud-guidelines/",
       "mediaUrl": "https://the420.in/wp-content/uploads/2026/10/The420in-1.jpg",
       "date": "2026-10-17",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recIM78V3CBW4nLIE",
+      "title": "Barclays to cut 5,000 jobs as it leans on AI",
+      "theme": "Jobs & livelihoods",
+      "format": "Text",
+      "summary": "Barclays will cut about 5,000 jobs by the end of 2026, many in support roles including software developers, announced alongside rising profits. The bank says AI is only part of the reason. The Unite union says AI is being used as an excuse to cut staff.",
+      "sourceUrl": "https://www.ibtimes.co.uk/barclays-cut-5000-jobs-2026-1827578",
+      "mediaUrl": "",
+      "date": "2026-10-22",
       "sensitivity": "Safe",
       "featured": false
     }
