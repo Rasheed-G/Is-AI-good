@@ -564,6 +564,7 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
   font-family: var(--mono); font-weight: 700; font-size: .9rem; text-transform: uppercase; letter-spacing: .05em;
 }
 .text-page .sources summary { padding: 10px 2px; }
+.sources-meta { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--muted); }
 .sources li:target { background: rgba(255, 106, 0, .18); }
 
 /* In-text citations: quiet links to the source list */

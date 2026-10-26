@@ -7,12 +7,12 @@
   <title>How AI is changing jobs and livelihoods | Is AI Good?</title>
   <meta name="description" content="How AI is changing jobs and livelihoods today, why starter jobs are hit first, who decides and who gains, and what could make it go well." />
   <!-- frame:head -->
-  <link rel="stylesheet" href="/styles.css?v=20261026o" />
+  <link rel="stylesheet" href="/styles.css?v=20261026p" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <script>document.documentElement.classList.add("js");</script>
-  <script defer src="/frame.js?v=20261026o"></script>
+  <script defer src="/frame.js?v=20261026p"></script>
   <!-- Cloudflare Web Analytics (free, cookieless, no consent banner needed) -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "9a041a5e0e46412bb8195564e5b1f1d7"}'></script>
@@ -85,7 +85,8 @@
         <p class="new-to-you-note" role="status" aria-live="polite"></p>
       </section>
 
-      <h2 class="sec-title">Read on to learn the details of how AI is changing jobs and livelihoods</h2>
+      <h2 class="sec-title">Go deeper into how AI is changing jobs and livelihoods</h2>
+      <p>The tabs below go into more detail, one question at a time: how big the change is, how it could go, what's still unknown, what we think, and what's being done.</p>
     </div>
 
     <div class="text-page deeper">
@@ -166,9 +167,23 @@
         </section>
       </div>
 
+      <section id="signup" class="signup-main" aria-labelledby="h-signup">
+        <h2 id="h-signup">Want to hear when we publish the next part of the site? Sign up here.</h2>
+        <form class="signup" action="/api/subscribe" method="post" novalidate>
+          <label class="visually-hidden" for="mainEmail">Your email</label>
+          <div class="signup-row">
+            <input id="mainEmail" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="Your email" />
+            <button class="signup-btn" type="submit">Sign up</button>
+          </div>
+          <!-- honeypot: hidden from people; a bot that fills it gets silently dropped -->
+          <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <p class="signup-note" role="status" aria-live="polite"></p>
+          <p class="signup-small">We'll ask you to confirm by email. Unsubscribe any time. <a href="/privacy/">How we use your email</a></p>
+        </form>
+      </section>
+
       <details id="sources" class="sources">
-        <summary><h2 class="sources-title">Sources</h2></summary>
-        <p class="updated"><em>Updated 25 October 2026.</em></p>
+        <summary><h2 class="sources-title">Sources <span class="sources-meta">· 16 · updated 26 October 2026</span></h2></summary>
         <ul>
           <li id="src-amodei">Dario Amodei on AI and entry-level jobs, Axios interview, May 2025, via <a href="https://www.yahoo.com/news/anthropic-ceo-warns-ai-could-152758674.html" rel="noopener">Yahoo News</a></li>
           <li id="src-stanford">Stanford Digital Economy Lab, <a href="https://digitaleconomy.stanford.edu/news/canariesaug26/" rel="noopener">No widespread displacement, but the AI employment gap for young workers has widened to 19%</a> (August 2026) and <a href="https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/" rel="noopener">Canaries in the Coal Mine?</a></li>
@@ -188,21 +203,6 @@
           <li id="src-wga">Writers Guild of America 2023 agreement on AI: <a href="https://www.nbclosangeles.com/news/local/hollywood-writers-safeguards-against-ai-wga-agreement/3233064/?amp=1" rel="noopener">NBC Los Angeles</a></li>
         </ul>
       </details>
-
-      <section id="signup" class="signup-main" aria-labelledby="h-signup">
-        <h2 id="h-signup">Want to hear when we publish the next part of the site? Sign up here.</h2>
-        <form class="signup" action="/api/subscribe" method="post" novalidate>
-          <label class="visually-hidden" for="mainEmail">Your email</label>
-          <div class="signup-row">
-            <input id="mainEmail" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="Your email" />
-            <button class="signup-btn" type="submit">Sign up</button>
-          </div>
-          <!-- honeypot: hidden from people; a bot that fills it gets silently dropped -->
-          <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
-          <p class="signup-note" role="status" aria-live="polite"></p>
-          <p class="signup-small">We'll ask you to confirm by email. Unsubscribe any time. <a href="/privacy/">How we use your email</a></p>
-        </form>
-      </section>
     </div>
   </main>
 
@@ -258,7 +258,7 @@
     </div>
   </div>
   <!-- /frame:footer-nosignup -->
-  <script src="/cards.js?v=20261026o"></script>
-  <script src="/theme.js?v=20261026o"></script>
+  <script src="/cards.js?v=20261026p"></script>
+  <script src="/theme.js?v=20261026p"></script>
 </body>
 </html>
