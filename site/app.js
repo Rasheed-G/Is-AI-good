@@ -17,9 +17,9 @@ const activeThemes = new Set();
 let query = "";
 let showSensitive = false;
 
-// Themes that have their own page: their cards link to it ("Read more on … →").
+// Themes that have their own page: their cards link to it with this line (+ " →").
 const THEME_PAGES = {
-  "Jobs & livelihoods": { url: "/impact/work/", label: "AI and your work" },
+  "Jobs & livelihoods": { url: "/impact/work/", text: "Read more on how AI is changing jobs and livelihoods" },
 };
 
 // Pagination: render the grid in batches instead of all at once, so performance
@@ -328,7 +328,7 @@ function card(s) {
       : "");
 
   const page = THEME_PAGES[s.theme];
-  const readMore = page ? `<a class="read-more" href="${page.url}">Read more on ${esc(page.label)} →</a>` : "";
+  const readMore = page ? `<a class="read-more" href="${page.url}">${esc(page.text)} →</a>` : "";
   el.innerHTML += `
     <div class="card-body">
       <div class="card-tags">${tags.join("")}</div>
