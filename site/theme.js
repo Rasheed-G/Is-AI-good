@@ -52,6 +52,9 @@
       document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
     });
     if (focus) tab.focus();
+    // Phones: the tab row scrolls sideways, so bring the chosen tab into view
+    const list = tab.parentElement;
+    if (list.scrollWidth > list.clientWidth) list.scrollLeft = tab.offsetLeft - list.offsetLeft - 8;
   }
   if (tabs.length) {
     document.documentElement.classList.add("has-tabs");
