@@ -217,11 +217,23 @@
       "featured": false
     },
     {
+      "id": "recdAa3N3ZuZuL2Rz",
+      "title": "Uber Eats driver wins payout over discriminatory facial recognition checks",
+      "theme": "Bias & discrimination",
+      "format": "Image",
+      "summary": "Pa Edrissa Manjang, a courier in Oxfordshire, was removed from the Uber Eats app after its face checks kept failing to match his selfies. Backed by the Equality and Human Rights Commission, he claimed the checks were racially discriminatory, and Uber Eats paid him a settlement. Uber says no one loses their account on AI checks alone.",
+      "sourceUrl": "https://lbc.co.uk/tech/963769b0feea44d69057d7735195d97b",
+      "mediaUrl": "https://images.globalplayer.com/images/642101?crop=16_9&width=1200&signature=j9VUkyfUg05kXNIJMR_sAZsMIok=",
+      "date": "2024-03-26",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "recFoflEmDP7auhAd",
       "title": "Detroit man's wrongful facial-recognition arrest ends in landmark settlement",
       "theme": "Surveillance",
       "format": "Image",
-      "summary": "The ACLU of Michigan reached a landmark settlement with the Detroit Police Department over wrongful facial-recognition arrests. This case highlights how AI errors can lead to innocent people being wrongly detained, demonstrating the real-world risk of flawed automated identification systems in law enforcement.",
+      "summary": "Robert Williams, a Black man, was arrested at home in front of his wife and young daughters, and held for 30 hours, after face recognition wrongly matched him to a shoplifter. Detroit paid him $300,000 and agreed its police can no longer arrest anyone on a face match alone.",
       "sourceUrl": "https://www.michiganpublic.org/criminal-justice-legal-system/2024-06-28/it-didnt-make-sense-at-all-wrongful-facial-recognition-arrest-leads-to-landmark-settlement",
       "mediaUrl": "https://npr.brightspotcdn.com/dims4/default/d83e439/2147483647/strip/true/crop/1260x662+0+142/resize/1200x630!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F50%2Ffb%2Fdccf0266411e93a84b68b44fed2c%2Frobert-williams-family-in-shorts-002.jpg",
       "date": "2024-06-28",
@@ -261,6 +273,18 @@
       "sourceUrl": "https://openai.com/index/detecting-and-reducing-scheming-in-ai-models/",
       "mediaUrl": "",
       "date": "2025-09-17",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recEyouB4FmD7vYAg",
+      "title": "Regulator rules that Facebook's job ads algorithm is discriminatory",
+      "theme": "Bias & discrimination",
+      "format": "Image",
+      "summary": "Facebook uses AI to decide who sees each ad. When campaigners ran job ads open to everyone in France, it showed a preschool teacher ad to women 93% of the time and a mechanic ad to men 94% of the time. In 2025, equality bodies in the Netherlands and France ruled this was sex discrimination and told Meta to fix it. Meta disagrees with the French ruling.",
+      "sourceUrl": "https://www.hcamag.com/ca/news/general/regulator-rules-that-facebooks-job-ads-algorithm-is-discriminatory/556043",
+      "mediaUrl": "https://cdn-res.keymedia.com/cms/images/us/035/0365_638983414553424701.png",
+      "date": "2025-11-10",
       "sensitivity": "Safe",
       "featured": false
     },
