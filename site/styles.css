@@ -700,6 +700,9 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 /* Where to start, inside card 1: the strongest things on the page (orange, shadow, they're the clicks) */
 .wwd-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
 @media (max-width: 719px) { .wwd-paths { grid-template-columns: 1fr; } }
+.wwd-label { display: block; margin-top: 18px; font-family: var(--mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.wwd-label + .wwd-paths, .wwd-label + a.path { margin-top: 10px; }
+.text-page a.path.path-quiet { background: var(--surface); }
 .text-page a.path {
   display: block; padding: 16px 18px; text-decoration: none; color: var(--ink);
   background: var(--orange); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
