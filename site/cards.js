@@ -6,6 +6,7 @@
 // Themes that have their own page: their cards link to it with this line (+ " →").
 const THEME_PAGES = {
   "Jobs & livelihoods": { url: "/impact/work/", text: "Read more on how AI is changing jobs and livelihoods" },
+  "Bias & discrimination": { url: "/impact/bias/", text: "Read more on how AI can treat people unfairly" },
 };
 
 function isSensitive(s) { return s.sensitivity === "Sensitive"; }

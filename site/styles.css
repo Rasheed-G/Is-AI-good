@@ -481,6 +481,7 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .takeaway figcaption { margin-top: 10px; font-size: .92rem; color: var(--muted); }
 .theme-stories { padding-top: 6px; }
 .theme-stories .grid { padding-bottom: 20px; }
+.theme-stories-note { margin: 0 0 16px; font-size: .95rem; color: var(--muted); }
 
 /* Section headings on theme pages: big, with a thick orange bar above that grows in when seen */
 .sec-title, .text-page .sec-title {
