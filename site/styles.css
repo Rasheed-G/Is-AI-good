@@ -298,6 +298,10 @@ a { color: inherit; }
 .fb-submit:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--orange); }
 .fb-submit:disabled { opacity: .55; cursor: default; transform: none; box-shadow: 4px 4px 0 var(--orange); }
 .fb-submit:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
+.fb-privacy { margin: 12px 0 0; font-size: .8rem; color: var(--mut2); }
+.fb-privacy a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.fb-privacy a:hover { color: var(--ink); }
+.fb-privacy a:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 2px; }
 
 @media (max-width: 480px) { .fb-open { right: 12px; bottom: 12px; } }
 
