@@ -347,7 +347,11 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 }
 .nav-sub li:first-child a { border-top: 0; }
 .nav-sub a:hover { background: var(--orange); }
-.nav-sub a[aria-current="page"] { background: var(--ink); color: #fff; }
+/* The page you're on: an orange bar on the left, not a black block (black reads as "selected/hover") */
+.nav-sub a[aria-current="page"] { box-shadow: inset 6px 0 0 var(--orange); }
+/* News & Stories browses every theme, so it sits apart from the theme pages: thick rule above, plain weight */
+.nav-sub .nav-sub-all a { border-top-width: 6px; font-weight: 400; background: var(--paper); }
+.nav-sub .nav-sub-all a:hover { background: var(--orange); }
 .mini-mark:focus-visible, .nav-link:focus-visible, .nav-group-btn:focus-visible, .menu-btn:focus-visible {
   outline: 3px solid var(--ink); outline-offset: 2px;
 }

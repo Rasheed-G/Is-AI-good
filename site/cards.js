@@ -7,7 +7,7 @@
 const THEME_PAGES = {
   "Jobs & livelihoods": { url: "/impact/work/", text: "Read more on how AI is changing jobs and livelihoods" },
   "Bias & discrimination": { url: "/impact/bias/", text: "Read more on how AI can treat people unfairly" },
-  "Environmental / data-centre impact": { url: "/impact/environment/", text: "Read more on what AI is costing the places it's built" },
+  "The environment & data centres": { url: "/impact/environment/", text: "Read more on what AI is costing the places it's built" },
 };
 
 function isSensitive(s) { return s.sensitivity === "Sensitive"; }

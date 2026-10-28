@@ -47,7 +47,7 @@ SWEEP = os.environ.get("SWEEP") == "1"   # weekly top-of-week sweep (vs the dail
 CLIPS_ONLY = os.environ.get("CLIPS_ONLY", "").strip().lower() in ("1", "true", "yes", "on")
 
 THEMES = [
-    "Deepfakes & image abuse", "Scams & fraud", "Environmental / data-centre impact",
+    "Deepfakes & image abuse", "Scams & fraud", "The environment & data centres",
     "Jobs & livelihoods", "Kids & safety", "Surveillance", "Misinformation",
     "Breaches & system failures", "Even the experts are worried",
     "Bias & discrimination", "Automated decisions & welfare", "AI companions & mental health",
