@@ -347,7 +347,14 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 }
 .nav-sub li:first-child a { border-top: 0; }
 .nav-sub a:hover { background: var(--orange); }
+/* Only the page you're on is black. The open "The impact of AI" button stays light (outlined), so
+   on a theme page there aren't two black blocks at once */
+.nav-group-btn[aria-expanded="true"] { background: var(--surface); color: var(--ink); }
+.nav-group-btn[aria-expanded="true"] .caret { display: inline-block; transform: rotate(180deg); }
 .nav-sub a[aria-current="page"] { background: var(--ink); color: #fff; }
+/* News & Stories browses every theme, so it sits apart from the theme pages: thick rule above, plain weight */
+.nav-sub .nav-sub-all a { border-top-width: 6px; font-weight: 400; background: var(--paper); }
+.nav-sub .nav-sub-all a:hover { background: var(--orange); }
 .mini-mark:focus-visible, .nav-link:focus-visible, .nav-group-btn:focus-visible, .menu-btn:focus-visible {
   outline: 3px solid var(--ink); outline-offset: 2px;
 }
@@ -656,6 +663,7 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
    (owner, 2026-10-26: no sentences in the header) */
 .text-page .home-lead { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.4; color: var(--ink); }
 .text-page .home-lead + .home-lead { margin-top: .6em; }
+.text-page .home-lead:first-child { font-weight: 700; }
 /* Section headings: ink bar, not orange (the heading isn't clickable) */
 .home .sec-title::before { background: var(--ink); box-shadow: none; }
 

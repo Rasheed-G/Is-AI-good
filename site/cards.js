@@ -7,6 +7,7 @@
 const THEME_PAGES = {
   "Jobs & livelihoods": { url: "/impact/work/", text: "Read more on how AI is changing jobs and livelihoods" },
   "Bias & discrimination": { url: "/impact/bias/", text: "Read more on how AI can treat people unfairly" },
+  "The environment & data centres": { url: "/impact/environment/", text: "Read more on how AI is affecting the environment" },
 };
 
 function isSensitive(s) { return s.sensitivity === "Sensitive"; }
@@ -167,6 +168,10 @@ function card(s, opts = {}) {
       ${readMore}
       <div class="card-foot">${foot}</div>
     </div>`;
+  // An image the source site won't serve us (blocked or gone) gets the placeholder cover instead.
+  // Attached last: the innerHTML += above would rebuild the img and drop the listener.
+  const img = el.querySelector(".card-media.image img");
+  if (img) img.addEventListener("error", () => { img.parentElement.outerHTML = placeholderHtml(s); }, { once: true });
   return el;
 }
 
