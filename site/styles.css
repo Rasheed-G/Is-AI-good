@@ -663,6 +663,7 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
    (owner, 2026-10-26: no sentences in the header) */
 .text-page .home-lead { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.4; color: var(--ink); }
 .text-page .home-lead + .home-lead { margin-top: .6em; }
+.text-page .home-lead:first-child { font-weight: 700; }
 /* Section headings: ink bar, not orange (the heading isn't clickable) */
 .home .sec-title::before { background: var(--ink); box-shadow: none; }
 
