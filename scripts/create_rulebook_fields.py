@@ -2,7 +2,8 @@
 
 Stories: the judge's scores per rulebook criterion, overall score, verdict and reason, the rulebook version
 it was judged under, the source's own headline (cards now carry our own title), and the hold fields
-(why a card is held, since when, how many summary tries).
+(why a card is held, since when, how many summary tries). Step 5 adds the re-judge's theme pick, sensitivity,
+hold and whether it read the page, plus the owner's labels (Step 5 sample, Owner label, Owner reason).
 Runs: a count per pipeline stage, and a sample of what triage dropped.
 Sources: how many of each source's items the judge read (next to Found and Kept).
 
@@ -19,6 +20,7 @@ NUM = {"type": "number", "options": {"precision": 0}}
 TEXT = {"type": "singleLineText"}
 LONG = {"type": "multilineText"}
 DATE = {"type": "date", "options": {"dateFormat": {"name": "iso"}}}
+CHECK = {"type": "checkbox", "options": {"icon": "check", "color": "greenBright"}}
 def select(*names):
     return {"type": "singleSelect", "options": {"choices": [{"name": n} for n in names]}}
 
@@ -34,6 +36,15 @@ FIELDS = {
                                "Summary failed", "Title and summary differ")),
         ("Held since", DATE),
         ("Summary tries", NUM),
+        # Release 3 step 5 (re-judge of the stored stories): what the judge said that isn't applied
+        # straight away (the owner sees theme moves first), and the owner's own labels.
+        ("Judge theme", TEXT),
+        ("Judge sensitive", CHECK),
+        ("Judge hold", select("Risky picture or video", "Child could be identified")),
+        ("Judge read page", CHECK),
+        ("Step 5 sample", CHECK),
+        ("Owner label", select("Keep", "Reject")),
+        ("Owner reason", TEXT),
     ],
     RUNS: [
         ("Too old", NUM), ("Duplicates", NUM), ("YouTube gate dropped", NUM),

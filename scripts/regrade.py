@@ -13,6 +13,14 @@ Settings (environment):
   WRITE=1                  write the scores, verdict, reason and rulebook version to each row
                            (default: print only, nothing written)
   WRITE_THEME=1            with WRITE, also move each row to the theme the judge picked
+  SKIP_JUDGED=1            skip rows already judged under the current rulebook version (so a run that
+                           stops part-way can simply be started again)
+  SAMPLE=only|skip         only the rows ticked "Step 5 sample", or all rows except them
+  EXCLUDE_THEMES=...       themes to leave out (comma-separated; default: Even the experts are worried)
+
+With WRITE, each batch is saved as soon as it is judged, and the step 5 columns are filled too: the
+theme the judge picked (Judge theme), its sensitivity and hold flags (Judge sensitive, Judge hold) and
+whether it could read the page (Judge read page). None of them changes what the site shows.
 
 Run:  source .env.local && python scripts/regrade.py
 """
@@ -25,6 +33,10 @@ STATUS = [s.strip() for s in os.environ.get("STATUS", "Published").split(",") if
 LIMIT = int(os.environ.get("LIMIT", "0") or 0)
 WRITE = os.environ.get("WRITE") == "1"
 WRITE_THEME = WRITE and os.environ.get("WRITE_THEME") == "1"
+SKIP_JUDGED = os.environ.get("SKIP_JUDGED") == "1"
+SAMPLE = os.environ.get("SAMPLE", "").strip().lower()
+EXCLUDE_THEMES = {t.strip() for t in os.environ.get("EXCLUDE_THEMES", "Even the experts are worried").split(",")
+                  if t.strip()}
 API = f"https://api.airtable.com/v0/{H.BASE}/{H.TABLE}"
 HDRS = {"Authorization": f"Bearer {H.AIRTABLE_TOKEN}"}
 
@@ -39,11 +51,23 @@ def fetch_rows():
         offset = data.get("offset")
         if not offset:
             break
-    return rows
+    version = int(rulebook.version())
+    def wanted(r):
+        f = r.get("fields", {})
+        if f.get("Theme") in EXCLUDE_THEMES:
+            return False
+        if SKIP_JUDGED and f.get("Rulebook version") == version and f.get("Judge verdict"):
+            return False
+        if SAMPLE == "only":
+            return bool(f.get("Step 5 sample"))
+        if SAMPLE == "skip":
+            return not f.get("Step 5 sample")
+        return True
+    return [r for r in rows if wanted(r)]
 
 
 def as_post(row):
-    """The row as the judge would have seen it at harvest time."""
+    """The row as the judge would have seen it at harvest time, and whether the page could be read."""
     f = row.get("fields", {})
     url = f.get("Source URL", "")
     body = ""
@@ -52,7 +76,7 @@ def as_post(row):
     return {"title": f.get("Source headline") or f.get("Title", ""),
             "selftext": body or f.get("Summary", ""), "external_url": url, "permalink": url,
             "provenance": f.get("Source type", ""), "source_label": f.get("Source name", ""),
-            "subreddit": None, "over_18": False}
+            "subreddit": None, "over_18": False}, len(body) >= 200   # less is a blocked or empty page
 
 
 def patch(updates):
@@ -67,15 +91,16 @@ def main():
         rows = random.Random(1).sample(rows, LIMIT)
     print(f"Re-judging {len(rows)} {'/'.join(STATUS)} rows with the rulebook v{rulebook.version()} judge"
           f"{' (writing results)' if WRITE else ' (print only, nothing written)'}.\n")
-    verdicts, moves, updates, tokens, calls, errors = Counter(), Counter(), [], 0, 0, 0
-    by_theme = {}
+    verdicts, moves, tokens, calls, errors, written = Counter(), Counter(), 0, 0, 0, 0
+    by_theme, limited = {}, 0
     for start in range(0, len(rows), H.JUDGE_BATCH):
         chunk = rows[start:start + H.JUDGE_BATCH]
-        posts = [as_post(r) for r in chunk]
-        replies, tok, status = H.groq_judge_batch(posts)
+        posts, read = zip(*[as_post(r) for r in chunk])
+        replies, tok, status = H.groq_judge_batch(list(posts))
         tokens += tok
         calls += 1
-        for r, t in zip(chunk, replies):
+        updates = []
+        for r, t, page in zip(chunk, replies, read):
             f = r.get("fields", {})
             if t is None:
                 errors += 1
@@ -92,9 +117,22 @@ def main():
                   f"{old[:24]:<24} → {new[:24]:<24} {f.get('Title', '')[:55]}\n"
                   f"         {str(t.get('reason', ''))[:150]}{flags}")
             fx = H.judge_fields(t)
+            fx.update({"Judge theme": new, "Judge sensitive": bool(t.get("sensitive")),
+                       "Judge hold": t["hold"] if t.get("hold") in H.HOLD_REASONS else None,
+                       "Judge read page": page})
             if WRITE_THEME and new in H.THEMES:
                 fx["Theme"] = new
             updates.append({"id": r["id"], "fields": fx})
+        if WRITE and updates:
+            patch(updates)        # saved batch by batch, so nothing is lost if the run stops
+            written += len(updates)
+        limited = limited + 1 if status == "rate_limited" else 0
+        if limited >= 3:
+            print("  Groq's daily allowance looks used up: stopping. Run again tomorrow (it carries on where it stopped).")
+            break
+        if limited:
+            print("  Groq rate limit reached: waiting a minute.")
+            time.sleep(60)
         time.sleep(H.JUDGE_BATCH_SLEEP)
     judged = sum(verdicts.values())
     print(f"\nOf {judged} re-judged: Keep {verdicts['Keep']}, Weak {verdicts['Weak']}, Reject {verdicts['Reject']}"
@@ -109,9 +147,9 @@ def main():
     if calls:
         print(f"Groq tokens: {tokens} in {calls} judge calls of up to {H.JUDGE_BATCH} stories "
               f"(about {tokens // calls} per call, {tokens // max(judged, 1)} per story).")
-    if WRITE and updates:
-        patch(updates)
-        print(f"Wrote judge results to {len(updates)} rows.")
+    if WRITE:
+        print(f"Wrote judge results to {written} rows. Rows with an error are judged again by the next run "
+              f"with SKIP_JUDGED=1.")
 
 
 if __name__ == "__main__":
