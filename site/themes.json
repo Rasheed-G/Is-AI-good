@@ -1,0 +1,70 @@
+{
+  "version": "1",
+  "themes": [
+    {
+      "name": "Jobs & livelihoods",
+      "slug": "jobs-livelihoods",
+      "summary": "How AI is changing work, pay and who gets hired."
+    },
+    {
+      "name": "Bias & discrimination",
+      "slug": "bias-discrimination",
+      "summary": "When AI treats people unfairly because of who they are."
+    },
+    {
+      "name": "Environment & data centres",
+      "slug": "environment-data-centres",
+      "summary": "What AI costs the planet and the people living next to it."
+    },
+    {
+      "name": "AI and war",
+      "slug": "ai-and-war",
+      "summary": "How AI is used in war, weapons and military targeting."
+    },
+    {
+      "name": "Kids & safety",
+      "slug": "kids-safety",
+      "summary": "How AI puts children at risk, and what's being done about it."
+    },
+    {
+      "name": "Relationships & mental health",
+      "slug": "relationships-mental-health",
+      "summary": "How AI chatbots and companions affect people's relationships and mental health."
+    },
+    {
+      "name": "When AI fails",
+      "slug": "when-ai-fails",
+      "summary": "When AI fails and people pay the price, in money, health or trust."
+    },
+    {
+      "name": "Hacking & AI acting autonomously",
+      "slug": "hacking-ai-acting-autonomously",
+      "summary": "When AI is used to break into systems, or acts beyond what people told it to do."
+    },
+    {
+      "name": "Automated decision making",
+      "slug": "automated-decision-making",
+      "summary": "When a computer decides about your money, benefits, services or rights, with no person checking."
+    },
+    {
+      "name": "Misinformation",
+      "slug": "misinformation",
+      "summary": "How AI spreads false information and fakes that mislead people."
+    },
+    {
+      "name": "Surveillance & privacy",
+      "slug": "surveillance-privacy",
+      "summary": "How AI watches people and uses their personal data."
+    },
+    {
+      "name": "Scams & fraud",
+      "slug": "scams-fraud",
+      "summary": "How criminals use AI to trick people out of money."
+    },
+    {
+      "name": "Image abuse",
+      "slug": "image-abuse",
+      "summary": "When AI is used to make fake sexual or humiliating images of real people."
+    }
+  ]
+}

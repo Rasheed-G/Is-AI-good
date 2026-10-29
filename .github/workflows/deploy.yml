@@ -2,7 +2,7 @@ name: Publish & deploy
 
 # The editorial gate + site build, committed back so the static host redeploys.
 #   publish.py  -> Approved and (auto) Safe Candidates become Published; Sensitive held
-#   build_data.py -> pulls Published rows into site/stories.json
+#   build_data.py -> pulls Published rows into site/stories.json, and the rulebook themes into site/themes.json
 #   commit      -> pushing site/stories.json triggers the host's auto-deploy
 #
 # Runs:
@@ -66,6 +66,6 @@ jobs:
         run: |
           git config user.name "harvest-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add site/stories.json
+          git add site/stories.json site/themes.json
           git diff --cached --quiet || git commit -m "Auto: refresh published stories"
           git push

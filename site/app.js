@@ -10,8 +10,11 @@
 //     platform's OFFICIAL embed script, because raw iframes to these platforms render blank or mis-sized.
 //
 // The page can open on chosen themes: /news/?theme=jobs-livelihoods (several: comma-separated).
+// Theme names and their one-line summaries come from the rulebook, via /themes.json.
 
 let ALL = [];
+// The rulebook's themes: [{name, slug, summary}] (empty if themes.json can't load; the page still works).
+let THEMES = [];
 // Themes the reader has picked; empty = all themes. Several can be on at once.
 const activeThemes = new Set();
 let query = "";
@@ -47,6 +50,10 @@ async function init() {
     $grid.innerHTML = "<p class='empty'>Could not load stories.</p>";
     return;
   }
+  try {
+    const res = await fetch("/themes.json", { cache: "no-store" });
+    THEMES = (await res.json()).themes || [];
+  } catch (e) { /* no summaries: the chips still work */ }
   // Most recent first; undated stories sort to the end.
   ALL.sort((a, b) => dateVal(b.date) - dateVal(a.date));
 
@@ -104,12 +111,28 @@ function buildThemeChips() {
 // Theme names as they appear in an address: "Jobs & livelihoods" -> "jobs-livelihoods".
 function slug(name) { return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
+// Links to themes that were renamed or split (release 3, rulebook v1) open the new themes.
+// A theme that left (Even the experts are worried) opens all themes.
+const OLD_THEME_SLUGS = {
+  "deepfakes-image-abuse": ["image-abuse"],
+  "surveillance": ["surveillance-privacy"],
+  "automated-decisions-welfare": ["automated-decision-making"],
+  "ai-companions-mental-health": ["relationships-mental-health"],
+  "breaches-system-failures": ["when-ai-fails", "hacking-ai-acting-autonomously"],
+  "environmental-data-centre-impact": ["environment-data-centres"],
+  "the-environment-data-centres": ["environment-data-centres"],
+  "even-the-experts-are-worried": [],
+};
+
 function themesFromUrl() {
-  const wanted = (new URLSearchParams(location.search).get("theme") || "").split(",").filter(Boolean);
-  if (!wanted.length) return;
+  const asked = (new URLSearchParams(location.search).get("theme") || "").split(",").filter(Boolean);
+  if (!asked.length) return;
+  const wanted = asked.flatMap(w => OLD_THEME_SLUGS[w] || [w]);
   const bySlug = {};
   ALL.forEach(s => { if (s.theme) bySlug[slug(s.theme)] = s.theme; });
   wanted.forEach(w => { if (bySlug[w]) activeThemes.add(bySlug[w]); });
+  // Show the new names in the address bar, so a copied link uses them.
+  if (asked.some(w => w in OLD_THEME_SLUGS)) themesToUrl();
 }
 function themesToUrl() {
   const params = new URLSearchParams(location.search);
@@ -130,6 +153,15 @@ function syncChips() {
   $themeCurrent.textContent = activeThemes.size === 0 ? "All"
     : activeThemes.size === 1 ? [...activeThemes][0]
     : `${activeThemes.size} themes`;
+  showThemeSummary();
+}
+
+// One theme picked: show its summary from the rulebook above the stories.
+function showThemeSummary() {
+  const $s = document.getElementById("themeSummary");
+  const t = activeThemes.size === 1 ? THEMES.find(x => x.name === [...activeThemes][0]) : null;
+  $s.textContent = t ? t.summary : "";
+  $s.hidden = !t;
 }
 
 // Theme + text match, ignoring the sensitive toggle (used for counting too).
