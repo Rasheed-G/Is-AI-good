@@ -120,7 +120,7 @@ def main():
             print(f"  · SKIP (thin fetch {fstatus}, {len(body)}c) {short}")
             continue
 
-        post = {"title": headline, "subreddit": None, "external_url": src,
+        post = {"title": headline, "subreddit": None, "external_url": src, "created": f.get("Date", ""),
                 "provenance": f.get("Source type", "") or "", "source_label": f.get("Source name", "") or ""}
         new_title, new, same_event, _tok = H.write_copy(post, body)
         time.sleep(COPY_SLEEP)

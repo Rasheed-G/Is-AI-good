@@ -1081,8 +1081,13 @@ def copy_prompt(post, body):
             f"{COPY_RULES}\n\n"
             'Return STRICT JSON only: {"title": "our own title", "summary": "the summary", '
             '"same_event": true or false}. "same_event" is false when the source headline below is '
-            "about a different event from what the body (and so the summary) describes.\n\n"
-            f"{_origin_line(post)}\nSource headline: {post['title']}\n"
+            "about a different event from what the body (and so the summary) describes.\n"
+            # The model doesn't know today's date: without the published date it invents one when it
+            # turns "Wednesday" or "last week" into a date (seen in the first judge check).
+            "Work out dates only from the published date below and what the body says; if a date "
+            "can't be worked out exactly, leave it out rather than guess.\n\n"
+            f"{_origin_line(post)}\nPublished: {(post.get('created') or 'unknown')[:10]}\n"
+            f"Source headline: {post['title']}\n"
             f"Body: {body[:JUDGE_READ] or '(no body text)'}")
 
 COPY_RULES = rulebook.plain(rulebook.section(7))
@@ -1274,7 +1279,7 @@ def retry_held_summaries(deadline):
         post = {"title": f.get("Source headline") or f.get("Title", ""), "selftext": "",
                 "permalink": f.get("Source URL", ""), "external_url": f.get("Source URL", ""),
                 "provenance": f.get("Source type", ""), "source_label": f.get("Source name", ""),
-                "subreddit": None}
+                "subreddit": None, "created": f.get("Date", "")}
         title, summary, same, tok = write_copy(post)
         spent += tok
         time.sleep(COPY_SLEEP)
