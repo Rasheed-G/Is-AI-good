@@ -14,6 +14,8 @@ Safety:
   * FLAGS, and doesn't write, a row whose source headline and summary are about different events
     (rulebook section 7: flagged, not patched).
   * Only Published rows; never touches Rejected/Candidate/Approved.
+  * Leaves alone the cards a theme page shows (the owner approved those pages as they are) and the
+    "Even the experts are worried" stories (archived in step 5).
   * DRY=1 -> print before/after only, no writes. LIMIT=n -> a random sample of n rows.
   * Calls Groq, so it runs in GitHub Actions (Groq blocks the owner's computer).
 
@@ -58,6 +60,15 @@ BACKUP = ROOT / "scripts" / "summary_backup.json"   # {id: {title, summary}} —
 looks_like_meta = H.looks_like_meta
 
 
+def theme_page_ids():
+    """Story ids the theme pages show (data-ids="rec…,rec…" in site/impact/*/index.html)."""
+    ids = set()
+    for page in (ROOT / "site").glob("impact/*/index.html"):
+        for m in re.finditer(r'data-ids="([^"]*)"', page.read_text(encoding="utf-8")):
+            ids.update(i.strip() for i in m.group(1).split(",") if i.strip())
+    return ids
+
+
 def published_rows():
     rows, offset = [], None
     while True:
@@ -94,7 +105,9 @@ def patch(batch):
 
 
 def main():
-    rows = published_rows()
+    keep_as_is = theme_page_ids()
+    rows = [r for r in published_rows() if r["id"] not in keep_as_is
+            and r.get("fields", {}).get("Theme") != "Even the experts are worried"]
     if LIMIT and LIMIT < len(rows):
         import random
         rows = random.Random(1).sample(rows, LIMIT)

@@ -1,0 +1,68 @@
+name: Re-judge stories (release 3 step 5)
+
+# Re-judge the stored stories with the current judge (built from rulebook.md) and SAVE the results to
+# Airtable, in the cloud (Groq blocks the owner's computer). Nothing here changes what the site shows:
+# the scores, verdict, reason and the judge's theme pick go in their own columns; Status and Theme
+# stay as they are until the owner has reviewed them.
+#
+#   judge-sample   the ~65 stories ticked "Step 5 sample" (after the owner has labelled them)
+#   judge-rest     every other Published and held story (skips any already judged under this rulebook)
+#   cards-preview  print new titles and summaries for a few cards (nothing written)
+#   cards-write    rewrite the title and summary of every live story (old copy saved as a download)
+#
+# Every judge task can simply be run again: it skips stories already judged under this rulebook.
+# Removed after step 5.
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "What to run"
+        type: choice
+        options: [judge-sample, judge-rest, cards-preview, cards-write]
+        default: judge-sample
+      pause:
+        description: "Seconds between judge calls (20 on the free tier, 2 on a paid one)"
+        default: "2"
+
+concurrency:
+  group: rejudge
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Re-judge and save
+        if: startsWith(github.event.inputs.task, 'judge-')
+        env:
+          STATUS: Published,Candidate
+          WRITE: "1"
+          SKIP_JUDGED: "1"
+          SAMPLE: ${{ github.event.inputs.task == 'judge-sample' && 'only' || 'skip' }}
+          JUDGE_BATCH_SLEEP: ${{ github.event.inputs.pause }}
+        run: python -u scripts/regrade.py
+      - name: Preview new card copy (nothing written)
+        if: github.event.inputs.task == 'cards-preview'
+        env:
+          DRY: "1"
+          LIMIT: "8"
+        run: python -u scripts/rewrite_summaries.py
+      - name: Rewrite card copy
+        if: github.event.inputs.task == 'cards-write'
+        run: python -u scripts/rewrite_summaries.py
+      - name: Keep the old titles and summaries
+        if: startsWith(github.event.inputs.task, 'cards-')
+        uses: actions/upload-artifact@v4
+        with:
+          name: old-card-copy
+          path: scripts/summary_backup.json
+          retention-days: 90
