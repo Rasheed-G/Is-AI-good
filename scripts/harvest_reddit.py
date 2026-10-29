@@ -806,13 +806,34 @@ def groq_chat(model, prompt, temperature=0.2, json_mode=True, reasoning_effort=N
             return None, 0, "error"
     return None, 0, "rate_limited"
 
+_OUTLETS = {}
+
+def outlet(url):
+    """Who published the item: its web address, or the channel for a YouTube video. Our feed labels are
+    search names ("AI Incident Database", "[Bias] credit / loan bias"), not publishers, so without this the
+    judge can't tell the Guardian from a blog and rejects good stories as "no credible source"."""
+    if url in _OUTLETS:
+        return _OUTLETS[url]
+    host = urllib.parse.urlparse(url or "").netloc.lower().removeprefix("www.").removeprefix("m.")
+    name = host
+    if host.endswith(("youtube.com", "youtu.be")):
+        try:
+            channel = http_json("https://www.youtube.com/oembed?format=json&url=" + urllib.parse.quote(url)).get("author_name")
+            name = f"YouTube channel {channel}" if channel else host
+        except Exception:
+            pass
+    _OUTLETS[url] = name
+    return name
+
 def _origin_line(post):
     # Source-agnostic origin — the harvester feeds Reddit, news RSS, Google Alerts, YouTube
     # and incident-DB entries, so never tell the judge everything is a "Reddit post".
     if post.get("subreddit"):
         return f"Source: Reddit — r/{post['subreddit']}"
     prov, lbl = post.get("provenance", ""), post.get("source_label", "")
-    return "Source: " + (f"{prov} — {lbl}" if (prov and lbl) else (prov or lbl or "unknown"))
+    line = "Found via: " + (f"{prov} — {lbl}" if (prov and lbl) else (prov or lbl or "unknown"))
+    pub = outlet(post.get("external_url", ""))
+    return line + (f" | Published by: {pub}" if pub else "")
 
 # --- Stage B: the editorial judge (gpt-oss-120b) ----------------------------
 # The judge's instructions are BUILT FROM rulebook.md (purpose, themes, story criteria, examples,
@@ -879,14 +900,16 @@ def judge_prompt(batch):
                  "short.\n" if any_clip else "")
     return f"""You are the editorial judge for "Is AI Good?" (isaigood.org), a gallery of real, sourced stories of
 harm from AI. Judge EACH numbered item on its own against the rules below. An item may be a news article, a
-Google Alert hit, a Reddit post, a YouTube video or an incident-database entry. Return STRICT JSON only.
+Google Alert hit, a Reddit post, a YouTube video or an incident-database entry. "Found via" is our own feed or
+search name, not the publisher; "Published by" is the outlet (web address or YouTube channel): judge source
+credibility on that. Return STRICT JSON only.
 
 {JUDGE_RULES}
 {clip_hint}
 Return one object per item, matching its [i] number:
 {{"results": [
   {{"i": <number>,
-    "reject": <the instant-reject number 1-9 that applies, or null>,
+    "reject": <the instant-reject number that applies, or null>,
     "theme": one of {THEMES} or "none",
     "scores": {{"credibility": 0-100, "consequence": 0-100, "significance": 0-100, "audience": 0-100, "theme_fit": 0-100}},
     "overall": 0-100,
