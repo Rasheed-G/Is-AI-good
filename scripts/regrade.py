@@ -92,7 +92,7 @@ def main():
     print(f"Re-judging {len(rows)} {'/'.join(STATUS)} rows with the rulebook v{rulebook.version()} judge"
           f"{' (writing results)' if WRITE else ' (print only, nothing written)'}.\n")
     verdicts, moves, tokens, calls, errors, written = Counter(), Counter(), 0, 0, 0, 0
-    by_theme = {}
+    by_theme, limited = {}, 0
     for start in range(0, len(rows), H.JUDGE_BATCH):
         chunk = rows[start:start + H.JUDGE_BATCH]
         posts, read = zip(*[as_post(r) for r in chunk])
@@ -126,7 +126,11 @@ def main():
         if WRITE and updates:
             patch(updates)        # saved batch by batch, so nothing is lost if the run stops
             written += len(updates)
-        if status == "rate_limited":
+        limited = limited + 1 if status == "rate_limited" else 0
+        if limited >= 3:
+            print("  Groq's daily allowance looks used up: stopping. Run again tomorrow (it carries on where it stopped).")
+            break
+        if limited:
             print("  Groq rate limit reached: waiting a minute.")
             time.sleep(60)
         time.sleep(H.JUDGE_BATCH_SLEEP)

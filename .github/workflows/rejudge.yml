@@ -11,8 +11,12 @@ name: Re-judge stories (release 3 step 5)
 #   cards-write    rewrite the title and summary of every live story (old copy saved as a download)
 #
 # Every judge task can simply be run again: it skips stories already judged under this rulebook.
+# On Groq's free tier (about 130 stories a day) it stops when the day's allowance is used up. With the
+# repo variable REJUDGE_DAILY set to "on", it also runs judge-rest by itself every day until all are done.
 # Removed after step 5.
 on:
+  schedule:
+    - cron: "30 6 * * *"
   workflow_dispatch:
     inputs:
       task:
@@ -22,7 +26,7 @@ on:
         default: judge-sample
       pause:
         description: "Seconds between judge calls (20 on the free tier, 2 on a paid one)"
-        default: "2"
+        default: "20"
 
 concurrency:
   group: rejudge
@@ -30,6 +34,7 @@ concurrency:
 
 jobs:
   run:
+    if: github.event_name == 'workflow_dispatch' || vars.REJUDGE_DAILY == 'on'
     runs-on: ubuntu-latest
     timeout-minutes: 300
     env:
@@ -42,13 +47,13 @@ jobs:
         with:
           python-version: "3.12"
       - name: Re-judge and save
-        if: startsWith(github.event.inputs.task, 'judge-')
+        if: github.event_name == 'schedule' || startsWith(github.event.inputs.task, 'judge-')
         env:
           STATUS: Published,Candidate
           WRITE: "1"
           SKIP_JUDGED: "1"
           SAMPLE: ${{ github.event.inputs.task == 'judge-sample' && 'only' || 'skip' }}
-          JUDGE_BATCH_SLEEP: ${{ github.event.inputs.pause }}
+          JUDGE_BATCH_SLEEP: ${{ github.event.inputs.pause || '20' }}
         run: python -u scripts/regrade.py
       - name: Preview new card copy (nothing written)
         if: github.event.inputs.task == 'cards-preview'
