@@ -119,7 +119,8 @@ const OLD_THEME_SLUGS = {
   "automated-decisions-welfare": ["automated-decision-making"],
   "ai-companions-mental-health": ["relationships-mental-health"],
   "breaches-system-failures": ["when-ai-fails", "hacking-ai-acting-autonomously"],
-  "environmental-data-centre-impact": ["the-environment-data-centres"],
+  "environmental-data-centre-impact": ["environment-data-centres"],
+  "the-environment-data-centres": ["environment-data-centres"],
   "even-the-experts-are-worried": [],
 };
 

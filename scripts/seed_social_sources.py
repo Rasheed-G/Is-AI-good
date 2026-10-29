@@ -76,7 +76,7 @@ VARIANTS = [
      '(AI OR algorithm OR "facial recognition") (racist OR biased OR discrimination OR denied)', False),
     ("Automated", "Automated decision making", "algorithm denied me",
      '(algorithm OR AI OR automated) (denied OR "cut off" OR benefits OR wrongly OR fired)', False),
-    ("Environment", "The environment & data centres", "data-centre impact",
+    ("Environment", "Environment & data centres", "data-centre impact",
      '("data center" OR "data centre") (water OR "power bill" OR noise OR residents)', False),
 ]
 
