@@ -3,21 +3,28 @@
 Run as the first step of the deploy pipeline, before build_data.py:
     source .env.local && python scripts/publish.py && python scripts/build_data.py
 
-MODEL — auto-publish with post-moderation (PLAN section 6, "AUTO-PUBLISH" switch):
-  * Approved (any sensitivity)   -> Published   (owner's manual clears)
-  * Candidate + Safe             -> Published   (auto, when AUTOPUBLISH is on)
-  * Candidate + Sensitive        -> left as Candidate (waits for human review)
+MODEL — auto-publish with post-moderation, following the rulebook (sections 4, 6 and 7):
+  * Approved (any sensitivity)                  -> Published  (owner's manual clears)
+  * Candidate with a Hold reason                -> left as Candidate (held for the owner)
+      - a sensitivity hold (risky picture or video, child could be identified) nobody has
+        reviewed after "Held-story expiry" weeks -> Archived (kept in Airtable, never shown)
+      - "Summary failed" is retried (and archived after 2 tries) by the harvester
+  * Candidate with no summary                   -> left as Candidate (never a blank card)
+  * Candidate + Safe                            -> Published  (auto, when AUTOPUBLISH is on)
+  * Candidate + Sensitive, judged under the rulebook -> Published (shown hidden by default,
+        with the "Sensitive topic" label: rulebook section 6, option A)
+  * Candidate + Sensitive, judged before the rulebook -> left as Candidate (re-judged in
+        release 3 step 5 before any of them can go live)
 
-So non-sensitive content flows to the live site on its own; the owner watches the
-site and pulls mistakes after the fact by setting a story's Status to "Rejected"
-(it then drops from the build and, because dedup scans every row, is never
-re-harvested). Sensitive items never auto-publish — the owner must Approve them.
+The owner watches the site and pulls mistakes after the fact by setting a story's Status to
+"Rejected" (it then drops from the build and, because dedup scans every row, is never
+re-harvested). To release a held card, clear its Hold reason or set it to Approved.
 
-AUTOPUBLISH env toggle (default "1" = on). Set AUTOPUBLISH=0 to fall back to
-manual review (only Approved rows publish; Candidates all wait). Nothing here can
-publish a Candidate the owner flagged Sensitive, or a Rejected row.
+AUTOPUBLISH env toggle (default "1" = on). Set AUTOPUBLISH=0 to fall back to manual review
+(only Approved rows publish; Candidates all wait).
 """
-import os, json, urllib.request, urllib.parse
+import os, json, datetime, urllib.request, urllib.parse
+import rulebook
 
 TOKEN = os.environ["AIRTABLE_TOKEN"]
 BASE = "appEiqYd3rnYwUNE7"
@@ -26,64 +33,77 @@ API = f"https://api.airtable.com/v0/{BASE}/{TABLE}"
 HEADERS = {"Authorization": f"Bearer {TOKEN}", "Content-Type": "application/json"}
 
 AUTOPUBLISH = os.environ.get("AUTOPUBLISH", "1").lower() not in ("0", "false", "no", "")
+SENSITIVE_HOLDS = ("Risky picture or video", "Child could be identified")
+FIELDS = ("Status", "Sensitivity", "Hold reason", "Held since", "Rulebook version", "Summary")
 
 
 def fetch_pending():
-    """Return (id, status, sensitivity) for every Candidate/Approved row."""
+    """Every Candidate/Approved row, as {"id", "status", "sens", "hold", "held_since", "version", "summary"}."""
     rows, offset = [], None
     formula = urllib.parse.quote("OR({Status}='Approved',{Status}='Candidate')")
+    fields = "".join(f"&fields%5B%5D={urllib.parse.quote(f)}" for f in FIELDS)
     while True:
-        url = (f"{API}?filterByFormula={formula}&pageSize=100"
-               "&fields%5B%5D=Status&fields%5B%5D=Sensitivity")
+        url = f"{API}?filterByFormula={formula}&pageSize=100{fields}"
         if offset:
             url += f"&offset={offset}"
         req = urllib.request.Request(url, headers=HEADERS)
         data = json.loads(urllib.request.urlopen(req).read())
         for r in data.get("records", []):
             f = r.get("fields", {})
-            rows.append((r["id"], f.get("Status"), f.get("Sensitivity", "Safe")))
+            rows.append({"id": r["id"], "status": f.get("Status"), "sens": f.get("Sensitivity", "Safe"),
+                         "hold": f.get("Hold reason"), "held_since": f.get("Held since", ""),
+                         "version": f.get("Rulebook version"), "summary": (f.get("Summary") or "").strip()})
         offset = data.get("offset")
         if not offset:
             break
     return rows
 
 
-def to_publish(rows):
-    ids = []
-    for rid, status, sens in rows:
-        if status == "Approved":
-            ids.append(rid)                                   # owner-cleared: always publish
-        elif status == "Candidate" and AUTOPUBLISH and sens != "Sensitive":
-            ids.append(rid)                                   # auto-publish non-sensitive
-        # Candidate + Sensitive, or AUTOPUBLISH off: left for human review
-    return ids
+def decide(row, today=None):
+    """"Published", "Archived" or None (leave as it is) for one pending row."""
+    if row["status"] == "Approved":
+        return "Published"                                # owner-cleared: always publish
+    if row["hold"]:
+        weeks = rulebook.setting_int("Held-story expiry")
+        cutoff = ((today or datetime.date.today()) - datetime.timedelta(weeks=weeks)).isoformat()
+        if row["hold"] in SENSITIVE_HOLDS and row["held_since"] and row["held_since"] < cutoff:
+            return "Archived"                             # nobody reviewed it in time
+        return None
+    if not AUTOPUBLISH or not row["summary"]:
+        return None
+    if row["sens"] != "Sensitive":
+        return "Published"                                # auto-publish non-sensitive
+    if row["version"]:
+        return "Published"                                # sensitive, passed the rulebook's bar
+    return None                                           # sensitive, judged before the rulebook
 
 
-def promote(ids):
-    """PATCH Status -> Published in batches of 10 (Airtable's per-request limit)."""
+def set_status(ids, status):
+    """PATCH Status in batches of 10 (Airtable's per-request limit). typecast adds 'Archived' if new."""
     done = 0
     for i in range(0, len(ids), 10):
-        batch = ids[i:i + 10]
-        body = json.dumps({
-            "records": [{"id": rid, "fields": {"Status": "Published"}} for rid in batch]
-        }).encode()
+        body = json.dumps({"records": [{"id": rid, "fields": {"Status": status}} for rid in ids[i:i + 10]],
+                           "typecast": True}).encode()
         req = urllib.request.Request(API, data=body, headers=HEADERS, method="PATCH")
-        resp = json.loads(urllib.request.urlopen(req).read())
-        done += len(resp.get("records", []))
+        done += len(json.loads(urllib.request.urlopen(req).read()).get("records", []))
     return done
 
 
 if __name__ == "__main__":
     rows = fetch_pending()
-    approved = sum(1 for _, s, _ in rows if s == "Approved")
-    auto = sum(1 for _, s, sens in rows if s == "Candidate" and AUTOPUBLISH and sens != "Sensitive")
-    held = sum(1 for _, s, sens in rows if s == "Candidate" and sens == "Sensitive")
-    print(f"AUTOPUBLISH={'on' if AUTOPUBLISH else 'off'} | "
-          f"Approved to publish: {approved} | auto-publish (Safe Candidates): {auto} | "
-          f"Sensitive held for review: {held}")
-    ids = to_publish(rows)
-    if not ids:
+    plan = {"Published": [], "Archived": []}
+    for row in rows:
+        verdict = decide(row)
+        if verdict:
+            plan[verdict].append(row["id"])
+    held = sum(1 for r in rows if r["status"] == "Candidate" and r["hold"])
+    old_sensitive = sum(1 for r in rows if r["status"] == "Candidate" and not r["hold"]
+                        and r["sens"] == "Sensitive" and not r["version"])
+    print(f"AUTOPUBLISH={'on' if AUTOPUBLISH else 'off'} | to publish: {len(plan['Published'])} | "
+          f"held for the owner: {held} | expired holds to archive: {len(plan['Archived'])} | "
+          f"sensitive, judged before the rulebook (waiting for the re-judge): {old_sensitive}")
+    for status, ids in plan.items():
+        if ids:
+            print(f"{set_status(ids, status)} stories -> {status}.")
+    if not any(plan.values()):
         print("Nothing to publish.")
-    else:
-        n = promote(ids)
-        print(f"Published {n} stories -> Published.")

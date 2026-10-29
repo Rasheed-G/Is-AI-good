@@ -38,8 +38,6 @@ GROQ_MODEL = JUDGE_MODEL               # back-compat alias for any external call
 # owner can add or pause them with NO code. The harvester reads Active rows each run.
 SOURCES_TABLE = "tbllWd5Rby0pkgIpB"
 RUNS_TABLE = "tblR1wvxB46FtwMia"
-CMAP_TABLE = "tblq6vFY3ldPy0KPM"   # Coverage Map (concepts). Per-source yield rolls up here by
-# each Source's stored `Concept` (set once), so the owner sees which concepts are producing.
 SWEEP = os.environ.get("SWEEP") == "1"   # weekly top-of-week sweep (vs the daily "new" run)
 # Option A (social clips). When a Reddit post links an Instagram/TikTok/YouTube clip we
 # surface that embed as the story's media instead of the article/text (always on — see
@@ -64,7 +62,6 @@ MAX_NEW = len(THEMES) * MAX_PER_THEME   # overall ceiling on new candidates per 
 MAX_JUDGE = 250           # safety ceiling on judge calls (a runaway pool); the real bound is now
                           # the judge's 200K-TPD bucket (~168 judges) + the wall-clock budget.
                           # Selection is judge-EVERYTHING-then-pick-best-per-theme, not cap-early.
-MIN_RELEVANCE = 70        # drop anything the judge scores below this (strict judge)
 STATS_WINDOW_SHORT = 10   # short rolling window for per-source "Found (10d)"/"Kept (10d)" yield
 STATS_WINDOW_LONG = 30    # long rolling window for per-source "Found (30d)"/"Kept (30d)" yield
 YT_SEARCH_DURATIONS = ("short", "medium")  # Lane 2: short <4m (incl Shorts) + medium 4–20m (segments)
@@ -648,14 +645,14 @@ def existing_signatures():
     sigs, offset = [], None
     while True:
         u = (f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100"
-             f"&fields%5B%5D=Title&fields%5B%5D=Summary"
+             f"&fields%5B%5D=Title&fields%5B%5D=Source%20headline&fields%5B%5D=Summary"
              f"&filterByFormula={urllib.parse.quote(formula)}")
         if offset:
             u += f"&offset={offset}"
         data = http_json(u, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
         for r in data.get("records", []):
             f = r.get("fields", {})
-            nt = norm_title(f.get("Title", ""))
+            nt = norm_title(f.get("Source headline") or f.get("Title", ""))   # Title is now our own
             if nt:
                 sigs.append((nt, (f.get("Summary", "") or "").lower().strip()))
         offset = data.get("offset")
@@ -817,115 +814,144 @@ def _origin_line(post):
     return "Source: " + (f"{prov} — {lbl}" if (prov and lbl) else (prov or lbl or "unknown"))
 
 # --- Stage B: the editorial judge (gpt-oss-120b) ----------------------------
-# The calibrated decision rules (STEP 1/2 + GUARDRAIL + SCOPE + COHERENCE) — the SINGLE source
-# of truth for judge behaviour, shared verbatim by the single judge and the batched judge so the
-# two can never drift. Only the I/O envelope (single item + single schema vs many items + array)
-# differs between them; the rules the model applies are identical.
-JUDGE_RUBRIC = """STEP 1 — classify "kind":
-- "human-impact": a real, identifiable person or community harmed by AI (deepfake victim, scam loss, wrongful arrest, job loss), INCLUDING a genuine FIRST-PERSON account of emotional, psychological, or relational harm from AI (e.g. dependence on an AI companion, chatbot mental-health effects). Firsthand lived experience only — not speculation or someone theorising about others.
-- "incident": a specific, verifiable AI-related event — a named AI-platform breach/hack/leak, a model failure causing harm, a large-scale deepfake/fraud campaign.
-- "expert-analysis": a journalist or researcher explaining a REAL AI harm/finding/trend — OR a striking statistic about AI harm (e.g. "AI-driven fraud up 1,400%") BUT ONLY if it attributes a credible source (a named report, study, agency, or news outlet). An unsourced statistic with no attribution is hype, not analysis.
-- "none": anything else.
+# The judge's instructions are BUILT FROM rulebook.md (purpose, themes, story criteria, examples,
+# sensitivity), so a rule changed there changes the judge. One prompt for every call: a single item
+# is just a batch of one. The judge scores; the code applies the bar (judge_verdict), so the pass
+# numbers live in the rulebook's settings and the model can't move them.
+SCORE_KEYS = ("credibility", "consequence", "significance", "audience", "theme_fit")
+SCORE_FIELDS = {"credibility": "Score: credibility", "consequence": "Score: consequence",
+                "significance": "Score: significance", "audience": "Score: audience",
+                "theme_fit": "Score: theme fit"}
+# "70, plus credibility at least 60, and 70 for unproven claims" -> overall, credibility floor,
+# credibility needed for an unproven claim (rulebook section 8, "Pass score").
+PASS_OVERALL, PASS_CREDIBILITY, PASS_UNPROVEN = (
+    int(n) for n in re.findall(r"\d+", rulebook.setting("Pass score"))[:3])
+JUDGE_READ = rulebook.setting_int("Judge reading length")   # chars of each item the judge reads
+HOLD_REASONS = ("Risky picture or video", "Child could be identified")
 
-STEP 2 — apply the bar. Force kind="none" unless it clearly meets its type:
-- human-impact needs an identifiable person/community AND a concrete harm, OR a clear first-person account of real emotional/psychological/relational harm from AI.
-- incident needs a specific, verifiable event (name the org/system, what happened, roughly when). "Breaches are rising" is NOT enough; a named breach IS.
-- expert-analysis must be grounded in a specific finding/event/data from a credible source; a statistic or trend MUST cite its source.
+def _judge_rules():
+    """The judge's rules, from the rulebook. Tables become one line per row to keep the prompt short."""
+    themes = "\n".join(f"- {t['name']}. In: {t['in']}. Out: {t['out']}" for t in rulebook.themes())
+    two = rulebook.plain(rulebook.section(2).split("**When a story fits two themes:**", 1)[1].split("|", 1)[0]).strip()
+    scores = "\n".join(f'- "{k}" = {row[0]}: {row[1]} About 90: {row[2]}. About 50: {row[3]}. Below 30: {row[4]}.'
+                       for k, row in zip(SCORE_KEYS, rulebook.table(3, "Score")))
+    examples = "\n".join(f"- {r[0]} → {r[1]}{', ' + r[2] if r[2] not in ('—', '') else ''}. {r[3]}"
+                         for r in rulebook.table(5, "Story"))
+    sens = rulebook.plain(rulebook.section(6))
+    return f"""ABOUT THE SITE ("Is AI Good?")
+{rulebook.plain(rulebook.section(1))}
 
-UNIVERSAL GUARDRAIL — force kind="none" if it is: an UNSOURCED hype/fear-marketing stat ("X% of firms exposed" with no credible attribution), a product/vendor promo, a generic how-to/advice listicle, opinion/speculation with no real event, a meme/joke, NOT in English, or AI-generated/unverifiable.
+THEMES. Reader: a thoughtful, experienced professional; topics are never filtered by audience.
+{themes}
+When a story fits two themes:
+{two}
 
-SCOPE — the test for EVERY item: does it help a general reader understand a REAL risk, danger, or harm of AI, or how AI is concretely affecting people or the world? If yes, it is IN scope even without a single named victim. If it only reports the human politics/process AROUND AI and illustrates no concrete AI danger, it is out. Force kind="none" for:
-- Protest / activism / arrests-of-protesters / PAC / lobbying / political he-said-she-said that CENTERS on the politics or the arrest rather than an AI danger (e.g. an anti-AI protester being jailed; a lawmaker denying staff used AI). KEEP when the same subject instead illustrates a real AI danger or a group responding to a concrete AI threat: performers striking over voice-cloning; a law BANNING AI worker-replacement (illustrates the job-loss danger); a company pausing a feature over deepfake risk (illustrates that risk).
-- Abstract regulatory / trend meta-commentary with no concrete danger or event ("frameworks may become mandatory").
-- Corporate PR, funding, or product-strategy puffery with no danger and no harm. (But a lab's safety research that DESCRIBES a real AI danger — e.g. models scheming or deceiving — IS in scope as expert-analysis.)
-- A generic cybersecurity vulnerability/breach with NO AI role (AI merely name-dropped).
-- AI that is INCIDENTAL — merely mentioned or present with no role in the harm. But KEEP when AI is actively USED as a tool to plan, generate, or carry out the harm (an AI-generated manifesto for a planned attack; using a chatbot to rehearse a killing) — that illustrates a real danger. Bare correlation ("happened to use ChatGPT") is not enough; instrumental use or a causal role IS.
+INSTANT REJECTS (any one is enough; give its number in "reject")
+{rulebook.plain(rulebook.part(3, "Instant rejects"))}
 
-COHERENCE — if the Title and the Body describe DIFFERENT events (the headline is about one topic and the body about another), set kind="none" and say so in reason. We cannot publish a card whose title and content disagree."""
+SCORES (each 0 to 100)
+{scores}
+"overall" (0 to 100): how strongly this belongs in the gallery, all things considered.
+"unproven": true when the harm rests on a claim not yet proven (a lawsuit filed, a police referral, an
+accusation). A ruling, settlement, charge or conviction counts as proven.
+"harm_documented": true when the harm itself is shown as fact (e.g. tenants did pay more), not only claimed.
 
-def groq_judge(post):
-    """Stage B — classify + grade. Returns (verdict_dict_or_None, tokens, status).
-    NO summary here: Stage C (write_summary) writes the card copy for keepers only,
-    so the judge's scarce budget isn't spent writing prose for rejected items."""
-    # Social clips (IG/TikTok/YouTube) reach us as a short indexed caption — the STORY is the
-    # video, which the judge can't see. Tell it so, so it doesn't reject on thinness alone; the
-    # scope/coherence bar still applies fully.
-    clip_note = ""
-    if is_social_clip(post.get("external_url", "") or ""):
-        clip_note = ("\n\nNOTE: This item is a short social-video clip (Instagram / TikTok / "
-                     "YouTube). The text below is only a brief caption the platform indexed — the "
-                     "actual content is the VIDEO, which you cannot see. Judge it on the topic and "
-                     "whether it points at a real AI risk/harm; do NOT force kind=\"none\" merely "
-                     "because the caption is short or thin. Apply the same SCOPE and COHERENCE "
-                     "tests as every other item.")
-    prompt = f"""You are the editorial judge for "AI Harm Watch", a public site documenting REAL stories of people/communities negatively affected by AI, plus real AI incidents and credible expert reporting on AI harms. Audience: the general public.
+WORKED EXAMPLES (the owner's own calls)
+{examples}
 
-Judge the content item below in two steps — it may be a Reddit post, a news article, a YouTube video, a Google-Alert hit, or an incident-database entry. Return STRICT JSON only, no prose.
+SENSITIVITY
+{sens}"""
 
-{JUDGE_RUBRIC}{clip_note}
+JUDGE_RULES = _judge_rules()
 
-Return:
-{{
-  "kind": "human-impact" | "incident" | "expert-analysis" | "none",
-  "grounded": true/false,   // does it point at a SPECIFIC real person/org/event/finding (not abstraction)?
-  "theme": one of {THEMES} or "none",
-  "relevance": 0-100,       // how strongly it shows real AI harm/disruption to a general reader
-  "sensitivity": "Safe" | "Sensitive",   // Sensitive if minors, sexual content, suicide/self-harm, or graphic harm
-  "reason": "one short line: why kept or rejected"
-}}
-
-{_origin_line(post)}
-Title: {post['title']}
-Body: {post['selftext'] or '(no body text)'}"""
-    content, tokens, status = groq_chat(JUDGE_MODEL, prompt)
-    if content is None:
-        return None, tokens, status
-    try:
-        return json.loads(content), tokens, "ok"
-    except Exception as e:
-        print(f"  ! judge JSON parse error: {e}")
-        return None, tokens, "error"
-
-def groq_judge_batch(batch):
-    """Stage B, BATCHED — judge up to JUDGE_BATCH items in ONE call sharing a single copy of
-    JUDGE_RUBRIC (the ~1,090-token rubric travels once, not once per item ⇒ ~58% fewer judge
-    tokens). Same calibrated rules as the single judge; only the I/O envelope differs.
-    Returns (verdicts, tokens, status): `verdicts` is a list aligned to `batch`, each a verdict
-    dict or None (an item the model omitted / unparseable); status is 'ok' | 'rate_limited' |
-    'error'. Callers single-re-judge any None and fall back to the single path on a whole-batch
-    failure, so batching can never silently lose an item."""
+def judge_prompt(batch):
+    """The one judge prompt: rules from the rulebook + the numbered items + the reply format."""
     lines, any_clip = [], False
     for i, p in enumerate(batch):
         clip = is_social_clip(p.get("external_url", "") or "")
         any_clip = any_clip or clip
         mark = " [social-video clip]" if clip else ""
-        body = (p.get("selftext") or "")[:1500] or "(no body text)"
+        body = (p.get("selftext") or "")[:JUDGE_READ] or "(no body text)"
         lines.append(f'[{i}]{mark} {_origin_line(p)} | Title: {p["title"]} | Body: {body}')
-    clip_hint = ("\nItems marked [social-video clip] are a short indexed caption over a video you "
-                 "cannot see (Instagram / TikTok / YouTube): judge those on topic + the SCOPE/"
-                 "COHERENCE tests, do NOT force kind=\"none\" merely because the caption is thin.\n"
-                 if any_clip else "")
-    prompt = f"""You are the editorial judge for "AI Harm Watch", a public site documenting REAL stories of people/communities negatively affected by AI, plus real AI incidents and credible expert reporting on AI harms. Audience: the general public.
+    clip_hint = ("\nItems marked [social-video clip] are a short caption over a video you cannot see "
+                 "(Instagram / TikTok / YouTube). Judge the topic; don't reject only because the caption is "
+                 "short.\n" if any_clip else "")
+    return f"""You are the editorial judge for "Is AI Good?" (isaigood.org), a gallery of real, sourced stories of
+harm from AI. Judge EACH numbered item on its own against the rules below. An item may be a news article, a
+Google Alert hit, a Reddit post, a YouTube video or an incident-database entry. Return STRICT JSON only.
 
-Judge EACH numbered item below independently in two steps — an item may be a Reddit post, a news article, a YouTube video, a Google-Alert hit, or an incident-database entry. Return STRICT JSON only, no prose.
-
-{JUDGE_RUBRIC}
+{JUDGE_RULES}
 {clip_hint}
-Return one object PER ITEM, matching each item's [i] number:
+Return one object per item, matching its [i] number:
 {{"results": [
-  {{"i": <the item's number>,
-    "kind": "human-impact" | "incident" | "expert-analysis" | "none",
-    "grounded": true/false,
+  {{"i": <number>,
+    "reject": <the instant-reject number 1-9 that applies, or null>,
     "theme": one of {THEMES} or "none",
-    "relevance": 0-100,
-    "sensitivity": "Safe" | "Sensitive",
-    "reason": "one short line: why kept or rejected"}}
+    "scores": {{"credibility": 0-100, "consequence": 0-100, "significance": 0-100, "audience": 0-100, "theme_fit": 0-100}},
+    "overall": 0-100,
+    "unproven": true/false,
+    "harm_documented": true/false,
+    "sensitive": true/false,
+    "hold": "{HOLD_REASONS[0]}" | "{HOLD_REASONS[1]}" | null,
+    "reason": "one short line: why it is kept, weak or rejected"}}
 ]}}
 Judge EVERY item; return exactly one object per item.
 
 ITEMS:
 {chr(10).join(lines)}"""
-    content, tokens, status = groq_chat(JUDGE_MODEL, prompt)
+
+def _score(t, key):
+    try:
+        return int(float((t.get("scores") or {}).get(key, 0) or 0))
+    except (TypeError, ValueError):
+        return 0
+
+def judge_verdict(t):
+    """Apply the rulebook's bar (section 3) to a judge reply: "Keep", "Weak" or "Reject"."""
+    if not t:
+        return "Reject"
+    if t.get("reject") not in (None, "", 0, "null", "none"):
+        return "Reject"
+    if t.get("theme") not in THEMES:
+        return "Weak"
+    try:
+        overall = int(float(t.get("overall", 0) or 0))
+    except (TypeError, ValueError):
+        overall = 0
+    cred = _score(t, "credibility")
+    if overall < PASS_OVERALL or cred < PASS_CREDIBILITY:
+        return "Weak"
+    if t.get("unproven") and not (cred >= PASS_UNPROVEN and t.get("harm_documented")):
+        return "Weak"
+    return "Keep"
+
+def judge_passes(t):
+    return judge_verdict(t) == "Keep"
+
+def overall_score(t):
+    try:
+        return int(float((t or {}).get("overall", 0) or 0))
+    except (TypeError, ValueError):
+        return 0
+
+def judge_fields(t):
+    """The Airtable columns a judge reply fills (scores, verdict, reason, rulebook version)."""
+    reject = t.get("reject")
+    reason = (t.get("reason") or "").strip()
+    if reject not in (None, "", 0, "null", "none"):
+        reason = f"Reject {reject}. {reason}"
+    fields = {SCORE_FIELDS[k]: _score(t, k) for k in SCORE_KEYS}
+    fields.update({"Overall score": overall_score(t), "Judge verdict": judge_verdict(t),
+                   "Judge reason": reason[:900], "Rulebook version": int(rulebook.version())})
+    return fields
+
+def groq_judge_batch(batch):
+    """Stage B — judge up to JUDGE_BATCH items in ONE call sharing one copy of the rules.
+    Returns (verdicts, tokens, status): `verdicts` is a list aligned to `batch`, each a reply dict
+    or None (an item the model omitted / unparseable); status is 'ok' | 'rate_limited' | 'error'.
+    Callers single-re-judge any None and fall back to single items on a whole-batch failure, so
+    batching can never silently lose an item."""
+    content, tokens, status = groq_chat(JUDGE_MODEL, judge_prompt(batch))
     if content is None:
         return [None] * len(batch), tokens, status   # rate_limited or error
     try:
@@ -939,42 +965,45 @@ ITEMS:
                     pass
         return [by_i.get(k) for k in range(len(batch))], tokens, "ok"
     except Exception as e:
-        print(f"  ! judge batch JSON parse error: {e}")
+        print(f"  ! judge JSON parse error: {e}")
         return [None] * len(batch), tokens, "error"
 
-def groq_triage(post):
-    """Back-compat shim for regrade.py (which imports groq_triage). Delegates to the
-    Stage-B judge and drops the status, returning the old (verdict, tokens) shape."""
-    v, tok, _status = groq_judge(post)
-    return v, tok
+def groq_judge(post):
+    """Stage B for one item: the same prompt as a batch of one. Returns (reply_or_None, tokens, status)."""
+    verdicts, tokens, status = groq_judge_batch([post])
+    if status == "ok" and verdicts[0] is None:
+        status = "error"
+    return verdicts[0], tokens, status
 
 # --- Stage A: cheap recall-biased pre-triage (gpt-oss-20b, batched) ----------
+# Its rules are the rulebook's "Triage rules" (section 9): drop only the obvious, when unsure keep.
+TRIAGE_RULES = rulebook.plain(rulebook.part(9, "Triage rules"))
+
+def triage_prompt(batch):
+    items = "\n".join(
+        f'{j+1}. {p["title"][:150]} — {(p.get("selftext") or "")[:TRIAGE_SNIPPET]}'
+        for j, p in enumerate(batch))
+    return ('You are a fast pre-filter for "Is AI Good?", a gallery of real, sourced stories of harm '
+            "from AI. For each numbered item, decide KEEP or DROP, following these rules:\n\n"
+            f"{TRIAGE_RULES}\n\n"
+            'Return JSON {"results":[{"n":1,"v":"KEEP"},...]} covering every item.\n\n' + items)
+
 def pretriage(posts, deadline):
     """Drop OBVIOUS junk before the expensive judge, in batches on the 20b bucket.
-    Recall-biased: DROP only clear non-stories (promo/meme/how-to/off-topic/non-English);
-    when unsure, KEEP. FAIL-OPEN — any batch that errors, times out, or returns malformed
-    output passes through untouched, so a broken pre-filter can only waste judge budget,
-    never silently lose a real story. Posts beyond MAX_TRIAGE skip pre-triage entirely."""
+    Recall-biased: an item is dropped only on an explicit DROP; when unsure, KEEP. FAIL-OPEN — any
+    batch that errors, times out, or returns malformed output passes through untouched, so a broken
+    pre-filter can only waste judge budget, never silently lose a real story. Posts beyond
+    MAX_TRIAGE skip pre-triage entirely. Returns (survivors, tokens, dropped_posts)."""
     if not posts:
-        return posts, 0
+        return posts, 0, []
     pool, rest = posts[:MAX_TRIAGE], posts[MAX_TRIAGE:]
-    survivors, dropped, batches, spent = [], 0, 0, 0
+    survivors, dropped, batches, spent = [], [], 0, 0
     for i in range(0, len(pool), TRIAGE_BATCH):
         if time.time() > deadline:                 # out of time → keep everything left (fail-open)
             survivors.extend(pool[i:])
             break
         batch = pool[i:i + TRIAGE_BATCH]
-        items = "\n".join(
-            f'{j+1}. {p["title"][:150]} — {(p.get("selftext") or "")[:TRIAGE_SNIPPET]}'
-            for j, p in enumerate(batch))
-        prompt = ("You are a fast pre-filter for a site documenting REAL stories of AI harm "
-                  "(real people harmed by AI, real AI incidents, credible reporting on AI harm). "
-                  "For each numbered item, decide KEEP or DROP. DROP only if it is OBVIOUSLY not "
-                  "such a story: product/marketing promo, meme/joke, generic how-to or listicle, "
-                  "an unrelated topic, or not in English. When unsure, KEEP (a stricter judge "
-                  'runs next). Return JSON {"results":[{"n":1,"v":"KEEP"},...]} covering every '
-                  "item.\n\n" + items)
-        content, tok, _status = groq_chat(TRIAGE_MODEL, prompt)
+        content, tok, _status = groq_chat(TRIAGE_MODEL, triage_prompt(batch))
         spent += tok
         batches += 1
         keep_idx = None
@@ -983,7 +1012,6 @@ def pretriage(posts, deadline):
                 data = json.loads(content)
                 verds = {int(r["n"]): str(r.get("v", "KEEP")).upper()
                          for r in data.get("results", []) if "n" in r}
-                # recall-biased: an item is dropped only on an explicit DROP; missing → KEEP
                 keep_idx = {n for n in range(1, len(batch) + 1) if verds.get(n, "KEEP") != "DROP"}
             except Exception:
                 keep_idx = None
@@ -991,16 +1019,20 @@ def pretriage(posts, deadline):
             survivors.extend(batch)
         else:
             for j, p in enumerate(batch):
-                if (j + 1) in keep_idx:
-                    survivors.append(p)
-                else:
-                    dropped += 1
+                (survivors if (j + 1) in keep_idx else dropped).append(p)
         time.sleep(TRIAGE_SLEEP)
     survivors.extend(rest)
     print(f"  Stage-A pre-triage ({TRIAGE_MODEL}): kept {len(survivors)}/{len(posts)} "
-          f"({dropped} obvious-junk dropped across {batches} batches"
+          f"({len(dropped)} obvious-junk dropped across {batches} batches"
           f"{f'; {len(rest)} past MAX_TRIAGE passed through' if rest else ''}).")
-    return survivors, spent
+    return survivors, spent, dropped
+
+TRIAGE_SAMPLE = 40   # dropped items saved to the Runs row each sweep, so triage can be checked (step 6)
+
+def triage_sample(dropped):
+    """A random sample of what triage dropped, one 'title — source' line each."""
+    pick = random.sample(dropped, min(TRIAGE_SAMPLE, len(dropped)))
+    return "\n".join(f"{p['title'][:140]} — {p.get('source_label') or '?'}" for p in pick)[:95000]
 
 # --- Stage C: card copy for keepers only (qwen3.8-27b) -----------------------
 COPY_MIN_BODY = 200        # below this a feed snippet is too thin to summarise from → fetch the full article first
@@ -1040,31 +1072,28 @@ def _article_text(url):
     return re.sub(r"\s+", " ", (desc + " " + text).strip())
 
 def copy_prompt(post, body):
-    """The Stage-C card-copy prompt — the SINGLE source of truth for card voice, shared by
-    the live harvester (write_summary) and the one-off bulk rewrite (rewrite_summaries.py) so
-    back-filled cards read identically to newly-harvested ones. Voice: plain-language, for a
-    reader NEW to AI; lead with the harm/risk to people and the concrete 'so what'; preserve
-    source specifics verbatim (dates/numbers/names) and drop reader-irrelevant metadata."""
-    return ("Write a plain-language summary (max 60 words) of the item below, for a "
-            "general-public card on a site about the dangers and risks of AI. Your reader is "
-            "new to AI — assume no technical background and use no jargon. Say plainly what "
-            "happened AND why it matters: who was harmed or put at risk, and the real-world "
-            "consequence (the 'so what'). Be concrete and specific (who / what / when). "
-            "Preserve every specific detail — dates, numbers, names, places — exactly as the "
-            "source gives them; never guess, round, infer, or shift them. "
-            "Convert any relative time ('last week', 'yesterday', 'today') to the actual "
-            "calendar date — never leave relative time on the card. "
-            "Omit source metadata a general reader doesn't need — author/byline lists, "
-            "submission timestamps, outlet boilerplate — unless it is itself the story. "
-            "Factual, never alarmist or speculative — no hype, no opinion, no preamble. "
-            "Return only the summary.\n\n"
-            f"{_origin_line(post)}\nTitle: {post['title']}\nBody: {body[:1500] or '(no body text)'}")
+    """The Stage-C card-copy prompt, built from the rulebook's "Card copy" rules (section 7). The ONE
+    prompt for card copy, shared by the live harvester (write_copy) and the bulk rewrite
+    (rewrite_summaries.py), so rewritten cards read like new ones. Asks for our own title, the
+    summary, and whether the source headline and the summary are about the same event."""
+    return ('Write the card for the item below, for "Is AI Good?", a gallery of real, sourced stories '
+            "of harm from AI. Follow these rules exactly:\n\n"
+            f"{COPY_RULES}\n\n"
+            'Return STRICT JSON only: {"title": "our own title", "summary": "the summary", '
+            '"same_event": true or false}. "same_event" is false when the source headline below is '
+            "about a different event from what the body (and so the summary) describes.\n\n"
+            f"{_origin_line(post)}\nSource headline: {post['title']}\n"
+            f"Body: {body[:JUDGE_READ] or '(no body text)'}")
 
-def write_summary(post):
-    """Stage C — write the <=60-word card summary for a KEPT item on the qwen bucket.
-    Returns (summary, tokens). Never blank: on any failure, falls back to a trimmed
-    body/title so the card always has text."""
-    body = (post.get("selftext") or "").strip()
+COPY_RULES = rulebook.plain(rulebook.section(7))
+
+def write_copy(post, body=None):
+    """Stage C — our own title and the card summary for a KEPT item, on the qwen bucket.
+    Returns (title, summary, same_event, tokens). title and summary are "" when the copy can't be
+    written (the AI fails or refuses): the card is then HELD, never filled with raw article text
+    (rulebook section 7), and the summary is retried next sweep. `body` overrides the post's own
+    text (rewrite_summaries.py passes the article it fetched)."""
+    body = (post.get("selftext") or "").strip() if body is None else body
     # A thin feed snippet is what made qwen refuse and leak meta-text onto live cards. When the
     # body is too short, fetch the real article body first (best-effort, skipped for social clips
     # whose "body" is the video itself). enrich_media re-opens the page later for media only.
@@ -1074,14 +1103,20 @@ def write_summary(post):
             full = _article_text(url)
             if len(full) > len(body):
                 body = full
-    prompt = copy_prompt(post, body)
-    # reasoning_effort='none' → qwen answers directly (~87 tok) instead of thinking (~950 tok).
-    content, tokens, status = groq_chat(COPY_MODEL, prompt, json_mode=False, reasoning_effort="none")
-    new = (content or "").strip().strip('"').strip()
-    # Store the summary only if it's a real one — never a refusal/meta-comment or an error echo.
-    if status == "ok" and new and not looks_like_meta(new):
-        return new, tokens
-    return (body[:200] or post["title"])[:200], tokens   # fail-safe: never a blank/refusal card
+    # reasoning_effort='none' → qwen answers directly instead of thinking first (far fewer tokens).
+    content, tokens, status = groq_chat(COPY_MODEL, copy_prompt(post, body), reasoning_effort="none")
+    if status != "ok" or not content:
+        return "", "", True, tokens
+    try:
+        data = json.loads(content)
+    except Exception:
+        return "", "", True, tokens
+    title = (data.get("title") or "").strip().strip('"').strip()
+    summary = (data.get("summary") or "").strip().strip('"').strip()
+    # Store the copy only if it's real — never a refusal/meta-comment about the source.
+    if not title or not summary or looks_like_meta(summary) or looks_like_meta(title):
+        return "", "", True, tokens
+    return title, summary, data.get("same_event") is not False, tokens
 
 def _is_clip_item(it):
     """True if a passed item is an embeddable social clip (its external link is an
@@ -1105,7 +1140,7 @@ def select_best(passed):
         # articles — but the video IS the story and social reach matters. If no clip made the
         # theme's top MAX_PER_THEME, promote the best clip that DID pass the judge into the last
         # slot (displacing the weakest non-clip). Only ever promotes an item already over the
-        # bar — never lowers MIN_RELEVANCE, just guarantees at most one clip a theme isn't buried.
+        # bar — never lowers the pass score, just guarantees at most one clip a theme isn't buried.
         if not any(_is_clip_item(it) for it in keep):
             clip = next((it for it in items[MAX_PER_THEME:] if _is_clip_item(it)), None)
             if clip:
@@ -1178,28 +1213,94 @@ def reenrich_new_rows(created, posts):
         print(f"  Re-enrich: recovered media for {len(updates)}/{len(bare)} new card(s).")
 
 # --- main -------------------------------------------------------------------
-def judge_passes(t):
-    return (t.get("kind") in ("human-impact", "incident", "expert-analysis")
-            and t.get("grounded") and t.get("relevance", 0) >= MIN_RELEVANCE)
-
-def build_fields(p, t, summary):
+def build_fields(p, t, title, summary, same_event=True):
+    """The new Stories row for a kept item. Holds (rulebook sections 6 and 7) keep it out of the
+    gallery: a risky picture or identifiable child (the judge's flag), a summary that couldn't be
+    written (retried next sweep), or a title and summary about different events."""
     theme = t.get("theme") if t.get("theme") in THEMES else None
     fmt, media = detect_format_and_media(p)
     fmt, media = enrich_media(p, fmt, media)   # open the page for a heading image / embedded video
-    sens = "Sensitive" if (t.get("sensitivity") == "Sensitive" or p["over_18"]) else "Safe"
-    note = f"Auto-harvested from {p.get('source_label') or 'feed'}. Kind: {t.get('kind')}. {t.get('reason', '')}"[:900]
+    sens = "Sensitive" if (t.get("sensitive") or p["over_18"]) else "Safe"
+    headline = clean_title(p["title"])[:250]
     fields = {
-        "Title": clean_title(p["title"])[:250], "Status": "Candidate", "Summary": summary,
+        "Title": (title or headline)[:250], "Source headline": headline,
+        "Status": "Candidate", "Summary": summary,
         "Source URL": story_source_url(p), "Media URL": media, "Format": fmt,
-        "Relevance": int(t.get("relevance", 0)), "Sensitivity": sens,
-        "Source type": p.get("provenance", "Manual"), "Editor notes": note,
+        "Relevance": overall_score(t), "Sensitivity": sens,
+        "Source type": p.get("provenance", "Manual"),
+        "Editor notes": f"Auto-harvested from {p.get('source_label') or 'feed'}."[:900],
         "Source name": (p.get("source_label") or "")[:250],
+        **judge_fields(t),
     }
+    hold = None
+    if t.get("hold") in HOLD_REASONS:
+        hold = t["hold"]
+    elif not summary:
+        hold, fields["Summary tries"] = "Summary failed", 1
+    elif not same_event:
+        hold = "Title and summary differ"
+    if hold:
+        fields["Hold reason"] = hold
+        fields["Held since"] = datetime.date.today().isoformat()
     if theme:
         fields["Theme"] = theme
     if p["created"]:
         fields["Date"] = p["created"]
     return fields
+
+def retry_held_summaries(deadline):
+    """Rulebook section 7: a card whose summary couldn't be written is held and retried here, once a
+    sweep. Success clears the hold (publish.py then treats it like any new card); a second failure
+    archives the story. Returns copy tokens spent."""
+    formula = "AND({Status}='Candidate', {Hold reason}='Summary failed')"
+    rows, offset, spent = [], None, 0
+    try:
+        while True:
+            u = (f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100"
+                 f"&filterByFormula={urllib.parse.quote(formula)}" + (f"&offset={offset}" if offset else ""))
+            data = http_json(u, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
+            rows.extend(data.get("records", []))
+            offset = data.get("offset")
+            if not offset:
+                break
+    except Exception as e:
+        print(f"  ! Could not read held summaries: {e}")
+        return 0
+    updates = []
+    for r in rows:
+        if time.time() > deadline:
+            break
+        f = r.get("fields", {})
+        post = {"title": f.get("Source headline") or f.get("Title", ""), "selftext": "",
+                "permalink": f.get("Source URL", ""), "external_url": f.get("Source URL", ""),
+                "provenance": f.get("Source type", ""), "source_label": f.get("Source name", ""),
+                "subreddit": None}
+        title, summary, same, tok = write_copy(post)
+        spent += tok
+        time.sleep(COPY_SLEEP)
+        tries = int(f.get("Summary tries") or 1) + 1
+        if summary:
+            fx = {"Title": title[:250], "Summary": summary, "Summary tries": tries,
+                  "Hold reason": None if same else "Title and summary differ",
+                  "Held since": None if same else datetime.date.today().isoformat()}
+        elif tries >= 2:
+            fx = {"Status": "Archived", "Summary tries": tries}
+        else:
+            fx = {"Summary tries": tries}
+        updates.append({"id": r["id"], "fields": fx})
+    for i in range(0, len(updates), 10):
+        try:
+            http_json(f"https://api.airtable.com/v0/{BASE}/{TABLE}",
+                      headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}", "Content-Type": "application/json"},
+                      data=json.dumps({"records": updates[i:i+10], "typecast": True}).encode(), method="PATCH")
+        except Exception as e:
+            print(f"  ! Could not update held summaries: {e}")
+            break
+    if rows:
+        fixed = sum(1 for u in updates if "Summary" in u["fields"])
+        gone = sum(1 for u in updates if u["fields"].get("Status") == "Archived")
+        print(f"  Held summaries: {len(rows)} retried, {fixed} written, {gone} archived after 2 tries.")
+    return spent
 
 def kept_windows(n_short, n_long):
     """One Stories scan → (kept_short, kept_long) Counters of {Source name: count} for
@@ -1254,7 +1355,8 @@ def _fetch_yield_rows(table_id, key_field, active_only):
     rows, offset = [], None
     while True:
         u = (f"https://api.airtable.com/v0/{BASE}/{table_id}?pageSize=100"
-             f"&fields%5B%5D={urllib.parse.quote(key_field)}&fields%5B%5D=Found%20daily")
+             f"&fields%5B%5D={urllib.parse.quote(key_field)}&fields%5B%5D=Found%20daily"
+             f"&fields%5B%5D=Judged%20daily")
         if active_only:
             u += f"&filterByFormula={urllib.parse.quote('{Active}=1')}"
         if offset:
@@ -1267,11 +1369,11 @@ def _fetch_yield_rows(table_id, key_field, active_only):
     return rows
 
 def _write_yield(table_id, key_field, rows, found_now, kept_now, kept10, kept30,
-                 today_s, cut_short, cut_long):
-    """Compute the six yield columns + accumulated 'Found daily' for each row (keyed by
-    key_field) and PATCH them. Returns rows written, or -1 if the yield fields are absent
-    (422 → skip, don't raise). 'Found' is accumulated into the history string; 'Kept' is
-    the exact rolling count passed in."""
+                 today_s, cut_short, cut_long, judged_now=None):
+    """Compute the yield columns + accumulated 'Found daily' / 'Judged daily' for each row (keyed
+    by key_field) and PATCH them. Returns rows written, or -1 if the yield fields are absent
+    (422 → skip, don't raise). 'Found' and 'Judged' are accumulated into history strings; 'Kept'
+    is the exact rolling count passed in."""
     updates = []
     for r in rows:
         key = (r.get("fields", {}).get(key_field) or "").strip()
@@ -1280,7 +1382,14 @@ def _write_yield(table_id, key_field, rows, found_now, kept_now, kept10, kept30,
         hist = _parse_found_daily(r.get("fields", {}).get("Found daily", ""))
         hist[today_s] = hist.get(today_s, 0) + int(found_now.get(key, 0))
         hist = {d: c for d, c in hist.items() if d > cut_long}       # trim to long window
-        updates.append({"id": r["id"], "fields": {
+        extra = {}
+        if judged_now is not None:      # how many of the source's items the judge actually read
+            jh = _parse_found_daily(r.get("fields", {}).get("Judged daily", ""))
+            jh[today_s] = jh.get(today_s, 0) + int(judged_now.get(key, 0))
+            jh = {d: c for d, c in jh.items() if d > cut_long}
+            extra = {"Judged last run": int(judged_now.get(key, 0)), "Judged (30d)": sum(jh.values()),
+                     "Judged daily": _fmt_found_daily(jh)}
+        updates.append({"id": r["id"], "fields": {**extra,
             "Found last run": int(found_now.get(key, 0)),
             "Kept last run": int(kept_now.get(key, 0)),
             "Found (10d)": sum(c for d, c in hist.items() if d > cut_short),
@@ -1301,67 +1410,25 @@ def _write_yield(table_id, key_field, rows, found_now, kept_now, kept10, kept30,
             raise
     return len(updates)
 
-def source_concept_map():
-    """{Source Name: Concept} for sources that carry a Concept (the 55 phrase-locked alerts).
-    Lets per-source yield roll up to the Coverage Map. Blank-Concept sources (subreddits,
-    feeds, YouTube, social) map to nothing and simply don't count toward any concept."""
-    m, offset = {}, None
-    while True:
-        u = (f"https://api.airtable.com/v0/{BASE}/{SOURCES_TABLE}?pageSize=100"
-             f"&fields%5B%5D=Name&fields%5B%5D=Concept")
-        if offset:
-            u += f"&offset={offset}"
-        data = http_json(u, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
-        for r in data.get("records", []):
-            f = r.get("fields", {})
-            name, concept = (f.get("Name") or "").strip(), (f.get("Concept") or "").strip()
-            if name and concept:
-                m[name] = concept
-        offset = data.get("offset")
-        if not offset:
-            break
-    return m
-
-def _remap(counter, name_to_concept):
-    """Re-key a {Source name: n} Counter to {Concept: n} via the source→concept map."""
-    out = Counter()
-    for name, n in counter.items():
-        concept = name_to_concept.get(name)
-        if concept:
-            out[concept] += n
-    return out
-
-def update_yields(found_by_src, kept_by_src):
-    """Roll this run's per-source yield onto BOTH the Sources table (keyed by Name, active rows)
-    and the Coverage Map (keyed by Concept, via each source's stored Concept), so the owner can
-    see which sources — and which targeted concepts — are actually producing. Each target gets
-    six columns + a 'Found daily' history:
-      • Found/Kept last run — this run's judging-pool contribution + what it landed.
-      • Found (10d)/(30d)   — rolling sums. 'Found' can't be recovered from Airtable (rejected
-        items aren't stored) so it's ACCUMULATED into 'Found daily' (append today, trim, re-sum)
-        → these build up over time rather than being backfillable.
-      • Kept (10d)/(30d)    — exact rolling counts from the Stories table (Rejected excluded).
-    Best-effort: never breaks the run; self-heals (logs) if a target's fields are absent."""
+def update_yields(found_by_src, kept_by_src, judged_by_src):
+    """Roll this run's per-source yield onto the Sources table (keyed by Name, active rows), so the
+    owner can see which sources are actually producing:
+      • Found/Judged/Kept last run — what the source supplied, how much the judge read, what it landed.
+      • Found (10d)/(30d), Judged (30d) — rolling sums. Neither can be recovered from Airtable
+        (rejected items aren't stored) so they're ACCUMULATED into 'Found daily' / 'Judged daily'.
+      • Kept (10d)/(30d) — exact rolling counts from the Stories table (Rejected excluded).
+    Best-effort: never breaks the run; self-heals (logs) if the fields are absent."""
     try:
         today = datetime.date.today()
         today_s = today.isoformat()
         cut_long = (today - datetime.timedelta(days=STATS_WINDOW_LONG)).isoformat()
         cut_short = (today - datetime.timedelta(days=STATS_WINDOW_SHORT)).isoformat()
         kept10, kept30 = kept_windows(STATS_WINDOW_SHORT, STATS_WINDOW_LONG)   # per Source name
-
-        # Sources — keyed by Name, active only
         n = _write_yield(SOURCES_TABLE, "Name", _fetch_yield_rows(SOURCES_TABLE, "Name", True),
-                         found_by_src, kept_by_src, kept10, kept30, today_s, cut_short, cut_long)
+                         found_by_src, kept_by_src, kept10, kept30, today_s, cut_short, cut_long,
+                         judged_now=judged_by_src)
         print("  ! Source-yield fields missing — skipped." if n < 0
               else f"  Per-source yield → {n} active Sources.")
-
-        # Coverage Map — remap every counter from source→concept, key by Concept
-        cmap = source_concept_map()
-        n = _write_yield(CMAP_TABLE, "Concept", _fetch_yield_rows(CMAP_TABLE, "Concept", False),
-                         _remap(found_by_src, cmap), _remap(kept_by_src, cmap),
-                         _remap(kept10, cmap), _remap(kept30, cmap), today_s, cut_short, cut_long)
-        print("  ! Coverage-Map yield fields missing — skipped." if n < 0
-              else f"  Per-concept yield → {n} Coverage Map rows.")
     except Exception as e:
         print(f"  ! Could not update yield stats: {e}")
 
@@ -1379,11 +1446,19 @@ def write_run(s):
         "Tokens B (judge)": s.get("tok_judge", 0),
         "Tokens C (copy)": s.get("tok_copy", 0),
         "Judge mode": s.get("judge_mode", ""),
+        # Count per stage (release 3): where items drop out on their way to the gallery.
+        "Too old": s.get("too_old", 0), "Duplicates": s.get("duplicates", 0),
+        "YouTube gate dropped": s.get("yt_dropped", 0), "Triage dropped": s.get("triage_dropped", 0),
+        "Not judged (ceiling)": s.get("not_judged", 0), "Passed bar": s.get("passed", 0),
+        "Held": s.get("held", 0), "Triage drop sample": s.get("triage_sample", ""),
+        "Rulebook version": int(rulebook.version()),
     }
     # Token fields may not exist in the base yet (added via Airtable UI or metadata API later).
     # A 422 UNKNOWN_FIELD_NAME names one absent field at a time; pop the named one and retry,
     # so the run row still logs with whatever token columns DO exist.
-    OPTIONAL = ("Tokens", "Tokens A (triage)", "Tokens B (judge)", "Tokens C (copy)", "Judge mode")
+    OPTIONAL = ("Tokens", "Tokens A (triage)", "Tokens B (judge)", "Tokens C (copy)", "Judge mode",
+                "Too old", "Duplicates", "YouTube gate dropped", "Triage dropped", "Not judged (ceiling)",
+                "Passed bar", "Held", "Triage drop sample", "Rulebook version")
     def _post(fx):
         http_json(f"https://api.airtable.com/v0/{BASE}/{RUNS_TABLE}",
                   headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}", "Content-Type": "application/json"},
@@ -1472,6 +1547,7 @@ def main():
     cutoff = _cutoff()
     before_win = len(posts)
     posts = [p for p in posts if within_window(p, cutoff)]
+    n_too_old = before_win - len(posts)
     print(f"  Recency window: kept {len(posts)}/{before_win} posts dated ≥ {cutoff} "
           f"(last {WINDOW_DAYS}d; undated kept).")
 
@@ -1485,12 +1561,15 @@ def main():
         print(f"  Spam-link filter: dropped {before_ip - len(posts)} post(s) linking a raw IP.")
 
     known = existing_source_urls()
+    before_dup = len(posts)
     if dry:
         n_in = sum(1 for p in posts if dedup_keys(p) & known)
         print(f"  {n_in} of these are already in Airtable (shown as [in-base]).")
     else:
         posts = [p for p in posts if not (dedup_keys(p) & known)]
         print(f"  {len(posts)} after removing ones already in Airtable.")
+    n_dup = before_dup - len(posts)
+    n_yt_dropped = 0
 
     # AI-relevance gate for YouTube whole-channel feeds (see ai_relevant). Other
     # sources bypass it. Applied before shuffle so filtered posts never cost a judge call.
@@ -1499,6 +1578,7 @@ def main():
         gate = load_gate_matchers()
         posts = [p for p in posts if p.get("provenance") != "YouTube" or ai_relevant(p, gate)]
         yt_after = sum(1 for p in posts if p.get("provenance") == "YouTube")
+        n_yt_dropped = yt_before - yt_after
         print(f"  YouTube AI-gate: kept {yt_after}/{yt_before} YouTube posts "
               f"({yt_before - yt_after} non-AI filtered before judging).")
 
@@ -1522,7 +1602,7 @@ def main():
 
     # Stage A — cheap pre-triage (gpt-oss-20b) drops obvious junk so the expensive judge's
     # scarce budget is spent on plausible candidates. Fail-open; its own rate-limit bucket.
-    posts, tok_triage = pretriage(posts, deadline)
+    posts, tok_triage, triage_dropped = pretriage(posts, deadline)
 
     kept, seen_titles, judged, errors, n_keep, n_rej = [], set(), 0, 0, 0, 0
     kept_posts = []                          # post objects parallel to `kept`, for the media retry
@@ -1534,12 +1614,14 @@ def main():
     # pick the best-per-theme rather than the first-per-theme. (Copy is written only for the
     # final picks, further down — never for an item that a higher-scoring rival displaces.)
     passed = []          # [{"p":post, "t":verdict, "rel":int, "theme":str}, …]
+    judged_by_src = Counter()                # per source: how many of its items the judge read
     # Pre-dedup: drop same-title cross-posts BEFORE batching, so batch slots aren't spent on dupes
     # and the [i] indices stay clean.
     to_judge = []
     for p in posts:
         norm = norm_title(p["title"])        # outlet-stripped, so cross-outlet reprints collide
         if norm in seen_titles:
+            n_dup += 1
             continue
         seen_titles.add(norm)
         to_judge.append(p)
@@ -1593,6 +1675,7 @@ def main():
                 time.sleep(JUDGE_SLEEP)
             tag = " [in-base]" if (dedup_keys(p) & known) else ""
             judged += 1
+            judged_by_src[p.get("source_label", "")] += 1
             if not t:                        # genuine error (bad HTTP / unparseable / omitted)
                 errors += 1
                 consec_err += 1
@@ -1603,16 +1686,14 @@ def main():
                     break
                 continue
             consec_err = 0
-            passes = judge_passes(t)
+            verd = judge_verdict(t)
             if dry:
-                n_keep += passes; n_rej += (not passes)
-                verd = "KEEP  " if passes else "reject"
-                print(f"  {verd} [{int(t.get('relevance',0)):>3}] {t.get('kind','?'):<15}{tag} "
-                      f"{p['title'][:50]} :: {t.get('reason','')[:55]}")
-            if not passes:
+                n_keep += verd == "Keep"; n_rej += verd != "Keep"
+                print(f"  {verd:<6} [{overall_score(t):>3}] {str(t.get('theme', '?'))[:22]:<22}{tag} "
+                      f"{p['title'][:50]} :: {str(t.get('reason', ''))[:55]}")
+            if verd != "Keep":
                 continue
-            theme = t.get("theme") if t.get("theme") in THEMES else "(none)"
-            passed.append({"p": p, "t": t, "rel": int(t.get("relevance", 0)), "theme": theme})
+            passed.append({"p": p, "t": t, "rel": overall_score(t), "theme": t["theme"]})
         if stop:
             break
         time.sleep(sleep_between)            # pace under the judge's TPM bucket between batches
@@ -1631,30 +1712,33 @@ def main():
 
     if dry:
         _tok_line()
-        print(f"\nDRY RUN complete — {n_keep} passed the bar, {n_rej} rejected, {judged} judged, "
+        print(f"\nDRY RUN complete — {n_keep} passed the bar, {n_rej} weak or rejected, {judged} judged, "
               f"{len(selected)} would be kept (best {MAX_PER_THEME}/theme). Nothing written.")
         return
 
     # Cross-run reprint corpus: recent still-standing rows to compare new copy against.
     dedup_sigs = existing_signatures()
     n_reprint = 0
+    # Cards held last sweep because their summary failed get their second try first.
+    tok_copy += retry_held_summaries(deadline)
     # Stage C — write the card copy (qwen bucket) for the FINAL selected keepers only.
     for it in selected:
-        summary, ctok = write_summary(it["p"])
+        title, summary, same_event, ctok = write_copy(it["p"])
         tok_copy += ctok
         time.sleep(COPY_SLEEP)
         # Cross-run near-dup: same event reprinted at a different URL (needs BOTH title AND
         # summary near-identical, so a developing story with new facts is kept).
-        dup, match = is_reprint(it["p"]["title"], summary, dedup_sigs)
+        dup, match = is_reprint(it["p"]["title"], summary, dedup_sigs) if summary else (False, "")
         if dup:
             n_reprint += 1
             print(f"  ⊘ reprint (skipped) — {it['p']['title'][:50]} ≈ {match[:40]}")
             continue
-        fields = build_fields(it["p"], it["t"], summary)
+        fields = build_fields(it["p"], it["t"], title, summary, same_event)
         dedup_sigs.append((norm_title(it["p"]["title"]), (summary or "").lower().strip()))  # catch same-run reprints too
         kept.append({"fields": fields})
         kept_posts.append(it["p"])   # keep the post alongside so reenrich_new_rows can retry bare cards
-        print(f"  + [{it['rel']}] {it['t'].get('kind')}/{it['theme']} — {it['p']['title'][:60]}")
+        held = f" (held: {fields['Hold reason']})" if fields.get("Hold reason") else ""
+        print(f"  + [{it['rel']}] {it['theme']} — {(title or it['p']['title'])[:60]}{held}")
     if n_reprint:
         print(f"  Cross-run dedup: {n_reprint} reprint(s) of existing stories skipped.")
     _tok_line()
@@ -1668,7 +1752,7 @@ def main():
     # owner see which alerts/feeds/subs earn their place vs which are noise. (kept carries each
     # row's "Source name".)
     kept_by_src = Counter((k["fields"].get("Source name") or "") for k in kept)
-    update_yields(found_by_src, kept_by_src)
+    update_yields(found_by_src, kept_by_src, judged_by_src)
     write_run({
         "run": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), "mode": mode,
         "tried": len(sources), "read": read_ok, "failed_n": len(failed), "failed": failed,
@@ -1676,6 +1760,10 @@ def main():
         "tokens": total_tokens,
         "tok_triage": tok_triage, "tok_judge": tok_judge, "tok_copy": tok_copy,
         "judge_mode": f"batch-{JUDGE_BATCH}" if JUDGE_BATCH > 1 else "single",
+        "too_old": n_too_old, "duplicates": n_dup, "yt_dropped": n_yt_dropped,
+        "triage_dropped": len(triage_dropped), "not_judged": max(0, len(to_judge) - judged),
+        "passed": len(passed), "held": sum(1 for k in kept if k["fields"].get("Hold reason")),
+        "triage_sample": triage_sample(triage_dropped),
     })
     print(f"\nDone. Mode={mode}. {read_ok}/{len(sources)} sources read, {judged} judged, "
           f"{errors} errors, {total_tokens} Groq tokens, wrote {len(kept)} new Candidate rows. Logged to Runs table.")

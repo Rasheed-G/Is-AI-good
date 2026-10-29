@@ -9,6 +9,8 @@ Code reads it from here instead of keeping its own copy, so a rule changed there
     rulebook.themes()             # [{"name", "slug", "summary", "in", "out"}, ...]
     rulebook.section(7)           # the text of "## 7. Card copy", heading excluded
     rulebook.setting("Gallery cap")   # "20"
+    rulebook.part(3, "Instant rejects")   # the text under "### Instant rejects" in section 3
+    rulebook.table(5, "Story")    # rows of the first table in section 5 whose first header is "Story"
 """
 import functools
 import pathlib
@@ -37,6 +39,19 @@ def section(n):
     return m.group(1).strip().removesuffix("---").strip()
 
 
+def part(n, heading):
+    """The body of '### heading' inside section n, up to the next '### ' (or the section's end)."""
+    m = re.search(rf"^### {re.escape(heading)}.*?$\n(.*?)(?=^### |\Z)", section(n), flags=re.M | re.S)
+    if not m:
+        raise ValueError(f"rulebook.md section {n} has no '### {heading}'")
+    return m.group(1).strip()
+
+
+def plain(text):
+    """Rulebook text without bold marks, for prompts."""
+    return text.replace("**", "")
+
+
 def _plain(cell):
     return cell.replace("**", "").strip()
 
@@ -62,6 +77,11 @@ def _table_rows(body, first_header):
             continue
         rows.append(cells)
     return rows
+
+
+def table(n, first_header):
+    """Rows of a table in section n (header and divider left out), each a list of plain cells."""
+    return [[_plain(c) for c in cells] for cells in _table_rows(section(n), first_header)]
 
 
 @functools.lru_cache(maxsize=1)
