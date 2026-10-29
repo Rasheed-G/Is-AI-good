@@ -119,6 +119,9 @@ a { color: inherit; }
 .toggle input:checked + .track::after { transform: translateX(20px); }
 .toggle input:focus-visible + .track { outline: 2px solid var(--orange-ink); outline-offset: 2px; }
 
+/* The picked theme's one-line summary (news page), from the rulebook */
+.theme-summary { margin: 18px 0 0; max-width: 60ch; }
+.theme-summary + .count { margin-top: 8px; }
 .count { color: var(--mut2); font-family: var(--mono); font-size: .74rem; margin: 18px 0 10px; }
 /* The count line also links to How we choose stories: there, but not dominant */
 .count a { color: inherit; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }

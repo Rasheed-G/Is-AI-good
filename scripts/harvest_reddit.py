@@ -10,6 +10,7 @@ Run locally:  source .env.local && python scripts/harvest_reddit.py
 import os, sys, json, time, html, re, random, datetime, difflib, email.utils, urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
 from collections import Counter
+import rulebook   # rulebook.md: the one home for themes, rules and settings
 
 # Force UTF-8 (Windows cp1252 would crash on unicode titles) and LINE buffering so
 # output streams live to CI logs instead of being lost if the job is killed.
@@ -46,12 +47,7 @@ SWEEP = os.environ.get("SWEEP") == "1"   # weekly top-of-week sweep (vs the dail
 # making the site clip-first. Default OFF = "enrich" mode (clips preferred, text kept).
 CLIPS_ONLY = os.environ.get("CLIPS_ONLY", "").strip().lower() in ("1", "true", "yes", "on")
 
-THEMES = [
-    "Deepfakes & image abuse", "Scams & fraud", "The environment & data centres",
-    "Jobs & livelihoods", "Kids & safety", "Surveillance", "Misinformation",
-    "Breaches & system failures", "Even the experts are worried",
-    "Bias & discrimination", "Automated decisions & welfare", "AI companions & mental health",
-]
+THEMES = rulebook.theme_names()   # the 13 themes, from rulebook.md section 2
 
 # Recency window (A): each run only looks at RECENT posts, so we don't re-judge stale
 # items every day (rejected posts aren't stored, so without this they'd be re-judged
@@ -60,11 +56,11 @@ THEMES = [
 WINDOW_DAYS = 7 if SWEEP else 2
 REDDIT_T = "week" if SWEEP else "day"   # Reddit `top`/search time filter (hour/day/week/month/year/all)
 PER_SOURCE = 25           # max posts fetched per source-pass (the window bounds the rest, not this)
-# Theme-balanced writing (C): spread candidates across the 12 themes rather than letting
+# Theme-balanced writing (C): spread candidates across the themes rather than letting
 # one loud theme fill the batch. Per-theme cap + an overall ceiling; judge widely so every
 # theme gets a look. Actual judged count is now bounded by how many NEW items the window holds.
 MAX_PER_THEME = 4         # keep the BEST N per theme (by relevance) after judging everything
-MAX_NEW = 48              # overall ceiling on new candidates per run (= 12 themes × 4)
+MAX_NEW = len(THEMES) * MAX_PER_THEME   # overall ceiling on new candidates per run (13 themes × 4)
 MAX_JUDGE = 250           # safety ceiling on judge calls (a runaway pool); the real bound is now
                           # the judge's 200K-TPD bucket (~168 judges) + the wall-clock budget.
                           # Selection is judge-EVERYTHING-then-pick-best-per-theme, not cap-early.
