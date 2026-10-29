@@ -15,19 +15,23 @@ is no server or database to run. An autonomous pipeline keeps it fed:
 ```
 Daily/weekly (GitHub Actions)
   → collect candidates   (Reddit RSS + Google-Alert RSS + news/RSS feeds + YouTube)
-  → AI triage & judge    (theme · plain-language summary · relevance score · sensitivity flag)
-  → review queue         (Airtable)
-  → editorial gate       (auto-publish safe items; sensitive items held for review)
+  → AI triage & judge    (theme · a score per criterion · verdict · sensitivity)
+  → AI card copy         (our own title + a short factual summary)
+  → review console       (Airtable)
+  → editorial gate       (auto-publish what passes the bar; the riskiest held for review)
   → build + deploy        (static JSON → the gallery re-renders)
 ```
 
+- **The rulebook** ([`rulebook.md`](rulebook.md)) is the one home for the editorial rules: the themes, what
+  counts as a story, the judge's scores and the bar, sensitivity, card copy and the settings. The triage, judge
+  and copy prompts are built from it, and the site's theme summaries come from it.
 - **Collection** is downstream-only — it reads public RSS/feeds and official platform embeds; it never
   scrapes walled apps.
-- **The AI judge** is a typed, source-agnostic editorial filter. Its north-star test is *"does this
-  help a general reader understand a real risk, danger, or harm of AI?"* — keeping grounded, sourced
-  stories and rejecting hype, promos, and opinion.
+- **The AI judge** scores each story for source credibility, real consequence, wider significance, fit for
+  our reader (a thoughtful, experienced professional) and theme fit. The code, not the AI, applies the bar.
 - **Editorial discipline is the credibility signal:** emotional in *what* is shown, disciplined in
-  *how* it is sourced and framed. Sensitive items are always held for human review before publishing.
+  *how* it is sourced and framed. Sensitive stories are hidden by default with a label; the riskiest are
+  held for a person to review.
 
 ## Tech
 
