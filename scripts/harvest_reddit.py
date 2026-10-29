@@ -1,11 +1,12 @@
-"""Reddit harvester for AI Harm Watch.
+"""Story harvester for Is AI Good? (isaigood.org).
 
-Reads Reddit's PUBLIC search JSON (no app / no OAuth / no Responsible-Builder
-sign-up needed), asks Groq to judge + summarise each post, dedupes against what
-is already in Airtable, and writes genuinely relevant new stories as
-`Candidate` rows for the owner to review.
+Reads the owner's Active sources from Airtable (Reddit, Google Alerts, news feeds, YouTube),
+drops what's too old, already stored or off topic, then asks Groq to triage, judge and write the
+card copy, following the editorial rulebook (rulebook.md, read by scripts/rulebook.py). The best
+stories per theme are written to Airtable as `Candidate` rows; publish.py decides what goes live.
 
-Run locally:  source .env.local && python scripts/harvest_reddit.py
+Calls Groq, so it runs in GitHub Actions (Groq blocks the owner's computer).
+Run:  source .env.local && python scripts/harvest_reddit.py   (DRY_RUN=1: judge only, write nothing)
 """
 import os, sys, json, time, html, re, random, datetime, difflib, email.utils, urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
@@ -419,7 +420,7 @@ def _feed_post(title, body, link, date, label, prov, feed_image=""):
             "created": date, "over_18": False, "feed_image": feed_image}
 
 # --- Lane 2: YouTube Data API search ----------------------------------------
-# Open discovery across the 12 themes (rows of Type "YouTube search" in the Sources
+# Open discovery across the themes (rows of Type "YouTube search" in the Sources
 # table; the row Name IS the query, like Keyword rows). Two passes per query — short
 # (<4m, incl Shorts) + medium (4–20m segments) — to get the short-vs-longform mix.
 # Provenance is "YouTube search" (NOT "YouTube"), so these BYPASS the AI pre-gate: the
