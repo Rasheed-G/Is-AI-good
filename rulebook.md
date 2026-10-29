@@ -64,8 +64,11 @@ theme page).
    say where it comes from. **A personal account** (a Reddit or social media post about one's own experience)
    counts only when a credible outlet, court or study reports it. Content that is itself AI-generated and can't
    be verified is rejected too.
-2. **AI plays no real part.** AI is only mentioned, not used in or causing the harm.
-3. **No real event or finding.** Opinion, speculation or "trends" with nothing specific behind it.
+2. **AI plays no real part.** AI is only mentioned, or a person happened to use it while the harm came from
+   something else (e.g. a student punished for using ChatGPT). Kept when what the AI produced or did caused or
+   enabled the harm, even if a person misused it.
+3. **No real event or finding.** Opinion, speculation or "trends" with nothing specific behind it. A named study,
+   an official statistic, or a ruling, law or local decision responding to a harm counts as a real finding.
 4. **Selling something.** Product launches, company PR, funding news, how-to lists, memes, hype or fear marketing.
 5. **Politics around AI, not harm from AI.** Who said what, protests, lobbying. Kept when it shows a real harm or
    a harm pushed back.
