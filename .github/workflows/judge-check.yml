@@ -1,0 +1,52 @@
+name: Judge check
+
+# Try the judge and card copy (built from rulebook.md) on stories already in Airtable, in the cloud
+# (Groq blocks the owner's computer). PRINT ONLY: nothing is written to Airtable or the site.
+#   regrade.py           re-judges a random sample of live stories with the current judge
+#   rewrite_summaries.py writes our own title + summary for a few of them (DRY)
+#
+# Runs:
+#   * on a pull request when the "judge-check" label is added (to test a rulebook or prompt change)
+#   * on demand (workflow_dispatch), with the sample size as an input
+on:
+  pull_request:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      stories:
+        description: "Stories to re-judge"
+        default: "12"
+      cards:
+        description: "Cards to rewrite"
+        default: "4"
+
+concurrency:
+  group: judge-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'judge-check'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Re-judge a sample of live stories (print only)
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          STATUS: Published
+          LIMIT: ${{ github.event.inputs.stories || '12' }}
+          PYTHONUNBUFFERED: "1"
+        run: python -u scripts/regrade.py
+      - name: Rewrite a few cards (print only)
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          DRY: "1"
+          LIMIT: ${{ github.event.inputs.cards || '4' }}
+          PYTHONUNBUFFERED: "1"
+        run: python -u scripts/rewrite_summaries.py
