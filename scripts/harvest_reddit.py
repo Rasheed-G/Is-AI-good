@@ -1079,21 +1079,64 @@ def looks_like_meta(text):
     t = (text or "").lower()
     return any(m in t for m in META_MARKERS)
 
+def _strip_tags(fragment):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"(?s)<[^>]+>", " ", fragment))).strip()
+
+def _ld_article_body(raw):
+    """The article text many news sites publish for search engines (JSON-LD "articleBody"): the
+    cleanest source there is, with no menus or adverts. The longest wins, as a page may also list
+    related stories."""
+    best = ""
+    for block in re.findall(r"(?is)<script[^>]+application/ld\+json[^>]*>(.*?)</script>", raw):
+        try:
+            todo = [json.loads(block.strip())]
+        except ValueError:
+            continue
+        while todo:
+            node = todo.pop()
+            if isinstance(node, list):
+                todo.extend(node)
+            elif isinstance(node, dict):
+                todo.extend(v for v in node.values() if isinstance(v, (list, dict)))
+                body = node.get("articleBody")
+                if isinstance(body, str) and len(body) > len(best):
+                    best = body
+    return _strip_tags(best)
+
+def _story_paragraphs(raw):
+    """The page's story paragraphs: inside its <article> or <main> when it has one, with menus,
+    headers, footers and link lists left out. Site menus use up the judge's fixed reading length
+    (and the card copy's) before the story starts."""
+    raw = re.sub(r"(?is)<(nav|header|footer|aside|form|menu)\b.*?</\1>", " ", raw)
+    blocks = re.findall(r"(?is)<(?:article|main)\b[^>]*>(.*?)</(?:article|main)>", raw)
+    scope = max(blocks, key=len) if blocks else raw
+    kept = []
+    for para in re.findall(r"(?is)<p\b[^>]*>(.*?)</p>", scope):
+        text = _strip_tags(para)
+        linked = sum(len(_strip_tags(a)) for a in re.findall(r"(?is)<a\b[^>]*>(.*?)</a>", para))
+        if len(text) >= 40 and linked <= len(text) / 2:     # short lines and link lists aren't the story
+            kept.append(text)
+    return " ".join(kept)
+
 def _article_text(url):
-    """Full article body (og:description + <p> text) for a feed/article URL — gives Stage C a
-    real body when the feed snippet is too thin to summarise from (the failure that let refusal
-    text reach live cards). Best-effort: returns '' on any error so the caller keeps the snippet."""
+    """Full article body for a feed/article URL: og:description, then the publisher's own article
+    text or else the story paragraphs (never site menus). Gives the judge and Stage C a real body
+    when the feed snippet is too thin (the failure that let refusal text reach live cards).
+    Best-effort: returns '' on any error so the caller keeps the snippet."""
     try:
         raw = http_text(url, headers={"User-Agent": BROWSER_UA})
     except Exception:
         return ""
+    body = _ld_article_body(raw)
     raw = re.sub(r"(?is)<(script|style|noscript).*?</\1>", " ", raw)
     m = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|description)["\']'
                   r'[^>]+content=["\']([^"\']+)', raw, re.I)
     desc = html.unescape(m.group(1)) if m else ""
-    paras = re.findall(r"(?is)<p[^>]*>(.*?)</p>", raw)
-    text = " ".join(html.unescape(re.sub(r"(?s)<[^>]+>", " ", p)) for p in paras)
-    return re.sub(r"\s+", " ", (desc + " " + text).strip())
+    if len(body) < 200:
+        body = _story_paragraphs(raw)
+    if len(body) < 200:     # an unusual page: better some menu text than no story at all
+        body = " ".join(_strip_tags(p) for p in re.findall(r"(?is)<p\b[^>]*>(.*?)</p>", raw))
+    return re.sub(r"\s+", " ", (desc + " " + body).strip())
 
 def copy_prompt(post, body):
     """The Stage-C card-copy prompt, built from the rulebook's "Card copy" rules (section 7). The ONE
