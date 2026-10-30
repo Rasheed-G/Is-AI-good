@@ -5,7 +5,7 @@ name: Re-judge stories (release 3 step 5)
 # the scores, verdict, reason and the judge's theme pick go in their own columns; Status and Theme
 # stay as they are until the owner has reviewed them.
 #
-#   judge-sample   the ~65 stories ticked "Step 5 sample" (after the owner has labelled them)
+#   judge-sample   the ~65 stories ticked "Step 5 sample" (after the owner has labelled them); always re-judged
 #   judge-rest     every other Published and held story (skips any already judged under this rulebook)
 #   cards-preview  print new titles and summaries for a few cards (nothing written)
 #   cards-write    rewrite the title and summary of every live story (old copy saved as a download)
@@ -51,7 +51,7 @@ jobs:
         env:
           STATUS: Published,Candidate
           WRITE: "1"
-          SKIP_JUDGED: "1"
+          SKIP_JUDGED: ${{ github.event.inputs.task == 'judge-sample' && '0' || '1' }}   # the sample is a test: always re-judged
           SAMPLE: ${{ github.event.inputs.task == 'judge-sample' && 'only' || 'skip' }}
           JUDGE_BATCH_SLEEP: ${{ github.event.inputs.pause || '20' }}
         run: python -u scripts/regrade.py
