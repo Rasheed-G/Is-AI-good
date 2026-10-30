@@ -919,7 +919,8 @@ Return one object per item, matching its [i] number:
     "hold": "{HOLD_REASONS[0]}" | "{HOLD_REASONS[1]}" | null,
     "reason": "one short line: why it is kept, weak or rejected"}}
 ]}}
-Judge EVERY item; return exactly one object per item.
+Judge EVERY item; return exactly one object per item. Pick the theme and fill in every score even when you
+reject an item: a story rejected only for its source can then be looked for elsewhere.
 
 ITEMS:
 {chr(10).join(lines)}"""
