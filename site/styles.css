@@ -357,6 +357,8 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .nav-sub a[aria-current="page"] { background: var(--ink); color: #fff; }
 /* News & Stories browses every theme, so it sits apart from the theme pages: thick rule above, plain weight */
 .nav-sub .nav-sub-all a { border-top-width: 6px; font-weight: 400; background: var(--paper); }
+/* All topics sits apart at the top the same way */
+.nav-sub .nav-sub-top a { border-bottom: 4px solid var(--ink); font-weight: 400; background: var(--paper); }
 .nav-sub .nav-sub-all a:hover { background: var(--orange); }
 .mini-mark:focus-visible, .nav-link:focus-visible, .nav-group-btn:focus-visible, .menu-btn:focus-visible {
   outline: 3px solid var(--ink); outline-offset: 2px;
@@ -720,6 +722,10 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .wwd-label { display: block; margin-top: 18px; font-family: var(--mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .wwd-label + .wwd-paths, .wwd-label + a.path { margin-top: 10px; }
 .text-page a.path.path-quiet { background: var(--surface); }
+/* "See all topics": black, so it reads as a different kind of link from the topics beside it */
+.text-page a.path.path-all { background: var(--ink); }
+.text-page a.path.path-all .path-q, .text-page a.path.path-all .path-line { color: #fff; }
+.text-page a.path.path-all:hover { box-shadow: 5px 5px 0 var(--orange); }
 .text-page a.path {
   display: block; padding: 16px 18px; text-decoration: none; color: var(--ink);
   background: var(--orange); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
