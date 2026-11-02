@@ -289,6 +289,18 @@
       "featured": false
     },
     {
+      "id": "recEvCLXiehGxOi6D",
+      "title": "A US strike on an Iranian school raises questions about AI targeting",
+      "theme": "AI and war",
+      "format": "Image",
+      "summary": "A US strike hit a girls' school in Minab, Iran, on the first day of the 2026 war, killing more than 150 people, most of them children. Old intelligence still listed the site as military. US lawmakers asked whether the Pentagon's AI targeting system helped pick it. The Pentagon says the strike is under investigation.",
+      "sourceUrl": "https://www.militarytimes.com/news/your-military/2026/03/24/deadly-iran-school-strike-casts-shadow-over-pentagons-ai-targeting-push/",
+      "mediaUrl": "https://one.sightlinemg.com/wp-content/uploads/2026/08/2026-03-12T170102Z_80407223_RC2HWJAA3TVX_RTRMADP_3_IRAN-CRISIS-SCHOOL-ATTACK.JPG.jpg?w=2048",
+      "date": "2026-03-24",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recAqF66W2C6iRFGL",
       "title": "Investigados dos hombres por las fotos falsas por IA de desnudos de más de 20 mujeres en Silleda",
       "theme": "Image abuse",
@@ -2809,6 +2821,18 @@
       "featured": false
     },
     {
+      "id": "rec8AS7eJZFhzsQFN",
+      "title": "A drone guided by AI killed three civilians in Ukraine",
+      "theme": "AI and war",
+      "format": "Image",
+      "summary": "A Russian drone with no radio link to a pilot hit a petrol station in Zaporizhzhia in July 2026, killing three civilians. Investigators, reported by the New York Times, found people had set its route and the AI on board chose where to strike. Russia hasn't responded to the findings.",
+      "sourceUrl": "https://www.aerotime.aero/articles/russian-drone-guided-entirely-by-ai-kills-civilians-in-ukraine",
+      "mediaUrl": "https://www.aerotime.aero/images/2026/08/3b1417c5970306b133b5e5634cf37699.jpg",
+      "date": "2026-08-24",
+      "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
       "id": "recWQhOFYz07895M8",
       "title": "AI blamed as UK graduate jobs supposedly half",
       "theme": "Jobs & livelihoods",
@@ -3790,6 +3814,18 @@
       "mediaUrl": "https://www.youtube.com/watch?v=u3NoOtEOfGU",
       "date": "2026-09-15",
       "sensitivity": "Safe",
+      "featured": false
+    },
+    {
+      "id": "recGIGF1E8dbluHl0",
+      "title": "AI targeting can move faster than people can check, experts tell US lawmakers",
+      "theme": "AI and war",
+      "format": "Image",
+      "summary": "At a US congressional hearing in September 2026, experts said AI can shape strike decisions while a person stays formally in charge. \"The approval button alone does not demonstrate the control,\" one researcher said. Witnesses asked the Pentagon to report when AI plays a part in strikes that harm civilians.",
+      "sourceUrl": "https://www.militarytimes.com/news/your-military/2026/09/16/ai-military-targeting-may-move-faster-than-humans-can-authenticate-critics-warn/",
+      "mediaUrl": "https://one.sightlinemg.com/wp-content/uploads/2026/09/9545934.jpg.jpg?w=2048",
+      "date": "2026-09-16",
+      "sensitivity": "Sensitive",
       "featured": false
     },
     {
