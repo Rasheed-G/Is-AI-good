@@ -1139,6 +1139,28 @@ def _article_text(url):
         body = " ".join(_strip_tags(p) for p in re.findall(r"(?is)<p\b[^>]*>(.*?)</p>", raw))
     return re.sub(r"\s+", " ", (desc + " " + body).strip())
 
+READ_WORKERS = 8           # pages opened at once before judging (no AI cost; bounded by the slowest page)
+
+def read_articles(posts, deadline):
+    """Before the judge: open each item's article and give the judge the story itself, not the feed's
+    snippet (about 150 characters for a Google Alert). Social clips and Reddit threads keep their own
+    text. A page that is blocked or empty keeps the snippet. The card copy then reuses the same text."""
+    from concurrent.futures import ThreadPoolExecutor
+    todo = [p for p in posts
+            if article_url(p).lower().startswith("http") and not is_social_clip(article_url(p))
+            and "reddit.com" not in article_url(p).lower()]
+    if not todo or time.time() > deadline:
+        return
+    with ThreadPoolExecutor(max_workers=READ_WORKERS) as pool:
+        texts = list(pool.map(lambda p: _article_text(article_url(p)), todo))
+    read = 0
+    for p, text in zip(todo, texts):
+        if len(text) >= COPY_MIN_BODY and len(text) > len((p.get("selftext") or "").strip()):
+            p["selftext"] = text
+            read += 1
+    print(f"  Read the article for {read} of {len(todo)} items before judging "
+          f"({len(todo) - read} blocked or empty: the judge reads their feed text)")
+
 def copy_prompt(post, body):
     """The Stage-C card-copy prompt, built from the rulebook's "Card copy" rules (section 7). The ONE
     prompt for card copy, shared by the live harvester (write_copy) and the bulk rewrite
@@ -1698,6 +1720,7 @@ def main():
             continue
         seen_titles.add(norm)
         to_judge.append(p)
+    read_articles(to_judge, deadline)
     batched = JUDGE_BATCH > 1
     sleep_between = JUDGE_BATCH_SLEEP if batched else JUDGE_SLEEP
     n_batches, stop = 0, False
