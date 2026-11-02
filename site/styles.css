@@ -355,8 +355,8 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .nav-group-btn[aria-expanded="true"] { background: var(--surface); color: var(--ink); }
 .nav-group-btn[aria-expanded="true"] .caret { display: inline-block; transform: rotate(180deg); }
 .nav-sub a[aria-current="page"] { background: var(--ink); color: #fff; }
-/* News & Stories browses every theme, so it sits apart from the theme pages: thick rule above, plain weight */
-.nav-sub .nav-sub-all a { border-top-width: 6px; font-weight: 400; background: var(--paper); }
+/* News & Stories browses every theme, so it leads and sits apart from the topics: thick rule below, plain weight */
+.nav-sub .nav-sub-all a { border-bottom: 4px solid var(--ink); font-weight: 400; background: var(--paper); }
 .nav-sub .nav-sub-all a:hover { background: var(--orange); }
 .mini-mark:focus-visible, .nav-link:focus-visible, .nav-group-btn:focus-visible, .menu-btn:focus-visible {
   outline: 3px solid var(--ink); outline-offset: 2px;
@@ -469,10 +469,15 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
   border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-decoration: none;
 }
 .btn-main:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+/* Explore other topics: black like "See all topics" on the home page, so it doesn't clash with the orange sign-up box below */
+.btn-main.btn-topics { background: var(--ink); color: #fff; box-shadow: 4px 4px 0 var(--orange); }
+.btn-main.btn-topics:focus-visible { outline-color: var(--orange-ink); }
 @media (prefers-reduced-motion: no-preference) {
   .btn-main { transition: transform .12s ease, box-shadow .12s ease; }
   .btn-main:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
   .btn-main:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-main.btn-topics:hover { box-shadow: 5px 5px 0 var(--orange); }
+  .btn-main.btn-topics:active { box-shadow: 2px 2px 0 var(--orange); }
 }
 
 /* ==== Theme page (first: /impact/work/). Text column like a text page; story cards go full width ==== */
@@ -673,6 +678,8 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .text-page .home-lead { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.4; color: var(--ink); }
 .text-page .home-lead + .home-lead { margin-top: .6em; }
 .text-page .home-lead:first-child { font-weight: 700; }
+/* The first line is bold already, so "can" stands out with a thick orange underline instead */
+.text-page .home-lead strong { text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 5px; text-underline-offset: 5px; }
 /* Section headings: ink bar, not orange (the heading isn't clickable) */
 .home .sec-title::before { background: var(--ink); box-shadow: none; }
 
@@ -720,6 +727,10 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .wwd-label { display: block; margin-top: 18px; font-family: var(--mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .wwd-label + .wwd-paths, .wwd-label + a.path { margin-top: 10px; }
 .text-page a.path.path-quiet { background: var(--surface); }
+/* "See all topics": black, so it reads as a different kind of link from the topics beside it */
+.text-page a.path.path-all { background: var(--ink); }
+.text-page a.path.path-all .path-q, .text-page a.path.path-all .path-line { color: #fff; }
+.text-page a.path.path-all:hover { box-shadow: 5px 5px 0 var(--orange); }
 .text-page a.path {
   display: block; padding: 16px 18px; text-decoration: none; color: var(--ink);
   background: var(--orange); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
@@ -729,5 +740,23 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .text-page a.path:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
 .path-q { display: block; margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.15rem, 2.4vw, 1.3rem); line-height: 1.2; color: var(--ink); }
 .path-line { display: block; margin-top: 6px; font-size: 1rem; line-height: 1.45; color: var(--ink); }
+/* The impact of AI page (/impact/): wider than a text page, topic boxes with a photo on top */
+.text-page.impact-home { max-width: 900px; }
+.impact-home .wwd-paths { gap: 24px; }
+.text-page a.path.path-pic { padding: 0; overflow: hidden; }
+.path-pic .path-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 2px solid var(--ink); background: var(--surface); }
+.path-pic .path-text { display: block; padding: 16px 18px 18px; }
+/* The news box runs the full width, so its photo sits to the left */
+.text-page a.path.path-pic.path-wide { display: grid; grid-template-columns: 2fr 3fr; }
+.path-wide .path-img { height: 100%; aspect-ratio: auto; border-bottom: 0; border-right: 2px solid var(--ink); }
+.path-wide .path-text { align-self: center; }
+/* On phones every box gets a small photo on the left, so several boxes fit on the screen */
+@media (max-width: 719px) {
+  .text-page a.path.path-pic, .text-page a.path.path-pic.path-wide { display: grid; grid-template-columns: 104px 1fr; }
+  .path-pic .path-img { height: 100%; aspect-ratio: auto; border-bottom: 0; border-right: 2px solid var(--ink); }
+  .path-pic .path-text { padding: 12px 14px; }
+  .impact-home .wwd-paths { gap: 16px; }
+}
+.photo-credits { margin-top: 2.5em !important; font-size: .85rem; line-height: 1.5; color: var(--muted); }
 .home .signup-main { margin-top: 3em; }
 .signup-intro { margin: -4px 0 12px; }
