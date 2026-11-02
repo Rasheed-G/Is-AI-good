@@ -1119,15 +1119,41 @@ def _story_paragraphs(raw):
             kept.append(text)
     return " ".join(kept)
 
-def _article_text(url):
-    """Full article body for a feed/article URL: og:description, then the publisher's own article
-    text or else the story paragraphs (never site menus). Gives the judge and Stage C a real body
-    when the feed snippet is too thin (the failure that let refusal text reach live cards).
-    Best-effort: returns '' on any error so the caller keeps the snippet."""
+def _page_date(raw):
+    """The date the page says it was published (YYYY-MM-DD), from the tags news sites give search engines,
+    or "" if it has none. Incident-database entries otherwise carry the date they were logged."""
+    for pattern in (r'"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})',
+                    r'<meta[^>]+(?:property|name|itemprop)=["\'](?:article:published_time|datePublished|'
+                    r'pubdate|publish-date|parsely-pub-date|date)["\'][^>]+content=["\'](\d{4}-\d{2}-\d{2})',
+                    r'<meta[^>]+content=["\'](\d{4}-\d{2}-\d{2})[^>]+(?:property|name)=["\']article:published_time'):
+        m = re.search(pattern, raw, re.I)
+        if m and "2000-01-01" <= m.group(1) <= datetime.date.today().isoformat():
+            return m.group(1)
+    return ""
+
+def _page_language(raw):
+    """The language the page declares (<html lang="en-GB"> gives "en"), or "" if it doesn't say."""
+    m = re.search(r'<html[^>]*\blang=["\']?([a-zA-Z]{2,3})', raw[:5000])
+    return m.group(1).lower() if m else ""
+
+def _read_page(url):
+    """(article text, published date, language) for a page; ("", "", "") when it can't be read."""
     try:
         raw = http_text(url, headers={"User-Agent": BROWSER_UA})
     except Exception:
-        return ""
+        return "", "", ""
+    return _article_text(url, raw), _page_date(raw), _page_language(raw)
+
+def _article_text(url, raw=None):
+    """Full article body for a feed/article URL: og:description, then the publisher's own article
+    text or else the story paragraphs (never site menus). Gives the judge and Stage C a real body
+    when the feed snippet is too thin (the failure that let refusal text reach live cards).
+    Best-effort: returns '' on any error so the caller keeps the snippet. `raw` skips the fetch."""
+    if raw is None:
+        try:
+            raw = http_text(url, headers={"User-Agent": BROWSER_UA})
+        except Exception:
+            return ""
     body = _ld_article_body(raw)
     raw = re.sub(r"(?is)<(script|style|noscript).*?</\1>", " ", raw)
     m = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|description)["\']'
@@ -1144,22 +1170,35 @@ READ_WORKERS = 8           # pages opened at once before judging (no AI cost; bo
 def read_articles(posts, deadline):
     """Before the judge: open each item's article and give the judge the story itself, not the feed's
     snippet (about 150 characters for a Google Alert). Social clips and Reddit threads keep their own
-    text. A page that is blocked or empty keeps the snippet. The card copy then reuses the same text."""
+    text. A page that is blocked or empty keeps the snippet. The card copy then reuses the same text.
+    The page also settles two automatic checks (rulebook section 3) in code rather than by the judge:
+    its own published date replaces the feed's, and a story older than the age limit or on a page
+    that declares a language other than English is dropped. Returns the posts that go on to the judge."""
     from concurrent.futures import ThreadPoolExecutor
     todo = [p for p in posts
             if article_url(p).lower().startswith("http") and not is_social_clip(article_url(p))
             and "reddit.com" not in article_url(p).lower()]
     if not todo or time.time() > deadline:
-        return
+        return posts
     with ThreadPoolExecutor(max_workers=READ_WORKERS) as pool:
-        texts = list(pool.map(lambda p: _article_text(article_url(p)), todo))
-    read = 0
-    for p, text in zip(todo, texts):
+        pages = list(pool.map(lambda p: _read_page(article_url(p)), todo))
+    oldest = (datetime.date.today() - datetime.timedelta(days=round(rulebook.setting_int("Age limit") * 30.5))).isoformat()
+    read, redated, drop = 0, 0, set()
+    for p, (text, published, language) in zip(todo, pages):
         if len(text) >= COPY_MIN_BODY and len(text) > len((p.get("selftext") or "").strip()):
             p["selftext"] = text
             read += 1
+        if published and published != (p.get("created") or "")[:10]:
+            p["created"] = published
+            redated += 1
+        if language and language != "en":
+            drop.add(id(p))
+        elif published and published < oldest:
+            drop.add(id(p))
     print(f"  Read the article for {read} of {len(todo)} items before judging "
-          f"({len(todo) - read} blocked or empty: the judge reads their feed text)")
+          f"({len(todo) - read} blocked or empty: the judge reads their feed text); "
+          f"{redated} dates corrected from the page; {len(drop)} dropped as not in English or too old")
+    return [p for p in posts if id(p) not in drop]
 
 def copy_prompt(post, body):
     """The Stage-C card-copy prompt, built from the rulebook's "Card copy" rules (section 7). The ONE
@@ -1720,7 +1759,7 @@ def main():
             continue
         seen_titles.add(norm)
         to_judge.append(p)
-    read_articles(to_judge, deadline)
+    to_judge = read_articles(to_judge, deadline)
     batched = JUDGE_BATCH > 1
     sleep_between = JUDGE_BATCH_SLEEP if batched else JUDGE_SLEEP
     n_batches, stop = 0, False
