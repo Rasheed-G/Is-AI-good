@@ -100,7 +100,11 @@ def main():
         tokens += tok
         calls += 1
         updates = []
-        for r, t, page in zip(chunk, replies, read):
+        for r, t, page, post in zip(chunk, replies, read, posts):
+            if t is None and status == "ok":     # left out of the batch reply: judge it on its own
+                t, tok, _ = H.groq_judge(post)
+                tokens += tok
+                calls += 1
             f = r.get("fields", {})
             if t is None:
                 errors += 1

@@ -11,8 +11,10 @@ MODEL — auto-publish with post-moderation, following the rulebook (sections 4,
       - "Summary failed" is retried (and archived after 2 tries) by the harvester
   * Candidate with no summary                   -> left as Candidate (never a blank card)
   * Candidate + Safe                            -> Published  (auto, when AUTOPUBLISH is on)
-  * Candidate + Sensitive, judged under the rulebook -> Published (shown hidden by default,
-        with the "Sensitive topic" label: rulebook section 6, option A)
+  * Candidate + Sensitive, kept by the judge under the rulebook -> Published (shown hidden by
+        default, with the "Sensitive topic" label: rulebook section 6, option A)
+  * Candidate re-judged by regrade.py (has a "Judge theme") -> left as Candidate. A re-judge only
+        records the judge's view; the owner's review decides, by setting Approved or Rejected.
   * Candidate + Sensitive, judged before the rulebook -> left as Candidate (re-judged in
         release 3 step 5 before any of them can go live)
 
@@ -34,7 +36,8 @@ HEADERS = {"Authorization": f"Bearer {TOKEN}", "Content-Type": "application/json
 
 AUTOPUBLISH = os.environ.get("AUTOPUBLISH", "1").lower() not in ("0", "false", "no", "")
 SENSITIVE_HOLDS = ("Risky picture or video", "Child could be identified")
-FIELDS = ("Status", "Sensitivity", "Hold reason", "Held since", "Rulebook version", "Summary")
+FIELDS = ("Status", "Sensitivity", "Hold reason", "Held since", "Rulebook version", "Summary",
+          "Judge verdict", "Judge theme")
 
 
 def fetch_pending():
@@ -52,7 +55,8 @@ def fetch_pending():
             f = r.get("fields", {})
             rows.append({"id": r["id"], "status": f.get("Status"), "sens": f.get("Sensitivity", "Safe"),
                          "hold": f.get("Hold reason"), "held_since": f.get("Held since", ""),
-                         "version": f.get("Rulebook version"), "summary": (f.get("Summary") or "").strip()})
+                         "version": f.get("Rulebook version"), "summary": (f.get("Summary") or "").strip(),
+                         "verdict": f.get("Judge verdict"), "rejudged": bool(f.get("Judge theme"))})
         offset = data.get("offset")
         if not offset:
             break
@@ -69,11 +73,11 @@ def decide(row, today=None):
         if row["hold"] in SENSITIVE_HOLDS and row["held_since"] and row["held_since"] < cutoff:
             return "Archived"                             # nobody reviewed it in time
         return None
-    if not AUTOPUBLISH or not row["summary"]:
+    if row["rejudged"] or not AUTOPUBLISH or not row["summary"]:
         return None
     if row["sens"] != "Sensitive":
         return "Published"                                # auto-publish non-sensitive
-    if row["version"]:
+    if row["version"] and row["verdict"] == "Keep":
         return "Published"                                # sensitive, passed the rulebook's bar
     return None                                           # sensitive, judged before the rulebook
 

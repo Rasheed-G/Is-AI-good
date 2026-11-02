@@ -806,13 +806,34 @@ def groq_chat(model, prompt, temperature=0.2, json_mode=True, reasoning_effort=N
             return None, 0, "error"
     return None, 0, "rate_limited"
 
+_OUTLETS = {}
+
+def outlet(url):
+    """Who published the item: its web address, or the channel for a YouTube video. Our feed labels are
+    search names ("AI Incident Database", "[Bias] credit / loan bias"), not publishers, so without this the
+    judge can't tell the Guardian from a blog and rejects good stories as "no credible source"."""
+    if url in _OUTLETS:
+        return _OUTLETS[url]
+    host = urllib.parse.urlparse(url or "").netloc.lower().removeprefix("www.").removeprefix("m.")
+    name = host
+    if host.endswith(("youtube.com", "youtu.be")):
+        try:
+            channel = http_json("https://www.youtube.com/oembed?format=json&url=" + urllib.parse.quote(url)).get("author_name")
+            name = f"YouTube channel {channel}" if channel else host
+        except Exception:
+            pass
+    _OUTLETS[url] = name
+    return name
+
 def _origin_line(post):
     # Source-agnostic origin — the harvester feeds Reddit, news RSS, Google Alerts, YouTube
     # and incident-DB entries, so never tell the judge everything is a "Reddit post".
     if post.get("subreddit"):
         return f"Source: Reddit — r/{post['subreddit']}"
     prov, lbl = post.get("provenance", ""), post.get("source_label", "")
-    return "Source: " + (f"{prov} — {lbl}" if (prov and lbl) else (prov or lbl or "unknown"))
+    line = "Found via: " + (f"{prov} — {lbl}" if (prov and lbl) else (prov or lbl or "unknown"))
+    pub = outlet(post.get("external_url", ""))
+    return line + (f" | Published by: {pub}" if pub else "")
 
 # --- Stage B: the editorial judge (gpt-oss-120b) ----------------------------
 # The judge's instructions are BUILT FROM rulebook.md (purpose, themes, story criteria, examples,
@@ -879,14 +900,16 @@ def judge_prompt(batch):
                  "short.\n" if any_clip else "")
     return f"""You are the editorial judge for "Is AI Good?" (isaigood.org), a gallery of real, sourced stories of
 harm from AI. Judge EACH numbered item on its own against the rules below. An item may be a news article, a
-Google Alert hit, a Reddit post, a YouTube video or an incident-database entry. Return STRICT JSON only.
+Google Alert hit, a Reddit post, a YouTube video or an incident-database entry. "Found via" is our own feed or
+search name, not the publisher; "Published by" is the outlet (web address or YouTube channel): judge source
+credibility on that. Return STRICT JSON only.
 
 {JUDGE_RULES}
 {clip_hint}
 Return one object per item, matching its [i] number:
 {{"results": [
   {{"i": <number>,
-    "reject": <the instant-reject number 1-9 that applies, or null>,
+    "reject": <the instant-reject number that applies, or null>,
     "theme": one of {THEMES} or "none",
     "scores": {{"credibility": 0-100, "consequence": 0-100, "significance": 0-100, "audience": 0-100, "theme_fit": 0-100}},
     "overall": 0-100,
@@ -896,7 +919,8 @@ Return one object per item, matching its [i] number:
     "hold": "{HOLD_REASONS[0]}" | "{HOLD_REASONS[1]}" | null,
     "reason": "one short line: why it is kept, weak or rejected"}}
 ]}}
-Judge EVERY item; return exactly one object per item.
+Judge EVERY item; return exactly one object per item. Pick the theme and fill in every score even when you
+reject an item: a story rejected only for its source can then be looked for elsewhere.
 
 ITEMS:
 {chr(10).join(lines)}"""
@@ -1056,21 +1080,64 @@ def looks_like_meta(text):
     t = (text or "").lower()
     return any(m in t for m in META_MARKERS)
 
+def _strip_tags(fragment):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"(?s)<[^>]+>", " ", fragment))).strip()
+
+def _ld_article_body(raw):
+    """The article text many news sites publish for search engines (JSON-LD "articleBody"): the
+    cleanest source there is, with no menus or adverts. The longest wins, as a page may also list
+    related stories."""
+    best = ""
+    for block in re.findall(r"(?is)<script[^>]+application/ld\+json[^>]*>(.*?)</script>", raw):
+        try:
+            todo = [json.loads(block.strip())]
+        except ValueError:
+            continue
+        while todo:
+            node = todo.pop()
+            if isinstance(node, list):
+                todo.extend(node)
+            elif isinstance(node, dict):
+                todo.extend(v for v in node.values() if isinstance(v, (list, dict)))
+                body = node.get("articleBody")
+                if isinstance(body, str) and len(body) > len(best):
+                    best = body
+    return _strip_tags(best)
+
+def _story_paragraphs(raw):
+    """The page's story paragraphs: inside its <article> or <main> when it has one, with menus,
+    headers, footers and link lists left out. Site menus use up the judge's fixed reading length
+    (and the card copy's) before the story starts."""
+    raw = re.sub(r"(?is)<(nav|header|footer|aside|form|menu)\b.*?</\1>", " ", raw)
+    blocks = re.findall(r"(?is)<(?:article|main)\b[^>]*>(.*?)</(?:article|main)>", raw)
+    scope = max(blocks, key=len) if blocks else raw
+    kept = []
+    for para in re.findall(r"(?is)<p\b[^>]*>(.*?)</p>", scope):
+        text = _strip_tags(para)
+        linked = sum(len(_strip_tags(a)) for a in re.findall(r"(?is)<a\b[^>]*>(.*?)</a>", para))
+        if len(text) >= 40 and linked <= len(text) / 2:     # short lines and link lists aren't the story
+            kept.append(text)
+    return " ".join(kept)
+
 def _article_text(url):
-    """Full article body (og:description + <p> text) for a feed/article URL — gives Stage C a
-    real body when the feed snippet is too thin to summarise from (the failure that let refusal
-    text reach live cards). Best-effort: returns '' on any error so the caller keeps the snippet."""
+    """Full article body for a feed/article URL: og:description, then the publisher's own article
+    text or else the story paragraphs (never site menus). Gives the judge and Stage C a real body
+    when the feed snippet is too thin (the failure that let refusal text reach live cards).
+    Best-effort: returns '' on any error so the caller keeps the snippet."""
     try:
         raw = http_text(url, headers={"User-Agent": BROWSER_UA})
     except Exception:
         return ""
+    body = _ld_article_body(raw)
     raw = re.sub(r"(?is)<(script|style|noscript).*?</\1>", " ", raw)
     m = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|description)["\']'
                   r'[^>]+content=["\']([^"\']+)', raw, re.I)
     desc = html.unescape(m.group(1)) if m else ""
-    paras = re.findall(r"(?is)<p[^>]*>(.*?)</p>", raw)
-    text = " ".join(html.unescape(re.sub(r"(?s)<[^>]+>", " ", p)) for p in paras)
-    return re.sub(r"\s+", " ", (desc + " " + text).strip())
+    if len(body) < 200:
+        body = _story_paragraphs(raw)
+    if len(body) < 200:     # an unusual page: better some menu text than no story at all
+        body = " ".join(_strip_tags(p) for p in re.findall(r"(?is)<p\b[^>]*>(.*?)</p>", raw))
+    return re.sub(r"\s+", " ", (desc + " " + body).strip())
 
 def copy_prompt(post, body):
     """The Stage-C card-copy prompt, built from the rulebook's "Card copy" rules (section 7). The ONE

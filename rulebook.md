@@ -1,6 +1,6 @@
 # Editorial rulebook
 
-**Version 1** (locked 2026-10-29)
+**Version 2** (2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
 
 The one reference point for what the gallery collects, keeps and shows. The pipeline reads this file: the theme
 list, the judge, triage and card copy instructions, and the site's theme summaries all come from here. Change a
@@ -64,19 +64,21 @@ theme page).
    say where it comes from. **A personal account** (a Reddit or social media post about one's own experience)
    counts only when a credible outlet, court or study reports it. Content that is itself AI-generated and can't
    be verified is rejected too.
-2. **AI plays no real part.** AI is only mentioned, not used in or causing the harm.
-3. **No real event or finding.** Opinion, speculation or "trends" with nothing specific behind it.
+2. **AI plays no real part.** AI is only mentioned, or a person happened to use it while the harm came from
+   something else (e.g. a student punished for using ChatGPT). Kept when what the AI produced or did caused or
+   enabled the harm, even if a person misused it.
+3. **No real event or finding.** Opinion, speculation or "trends" with nothing specific behind it. A named study,
+   an official statistic, or a ruling, law or local decision responding to a harm counts as a real finding.
 4. **Selling something.** Product launches, company PR, funding news, how-to lists, memes, hype or fear marketing.
-5. **Politics around AI, not harm from AI.** Who said what, protests, lobbying. Kept when it shows a real harm or
-   a harm pushed back.
-6. **Headline and story don't match.**
-7. **A warning about the future, or a lab-only test finding.**
-8. **AI doing good on its own.**
-9. Not in English.
+5. **Headline and story don't match.**
+6. **A warning about the future, or a lab-only test finding.**
+7. **AI doing good on its own.**
+8. **Not in English.** The source itself is in another language, however good the story. Judge the language of
+   the source's title and text, not where the story happened.
 
 ### Automatic checks (code, not the judge)
 - The source link works.
-- A working image or video (no placeholder card).
+- A picture or video when there is one. A strong story with none goes live as a text card.
 - A date within 6 months (featured cards, theme-page cards and the owner's stories exempt).
 - A theme.
 - Not a copy of a story we already have.
@@ -131,7 +133,8 @@ theme page).
 | Suno loses copyright lawsuit brought by GEMA | **Keep** | Jobs & livelihoods | Creative work copied; a ruling is a harm pushed back |
 | Dutch police used predictive policing for a decade without evidence it worked | **Keep** | When AI fails | A tool that didn't work for anyone; no group treated worse, so not Bias |
 | OpenAI cancels a model release over safety concerns | **Reject** | — | A lab's own warning about the future, no harm yet |
-| First anti-AI protester to be jailed | **Reject** | — | Politics around AI, not harm from AI |
+| First anti-AI protester to be jailed | **Reject** | — | AI plays no real part in the harm |
+| Estonian court fines plaintiffs for AI-invented references (Lithuanian source) | **Reject** | — | Not in English |
 | Dallas adds 1,200 AI cameras, vows no face recognition | **Weak** | Surveillance & privacy | A plan and a promise; no one harmed yet |
 | Fake video of a Nepal bridge collapsing | **Weak** | Misinformation | A fake that exists, with no sign it spread or misled anyone |
 | Lawsuit claims RealPage software inflated rents | **Weak** | Automated decision making | An unproven claim from a lawsuit-news site; needs a stronger source or a documented harm |

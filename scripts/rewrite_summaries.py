@@ -83,18 +83,8 @@ def published_rows():
 
 
 def fetch_body(url):
-    """Article body text (og:description + <p> text), mirroring the copy test harness."""
-    try:
-        raw = H.http_text(url, headers={"User-Agent": H.BROWSER_UA})
-    except Exception as e:
-        return "", f"fetch-fail:{getattr(e, 'code', e)}"
-    raw = re.sub(r"(?is)<(script|style|noscript).*?</\1>", " ", raw)
-    m = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|description)["\']'
-                  r'[^>]+content=["\']([^"\']+)', raw, re.I)
-    desc = html.unescape(m.group(1)) if m else ""
-    paras = re.findall(r"(?is)<p[^>]*>(.*?)</p>", raw)
-    text = " ".join(html.unescape(re.sub(r"(?s)<[^>]+>", " ", p)) for p in paras)
-    body = re.sub(r"\s+", " ", (desc + " " + text).strip())
+    """Article text, the same way the judge and the live copy step read it (no site menus)."""
+    body = H._article_text(url)
     return body, ("ok" if body else "empty")
 
 
