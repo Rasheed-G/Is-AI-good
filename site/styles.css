@@ -355,10 +355,8 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
 .nav-group-btn[aria-expanded="true"] { background: var(--surface); color: var(--ink); }
 .nav-group-btn[aria-expanded="true"] .caret { display: inline-block; transform: rotate(180deg); }
 .nav-sub a[aria-current="page"] { background: var(--ink); color: #fff; }
-/* News & Stories browses every theme, so it sits apart from the theme pages: thick rule above, plain weight */
-.nav-sub .nav-sub-all a { border-top-width: 6px; font-weight: 400; background: var(--paper); }
-/* All topics sits apart at the top the same way */
-.nav-sub .nav-sub-top a { border-bottom: 4px solid var(--ink); font-weight: 400; background: var(--paper); }
+/* News & Stories browses every theme, so it leads and sits apart from the topics: thick rule below, plain weight */
+.nav-sub .nav-sub-all a { border-bottom: 4px solid var(--ink); font-weight: 400; background: var(--paper); }
 .nav-sub .nav-sub-all a:hover { background: var(--orange); }
 .mini-mark:focus-visible, .nav-link:focus-visible, .nav-group-btn:focus-visible, .menu-btn:focus-visible {
   outline: 3px solid var(--ink); outline-offset: 2px;
@@ -741,6 +739,17 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .text-page a.path.path-pic { padding: 0; overflow: hidden; }
 .path-pic .path-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 2px solid var(--ink); background: var(--surface); }
 .path-pic .path-text { display: block; padding: 16px 18px 18px; }
+/* The news box runs the full width, so its photo sits to the left */
+.text-page a.path.path-pic.path-wide { display: grid; grid-template-columns: 2fr 3fr; }
+.path-wide .path-img { height: 100%; aspect-ratio: auto; border-bottom: 0; border-right: 2px solid var(--ink); }
+.path-wide .path-text { align-self: center; }
+/* On phones every box gets a small photo on the left, so several boxes fit on the screen */
+@media (max-width: 719px) {
+  .text-page a.path.path-pic, .text-page a.path.path-pic.path-wide { display: grid; grid-template-columns: 104px 1fr; }
+  .path-pic .path-img { height: 100%; aspect-ratio: auto; border-bottom: 0; border-right: 2px solid var(--ink); }
+  .path-pic .path-text { padding: 12px 14px; }
+  .impact-home .wwd-paths { gap: 16px; }
+}
 .photo-credits { margin-top: 2.5em !important; font-size: .85rem; line-height: 1.5; color: var(--muted); }
 .home .signup-main { margin-top: 3em; }
 .signup-intro { margin: -4px 0 12px; }
