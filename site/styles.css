@@ -481,6 +481,8 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
   text-transform: uppercase; letter-spacing: .05em; color: var(--ink);
 }
 .eyebrow + .page-title { margin-top: 8px; }
+/* Sensitive content note under a theme page's title */
+.content-note { margin: 10px 0 0; font-size: .95rem; font-weight: 600; color: var(--ink); }
 /* One column width for everything on the page: text, stories and boxes line up */
 .theme-page .text-page, .theme-page .theme-stories { max-width: 820px; }
 .theme-page .text-page + .text-page, .theme-page .theme-stories + .text-page { padding-top: 12px; }
