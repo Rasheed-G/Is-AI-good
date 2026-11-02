@@ -1,14 +1,23 @@
-name: Weekly sweep
+name: Weekly pick
 
-# Once a week: the "top of the week" backstop that catches anything the daily
-# runs missed (dedupe prevents repeats). Sunday 02:00 UTC. Also runnable on demand.
+# v3: once a week (Sunday 04:00 UTC, after Sunday's daily harvest) rank the week's passes, keep the best
+# 4 per theme, write their card copy and store them as Candidates (scripts/weekly_pick.py). Publish &
+# deploy runs when this finishes. Then the health check (newest story's age, Airtable rows, broken links).
+# Replaces the old weekly sweep (same file, so it stays DISABLED on GitHub until the owner turns it on).
 on:
   schedule:
-    - cron: "0 2 * * 0"
+    - cron: "0 4 * * 0"
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
+concurrency:
+  group: pipeline-data
+  cancel-in-progress: false
+
 jobs:
-  sweep:
+  pick:
     runs-on: ubuntu-latest
     timeout-minutes: 80
     steps:
@@ -16,12 +25,22 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run weekly top-of-week sweep
+      - name: Check out the working files (pipeline-data branch)
+        run: bash scripts/pipeline_data.sh checkout
+      - name: Pick the week's best stories
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          SWEEP: "1"
+          PIPELINE_DATA: pipeline-data
           PYTHONUNBUFFERED: "1"
-        run: python -u scripts/harvest_reddit.py
-# Weekly top-of-week sweep for AI Harm Watch.
+        run: python -u scripts/weekly_pick.py
+      - name: Health check
+        if: always()
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          PIPELINE_DATA: pipeline-data
+        run: python -u scripts/health_check.py
+      - name: Save the working files
+        if: always()
+        run: bash scripts/pipeline_data.sh push "Weekly pick"
+# Weekly pick workflow for AI Harm Watch.

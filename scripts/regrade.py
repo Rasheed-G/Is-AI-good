@@ -110,6 +110,7 @@ def main():
                 errors += 1
                 print(f"  ? ERROR ({status})  {f.get('Title', '')[:60]}")
                 continue
+            H.outlets.trust(t, f.get("Source URL", ""))   # approved outlet = trusted credibility, as live
             v = H.judge_verdict(t)
             verdicts[v] += 1
             old, new = f.get("Theme", "(none)"), str(t.get("theme", "none"))

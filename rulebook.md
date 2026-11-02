@@ -1,6 +1,6 @@
 # Editorial rulebook
 
-**Version 2** (2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
+**Version 3** (v3 pipeline branch, 2026-11-02: daily judging and a weekly pick, approved outlets, same-event duplicate check, a better source found automatically, judge randomness off. Not live until merged. Version 2 2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
 
 The one reference point for what the gallery collects, keeps and shows. The pipeline reads this file: the theme
 list, the judge, triage and card copy instructions, and the site's theme summaries all come from here. Change a
@@ -81,7 +81,12 @@ theme page).
 - A picture or video when there is one. A strong story with none goes live as a text card.
 - A date within 6 months (featured cards, theme-page cards and the owner's stories exempt).
 - A theme.
-- Not a copy of a story we already have.
+- Not a copy of a story we already have, including **the same event from another outlet** (the more reputable
+  outlet is kept). A later development is a new story only if it adds a real new fact, such as a ruling or a settlement.
+- **Approved outlets** (`approved_outlets.txt`) count as a trusted source: their credibility score is set in code
+  (section 8). Other outlets are scored by the judge, so small outlets aren't shut out.
+- **A better source:** a strong story held back only by its outlet is swapped to the same event at an approved
+  outlet when one is found. The old link is kept on the story.
 - **The card's title and summary describe the same event** (checked after the summary is written).
 
 ### Judge scores (each 0 to 100, plus an overall score and a one-line reason)
@@ -200,21 +205,27 @@ doesn't add "no one was hurt", because the summary we have doesn't say so)
 
 | Dial | What it does | Value |
 |---|---|---|
-| Look-back window | How far back each weekly sweep looks for new items | 7 days |
-| Items per source | Most items read from one source per sweep | 25 |
+| Look-back window | How far back each daily sweep looks for new items (overlap so a missed day loses nothing) | 2 days |
+| Items per source | Most items read from one source per daily sweep | 25 |
 | YouTube results per search | Results per search, per video length | 6 |
-| Judge ceiling ⚙ | Most stories the judge reads per sweep | 250 |
+| Judge ceiling ⚙ | Most stories the judge reads per day (approved outlets and widely covered events first) | 100 |
+| Judge randomness | How much the judge's answers may vary on the same text | 0 (off) |
 | Stories per judge call | Stories sent to the judge together (saves AI usage) | 4 |
 | Judge reading length ⚙ | How much of each item the judge reads | about 1,500 characters |
-| Best per theme per sweep ⚙ | Most new stories one theme can add in one sweep | 4 |
-| Video slot | If none of a theme's best 4 is a video, the best video that passed the bar replaces the 4th | 1 per theme per sweep |
+| Publish day | The day the week's best stories are picked and go live | Sunday |
+| Best per theme per week ⚙ | Most new stories one theme can add each week | 4 |
+| Weekly ranking ⚙ | How the week's passes are ranked | Real consequence plus wider significance, plus 5 for each other outlet that covered the same event, up to 20 |
+| Video slot | If none of a theme's best 4 is a video, the best video that passed the bar replaces the 4th | 1 per theme per week |
+| Approved outlet credibility ⚙ | Credibility score a story from an approved outlet gets | 90 |
 | Pass score ⚙ | Lowest overall judge score that can go live | 70, plus credibility at least 60, and 70 for unproven claims |
 | Gallery cap | Most live stories per theme | 20 |
 | Age limit | How old a live story can be | 6 months (exemptions in section 4) |
 | Held-story expiry | How long a held sensitive story waits before it's dropped | 4 weeks |
 | Card length | Summary length | 50 words, plus our own title (about 12 words) |
 | Yield windows | Periods used to count each source's kept stories | 10 and 30 days |
-| Duplicate check | What counts as a story we already have | Same link; or a title 90% alike, or a summary 72% alike, within 14 days |
+| Duplicate check | What counts as a story we already have | Same link; or a title 90% alike, or a summary 72% alike, within 14 days; or the same event (shared rare words, then a cheap AI yes or no) within 60 days |
+| Same-event checks ⚙ | Most pairs the cheap AI checks per day | 80 |
+| Better source window | How far back the search for a better source looks | 14 days |
 | Time limit | Longest a sweep may run | 70 minutes |
 
 ---

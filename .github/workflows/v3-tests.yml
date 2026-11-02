@@ -1,0 +1,47 @@
+name: v3 tests
+
+# Tests for the v3 pipeline. They READ Airtable and never write it (AIRTABLE_READONLY), and save results as a
+# downloadable file on the run (artifact "v3-test-results"). Each uses AI allowance, so each runs only when its
+# label is added to the v3 pull request, after the owner says yes:
+#   v3-duplicate-test   same-event check on the stories in Airtable      ~40K triage-model tokens
+#   v3-triage-test      practice sweep + 50 triage drops to the judge   ~45K triage + ~75K judge tokens
+#   v3-health-check     newest story's age, Airtable rows, broken links  no AI
+on:
+  pull_request:
+    types: [labeled]
+
+concurrency:
+  group: v3-tests
+  cancel-in-progress: false
+
+jobs:
+  test:
+    if: startsWith(github.event.label.name, 'v3-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run ${{ github.event.label.name }}
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          AIRTABLE_READONLY: "1"
+          RESULTS: results
+          PIPELINE_DATA: results
+          PYTHONUNBUFFERED: "1"
+        run: |
+          case "${{ github.event.label.name }}" in
+            v3-duplicate-test) python -u tests/duplicate_test.py ;;
+            v3-triage-test)    python -u tests/triage_test.py ;;
+            v3-health-check)   python -u scripts/health_check.py ;;
+            *) echo "Unknown test label"; exit 1 ;;
+          esac
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v3-test-results-${{ github.event.label.name }}
+          path: results/

@@ -12,6 +12,7 @@ import os, sys, json, time, html, re, random, datetime, difflib, email.utils, ur
 import xml.etree.ElementTree as ET
 from collections import Counter
 import rulebook   # rulebook.md: the one home for themes, rules and settings
+import outlets, events, better_source, pipeline_data   # v3 steps: approved outlets, same event, better source, working files
 
 # Force UTF-8 (Windows cp1252 would crash on unicode titles) and LINE buffering so
 # output streams live to CI logs instead of being lost if the job is killed.
@@ -39,30 +40,30 @@ GROQ_MODEL = JUDGE_MODEL               # back-compat alias for any external call
 # owner can add or pause them with NO code. The harvester reads Active rows each run.
 SOURCES_TABLE = "tbllWd5Rby0pkgIpB"
 RUNS_TABLE = "tblR1wvxB46FtwMia"
-SWEEP = os.environ.get("SWEEP") == "1"   # weekly top-of-week sweep (vs the daily "new" run)
 # Option A (social clips). When a Reddit post links an Instagram/TikTok/YouTube clip we
 # surface that embed as the story's media instead of the article/text (always on — see
 # _pick_external). CLIPS_ONLY additionally DROPS Reddit posts that have no such clip,
 # making the site clip-first. Default OFF = "enrich" mode (clips preferred, text kept).
+# Tests (tests/*.py, v3) set these: read Airtable but never write it; stop after triage and save its output.
+AIRTABLE_READONLY = os.environ.get("AIRTABLE_READONLY") == "1"
+TRIAGE_ONLY = os.environ.get("TRIAGE_ONLY") == "1"
 CLIPS_ONLY = os.environ.get("CLIPS_ONLY", "").strip().lower() in ("1", "true", "yes", "on")
 
 THEMES = rulebook.theme_names()   # the 13 themes, from rulebook.md section 2
 
-# Recency window (A): each run only looks at RECENT posts, so we don't re-judge stale
-# items every day (rejected posts aren't stored, so without this they'd be re-judged
-# forever). Daily = last 2 days; weekly sweep = last 7. Reddit's `t` param + YouTube's
-# publishedAfter bound server-side; feeds/`new.rss` are filtered client-side by date.
-WINDOW_DAYS = 7 if SWEEP else 2
-REDDIT_T = "week" if SWEEP else "day"   # Reddit `top`/search time filter (hour/day/week/month/year/all)
-PER_SOURCE = 25           # max posts fetched per source-pass (the window bounds the rest, not this)
-# Theme-balanced writing (C): spread candidates across the themes rather than letting
-# one loud theme fill the batch. Per-theme cap + an overall ceiling; judge widely so every
-# theme gets a look. Actual judged count is now bounded by how many NEW items the window holds.
-MAX_PER_THEME = 4         # keep the BEST N per theme (by relevance) after judging everything
-MAX_NEW = len(THEMES) * MAX_PER_THEME   # overall ceiling on new candidates per run (13 themes × 4)
-MAX_JUDGE = 250           # safety ceiling on judge calls (a runaway pool); the real bound is now
-                          # the judge's 200K-TPD bucket (~168 judges) + the wall-clock budget.
-                          # Selection is judge-EVERYTHING-then-pick-best-per-theme, not cap-early.
+# v3 (rulebook section 8): one sweep a day judges what's new; the week's passes wait in the queue
+# (pipeline_data.py) and Sunday's pick (weekly_pick.py) puts the best per theme live. The look-back
+# overlaps by a day so a missed run loses nothing; the seen list stops a story being paid for twice.
+# Reddit's `t` param + YouTube's publishedAfter bound server-side; feeds are filtered by date here.
+WINDOW_DAYS = rulebook.setting_int("Look-back window")
+REDDIT_T = "day"          # Reddit `top`/search time filter: the daily run reads top-of-day
+PER_SOURCE = rulebook.setting_int("Items per source")   # max posts fetched per source-pass
+MAX_PER_THEME = rulebook.setting_int("Best per theme per week")   # the weekly pick's best N per theme
+MAX_NEW = len(THEMES) * MAX_PER_THEME   # overall ceiling on new stories per week (13 themes × 4)
+MAX_JUDGE = rulebook.setting_int("Judge ceiling")   # stories judged per day; past it the rest wait
+                          # (approved outlets and widely covered events are judged first)
+JUDGE_TEMPERATURE = rulebook.setting_int("Judge randomness")   # 0 = off (owner, 2026-11-02)
+SAME_EVENT_MAX = rulebook.setting_int("Same-event checks")     # pairs the cheap model checks per day
 STATS_WINDOW_SHORT = 10   # short rolling window for per-source "Found (10d)"/"Kept (10d)" yield
 STATS_WINDOW_LONG = 30    # long rolling window for per-source "Found (30d)"/"Kept (30d)" yield
 YT_SEARCH_DURATIONS = ("short", "medium")  # Lane 2: short <4m (incl Shorts) + medium 4–20m (segments)
@@ -107,6 +108,8 @@ BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 
 # --- helpers ----------------------------------------------------------------
 def http_json(url, headers=None, data=None, method="GET"):
+    if AIRTABLE_READONLY and method != "GET" and "api.airtable.com" in url:
+        raise RuntimeError("AIRTABLE_READONLY is set: this run may read Airtable but never write it")
     req = urllib.request.Request(url, data=data, method=method, headers=headers or {})
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read())
@@ -129,9 +132,6 @@ def source_urls(src):
         sub = urllib.parse.quote((name[2:] if name.lower().startswith("r/") else name).strip("/"))
         base = f"https://www.reddit.com/r/{sub}"
         top = base + "/top.rss?" + urllib.parse.urlencode({"t": REDDIT_T, "limit": PER_SOURCE})  # top of window
-        if SWEEP:
-            # Weekly backstop: newest + top-of-week (two passes) so nothing recent slips through.
-            return [base + "/new.rss?" + urllib.parse.urlencode({"limit": PER_SOURCE}), top]
         # Daily: ONE pass, top-of-day only — upvote-filtered (higher signal, less junk) and
         # ~half the Reddit rate-limit backoff, which is the run's biggest time drain.
         return [top]
@@ -833,7 +833,8 @@ def _origin_line(post):
     prov, lbl = post.get("provenance", ""), post.get("source_label", "")
     line = "Found via: " + (f"{prov} — {lbl}" if (prov and lbl) else (prov or lbl or "unknown"))
     pub = outlet(post.get("external_url", ""))
-    return line + (f" | Published by: {pub}" if pub else "")
+    trusted = " (on our approved outlet list)" if outlets.approved(post.get("external_url", "")) else ""
+    return line + (f" | Published by: {pub}{trusted}" if pub else "")
 
 # --- Stage B: the editorial judge (gpt-oss-120b) ----------------------------
 # The judge's instructions are BUILT FROM rulebook.md (purpose, themes, story criteria, examples,
@@ -976,7 +977,7 @@ def groq_judge_batch(batch):
     or None (an item the model omitted / unparseable); status is 'ok' | 'rate_limited' | 'error'.
     Callers single-re-judge any None and fall back to single items on a whole-batch failure, so
     batching can never silently lose an item."""
-    content, tokens, status = groq_chat(JUDGE_MODEL, judge_prompt(batch))
+    content, tokens, status = groq_chat(JUDGE_MODEL, judge_prompt(batch), temperature=JUDGE_TEMPERATURE)
     if content is None:
         return [None] * len(batch), tokens, status   # rate_limited or error
     try:
@@ -1346,6 +1347,95 @@ def reenrich_new_rows(created, posts):
     if updates:
         print(f"  Re-enrich: recovered media for {len(updates)}/{len(bare)} new card(s).")
 
+# --- v3 steps: same-event check, ordering, better source, the week's queue ----------------
+EVENT_WINDOW_DAYS = 60     # how far back in Airtable the same-event check looks
+
+def recent_stories(days=EVENT_WINDOW_DAYS):
+    """Every story stored in the last `days` (any status: a rejected event is not wanted again either)."""
+    cut = (datetime.date.today() - datetime.timedelta(days=days)).isoformat()
+    formula = f"IS_AFTER({{Date Harvested}}, '{cut}')"
+    out, offset = [], None
+    while True:
+        u = (f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100"
+             + "".join(f"&fields%5B%5D={urllib.parse.quote(f)}" for f in ("Title", "Source headline", "Summary", "Source URL"))
+             + f"&filterByFormula={urllib.parse.quote(formula)}" + (f"&offset={offset}" if offset else ""))
+        data = http_json(u, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
+        out.extend(r.get("fields", {}) for r in data.get("records", []))
+        offset = data.get("offset")
+        if not offset:
+            return out
+
+def _triage_chat(prompt):
+    return groq_chat(TRIAGE_MODEL, prompt)
+
+def same_event_check(posts, queue):
+    """Rulebook section 3: drop new copies of an event we already have (in Airtable or this week's queue)
+    and keep one story per event among today's, the more reputable outlet first. Every kept story carries
+    p["outlets"]: the outlets that covered its event (the weekly ranking's boost). Returns
+    (posts, queue, dropped_count, tokens)."""
+    for p in posts:
+        p["outlets"] = [outlets.host(article_url(p))]
+    try:
+        stories = recent_stories()
+    except Exception as e:
+        print(f"  ! Same-event check: could not read recent stories ({e}); today's and the queue only.")
+        stories = []
+    docs = [events.doc(p["title"], p.get("selftext"), article_url(p), "new", k) for k, p in enumerate(posts)]
+    for k, q in enumerate(queue):
+        d = events.doc(q["p"]["title"], q["p"].get("selftext"), article_url(q["p"]), "queue", k)
+        d["outlets"] = q.get("outlets") or []
+        docs.append(d)
+    docs += [events.doc(f.get("Source headline") or f.get("Title"), f.get("Summary"), f.get("Source URL"), "airtable")
+             for f in stories]
+    pairs = events.candidate_pairs(docs, SAME_EVENT_MAX)
+    if not pairs:
+        print(f"  Same-event check: no likely pairs among {len(posts)} new stories.")
+        return posts, queue, 0, 0
+    same, tok = events.ask_same(pairs, docs, _triage_chat, sleep=TRIAGE_SLEEP)
+    grp = events.groups(len(docs), [k for k, v in same.items() if v])
+    drop_new, drop_queue, upgrades, covered = events.resolve(docs, grp, outlets.approved, outlets.host)
+    for qi, ni in upgrades.items():             # a queued story takes an approved outlet's link
+        q, p = queue[docs[qi]["ref"]], posts[docs[ni]["ref"]]
+        q["swapped_from"] = q.get("swapped_from") or article_url(q["p"])
+        q["p"]["external_url"] = q["p"]["permalink"] = article_url(p)
+        if len(p.get("selftext") or "") > len(q["p"].get("selftext") or ""):
+            q["p"]["selftext"] = (p.get("selftext") or "")[:pipeline_data.BODY_KEEP]
+        outlets.trust(q["t"], article_url(p))
+        q["approved"] = True
+    for i, hosts in covered.items():
+        d = docs[i]
+        target = posts[d["ref"]] if d["kind"] == "new" else queue[d["ref"]]
+        target["outlets"] = sorted(set(target.get("outlets") or []) | hosts)
+    keep_new = {docs[i]["ref"] for i in range(len(docs)) if docs[i]["kind"] == "new" and i not in drop_new}
+    keep_q = {docs[i]["ref"] for i in range(len(docs)) if docs[i]["kind"] == "queue" and i not in drop_queue}
+    posts = [p for k, p in enumerate(posts) if k in keep_new]
+    queue = [q for k, q in enumerate(queue) if k in keep_q]
+    n = len(drop_new) + len(drop_queue)
+    print(f"  Same-event check ({TRIAGE_MODEL}): {len(pairs)} likely pairs asked, {sum(same.values())} the same "
+          f"event; {len(drop_new)} new and {len(drop_queue)} queued copies dropped, {len(upgrades)} queued "
+          f"stories moved to an approved outlet ({tok} tokens).")
+    return posts, queue, n, tok
+
+def judge_order(posts):
+    """Rulebook section 8: past the daily ceiling the rest wait, so approved outlets and widely covered
+    events are judged first (stable, so the shuffle still mixes sources within each group)."""
+    return sorted(posts, key=lambda p: (not outlets.approved(article_url(p)), -len(p.get("outlets") or [])))
+
+def _google_text(url):
+    return http_text(url, headers={"User-Agent": BROWSER_UA})
+
+def _google_post(url, body):
+    req = urllib.request.Request(url, data=body.encode(), method="POST",
+                                 headers={"User-Agent": BROWSER_UA,
+                                          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"})
+    with urllib.request.urlopen(req, timeout=25) as r:
+        return r.read().decode("utf-8", "replace")
+
+def queue_item(p, t):
+    return {"p": pipeline_data.slim(p), "t": t, "theme": t.get("theme"), "judged": pipeline_data.today(),
+            "outlets": p.get("outlets") or [outlets.host(article_url(p))],
+            "approved": outlets.approved(article_url(p)), "swapped_from": p.get("swapped_from", "")}
+
 # --- main -------------------------------------------------------------------
 def build_fields(p, t, title, summary, same_event=True):
     """The new Stories row for a kept item. Holds (rulebook sections 6 and 7) keep it out of the
@@ -1586,13 +1676,16 @@ def write_run(s):
         "Not judged (ceiling)": s.get("not_judged", 0), "Passed bar": s.get("passed", 0),
         "Held": s.get("held", 0), "Triage drop sample": s.get("triage_sample", ""),
         "Rulebook version": int(rulebook.version()),
+        "Same event dropped": s.get("same_event", 0), "Approved outlet": s.get("approved", 0),
+        "Swapped source": s.get("swapped", 0), "Queued": s.get("queued", 0),
     }
     # Token fields may not exist in the base yet (added via Airtable UI or metadata API later).
     # A 422 UNKNOWN_FIELD_NAME names one absent field at a time; pop the named one and retry,
     # so the run row still logs with whatever token columns DO exist.
     OPTIONAL = ("Tokens", "Tokens A (triage)", "Tokens B (judge)", "Tokens C (copy)", "Judge mode",
                 "Too old", "Duplicates", "YouTube gate dropped", "Triage dropped", "Not judged (ceiling)",
-                "Passed bar", "Held", "Triage drop sample", "Rulebook version")
+                "Passed bar", "Held", "Triage drop sample", "Rulebook version",
+                "Same event dropped", "Approved outlet", "Swapped source", "Queued")
     def _post(fx):
         http_json(f"https://api.airtable.com/v0/{BASE}/{RUNS_TABLE}",
                   headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}", "Content-Type": "application/json"},
@@ -1625,8 +1718,8 @@ def write_run(s):
             return
 
 def main():
-    dry = os.environ.get("DRY_RUN") == "1"
-    mode = "Weekly sweep" if SWEEP else ("Manual" if dry else "Daily")
+    dry = os.environ.get("DRY_RUN") == "1" or TRIAGE_ONLY
+    mode = "Manual" if dry else "Daily"
     print(("*** DRY RUN — judging only, nothing written ***\n" if dry else "")
           + f"Harvest mode: {mode}. Window: last {WINDOW_DAYS} days. Fetching candidates…")
     deadline = time.time() + MAX_RUNTIME_MIN * 60
@@ -1703,6 +1796,13 @@ def main():
         posts = [p for p in posts if not (dedup_keys(p) & known)]
         print(f"  {len(posts)} after removing ones already in Airtable.")
     n_dup = before_dup - len(posts)
+    # v3: links the triage or judge already looked at on an earlier day (the look-back overlaps).
+    seen_links = pipeline_data.load_seen()
+    seen_set = set(seen_links)
+    n_seen = sum(1 for p in posts if dedup_keys(p) & seen_set)
+    if not dry:
+        posts = [p for p in posts if not (dedup_keys(p) & seen_set)]
+    print(f"  Seen list: {n_seen} already looked at on an earlier day{' (kept for the dry run)' if dry else ''}.")
     n_yt_dropped = 0
 
     # AI-relevance gate for YouTube whole-channel feeds (see ai_relevant). Other
@@ -1729,29 +1829,41 @@ def main():
 
     random.shuffle(posts)   # mix sources so the judge budget isn't eaten by whoever loaded first
 
-    # Snapshot each source's supply to the judging pool BEFORE pre-triage, so the Sources /
-    # Coverage-Map "Found" yield reflects what a source actually supplied (in-window, deduped),
-    # not what survived our own filter. Stage A's own "kept X/Y" log shows the filter's effect.
+    # Snapshot each source's supply to the judging pool BEFORE the filters, so the Sources "Found" yield
+    # reflects what a source actually supplied (in-window, deduped), not what survived our own filters.
     found_by_src = Counter(p.get("source_label", "") for p in posts)
+
+    # v3 same-event check (cheapest first: code pairs, then the cheap model on the close calls only).
+    queue = pipeline_data.load_queue()
+    before_same = list(posts)
+    if TRIAGE_ONLY:                          # the triage test checks triage alone (saves the cheap model's tokens)
+        n_same, tok_same = 0, 0
+    else:
+        posts, queue, n_same, tok_same = same_event_check(posts, queue)
+    kept_ids = {id(p) for p in posts}
+    same_dropped = [p for p in before_same if id(p) not in kept_ids]
 
     # Stage A — cheap pre-triage (gpt-oss-20b) drops obvious junk so the expensive judge's
     # scarce budget is spent on plausible candidates. Fail-open; its own rate-limit bucket.
     posts, tok_triage, triage_dropped = pretriage(posts, deadline)
+    tok_triage += tok_same
+    if TRIAGE_ONLY:
+        pipeline_data.save_triage_drops(triage_dropped)
+        pipeline_data._write("triage-kept.json", [pipeline_data.slim(p) for p in posts])
+        pipeline_data._write("triage-dropped.json", [pipeline_data.slim(p) for p in triage_dropped])
+        print(f"\nTRIAGE ONLY: {len(posts)} kept, {len(triage_dropped)} dropped, {tok_triage} tokens. "
+              f"Saved to {pipeline_data.DIR}.")
+        return
 
-    kept, seen_titles, judged, errors, n_keep, n_rej = [], set(), 0, 0, 0, 0
-    kept_posts = []                          # post objects parallel to `kept`, for the media retry
+    judged, errors, n_keep, n_rej, n_trusted = 0, 0, 0, 0, 0
     consec_err, consec_rl = 0, 0             # genuine-error streak vs rate-limit streak (tracked apart)
-    # Per-model token metering: each stage runs on its OWN 200K/day bucket, so track them apart
-    # (a single lumped number can't tell you which bucket is nearing its cap).
-    tok_judge, tok_copy = 0, 0
-    # Judge EVERY survivor, collecting all that pass the bar; SELECTION happens after, so we
-    # pick the best-per-theme rather than the first-per-theme. (Copy is written only for the
-    # final picks, further down — never for an item that a higher-scoring rival displaces.)
-    passed = []          # [{"p":post, "t":verdict, "rel":int, "theme":str}, …]
+    tok_judge = 0
+    passed, weak = [], []                    # [{"p":post, "t":verdict}, …]
+    judged_posts = []                        # everything the judge returned a verdict for (-> seen list)
     judged_by_src = Counter()                # per source: how many of its items the judge read
     # Pre-dedup: drop same-title cross-posts BEFORE batching, so batch slots aren't spent on dupes
     # and the [i] indices stay clean.
-    to_judge = []
+    to_judge, seen_titles = [], set()
     for p in posts:
         norm = norm_title(p["title"])        # outlet-stripped, so cross-outlet reprints collide
         if norm in seen_titles:
@@ -1760,22 +1872,21 @@ def main():
         seen_titles.add(norm)
         to_judge.append(p)
     to_judge = read_articles(to_judge, deadline)
+    to_judge = judge_order(to_judge)         # approved outlets and widely covered events first
     batched = JUDGE_BATCH > 1
     sleep_between = JUDGE_BATCH_SLEEP if batched else JUDGE_SLEEP
     n_batches, stop = 0, False
-    print(f"  Stage-B judge ({JUDGE_MODEL}): {'batched ×' + str(JUDGE_BATCH) if batched else 'single'}"
-          f" — {len(to_judge)} survivors to judge")
-    # Judge EVERY survivor (batched by JUDGE_BATCH), collecting all that pass the bar; SELECTION
-    # happens after so we pick best-per-theme, not first-per-theme.
+    print(f"  Stage-B judge ({JUDGE_MODEL}, randomness {JUDGE_TEMPERATURE}): "
+          f"{'batched ×' + str(JUDGE_BATCH) if batched else 'single'} — {len(to_judge)} survivors, "
+          f"up to {MAX_JUDGE} today")
     for start in range(0, len(to_judge), JUDGE_BATCH):
-        if judged >= MAX_JUDGE:              # safety ceiling only; normally never hit
-            print(f"  ! MAX_JUDGE ({MAX_JUDGE}) reached — stopping.")
+        if judged >= MAX_JUDGE:              # the daily ceiling: the rest wait for tomorrow
+            print(f"  ! Daily judge ceiling ({MAX_JUDGE}) reached — the rest wait for tomorrow.")
             break
         if time.time() > deadline:
             print("  ! Time budget reached during judging — stopping early.")
             break
         chunk = to_judge[start:start + JUDGE_BATCH]
-        # Stage B — the judge (gpt-oss-120b): one call per batch (or per item when JUDGE_BATCH=1).
         if batched:
             verdicts, tok, status = groq_judge_batch(chunk)
         else:
@@ -1821,87 +1932,68 @@ def main():
                     break
                 continue
             consec_err = 0
+            judged_posts.append(p)
+            n_trusted += outlets.trust(t, article_url(p))   # approved outlet = trusted credibility
             verd = judge_verdict(t)
             if dry:
                 n_keep += verd == "Keep"; n_rej += verd != "Keep"
                 print(f"  {verd:<6} [{overall_score(t):>3}] {str(t.get('theme', '?'))[:22]:<22}{tag} "
                       f"{p['title'][:50]} :: {str(t.get('reason', ''))[:55]}")
-            if verd != "Keep":
-                continue
-            passed.append({"p": p, "t": t, "rel": overall_score(t), "theme": t["theme"]})
+            if verd == "Keep":
+                passed.append({"p": p, "t": t})
+            elif verd == "Weak":
+                weak.append({"p": p, "t": t})
         if stop:
             break
         time.sleep(sleep_between)            # pace under the judge's TPM bucket between batches
-    print(f"  Stage-B judged {judged}/{len(to_judge)} survivors across {n_batches} call(s).")
+    print(f"  Stage-B judged {judged}/{len(to_judge)} survivors across {n_batches} call(s); "
+          f"{len(passed)} passed, {n_trusted} given an approved outlet's credibility.")
 
-    # --- SELECTION: keep the best per theme, then cap overall (see select_best) ---
-    selected, dropped_by_cap = select_best(passed)
-    print(f"  Selection: {len(passed)} passed → {len(selected)} kept "
-          f"(best {MAX_PER_THEME}/theme; {dropped_by_cap} lower-scoring in-scope items dropped).")
+    # v3 better source: strong stories held back only by their outlet, swapped automatically when found.
+    swapped, searched, tok_better = better_source.improve(
+        weak, judge_verdict, _triage_chat, _google_text, _google_post, _read_page, deadline)
+    tok_triage += tok_better
+    passed.extend(swapped)
+    print(f"  Better source: {searched} searched, {len(swapped)} swapped to an approved outlet.")
 
-    def _tok_line():                         # per-bucket metering vs each model's 200K/day cap
-        per = f", {tok_judge // judged}/judge" if judged else ""
-        print(f"  Groq tokens this run: {tok_triage + tok_judge + tok_copy} total — "
-              f"A/pre-triage {tok_triage} ({TRIAGE_MODEL}), "
-              f"B/judge {tok_judge} ({JUDGE_MODEL}{per}), C/copy {tok_copy} ({COPY_MODEL}).")
-
+    tok_copy = 0                             # card copy is written on Sunday, for the week's picks only
+    total_tokens = tok_triage + tok_judge
+    per = f", {tok_judge // judged}/judge" if judged else ""
+    print(f"  Groq tokens this run: {total_tokens} total — A/triage + same event + better source "
+          f"{tok_triage} ({TRIAGE_MODEL}), B/judge {tok_judge} ({JUDGE_MODEL}{per}).")
     if dry:
-        _tok_line()
         print(f"\nDRY RUN complete — {n_keep} passed the bar, {n_rej} weak or rejected, {judged} judged, "
-              f"{len(selected)} would be kept (best {MAX_PER_THEME}/theme). Nothing written.")
+              f"{len(swapped)} better sources found. Nothing written.")
         return
 
-    # Cross-run reprint corpus: recent still-standing rows to compare new copy against.
-    dedup_sigs = existing_signatures()
-    n_reprint = 0
-    # Cards held last sweep because their summary failed get their second try first.
-    tok_copy += retry_held_summaries(deadline)
-    # Stage C — write the card copy (qwen bucket) for the FINAL selected keepers only.
-    for it in selected:
-        title, summary, same_event, ctok = write_copy(it["p"])
-        tok_copy += ctok
-        time.sleep(COPY_SLEEP)
-        # Cross-run near-dup: same event reprinted at a different URL (needs BOTH title AND
-        # summary near-identical, so a developing story with new facts is kept).
-        dup, match = is_reprint(it["p"]["title"], summary, dedup_sigs) if summary else (False, "")
-        if dup:
-            n_reprint += 1
-            print(f"  ⊘ reprint (skipped) — {it['p']['title'][:50]} ≈ {match[:40]}")
-            continue
-        fields = build_fields(it["p"], it["t"], title, summary, same_event)
-        dedup_sigs.append((norm_title(it["p"]["title"]), (summary or "").lower().strip()))  # catch same-run reprints too
-        kept.append({"fields": fields})
-        kept_posts.append(it["p"])   # keep the post alongside so reenrich_new_rows can retry bare cards
-        held = f" (held: {fields['Hold reason']})" if fields.get("Hold reason") else ""
-        print(f"  + [{it['rel']}] {it['theme']} — {(title or it['p']['title'])[:60]}{held}")
-    if n_reprint:
-        print(f"  Cross-run dedup: {n_reprint} reprint(s) of existing stories skipped.")
-    _tok_line()
-    total_tokens = tok_triage + tok_judge + tok_copy
+    # The week's queue (Sunday's pick reads it) and the seen list; triage's drops saved for checks.
+    queue.extend(queue_item(it["p"], it["t"]) for it in passed)
+    pipeline_data.save_queue(queue)
+    pipeline_data.save_seen(seen_links, triage_dropped + same_dropped + judged_posts, dedup_keys)
+    drops_file = pipeline_data.save_triage_drops(triage_dropped)
+    print(f"  Queue: {len(passed)} added, {len(queue)} waiting for Sunday's pick."
+          + (f" Triage drops saved to {drops_file.name}." if drops_file else ""))
 
-    if kept:
-        created = create_records(kept)
-        reenrich_new_rows(created, kept_posts)   # second, patient media attempt on THIS run's bare rows
-    # Per-source yield → Sources table. "Found" = this source's share of the judging pool it
-    # supplied (snapshotted above, BEFORE pre-triage); "Kept" = how many it landed. Lets the
-    # owner see which alerts/feeds/subs earn their place vs which are noise. (kept carries each
-    # row's "Source name".)
-    kept_by_src = Counter((k["fields"].get("Source name") or "") for k in kept)
-    update_yields(found_by_src, kept_by_src, judged_by_src)
+    # Per-source yield → Sources table. "Found" = this source's share of the pool (snapshotted above);
+    # "Kept" is recomputed from Stories, so it moves on Sundays when the pick writes the week's stories.
+    update_yields(found_by_src, Counter(), judged_by_src)
     write_run({
         "run": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), "mode": mode,
         "tried": len(sources), "read": read_ok, "failed_n": len(failed), "failed": failed,
-        "fetched": fetched_total, "judged": judged, "kept": len(kept), "errors": errors,
+        "fetched": fetched_total, "judged": judged, "kept": 0, "errors": errors,
         "tokens": total_tokens,
         "tok_triage": tok_triage, "tok_judge": tok_judge, "tok_copy": tok_copy,
         "judge_mode": f"batch-{JUDGE_BATCH}" if JUDGE_BATCH > 1 else "single",
-        "too_old": n_too_old, "duplicates": n_dup, "yt_dropped": n_yt_dropped,
+        "too_old": n_too_old, "duplicates": n_dup + n_seen, "yt_dropped": n_yt_dropped,
         "triage_dropped": len(triage_dropped), "not_judged": max(0, len(to_judge) - judged),
-        "passed": len(passed), "held": sum(1 for k in kept if k["fields"].get("Hold reason")),
+        "passed": len(passed), "held": 0,
         "triage_sample": triage_sample(triage_dropped),
+        "same_event": n_same, "approved": sum(1 for p in judged_posts if outlets.approved(article_url(p))),
+        "swapped": len(swapped), "queued": len(queue),
     })
-    print(f"\nDone. Mode={mode}. {read_ok}/{len(sources)} sources read, {judged} judged, "
-          f"{errors} errors, {total_tokens} Groq tokens, wrote {len(kept)} new Candidate rows. Logged to Runs table.")
+    print(f"\nDone. Mode={mode}. {read_ok}/{len(sources)} sources read, {judged} judged, {len(passed)} passed, "
+          f"{errors} errors, {total_tokens} Groq tokens. Logged to Runs table.")
+
 
 if __name__ == "__main__":
     main()
