@@ -735,5 +735,12 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .text-page a.path:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
 .path-q { display: block; margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.15rem, 2.4vw, 1.3rem); line-height: 1.2; color: var(--ink); }
 .path-line { display: block; margin-top: 6px; font-size: 1rem; line-height: 1.45; color: var(--ink); }
+/* The impact of AI page (/impact/): wider than a text page, topic boxes with a photo on top */
+.text-page.impact-home { max-width: 900px; }
+.impact-home .wwd-paths { gap: 24px; }
+.text-page a.path.path-pic { padding: 0; overflow: hidden; }
+.path-pic .path-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 2px solid var(--ink); background: var(--surface); }
+.path-pic .path-text { display: block; padding: 16px 18px 18px; }
+.photo-credits { margin-top: 2.5em !important; font-size: .85rem; line-height: 1.5; color: var(--muted); }
 .home .signup-main { margin-top: 3em; }
 .signup-intro { margin: -4px 0 12px; }
