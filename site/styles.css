@@ -469,10 +469,15 @@ html:not(.js) .nav-sub { position: static; box-shadow: none; }
   border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-decoration: none;
 }
 .btn-main:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+/* Explore other topics: black like "See all topics" on the home page, so it doesn't clash with the orange sign-up box below */
+.btn-main.btn-topics { background: var(--ink); color: #fff; box-shadow: 4px 4px 0 var(--orange); }
+.btn-main.btn-topics:focus-visible { outline-color: var(--orange-ink); }
 @media (prefers-reduced-motion: no-preference) {
   .btn-main { transition: transform .12s ease, box-shadow .12s ease; }
   .btn-main:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
   .btn-main:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-main.btn-topics:hover { box-shadow: 5px 5px 0 var(--orange); }
+  .btn-main.btn-topics:active { box-shadow: 2px 2px 0 var(--orange); }
 }
 
 /* ==== Theme page (first: /impact/work/). Text column like a text page; story cards go full width ==== */
