@@ -277,6 +277,18 @@
       "featured": false
     },
     {
+      "id": "recMsVTkbOEIAHqtr",
+      "title": "Google removes some AI health summaries after they gave misleading advice",
+      "theme": "When AI fails",
+      "format": "Image",
+      "summary": "In January 2026 the Guardian found Google's AI summaries gave misleading answers to health searches, including normal ranges for liver blood tests that left out age, sex and ethnicity. Google removed some of the summaries. Reported by the Guardian.",
+      "sourceUrl": "https://www.theguardian.com/technology/2026/jan/11/google-ai-overviews-health-guardian-investigation",
+      "mediaUrl": "https://i.guim.co.uk/img/media/f8d00c974ded83894d8c39a75fab0c5442c8bb9f/869_0_6827_5464/master/6827.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=28f5a8e9b3185cdbde1b56cd35795197",
+      "date": "2026-01-11",
+      "sensitivity": "Safe",
+      "featured": false
+    },
+    {
       "id": "recMmyWGtkZ0UcBZc",
       "title": "Jack Dorsey's Block Plans to Cut Nearly Half of Workforce in AI Bet",
       "theme": "Jobs & livelihoods",
@@ -298,6 +310,18 @@
       "mediaUrl": "https://one.sightlinemg.com/wp-content/uploads/2026/08/2026-03-12T170102Z_80407223_RC2HWJAA3TVX_RTRMADP_3_IRAN-CRISIS-SCHOOL-ATTACK.JPG.jpg?w=2048",
       "date": "2026-03-24",
       "sensitivity": "Sensitive",
+      "featured": false
+    },
+    {
+      "id": "recG3QsAhAKcbM4DX",
+      "title": "Waymo recalls 3,791 robotaxis after one drove into floodwater",
+      "theme": "When AI fails",
+      "format": "Image",
+      "summary": "On 20 April 2026 an empty Waymo robotaxi drove onto a flooded road in San Antonio and was swept into a creek. No one was hurt. Waymo recalled the software in 3,791 robotaxis to improve how they spot flooded roads. Reported by Electrek.",
+      "sourceUrl": "https://electrek.co/2026/05/12/waymo-recalls-3791-robotaxis-flooded-road-ota-software-fix/",
+      "mediaUrl": "https://electrek.co/wp-content/uploads/sites/3/2025/11/Waymo-cities-freeway.jpg?quality=82&strip=all&resize=1200,628",
+      "date": "2026-05-12",
+      "sensitivity": "Safe",
       "featured": false
     },
     {
