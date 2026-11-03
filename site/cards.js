@@ -11,6 +11,7 @@ const THEME_PAGES = {
   "AI and war": { url: "/impact/war/", text: "Read more on how AI is used in war" },
   "Children & safety": { url: "/impact/children/", text: "Read more on how AI affects children" },
   "Relationships & mental health": { url: "/impact/relationships/", text: "Read more on how AI affects relationships and mental health" },
+  "When AI fails": { url: "/impact/failures/", text: "Read more on when AI gets it wrong" },
 };
 
 function isSensitive(s) { return s.sensitivity === "Sensitive"; }
