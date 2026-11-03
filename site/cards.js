@@ -9,6 +9,7 @@ const THEME_PAGES = {
   "Bias & discrimination": { url: "/impact/bias/", text: "Read more on how AI can treat people unfairly" },
   "Environment & data centres": { url: "/impact/environment/", text: "Read more on how AI is affecting the environment" },
   "AI and war": { url: "/impact/war/", text: "Read more on how AI is used in war" },
+  "Children & safety": { url: "/impact/children/", text: "Read more on how AI affects children" },
 };
 
 function isSensitive(s) { return s.sensitivity === "Sensitive"; }
