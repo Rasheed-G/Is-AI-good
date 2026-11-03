@@ -24,7 +24,7 @@ PAIR_BATCH = 8           # pairs per AI call (each pair ~ 2 headlines + 2 snippe
 SNIPPET = 400            # characters of each story the AI sees
 PER_NEW = 8              # closest candidates kept for each new story
 RARE_SHARE = 0.03        # a word counts as rare if it is in at most this share of the stories
-RANK = "rare"            # how likely pairs are ordered: rare | cosine | title (see candidate_pairs)
+RANK = "cosine"          # how likely pairs are ordered: rare | cosine | title (see candidate_pairs; cosine chosen 2026-11-03, code-only test)
 _WORD = re.compile(r"[a-z0-9][a-z0-9'’.$£€-]*[a-z0-9]")
 
 
