@@ -9,7 +9,8 @@ page by this script. Each page marks where the pieces go with comment pairs:
 
 Use "frame:footer-nosignup" instead on pages that carry the main sign-up themselves (one sign-up
 per page). Links to the page itself get aria-current="page", and a menu group containing the
-current page is marked too. The head also gets share previews (the title, description and image
+current page is marked too, as is the topics group on any /impact/ page,
+including theme pages the menu doesn't list. The head also gets share previews (the title, description and image
 shown when a page is shared on LinkedIn or by message), taken from each page's own <title> and
 description.
 
@@ -49,7 +50,7 @@ def mark_current(html, path):
     html = html.replace(f'href="{path}"', f'href="{path}" aria-current="page"')
     return GROUP.sub(
         lambda m: m.group(0).replace('class="nav-group-btn"', 'class="nav-group-btn is-current"', 1)
-        if "aria-current" in m.group(1) else m.group(0),
+        if "aria-current" in m.group(1) or path.startswith("/impact/") else m.group(0),
         html,
     )
 
