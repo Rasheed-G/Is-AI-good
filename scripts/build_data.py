@@ -66,7 +66,13 @@ def theme_page_ids():
             ids.update(i.strip() for i in m.group(1).split(",") if i.strip())
     return ids
 
+# Themes renamed in the rulebook whose old name is still stored on stories in Airtable.
+RENAMED = {"Kids & safety": "Children & safety"}   # renamed 2026-11-03
+
+
 def in_rulebook_theme(stories):
+    for s in stories:
+        s["theme"] = RENAMED.get(s["theme"], s["theme"])
     names = set(rulebook.theme_names())
     kept = [s for s in stories if not s["theme"] or s["theme"] in names]
     gone = len(stories) - len(kept)
