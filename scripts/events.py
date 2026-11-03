@@ -24,6 +24,7 @@ PAIR_BATCH = 8           # pairs per AI call (each pair ~ 2 headlines + 2 snippe
 SNIPPET = 400            # characters of each story the AI sees
 PER_NEW = 8              # closest candidates kept for each new story
 RARE_SHARE = 0.03        # a word counts as rare if it is in at most this share of the stories
+RANK = "rare"            # how likely pairs are ordered: rare | cosine | title (see candidate_pairs)
 _WORD = re.compile(r"[a-z0-9][a-z0-9'’.$£€-]*[a-z0-9]")
 
 
@@ -44,18 +45,31 @@ def tokens(text):
 def doc(title, text, url, kind, ref=None):
     """One story to compare: kind is 'new', 'queue' or 'airtable'; ref points back to the item."""
     return {"title": title or "", "text": (text or "")[:600], "url": url or "", "kind": kind, "ref": ref,
-            "tok": tokens(f"{title} {(text or '')[:600]}")}
+            "tok": tokens(f"{title} {(text or '')[:600]}"), "ttok": tokens(title)}
+
+
+def _cos(a, b, w):
+    """Overlap of two word sets, weighted by rarity, 0 to 1 (1 = the same words)."""
+    shared = sum(w.get(t, 0) ** 2 for t in a & b)
+    if not shared:
+        return 0.0
+    return shared / math.sqrt(sum(w.get(t, 0) ** 2 for t in a) * sum(w.get(t, 0) ** 2 for t in b))
 
 
 def candidate_pairs(docs, max_pairs, min_shared=2):
     """Pairs (i, j, score) worth asking about. At least one side is a new story. Rare = a word in at most
-    3% of the stories (at least 3), so a big event's own words still count. Score = summed rarity of the shared rare words."""
+    3% of the stories (at least 3), so a big event's own words still count. Pairs must share min_shared rare
+    words; they are then ordered by RANK:
+      rare   - summed rarity of the shared rare words (favours long texts on similar topics);
+      cosine - how alike the two stories' words are overall, weighted by rarity (0 to 1);
+      title  - the same for the two headlines, counted twice, plus the overall likeness."""
     n = len(docs)
     if n < 2:
         return []
     df = Counter(t for d in docs for t in d["tok"])
     rare_cut = max(3, int(n * RARE_SHARE))
     idf = {t: math.log(n / c) for t, c in df.items() if c <= rare_cut}
+    w = {t: math.log(n / c) for t, c in df.items()}
     rare = [{t for t in d["tok"] if t in idf} for d in docs]
     index = defaultdict(list)
     for i, r in enumerate(rare):
@@ -74,7 +88,12 @@ def candidate_pairs(docs, max_pairs, min_shared=2):
             if c < min_shared:
                 continue
             a, b = min(i, j), max(i, j)
-            score = sum(idf[t] for t in rare[i] & rare[j])
+            if RANK == "cosine":
+                score = _cos(docs[i]["tok"], docs[j]["tok"], w)
+            elif RANK == "title":
+                score = 2 * _cos(docs[i]["ttok"], docs[j]["ttok"], w) + _cos(docs[i]["tok"], docs[j]["tok"], w)
+            else:
+                score = sum(idf[t] for t in rare[i] & rare[j])
             best[(a, b)] = max(best.get((a, b), 0), score)
     # Each new story keeps its PER_NEW strongest candidates, then the day's cap keeps the strongest overall.
     per_new = defaultdict(list)

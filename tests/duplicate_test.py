@@ -123,11 +123,11 @@ def code_only(docs, ids, key_pairs, groups):
     need = sum(len([r for r in g if r in pos]) - 1 for g in groups)
     caps = (250, 300, 600, 1000, 2000, 5000)
     result = {"stories": len(docs), "key_pairs": len(key_pairs), "duplicate_stories": need, "settings": {}}
-    settings = {"as built (8 per story, 2 shared rare words)": (events.PER_NEW, 2),
-                "no per-story limit, 2 shared rare words": (10 ** 6, 2),
-                "no per-story limit, 1 shared rare word": (10 ** 6, 1)}
-    for name, (per_new, min_shared) in settings.items():
-        events.PER_NEW = per_new
+    built = (events.PER_NEW, events.RANK)
+    settings = {f"rank {r}, {p} per story, {m} shared rare word{'s' if m > 1 else ''}": (p, m, r)
+                for r in ("rare", "cosine", "title") for p, m in ((8, 2), (8, 1))}
+    for name, (per_new, min_shared, rank_by) in settings.items():
+        events.PER_NEW, events.RANK = per_new, rank_by
         ranked = events.candidate_pairs(docs, 10 ** 9, min_shared=min_shared)
         rank = {(a, b): r for r, (a, b, _s) in enumerate(ranked, 1)}
         listed = [p for p in key_pairs if p in rank]
@@ -142,7 +142,7 @@ def code_only(docs, ids, key_pairs, groups):
               f"stories caught of {need}: " + ", ".join(f"cap {c} -> {row['by_cap'][str(c)]['best_case_stories_caught']}"
                                                        for c in caps)
               + f", no cap -> {row['all_listed_best_case_stories_caught']}")
-    events.PER_NEW = settings["as built (8 per story, 2 shared rare words)"][0]
+    events.PER_NEW, events.RANK = built
     ranked = events.candidate_pairs(docs, 10 ** 9, min_shared=1)
     ever = {(a, b) for a, b, _s in ranked}
     result["key_pairs_sharing_no_rare_word"] = [
