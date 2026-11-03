@@ -122,16 +122,23 @@ def pair_prompt(pairs, docs):
 
 SLEEP = 20               # seconds between calls: about 2.5K tokens a call keeps under the 8K-a-minute limit
 RETRIES = 3              # a call that fails (usually the per-minute limit) is tried again after a minute
+GIVE_UP = 2              # batches in a row that fail every retry before the rest are skipped (daily limit hit)
 
 
 def ask_same(pairs, docs, chat, sleep=SLEEP):
     """({(a, b): True/False}, tokens, unanswered) from the cheap model, PAIR_BATCH pairs per call.
     chat(prompt) -> (content, tokens, status). A failed call is retried; pairs still unanswered count as
-    different (keep both) and are counted, so a run that was mostly rate-limited shows it."""
-    out, spent, unanswered = {}, 0, 0
+    different (keep both) and are counted, so a run that was mostly rate-limited shows it. After GIVE_UP
+    batches in a row fail every retry (usually the daily limit), the rest are skipped, not retried for an hour."""
+    out, spent, unanswered, failed_in_row = {}, 0, 0, 0
     for i in range(0, len(pairs), PAIR_BATCH):
         chunk = pairs[i:i + PAIR_BATCH]
         verdicts = {}
+        if failed_in_row >= GIVE_UP:
+            for a, b, _s in chunk:
+                out[(a, b)] = False
+            unanswered += len(chunk)
+            continue
         for attempt in range(1 + RETRIES):
             content, tok, status = chat(pair_prompt(chunk, docs))
             spent += tok
@@ -141,10 +148,13 @@ def ask_same(pairs, docs, chat, sleep=SLEEP):
                                 for r in json.loads(content).get("results", []) if "n" in r}
                 except Exception:
                     verdicts = {}
-            if verdicts:
+            if verdicts or attempt == RETRIES:
                 break
             print(f"  … same-event call {status or 'failed'}; trying again in 60s")
             time.sleep(60)
+        failed_in_row = 0 if verdicts else failed_in_row + 1
+        if failed_in_row == GIVE_UP:
+            print(f"  ! Same-event check: {GIVE_UP} batches in a row got no answer; skipping the rest.")
         for n, (a, b, _s) in enumerate(chunk, 1):
             if n not in verdicts:
                 unanswered += 1
