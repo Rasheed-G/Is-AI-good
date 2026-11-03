@@ -1393,7 +1393,9 @@ def same_event_check(posts, queue):
     if not pairs:
         print(f"  Same-event check: no likely pairs among {len(posts)} new stories.")
         return posts, queue, 0, 0
-    same, tok = events.ask_same(pairs, docs, _triage_chat, sleep=TRIAGE_SLEEP)
+    same, tok, unanswered = events.ask_same(pairs, docs, _triage_chat)
+    if unanswered:
+        print(f"  ! Same-event check: {unanswered} of {len(pairs)} pairs got no answer (counted as different).")
     grp = events.groups(len(docs), [k for k, v in same.items() if v])
     drop_new, twins, upgrades, covered = events.resolve(docs, grp, outlets.approved, outlets.host)
     item = lambda d: posts[d["ref"]] if d["kind"] == "new" else queue[d["ref"]]["p"]

@@ -99,7 +99,7 @@ def find(item, chat, get_text, post_form, read_page):
     docs = [events.doc(p["title"], p.get("selftext"), p.get("external_url"), "new")]
     docs += [events.doc(t, d, link, "queue") for t, link, _src, d in results]
     pairs = [(0, k, 0) for k in range(1, len(docs))]
-    same, tok = events.ask_same(pairs, docs, chat, sleep=0)
+    same, tok, _unanswered = events.ask_same(pairs, docs, chat, sleep=0)
     for k in range(1, len(docs)):
         if not same.get((0, k)):
             continue

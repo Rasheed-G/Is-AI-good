@@ -77,7 +77,7 @@ def main():
     found = key_pairs & asked
     print(f"{len(docs)} stories; key has {len(key_pairs)} same-event pairs; the code put forward {len(pairs)} pairs, "
           f"{len(found)} of the key's.")
-    same, tokens = events.ask_same(pairs, docs, H._triage_chat, sleep=H.TRIAGE_SLEEP)
+    same, tokens, unanswered = events.ask_same(pairs, docs, H._triage_chat)
     agree = sum(1 for (a, b), v in same.items() if v == truth(a, b))
     false_same = [(a, b) for (a, b), v in same.items() if v and not truth(a, b)]
     missed = [(a, b) for (a, b), v in same.items() if not v and truth(a, b)]
@@ -87,7 +87,7 @@ def main():
         return {"A": docs[a]["title"], "A link": docs[a]["url"], "B": docs[b]["title"], "B link": docs[b]["url"]}
     result = {
         "stories": len(docs), "key_pairs": len(key_pairs), "pairs_asked": len(pairs),
-        "key_pairs_put_forward_by_code": len(found), "tokens": tokens,
+        "key_pairs_put_forward_by_code": len(found), "tokens": tokens, "unanswered": unanswered,
         "agree_with_key": agree, "agree_share": round(agree / len(same), 3) if same else None,
         "ai_said_same_key_says_different": [show(a, b) for a, b in false_same],
         "ai_said_different_key_says_same": [show(a, b) for a, b in missed],
@@ -96,7 +96,7 @@ def main():
     (OUT / "duplicate-test.json").write_text(json.dumps(result, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"AI agreed with the key on {agree}/{len(same)} pairs; said 'same' for {len(false_same)} the key calls "
           f"different; said 'different' for {len(missed)} the key calls same; {len(never_asked)} key pairs never "
-          f"put forward by the code. {tokens} tokens. Results: {OUT / 'duplicate-test.json'}")
+          f"put forward by the code. {unanswered} pairs got no answer. {tokens} tokens. Results: {OUT / 'duplicate-test.json'}")
 
 
 def caught(groups, pos, found_pairs):

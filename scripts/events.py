@@ -120,25 +120,38 @@ def pair_prompt(pairs, docs):
             'Return JSON {"results":[{"n":1,"same":true},...]} covering every pair.\n\n' + "\n".join(lines))
 
 
-def ask_same(pairs, docs, chat, sleep=9):
-    """{(a, b): True/False} from the cheap model, PAIR_BATCH pairs per call. chat(prompt) -> (content, tokens, status)."""
-    out, spent = {}, 0
+SLEEP = 20               # seconds between calls: about 2.5K tokens a call keeps under the 8K-a-minute limit
+RETRIES = 3              # a call that fails (usually the per-minute limit) is tried again after a minute
+
+
+def ask_same(pairs, docs, chat, sleep=SLEEP):
+    """({(a, b): True/False}, tokens, unanswered) from the cheap model, PAIR_BATCH pairs per call.
+    chat(prompt) -> (content, tokens, status). A failed call is retried; pairs still unanswered count as
+    different (keep both) and are counted, so a run that was mostly rate-limited shows it."""
+    out, spent, unanswered = {}, 0, 0
     for i in range(0, len(pairs), PAIR_BATCH):
         chunk = pairs[i:i + PAIR_BATCH]
-        content, tok, _status = chat(pair_prompt(chunk, docs))
-        spent += tok
         verdicts = {}
-        if content:
-            try:
-                verdicts = {int(r["n"]): r.get("same") is True
-                            for r in json.loads(content).get("results", []) if "n" in r}
-            except Exception:
-                verdicts = {}
+        for attempt in range(1 + RETRIES):
+            content, tok, status = chat(pair_prompt(chunk, docs))
+            spent += tok
+            if content:
+                try:
+                    verdicts = {int(r["n"]): r.get("same") is True
+                                for r in json.loads(content).get("results", []) if "n" in r}
+                except Exception:
+                    verdicts = {}
+            if verdicts:
+                break
+            print(f"  … same-event call {status or 'failed'}; trying again in 60s")
+            time.sleep(60)
         for n, (a, b, _s) in enumerate(chunk, 1):
+            if n not in verdicts:
+                unanswered += 1
             out[(a, b)] = verdicts.get(n, False)        # missing or failed = different (keep both)
         if i + PAIR_BATCH < len(pairs):
             time.sleep(sleep)
-    return out, spent
+    return out, spent, unanswered
 
 
 def groups(n, same_pairs):
