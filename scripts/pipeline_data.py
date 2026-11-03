@@ -73,6 +73,23 @@ def save_queue(queue):
 
 
 # --- triage drops and leftovers ---------------------------------------------------
+def save_same_event(log):
+    """Every same-event drop (a copy of a story already in Airtable) and flag, with the story it matched, so the
+    check can be audited (appends if the day runs twice). log: [(action, doc, matched doc)]."""
+    if not log:
+        return None
+    p = _path(f"same-event/{today()}.csv")
+    p.parent.mkdir(parents=True, exist_ok=True)
+    new = not p.exists()
+    with p.open("a", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        if new:
+            w.writerow(["Action", "Headline", "Link", "Matched headline", "Matched link"])
+        for action, d, m in log:
+            w.writerow([action, d["title"], d["url"], m["title"] if m else "", m["url"] if m else ""])
+    return p
+
+
 def save_triage_drops(dropped, snippet_chars=300):
     """Headline, snippet and link of everything triage dropped today (appends if the day runs twice)."""
     if not dropped:

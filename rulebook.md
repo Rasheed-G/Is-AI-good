@@ -1,6 +1,6 @@
 # Editorial rulebook
 
-**Version 3** (v3 pipeline branch, 2026-11-02, amended 2026-11-03: judge ceiling 140, Incident Database first and past triage, BleepingComputer approved; daily judging and a weekly pick, approved outlets, same-event duplicate check, a better source found automatically, judge randomness off. Not live until merged. Version 2 2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
+**Version 3** (v3 pipeline branch, 2026-11-02, amended 2026-11-03: judge ceiling 140, same-event check widened and flags copies instead of dropping them, Incident Database first and past triage, BleepingComputer approved; daily judging and a weekly pick, approved outlets, same-event duplicate check, a better source found automatically, judge randomness off. Not live until merged. Version 2 2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
 
 The one reference point for what the gallery collects, keeps and shows. The pipeline reads this file: the theme
 list, the judge, triage and card copy instructions, and the site's theme summaries all come from here. Change a
@@ -224,7 +224,7 @@ doesn't add "no one was hurt", because the summary we have doesn't say so)
 | Card length | Summary length | 50 words, plus our own title (about 12 words) |
 | Yield windows | Periods used to count each source's kept stories | 10 and 30 days |
 | Duplicate check | What counts as a story we already have | Same link; or a title 90% alike, or a summary 72% alike, within 14 days; or the same event (shared rare words, then a cheap AI yes or no) within 60 days |
-| Same-event checks ⚙ | Most pairs the cheap AI checks per day | 80 |
+| Same-event checks ⚙ | Most pairs the cheap AI checks per day (up to 8 per new story). A copy of a story already live is dropped; other copies of one event are flagged, judged last, and the weekly pick takes one | 250 |
 | Better source window | How far back the search for a better source looks | 14 days |
 | Time limit | Longest a sweep may run | 70 minutes |
 

@@ -21,7 +21,9 @@ report reports reported according people company companies first last time new n
 artificial intelligence using used uses tool tools system systems chatbot chatbots model models generative
 openai chatgpt google meta microsoft says amid could""".split())
 PAIR_BATCH = 8           # pairs per AI call (each pair ~ 2 headlines + 2 snippets)
-SNIPPET = 220            # characters of each story the AI sees
+SNIPPET = 400            # characters of each story the AI sees
+PER_NEW = 8              # closest candidates kept for each new story
+RARE_SHARE = 0.03        # a word counts as rare if it is in at most this share of the stories
 _WORD = re.compile(r"[a-z0-9][a-z0-9'’.$£€-]*[a-z0-9]")
 
 
@@ -47,12 +49,12 @@ def doc(title, text, url, kind, ref=None):
 
 def candidate_pairs(docs, max_pairs, min_shared=2):
     """Pairs (i, j, score) worth asking about. At least one side is a new story. Rare = a word in at most
-    about 1% of the stories (at least 3). Score = summed rarity of the shared rare words."""
+    3% of the stories (at least 3), so a big event's own words still count. Score = summed rarity of the shared rare words."""
     n = len(docs)
     if n < 2:
         return []
     df = Counter(t for d in docs for t in d["tok"])
-    rare_cut = max(3, n // 100)
+    rare_cut = max(3, int(n * RARE_SHARE))
     idf = {t: math.log(n / c) for t, c in df.items() if c <= rare_cut}
     rare = [{t for t in d["tok"] if t in idf} for d in docs]
     index = defaultdict(list)
@@ -74,7 +76,7 @@ def candidate_pairs(docs, max_pairs, min_shared=2):
             a, b = min(i, j), max(i, j)
             score = sum(idf[t] for t in rare[i] & rare[j])
             best[(a, b)] = max(best.get((a, b), 0), score)
-    # Each new story keeps its 3 strongest candidates, then the day's cap keeps the strongest overall.
+    # Each new story keeps its PER_NEW strongest candidates, then the day's cap keeps the strongest overall.
     per_new = defaultdict(list)
     for (a, b), s in best.items():
         for k in (a, b):
@@ -82,7 +84,7 @@ def candidate_pairs(docs, max_pairs, min_shared=2):
                 per_new[k].append((s, a, b))
     chosen = set()
     for k, lst in per_new.items():
-        for s, a, b in sorted(lst, reverse=True)[:3]:
+        for s, a, b in sorted(lst, reverse=True)[:PER_NEW]:
             chosen.add((a, b, s))
     return sorted(chosen, key=lambda x: -x[2])[:max_pairs]
 
@@ -138,15 +140,18 @@ def groups(n, same_pairs):
 
 
 def resolve(docs, same_groups, approved, host):
-    """Decide each same-event group. Returns (drop_new, drop_queue, upgrades, outlets):
-      drop_new / drop_queue - doc indexes to remove;
+    """Decide each same-event group. Returns (drop_new, twins, upgrades, outlets):
+      drop_new - new doc indexes to remove: only copies of a story already in Airtable;
+      twins    - {doc index: kept doc index} for the other copies. They are flagged, not dropped (owner,
+                 2026-11-03), so a wrong "same" costs a judge slot, not a story: twins are judged last and
+                 the weekly pick takes one story per event;
       upgrades - {queue doc index: new doc index} where a queued story (already passed the judge) takes the
                  link of a new copy from an approved outlet, so a passed story is never thrown away for an
                  unjudged one;
       outlets  - {kept doc index: every outlet that covered the event} for the weekly ranking.
     A story already in Airtable always wins (the new copies are dropped). Among new stories only, the approved
     outlet wins, then the longer text."""
-    drop_new, drop_queue, upgrades, outlets = set(), set(), {}, {}
+    drop_new, twins, upgrades, outlets = set(), {}, {}, {}
     for g in same_groups:
         hosts = {host(docs[i]["url"]) for i in g if docs[i]["url"]}
         for i in g:
@@ -165,6 +170,6 @@ def resolve(docs, same_groups, approved, host):
             keep = max(g, key=rank)
         for i in g:
             if i != keep:
-                (drop_new if docs[i]["kind"] == "new" else drop_queue).add(i)
+                twins[i] = keep
         outlets[keep] = hosts
-    return drop_new, drop_queue, upgrades, outlets
+    return drop_new, twins, upgrades, outlets

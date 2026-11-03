@@ -49,6 +49,13 @@ def main():
         q["p"].setdefault("over_18", False)
         q["p"].setdefault("created", "")
         passed.append({"p": q["p"], "t": q["t"], "rel": rank(q), "theme": q["theme"], "q": q})
+    # One story per event (rulebook section 3): flagged copies of the same event compete, the best ranked wins.
+    best = {}
+    for it in passed:
+        key = it["q"].get("event")
+        if key and (key not in best or it["rel"] > best[key]["rel"]):
+            best[key] = it
+    passed = [it for it in passed if not it["q"].get("event") or best[it["q"]["event"]] is it]
     selected, _dropped = H.select_best(passed)
     # A story written to Airtable since it was queued (by hand or a re-run) is not written twice.
     known = H.existing_source_urls()

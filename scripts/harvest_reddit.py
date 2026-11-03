@@ -1369,9 +1369,11 @@ def _triage_chat(prompt):
     return groq_chat(TRIAGE_MODEL, prompt)
 
 def same_event_check(posts, queue):
-    """Rulebook section 3: drop new copies of an event we already have (in Airtable or this week's queue)
-    and keep one story per event among today's, the more reputable outlet first. Every kept story carries
-    p["outlets"]: the outlets that covered its event (the weekly ranking's boost). Returns
+    """Rulebook section 3: drop new copies of a story already in Airtable. Other copies of one event (today's
+    and this week's queue) are flagged, not dropped: each carries p["event"] (the kept copy's link) and the
+    copies carry p["twin_of"], so they are judged last and the weekly pick takes one per event. Every kept
+    story carries p["outlets"]: the outlets that covered its event (the weekly ranking's boost). Each drop
+    and twin is saved with its match in same-event/DATE.csv for checking. Returns
     (posts, queue, dropped_count, tokens)."""
     for p in posts:
         p["outlets"] = [outlets.host(article_url(p))]
@@ -1393,7 +1395,21 @@ def same_event_check(posts, queue):
         return posts, queue, 0, 0
     same, tok = events.ask_same(pairs, docs, _triage_chat, sleep=TRIAGE_SLEEP)
     grp = events.groups(len(docs), [k for k, v in same.items() if v])
-    drop_new, drop_queue, upgrades, covered = events.resolve(docs, grp, outlets.approved, outlets.host)
+    drop_new, twins, upgrades, covered = events.resolve(docs, grp, outlets.approved, outlets.host)
+    item = lambda d: posts[d["ref"]] if d["kind"] == "new" else queue[d["ref"]]["p"]
+    log = []
+    for g in grp:
+        keeper = next((i for i in g if docs[i]["kind"] == "airtable"), None)
+        for i in g:
+            if i in drop_new:
+                log.append(("dropped", docs[i], docs[keeper]))
+    for i, k in twins.items():
+        log.append(("flagged", docs[i], docs[k]))
+        key = item(docs[k]).get("event") or docs[k]["url"]
+        item(docs[k])["event"] = key
+        item(docs[i])["event"] = key
+        item(docs[i])["twin_of"] = docs[k]["url"]
+    pipeline_data.save_same_event(log)
     for qi, ni in upgrades.items():             # a queued story takes an approved outlet's link
         q, p = queue[docs[qi]["ref"]], posts[docs[ni]["ref"]]
         q["swapped_from"] = q.get("swapped_from") or article_url(q["p"])
@@ -1407,20 +1423,21 @@ def same_event_check(posts, queue):
         target = posts[d["ref"]] if d["kind"] == "new" else queue[d["ref"]]
         target["outlets"] = sorted(set(target.get("outlets") or []) | hosts)
     keep_new = {docs[i]["ref"] for i in range(len(docs)) if docs[i]["kind"] == "new" and i not in drop_new}
-    keep_q = {docs[i]["ref"] for i in range(len(docs)) if docs[i]["kind"] == "queue" and i not in drop_queue}
+    for q in queue:                            # the queue keeps the event key and twin flag
+        q["event"], q["twin_of"] = q["p"].get("event", q.get("event", "")), q["p"].get("twin_of", q.get("twin_of", ""))
     posts = [p for k, p in enumerate(posts) if k in keep_new]
-    queue = [q for k, q in enumerate(queue) if k in keep_q]
-    n = len(drop_new) + len(drop_queue)
+    n = len(drop_new)
     print(f"  Same-event check ({TRIAGE_MODEL}): {len(pairs)} likely pairs asked, {sum(same.values())} the same "
-          f"event; {len(drop_new)} new and {len(drop_queue)} queued copies dropped, {len(upgrades)} queued "
-          f"stories moved to an approved outlet ({tok} tokens).")
+          f"event; {len(drop_new)} copies of stories already in Airtable dropped, {len(twins)} copies flagged, "
+          f"{len(upgrades)} queued stories moved to an approved outlet ({tok} tokens).")
     return posts, queue, n, tok
 
 def judge_order(posts):
     """Rulebook section 8: past the daily ceiling the rest wait, so approved outlets and the AI Incident
-    Database are judged first, then widely covered events (stable, so the shuffle still mixes sources
-    within each group)."""
-    return sorted(posts, key=lambda p: (not (outlets.approved(article_url(p)) or p.get("provenance") == "Incident DB"),
+    Database are judged first, then widely covered events, and flagged copies of an event last (stable, so
+    the shuffle still mixes sources within each group)."""
+    return sorted(posts, key=lambda p: (bool(p.get("twin_of")),
+                                        not (outlets.approved(article_url(p)) or p.get("provenance") == "Incident DB"),
                                         -len(p.get("outlets") or [])))
 
 def _google_text(url):
@@ -1436,7 +1453,8 @@ def _google_post(url, body):
 def queue_item(p, t):
     return {"p": pipeline_data.slim(p), "t": t, "theme": t.get("theme"), "judged": pipeline_data.today(),
             "outlets": p.get("outlets") or [outlets.host(article_url(p))],
-            "approved": outlets.approved(article_url(p)), "swapped_from": p.get("swapped_from", "")}
+            "approved": outlets.approved(article_url(p)), "swapped_from": p.get("swapped_from", ""),
+            "event": p.get("event", ""), "twin_of": p.get("twin_of", "")}
 
 # --- main -------------------------------------------------------------------
 def build_fields(p, t, title, summary, same_event=True):
