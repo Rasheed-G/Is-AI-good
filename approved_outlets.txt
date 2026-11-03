@@ -167,6 +167,9 @@ defenseone.com
 justsecurity.org
 lawfaremedia.org
 
+# Tech and security (owner approved 2026-11-03)
+bleepingcomputer.com
+
 # Courts, regulators, studies and watchdogs
 suffix:.gov
 suffix:.gov.uk

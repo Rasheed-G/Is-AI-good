@@ -1417,9 +1417,11 @@ def same_event_check(posts, queue):
     return posts, queue, n, tok
 
 def judge_order(posts):
-    """Rulebook section 8: past the daily ceiling the rest wait, so approved outlets and widely covered
-    events are judged first (stable, so the shuffle still mixes sources within each group)."""
-    return sorted(posts, key=lambda p: (not outlets.approved(article_url(p)), -len(p.get("outlets") or [])))
+    """Rulebook section 8: past the daily ceiling the rest wait, so approved outlets and the AI Incident
+    Database are judged first, then widely covered events (stable, so the shuffle still mixes sources
+    within each group)."""
+    return sorted(posts, key=lambda p: (not (outlets.approved(article_url(p)) or p.get("provenance") == "Incident DB"),
+                                        -len(p.get("outlets") or [])))
 
 def _google_text(url):
     return http_text(url, headers={"User-Agent": BROWSER_UA})
@@ -1845,7 +1847,10 @@ def main():
 
     # Stage A — cheap pre-triage (gpt-oss-20b) drops obvious junk so the expensive judge's
     # scarce budget is spent on plausible candidates. Fail-open; its own rate-limit bucket.
-    posts, tok_triage, triage_dropped = pretriage(posts, deadline)
+    # Rulebook section 9: AI Incident Database stories skip triage and go straight to the judge.
+    incident = [p for p in posts if p.get("provenance") == "Incident DB"]
+    posts, tok_triage, triage_dropped = pretriage([p for p in posts if p.get("provenance") != "Incident DB"], deadline)
+    posts = incident + posts
     tok_triage += tok_same
     if TRIAGE_ONLY:
         pipeline_data.save_triage_drops(triage_dropped)
@@ -1872,7 +1877,7 @@ def main():
         seen_titles.add(norm)
         to_judge.append(p)
     to_judge = read_articles(to_judge, deadline)
-    to_judge = judge_order(to_judge)         # approved outlets and widely covered events first
+    to_judge = judge_order(to_judge)         # approved outlets and Incident DB, then widely covered events
     batched = JUDGE_BATCH > 1
     sleep_between = JUDGE_BATCH_SLEEP if batched else JUDGE_SLEEP
     n_batches, stop = 0, False

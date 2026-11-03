@@ -1,6 +1,6 @@
 # Editorial rulebook
 
-**Version 3** (v3 pipeline branch, 2026-11-02: daily judging and a weekly pick, approved outlets, same-event duplicate check, a better source found automatically, judge randomness off. Not live until merged. Version 2 2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
+**Version 3** (v3 pipeline branch, 2026-11-02, amended 2026-11-03: judge ceiling 140, Incident Database first and past triage, BleepingComputer approved; daily judging and a weekly pick, approved outlets, same-event duplicate check, a better source found automatically, judge randomness off. Not live until merged. Version 2 2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
 
 The one reference point for what the gallery collects, keeps and shows. The pipeline reads this file: the theme
 list, the judge, triage and card copy instructions, and the site's theme summaries all come from here. Change a
@@ -208,7 +208,7 @@ doesn't add "no one was hurt", because the summary we have doesn't say so)
 | Look-back window | How far back each daily sweep looks for new items (overlap so a missed day loses nothing) | 2 days |
 | Items per source | Most items read from one source per daily sweep | 25 |
 | YouTube results per search | Results per search, per video length | 6 |
-| Judge ceiling ⚙ | Most stories the judge reads per day (approved outlets and widely covered events first) | 100 |
+| Judge ceiling ⚙ | Most stories the judge reads per day (approved outlets and the AI Incident Database first, then widely covered events, then a mix of the rest) | 140 |
 | Judge randomness | How much the judge's answers may vary on the same text | 0 (off) |
 | Stories per judge call | Stories sent to the judge together (saves AI usage) | 4 |
 | Judge reading length ⚙ | How much of each item the judge reads | about 1,500 characters |
@@ -233,7 +233,8 @@ doesn't add "no one was hurt", because the summary we have doesn't say so)
 ## 9. Collection and the filter before the judge
 ### Triage rules
 Triage is a fast, cheap first pass. **It only drops what is obviously not a story for us; when unsure, it keeps**
-(the judge decides the rest). If triage fails, everything passes through.
+(the judge decides the rest). If triage fails, everything passes through. Stories from the AI Incident Database
+skip triage and go straight to the judge (owner, 2026-11-03: few a day, and one of its stories was lost to triage).
 
 **Drop only if obviously:**
 - not about AI at all,
