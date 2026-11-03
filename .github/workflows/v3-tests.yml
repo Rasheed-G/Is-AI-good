@@ -6,6 +6,7 @@ name: v3 tests
 #   v3-duplicate-test   same-event check on the stories in Airtable      ~40K triage-model tokens
 #   v3-triage-test      practice sweep + 50 triage drops to the judge   ~45K triage + ~75K judge tokens
 #   v3-health-check     newest story's age, Airtable rows, broken links  no AI
+#   v3-duplicate-code-only  where the duplicate pairs fall on the code's list   no AI
 on:
   pull_request:
     types: [labeled]
@@ -38,6 +39,7 @@ jobs:
             v3-duplicate-test) python -u tests/duplicate_test.py ;;
             v3-triage-test)    python -u tests/triage_test.py ;;
             v3-health-check)   python -u scripts/health_check.py ;;
+            v3-duplicate-code-only) CODE_ONLY=1 python -u tests/duplicate_test.py ;;
             *) echo "Unknown test label"; exit 1 ;;
           esac
       - uses: actions/upload-artifact@v4
