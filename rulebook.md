@@ -245,6 +245,13 @@ skip triage and go straight to the judge (owner, 2026-11-03: few a day, and one 
 - AI doing good with no harm in sight,
 - not in English.
 
+**Videos, social posts and research papers are checked harder** (owner, 2026-11-05: they took judge slots from
+stronger stories). Each is marked in the list triage sees. Drop one when it is clearly:
+- commentary, opinion, an explainer, a reaction or a general talk about AI risk, with no specific real event,
+- a personal account no outlet, court or study has reported,
+- a lab-only finding or a warning about the future (what a model could do, with no real people harmed).
+Keep it when it reports a specific real event of AI harm, or a study of harm that really happened. When unsure, keep.
+
 **Never drop at triage** for credibility, consequence, theme or "is it proven": those need the judge. Triage
 doesn't see the themes table or the examples (cost).
 

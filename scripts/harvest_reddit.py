@@ -1005,9 +1005,27 @@ def groq_judge(post):
 # Its rules are the rulebook's "Triage rules" (section 9): drop only the obvious, when unsure keep.
 TRIAGE_RULES = rulebook.plain(rulebook.part(9, "Triage rules"))
 
+SOCIAL_HOSTS = ("instagram.com", "tiktok.com", "x.com", "twitter.com", "facebook.com", "threads.net",
+                "linkedin.com", "bsky.app", "reddit.com", "redd.it")
+PAPER_HOSTS = ("arxiv.org", "biorxiv.org", "medrxiv.org", "ssrn.com", "researchgate.net", "openreview.net")
+
+
+def triage_kind(p):
+    """The mark triage sees for items it checks harder (rulebook section 9): video, social post, research paper."""
+    h = outlets.host(article_url(p))
+    on = lambda hosts: any(h == d or h.endswith("." + d) for d in hosts)
+    if (p.get("provenance") or "").startswith("YouTube") or on(("youtube.com", "youtu.be")):
+        return "[video] "
+    if on(PAPER_HOSTS):
+        return "[research paper] "
+    if on(SOCIAL_HOSTS):
+        return "[social post] "
+    return ""
+
+
 def triage_prompt(batch):
     items = "\n".join(
-        f'{j+1}. {p["title"][:150]} — {(p.get("selftext") or "")[:TRIAGE_SNIPPET]}'
+        f'{j+1}. {triage_kind(p)}{p["title"][:150]} — {(p.get("selftext") or "")[:TRIAGE_SNIPPET]}'
         for j, p in enumerate(batch))
     return ('You are a fast pre-filter for "Is AI Good?", a gallery of real, sourced stories of harm '
             "from AI. For each numbered item, decide KEEP or DROP, following these rules:\n\n"
