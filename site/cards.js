@@ -8,6 +8,10 @@ const THEME_PAGES = {
   "Jobs & livelihoods": { url: "/impact/work/", text: "Read more on how AI is changing jobs and livelihoods" },
   "Bias & discrimination": { url: "/impact/bias/", text: "Read more on how AI can treat people unfairly" },
   "Environment & data centres": { url: "/impact/environment/", text: "Read more on how AI is affecting the environment" },
+  "AI and war": { url: "/impact/war/", text: "Read more on how AI is used in war" },
+  "Children & safety": { url: "/impact/children/", text: "Read more on how AI affects children" },
+  "Relationships & mental health": { url: "/impact/relationships/", text: "Read more on how AI affects relationships and mental health" },
+  "When AI fails": { url: "/impact/failures/", text: "Read more on when AI gets it wrong" },
 };
 
 function isSensitive(s) { return s.sensitivity === "Sensitive"; }
