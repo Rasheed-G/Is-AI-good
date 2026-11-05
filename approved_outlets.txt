@@ -1,6 +1,8 @@
 # Approved outlets: a story from one of these counts as a trusted source (rulebook section 8). Copied 2026-11-02 from the list frozen for the pipeline test (owner approved 2026-10-30).
 # One web address per line. Sub-addresses count (e.g. edition.cnn.com matches cnn.com).
 # suffix: lines match any address ending that way.
+# "paywall" after an address: readers mostly can't read it free. Still trusted, but a free approved copy of the same
+# event is preferred when one exists (owner, 2026-11-05). Marked by Claude from known paywalls; the owner can edit.
 
 
 # Global and US national
@@ -10,50 +12,50 @@ apnews.com
 axios.com
 bbc.co.uk
 bbc.com
-bloomberg.com
-bostonglobe.com
+bloomberg.com  paywall
+bostonglobe.com  paywall
 cbsnews.com
-chicagotribune.com
+chicagotribune.com  paywall
 cnbc.com
 cnn.com
-economist.com
-ft.com
-latimes.com
-marketwatch.com
+economist.com  paywall
+ft.com  paywall
+latimes.com  paywall
+marketwatch.com  paywall
 nbcnews.com
-newyorker.com
+newyorker.com  paywall
 npr.org
-nytimes.com
+nytimes.com  paywall
 pbs.org
 politico.com
 politico.eu
 propublica.org
 reuters.com
-theatlantic.com
+theatlantic.com  paywall
 theintercept.com
 time.com
 usatoday.com
 vox.com
-washingtonpost.com
-wsj.com
+washingtonpost.com  paywall
+wsj.com  paywall
 
 # UK and Ireland
 channel4.com
 cityam.com
-heraldscotland.com
+heraldscotland.com  paywall
 independent.co.uk
-irishtimes.com
+irishtimes.com  paywall
 itv.com
 lbc.co.uk
 manchestereveningnews.co.uk
 news.sky.com
 rte.ie
-scotsman.com
+scotsman.com  paywall
 standard.co.uk
-telegraph.co.uk
+telegraph.co.uk  paywall
 theguardian.com
-thetimes.co.uk
-thetimes.com
+thetimes.co.uk  paywall
+thetimes.com  paywall
 walesonline.co.uk
 yorkshirepost.co.uk
 
@@ -69,7 +71,7 @@ english.elpais.com
 france24.com
 indianexpress.com
 indiatoday.in
-japantimes.co.jp
+japantimes.co.jp  paywall
 koreaherald.com
 koreatimes.co.kr
 kyivindependent.com
@@ -78,17 +80,17 @@ nzherald.co.nz
 restofworld.org
 rnz.co.nz
 sbs.com.au
-scmp.com
-smh.com.au
+scmp.com  paywall
+smh.com.au  paywall
 straitstimes.com
-theage.com.au
-theglobeandmail.com
-thehindu.com
+theage.com.au  paywall
+theglobeandmail.com  paywall
+thehindu.com  paywall
 
 # Technology and trade reporting
 404media.co
 arstechnica.com
-bloomberglaw.com
+bloomberglaw.com  paywall
 canarymedia.com
 carbonbrief.org
 courthousenews.com
@@ -98,8 +100,8 @@ hrdive.com
 ieee.org
 insideclimatenews.org
 krebsonsecurity.com
-law.com
-law360.com
+law.com  paywall
+law360.com  paywall
 musicbusinessworldwide.com
 securityweek.com
 spectrum.ieee.org
@@ -110,26 +112,26 @@ themarkup.org
 therecord.media
 theregister.com
 theverge.com
-wired.com
+wired.com  paywall
 
 # Regional papers and public media
-ajc.com
-azcentral.com
+ajc.com  paywall
+azcentral.com  paywall
 calmatters.org
-dallasnews.com
-denverpost.com
+dallasnews.com  paywall
+denverpost.com  paywall
 gazette.com
-houstonchronicle.com
-inquirer.com
+houstonchronicle.com  paywall
+inquirer.com  paywall
 kqed.org
-miamiherald.com
+miamiherald.com  paywall
 michiganpublic.org
 oregonlive.com
 pressdemocrat.com
-seattletimes.com
-sfchronicle.com
-startribune.com
-tampabay.com
+seattletimes.com  paywall
+sfchronicle.com  paywall
+startribune.com  paywall
+tampabay.com  paywall
 texastribune.org
 vpm.org
 wbur.org
@@ -182,18 +184,18 @@ amnesty.org
 eff.org
 hrw.org
 ilo.org
-jamanetwork.com
+jamanetwork.com  paywall
 nature.com
 nber.org
 oecd.org
 science.org
-thelancet.com
+thelancet.com  paywall
 
 # Close calls the owner approved as In
 huffpost.com
 thehill.com
-businessinsider.com
-fortune.com
+businessinsider.com  paywall
+fortune.com  paywall
 fastcompany.com
 engadget.com
 euronews.com

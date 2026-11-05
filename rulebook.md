@@ -85,8 +85,10 @@ theme page).
   outlet is kept). A later development is a new story only if it adds a real new fact, such as a ruling or a settlement.
 - **Approved outlets** (`approved_outlets.txt`) count as a trusted source: their credibility score is set in code
   (section 8). Other outlets are scored by the judge, so small outlets aren't shut out.
+- **Free before paywalled:** outlets marked "paywall" on the list stay trusted, but when the same event is at a free
+  approved outlet, the card links there, so readers can read the full story.
 - **A better source:** a strong story held back only by its outlet is swapped to the same event at an approved
-  outlet when one is found. The old link is kept on the story.
+  outlet when one is found (a free one first). The old link is kept on the story.
 - **The card's title and summary describe the same event** (checked after the summary is written).
 
 ### Judge scores (each 0 to 100, plus an overall score and a one-line reason)

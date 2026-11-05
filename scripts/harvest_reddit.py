@@ -1397,7 +1397,7 @@ def same_event_check(posts, queue):
     if unanswered:
         print(f"  ! Same-event check: {unanswered} of {len(pairs)} pairs got no answer (counted as different).")
     grp = events.groups(len(docs), [k for k, v in same.items() if v])
-    drop_new, twins, upgrades, covered = events.resolve(docs, grp, outlets.approved, outlets.host)
+    drop_new, twins, upgrades, covered = events.resolve(docs, grp, outlets.approved, outlets.host, outlets.preference)
     item = lambda d: posts[d["ref"]] if d["kind"] == "new" else queue[d["ref"]]["p"]
     log = []
     for g in grp:

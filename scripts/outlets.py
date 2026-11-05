@@ -7,19 +7,23 @@ PATH = pathlib.Path(__file__).resolve().parent.parent / "approved_outlets.txt"
 
 
 def _load():
-    exact, suffixes = set(), []
+    exact, suffixes, paywall = set(), [], set()
     for line in PATH.read_text(encoding="utf-8").splitlines():
         line = line.strip().lower()
         if not line or line.startswith("#"):
             continue
+        words = line.split()
+        line = words[0]
         if line.startswith("suffix:"):
             suffixes.append(line[7:].strip())
         else:
             exact.add(line)
-    return exact, tuple(suffixes)
+            if "paywall" in words[1:]:
+                paywall.add(line)
+    return exact, tuple(suffixes), paywall
 
 
-EXACT, SUFFIXES = _load()
+EXACT, SUFFIXES, PAYWALL = _load()
 TRUSTED_CREDIBILITY = rulebook.setting_int("Approved outlet credibility")
 
 
@@ -37,6 +41,17 @@ def approved(url):
         return True
     parts = h.split(".")
     return any(".".join(parts[i:]) in EXACT for i in range(len(parts) - 1))
+
+
+def paywalled(url):
+    """True when the link is at an approved outlet marked "paywall" (readers mostly can't read it free)."""
+    parts = host(url).split(".")
+    return any(".".join(parts[i:]) in PAYWALL for i in range(len(parts) - 1))
+
+
+def preference(url):
+    """Which link readers are best sent to: a free approved outlet (2), a paywalled approved one (1), other (0)."""
+    return 2 if approved(url) and not paywalled(url) else 1 if approved(url) else 0
 
 
 def trust(verdict, url):

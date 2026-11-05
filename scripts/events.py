@@ -181,7 +181,7 @@ def groups(n, same_pairs):
     return [v for v in g.values() if len(v) > 1]
 
 
-def resolve(docs, same_groups, approved, host):
+def resolve(docs, same_groups, approved, host, prefer=None):
     """Decide each same-event group. Returns (drop_new, twins, upgrades, outlets):
       drop_new - new doc indexes to remove: only copies of a story already in Airtable;
       twins    - {doc index: kept doc index} for the other copies. They are flagged, not dropped (owner,
@@ -192,7 +192,9 @@ def resolve(docs, same_groups, approved, host):
                  unjudged one;
       outlets  - {kept doc index: every outlet that covered the event} for the weekly ranking.
     A story already in Airtable always wins (the new copies are dropped). Among new stories only, the approved
-    outlet wins, then the longer text."""
+    outlet wins (a free one before a paywalled one, owner 2026-11-05), then the longer text.
+    prefer(url) -> 2 free approved, 1 paywalled approved, 0 other; defaults to approved(url)."""
+    prefer = prefer or (lambda u: int(bool(approved(u))))
     drop_new, twins, upgrades, outlets = set(), {}, {}, {}
     for g in same_groups:
         hosts = {host(docs[i]["url"]) for i in g if docs[i]["url"]}
@@ -202,11 +204,12 @@ def resolve(docs, same_groups, approved, host):
             drop_new.update(i for i in g if docs[i]["kind"] == "new")
             continue
         queued = [i for i in g if docs[i]["kind"] == "queue"]
-        rank = lambda i: (approved(docs[i]["url"]), len(docs[i]["text"]))
+        rank = lambda i: (prefer(docs[i]["url"]), len(docs[i]["text"]))
         if queued:
             keep = max(queued, key=rank)
-            better = [i for i in g if docs[i]["kind"] == "new" and approved(docs[i]["url"])]
-            if better and not approved(docs[keep]["url"]):
+            better = [i for i in g if docs[i]["kind"] == "new" and approved(docs[i]["url"])
+                      and prefer(docs[i]["url"]) > prefer(docs[keep]["url"])]
+            if better:
                 upgrades[keep] = max(better, key=rank)
         else:
             keep = max(g, key=rank)

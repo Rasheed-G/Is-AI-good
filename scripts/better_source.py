@@ -92,8 +92,10 @@ def find(item, chat, get_text, post_form, read_page):
     """Look for one story at an approved outlet. Returns (new_url, article_text, tokens) or ("", "", tokens)."""
     p = item["p"]
     here = outlets.host(p.get("external_url") or p.get("permalink"))
-    results = [r for r in search(p["title"], get_text)
-               if outlets.approved(r[2]) and outlets.host(r[2]) != here][:3]
+    # Free approved outlets first, paywalled ones only after (owner, 2026-11-05: readers can find the full story).
+    results = sorted([r for r in search(p["title"], get_text)
+                      if outlets.approved(r[2]) and outlets.host(r[2]) != here],
+                     key=lambda r: outlets.paywalled(r[2]))[:3]
     if not results:
         return "", "", 0
     docs = [events.doc(p["title"], p.get("selftext"), p.get("external_url"), "new")]
