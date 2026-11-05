@@ -1,6 +1,6 @@
 # Editorial rulebook
 
-**Version 3** (v3 pipeline branch, 2026-11-02, amended 2026-11-03 and 2026-11-05: judge ceiling 140, same-event check widened (300 pairs a day, closest pairs first) and flags copies instead of dropping them, Incident Database first and past triage, BleepingComputer approved; daily judging and a weekly pick, approved outlets, same-event duplicate check, a better source found automatically, judge randomness off. Not live until merged. Version 2 2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
+**Version 3** (v3 pipeline branch, 2026-11-02, amended 2026-11-03 and 2026-11-05: judge ceiling 140, same-event check widened (300 pairs a day, closest pairs first) and flags copies instead of dropping them, free outlets before paywalled ones, unpicked passes wait one more week, Incident Database first and past triage, BleepingComputer approved; daily judging and a weekly pick, approved outlets, same-event duplicate check, a better source found automatically, judge randomness off. Not live until merged. Version 2 2026-10-30, after the step 5 sample checks: politics rejects removed, rejects 2, 3 and "not in English" clearer, image rule softened; version 1 locked 2026-10-29)
 
 The one reference point for what the gallery collects, keeps and shows. The pipeline reads this file: the theme
 list, the judge, triage and card copy instructions, and the site's theme summaries all come from here. Change a
@@ -216,6 +216,7 @@ doesn't add "no one was hurt", because the summary we have doesn't say so)
 | Judge reading length ⚙ | How much of each item the judge reads | about 1,500 characters |
 | Publish day | The day the week's best stories are picked and go live | Sunday |
 | Best per theme per week ⚙ | Most new stories one theme can add each week | 4 |
+| Carry-over | Extra Sundays a story that passed but wasn't picked may wait, competing again (not if its event was picked) | 1 |
 | Weekly ranking ⚙ | How the week's passes are ranked | Real consequence plus wider significance, plus 5 for each other outlet that covered the same event, up to 20 |
 | Video slot | If none of a theme's best 4 is a video, the best video that passed the bar replaces the 4th | 1 per theme per week |
 | Approved outlet credibility ⚙ | Credibility score a story from an approved outlet gets | 90 |

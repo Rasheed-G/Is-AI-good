@@ -18,6 +18,8 @@ _nums = [int(n) for n in re.findall(r"\d+", rulebook.setting("Weekly ranking"))]
 BOOST_PER_OUTLET, BOOST_CAP = (_nums + [5, 20])[:2]
 
 
+CARRY_WEEKS = rulebook.setting_int("Carry-over")   # extra Sundays an unpicked pass may wait (owner, 2026-11-05)
+
 def rank(q):
     t = q["t"]
     extra = max(0, len(q.get("outlets") or []) - 1)
@@ -99,21 +101,32 @@ def main():
         created = H.create_records(kept)
         H.reenrich_new_rows(created, kept_posts)
 
-    # Picked stories leave the queue; anything picked but not reached (time) stays for next week.
+    # Picked stories leave the queue; anything picked but not reached (time) stays for next week. A pass that
+    # wasn't picked gets one more Sunday (owner, 2026-11-05), unless its event was picked or it already had one.
     reached = {id(it["q"]) for it in selected if it["q"].get("written")}
     picked = {id(it["q"]) for it in selected}
-    pipeline_data.save_not_picked([q for q in queue if id(q) not in picked])
-    pipeline_data.save_queue([q for q in queue if id(q) in picked and id(q) not in reached])
+    picked_events = {it["q"].get("event") for it in selected if it["q"].get("event")}
+    carry, not_picked = [], []
+    for q in queue:
+        if id(q) in picked:
+            continue
+        if q.get("weeks_waited", 0) < CARRY_WEEKS and not (q.get("event") and q["event"] in picked_events):
+            q["weeks_waited"] = q.get("weeks_waited", 0) + 1
+            carry.append(q)
+        else:
+            not_picked.append(q)
+    pipeline_data.save_not_picked(not_picked)
+    pipeline_data.save_queue([q for q in queue if id(q) in picked and id(q) not in reached] + carry)
     # Per-source "Kept" counts are recomputed from Stories by the next daily run, so nothing to do here.
     H.write_run({
         "run": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), "mode": "Weekly pick",
         "tried": 0, "read": 0, "failed_n": 0, "failed": [], "fetched": 0, "judged": 0,
         "kept": len(kept), "errors": 0, "tokens": tok_copy, "tok_triage": 0, "tok_judge": 0, "tok_copy": tok_copy,
         "judge_mode": "", "passed": len(queue), "held": sum(1 for k in kept if k["fields"].get("Hold reason")),
-        "queued": len(queue) - len(picked),
+        "queued": len(carry),
     })
     print(f"\nDone. {len(kept)} stories written as Candidates, {n_reprint} reprints skipped, "
-          f"{len(queue) - len(picked)} not picked (saved to not-picked/), {tok_copy} copy tokens.")
+          f"{len(carry)} carried to next week, {len(not_picked)} not picked (saved to not-picked/), {tok_copy} copy tokens.")
 
 
 if __name__ == "__main__":
