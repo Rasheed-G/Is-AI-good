@@ -56,6 +56,8 @@ def fetch_rows():
         f = r.get("fields", {})
         if f.get("Theme") in EXCLUDE_THEMES:
             return False
+        if f.get("Duplicate of"):           # a marked duplicate is leaving: don't spend the judge on it
+            return False
         if SKIP_JUDGED and f.get("Rulebook version") == version and f.get("Judge verdict"):
             return False
         if SAMPLE == "only":
