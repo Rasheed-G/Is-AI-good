@@ -35,6 +35,7 @@ WRITE = os.environ.get("WRITE") == "1"
 WRITE_THEME = WRITE and os.environ.get("WRITE_THEME") == "1"
 SKIP_JUDGED = os.environ.get("SKIP_JUDGED") == "1"
 SAMPLE = os.environ.get("SAMPLE", "").strip().lower()
+IDS = {i.strip() for i in os.environ.get("IDS", "").replace(",", " ").split() if i.strip()}   # judge only these rows
 EXCLUDE_THEMES = {t.strip() for t in os.environ.get("EXCLUDE_THEMES", "Even the experts are worried").split(",")
                   if t.strip()}
 API = f"https://api.airtable.com/v0/{H.BASE}/{H.TABLE}"
@@ -60,6 +61,8 @@ def fetch_rows():
             return False
         if SKIP_JUDGED and f.get("Rulebook version") == version and f.get("Judge verdict"):
             return False
+        if IDS:
+            return r["id"] in IDS
         if SAMPLE == "only":
             return bool(f.get("Step 5 sample"))
         if SAMPLE == "skip":

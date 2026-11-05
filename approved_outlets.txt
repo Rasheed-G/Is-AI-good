@@ -1,8 +1,9 @@
 # Approved outlets: a story from one of these counts as a trusted source (rulebook section 8). Copied 2026-11-02 from the list frozen for the pipeline test (owner approved 2026-10-30).
 # One web address per line. Sub-addresses count (e.g. edition.cnn.com matches cnn.com).
 # suffix: lines match any address ending that way.
-# "paywall" after an address: readers mostly can't read it free. Still trusted, but a free approved copy of the same
-# event is preferred when one exists (owner, 2026-11-05). Marked by Claude from known paywalls; the owner can edit.
+# "paywall" after an address: a reader clicking through usually can't read the article free (hard paywalls, and
+# research papers at journals). Metered outlets (a few free articles a month) are not marked: a reader clicking one
+# story gets through (owner, 2026-11-05). Still trusted, but a free approved copy of the same event is preferred.
 
 
 # Global and US national
@@ -15,13 +16,13 @@ bbc.com
 bloomberg.com  paywall
 bostonglobe.com  paywall
 cbsnews.com
-chicagotribune.com  paywall
+chicagotribune.com
 cnbc.com
 cnn.com
 economist.com  paywall
 ft.com  paywall
-latimes.com  paywall
-marketwatch.com  paywall
+latimes.com
+marketwatch.com
 nbcnews.com
 newyorker.com  paywall
 npr.org
@@ -44,13 +45,13 @@ channel4.com
 cityam.com
 heraldscotland.com  paywall
 independent.co.uk
-irishtimes.com  paywall
+irishtimes.com
 itv.com
 lbc.co.uk
 manchestereveningnews.co.uk
 news.sky.com
 rte.ie
-scotsman.com  paywall
+scotsman.com
 standard.co.uk
 telegraph.co.uk  paywall
 theguardian.com
@@ -71,21 +72,21 @@ english.elpais.com
 france24.com
 indianexpress.com
 indiatoday.in
-japantimes.co.jp  paywall
+japantimes.co.jp
 koreaherald.com
 koreatimes.co.kr
 kyivindependent.com
 livemint.com
-nzherald.co.nz
+nzherald.co.nz  paywall
 restofworld.org
 rnz.co.nz
 sbs.com.au
-scmp.com  paywall
-smh.com.au  paywall
-straitstimes.com
-theage.com.au  paywall
+scmp.com
+smh.com.au
+straitstimes.com  paywall
+theage.com.au
 theglobeandmail.com  paywall
-thehindu.com  paywall
+thehindu.com
 
 # Technology and trade reporting
 404media.co
@@ -112,26 +113,26 @@ themarkup.org
 therecord.media
 theregister.com
 theverge.com
-wired.com  paywall
+wired.com
 
 # Regional papers and public media
 ajc.com  paywall
-azcentral.com  paywall
+azcentral.com
 calmatters.org
 dallasnews.com  paywall
-denverpost.com  paywall
+denverpost.com
 gazette.com
-houstonchronicle.com  paywall
-inquirer.com  paywall
+houstonchronicle.com
+inquirer.com
 kqed.org
-miamiherald.com  paywall
+miamiherald.com
 michiganpublic.org
 oregonlive.com
 pressdemocrat.com
-seattletimes.com  paywall
-sfchronicle.com  paywall
-startribune.com  paywall
-tampabay.com  paywall
+seattletimes.com
+sfchronicle.com
+startribune.com
+tampabay.com
 texastribune.org
 vpm.org
 wbur.org
@@ -184,18 +185,18 @@ amnesty.org
 eff.org
 hrw.org
 ilo.org
-jamanetwork.com  paywall
-nature.com
+jamanetwork.com
+nature.com  paywall
 nber.org
 oecd.org
-science.org
+science.org  paywall
 thelancet.com  paywall
 
 # Close calls the owner approved as In
 huffpost.com
 thehill.com
 businessinsider.com  paywall
-fortune.com  paywall
+fortune.com
 fastcompany.com
 engadget.com
 euronews.com
