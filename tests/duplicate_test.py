@@ -24,7 +24,7 @@ import harvest_reddit as H
 import events
 
 OUT = pathlib.Path(os.environ.get("RESULTS", HERE / "results"))
-MAX_PAIRS = int(os.environ.get("MAX_PAIRS", "300"))
+MAX_PAIRS = int(os.environ.get("MAX_PAIRS", H.SAME_EVENT_MAX))   # the rulebook's daily limit unless overridden
 CODE_ONLY = os.environ.get("CODE_ONLY") == "1"
 
 
