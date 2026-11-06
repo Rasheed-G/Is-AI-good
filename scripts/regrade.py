@@ -55,7 +55,7 @@ def fetch_rows():
     version = int(rulebook.version())
     def wanted(r):
         f = r.get("fields", {})
-        if f.get("Theme") in EXCLUDE_THEMES:
+        if f.get("Theme") in EXCLUDE_THEMES and r["id"] not in IDS:   # a listed row is judged whatever its theme
             return False
         if f.get("Duplicate of"):           # a marked duplicate is leaving: don't spend the judge on it
             return False
