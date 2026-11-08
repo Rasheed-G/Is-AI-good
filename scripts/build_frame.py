@@ -14,12 +14,20 @@ including theme pages the menu doesn't list. The head also gets share previews (
 shown when a page is shared on LinkedIn or by message), taken from each page's own <title> and
 description.
 
+A page can also carry the theme list from rulebook.md (each theme's name, linked to its stories, and its public
+summary), so the list on the site always matches the rulebook:
+
+  <!-- frame:themes --> ... <!-- /frame:themes -->
+
 Edit the pieces in scripts/frame/, then run:   python scripts/build_frame.py
 Check nothing is out of date (e.g. before a PR): python scripts/build_frame.py --check
 """
+import html
 import pathlib
 import re
 import sys
+
+import rulebook
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
@@ -30,7 +38,7 @@ GROUP = re.compile(r'<button class="nav-group-btn"(.*?)</ul>', re.S)
 SITE_URL = "https://isaigood.org"
 TITLE = re.compile(r"<title>(.*?)</title>", re.S)
 DESC = re.compile(r'<meta name="description" content="(.*?)" />', re.S)
-SLOT = re.compile(r"(<!-- frame:(head|header|footer|footer-nosignup) -->\n)(.*?)([ \t]*<!-- /frame:\2 -->)", re.S)
+SLOT = re.compile(r"(<!-- frame:(head|header|footer|footer-nosignup|themes) -->\n)(.*?)([ \t]*<!-- /frame:\2 -->)", re.S)
 
 
 def piece(name):
@@ -73,6 +81,15 @@ def share_preview(text, path):
     return "".join(f"  {l}\n" for l in lines if l)
 
 
+def theme_list():
+    items = "".join(
+        f'        <li><a href="/news/?theme={t["slug"]}"><strong>{html.escape(t["name"])}</strong></a>. '
+        f'{html.escape(t["summary"])}</li>\n'
+        for t in rulebook.themes()
+    )
+    return f'      <ul class="theme-list">\n{items}      </ul>\n'
+
+
 def stamp(text, path):
     pieces = {
         "head": piece("head") + share_preview(text, path),
@@ -80,6 +97,8 @@ def stamp(text, path):
         "footer": mark_current(piece("footer"), path),
     }
     pieces["footer-nosignup"] = SIGNUP.sub("", pieces["footer"])
+    if "<!-- frame:themes -->" in text:
+        pieces["themes"] = theme_list()
     return SLOT.sub(lambda m: m.group(1) + pieces[m.group(2)] + m.group(4), text)
 
 
