@@ -50,6 +50,9 @@ FIELDS = {
         ("Too old", NUM), ("Duplicates", NUM), ("YouTube gate dropped", NUM),
         ("Triage dropped", NUM), ("Not judged (ceiling)", NUM), ("Passed bar", NUM),
         ("Held", NUM), ("Triage drop sample", LONG), ("Rulebook version", NUM),
+        # Daily v3 counts: copies of one event dropped, approved-outlet stories, sources swapped for a
+        # better outlet, passes queued for the weekly pick.
+        ("Same event dropped", NUM), ("Approved outlet", NUM), ("Swapped source", NUM), ("Queued", NUM),
     ],
     SOURCES: [
         ("Judged last run", NUM), ("Judged (30d)", NUM), ("Judged daily", LONG),
