@@ -56,8 +56,15 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/publish.py
       - name: Build site data
+        # Gallery limits on: at most 20 stories per theme, none older than 6 months (rulebook section 4).
+        # Stories they leave out are archived with every field to the archive repo, then removed from Airtable.
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          GALLERY_LIMITS: "1"
+          GALLERY_ARCHIVE: "1"
+          ARCHIVE_REPO: ${{ secrets.ARCHIVE_REPO }}
+          ARCHIVE_PATH: ${{ secrets.ARCHIVE_PATH }}
+          ARCHIVE_TOKEN: ${{ secrets.ARCHIVE_TOKEN || secrets.PUBLISH_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/build_data.py
       - name: Theme list on How we choose stories (from the rulebook)
