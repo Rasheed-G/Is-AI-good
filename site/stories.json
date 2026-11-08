@@ -61,90 +61,6 @@
       "featured": true
     },
     {
-      "id": "recS3NTp3wJl9WSbp",
-      "title": "Flock is tightening its rules in response to a growing surveillance backlash",
-      "theme": "Surveillance & privacy",
-      "format": "Image",
-      "summary": "Flock is requiring officers to enter a criminal case number before searching its 120,000-camera license plate network. This follows a Washington Post investigation finding 46 cases of officers using the tech to stalk romantic partners. The change aims to stop abuse and win back city contracts, though loopholes remain.",
-      "sourceUrl": "https://www.technologyreview.com/2026/08/13/1141904/flock-is-tightening-its-rules-in-response-to-a-growing-surveillance-backlash/",
-      "mediaUrl": "https://wp.technologyreview.com/wp-content/uploads/2026/08/AP26039248966381.jpg?resize=1200,600",
-      "date": "",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "reciplAoTRQQXxy1n",
-      "title": "How a Yale AI-cheating dispute became a 13-count federal lawsuit",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "In February 2025, Thierry Rignol sued Yale University for 13 counts after an unreliable AI detector accused him of cheating. Yale suspended him for a year, gave him an F in Sourcing and Managing Funds, and cost him $208,500 in tuition and the class valedictorian title, despite his claim of being a top student.",
-      "sourceUrl": "https://arstechnica.com/tech-policy/2026/07/how-a-yale-ai-cheating-dispute-became-a-13-count-federal-lawsuit/",
-      "mediaUrl": "https://cdn.arstechnica.net/wp-content/uploads/2026/07/GettyImages-610869530-2560x1440.jpg",
-      "date": "",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recRHOxTXPGAqYnv7",
-      "title": "Lancaster County parents call for change after deepfake pornographic images of over 50 female students created",
-      "theme": "Children & safety",
-      "format": "Text",
-      "summary": "Deepfake pornographic images of 50+ female students created",
-      "sourceUrl": "https://www.abc27.com/local-news/lancaster/lancaster-county-parents-call-for-change-after-deepfake-pornographic-images-of-over-50-female-students-created/",
-      "mediaUrl": "",
-      "date": "",
-      "sensitivity": "Sensitive",
-      "featured": false
-    },
-    {
-      "id": "recIf8xl9eMa5AdF0",
-      "title": "News report: AI voice-cloning 'grandparent' scams target older people",
-      "theme": "Scams & fraud",
-      "format": "Video",
-      "summary": "A news segment showing how scammers clone a loved one's voice from a few seconds of audio found online, then phone older relatives pretending to be in an emergency and needing money urgently. Victims describe hearing what sounds exactly like their grandchild before losing thousands.",
-      "sourceUrl": "https://www.youtube.com/watch?v=45yb6F6TJuI",
-      "mediaUrl": "https://www.youtube.com/watch?v=45yb6F6TJuI",
-      "date": "",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recnb2v6BlTPFYs8x",
-      "title": "Pastor Seeks Accountability After ChatGPT Allegedly Discouraged Him From Seeking Medical Care During Life-Threatening Blood Clots",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "On May 22, 2024, Tech Justice Law and the Social Media Victims Law Center sued OpenAI and Sam Altman in San Francisco County Superior Court. Former pastor Scott Winters nearly died from a bilateral pulmonary embolism after ChatGPT-4o gave inaccurate medical advice and coached him against seeking hospital care.",
-      "sourceUrl": "https://techjusticelaw.org/press-releases/pastor-sues-after-openai-ai-chatgpt-allegedly-discouraged-him-from-seeking-medical-care-during-life-threatening-blood-clots/",
-      "mediaUrl": "https://techjusticelaw.org/wp-content/uploads/2026/07/Screenshot-2026-07-22-at-9.33.49-AM.png",
-      "date": "",
-      "sensitivity": "Sensitive",
-      "featured": false
-    },
-    {
-      "id": "rec6gmVBuQuKwi8g5",
-      "title": "UPDATED: Officials: 3 Cascade students charged in connection with deepfake photos",
-      "theme": "Children & safety",
-      "format": "Image",
-      "summary": "On September 16, 2025, officials in Cascade, Iowa, charged three Cascade High School students for using AI to create fake nude photos of numerous high-school-age girls. This incident highlights how AI can be weaponized to sexually exploit minors, causing real harm to victims and prompting legal action against the perpetrators.",
-      "sourceUrl": "https://www.telegraphherald.com/news/breaking/article_fbb75b42-e74a-4a56-99cc-74781b10ad3b.html",
-      "mediaUrl": "https://bloximages.newyork1.vip.townnews.com/telegraphherald.com/content/tncms/custom/image/646a89a2-fd9d-11e5-9db5-4b01910bfaa0.jpg?resize=600%2C315",
-      "date": "",
-      "sensitivity": "Sensitive",
-      "featured": false
-    },
-    {
-      "id": "recoMEMspi16jNJ9A",
-      "title": "AI-cloned 'Biden' robocall told New Hampshire voters to stay home",
-      "theme": "Misinformation",
-      "format": "Audio",
-      "summary": "In New Hampshire, voters received robocalls using an AI-cloned voice of President Biden urging them not to vote in the upcoming presidential primary. This incident demonstrates how AI can manipulate democratic processes by suppressing voter turnout, leading to criminal charges and FCC fines against those responsible.",
-      "sourceUrl": "https://www.npr.org/2024/05/23/nx-s1-4977582/fcc-ai-deepfake-robocall-biden-new-hampshire-political-operative",
-      "mediaUrl": "",
-      "date": "2024-01-21",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "recdAa3N3ZuZuL2Rz",
       "title": "Uber Eats driver wins payout over discriminatory facial recognition checks",
       "theme": "Bias & discrimination",
@@ -169,30 +85,6 @@
       "featured": false
     },
     {
-      "id": "recuRprevLJBZ1FW3",
-      "title": "Video-game voice actors strike for nearly a year over AI cloning",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "On 1 August 2024, video game performers struck for nearly a year over AI voice cloning. Actor Jennifer Hale warned major gaming companies treat their work as a commodity for profit, crushing human beings. The strike highlights risks to livelihoods as AI threatens to reproduce actors’ voices without consent.",
-      "sourceUrl": "https://www.bbc.co.uk/news/articles/czvxz11gl57o",
-      "mediaUrl": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/a7e8/live/7ac5b3a0-4fd5-11ef-b8a6-c9027db4120d.jpg",
-      "date": "2024-07-26",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "rec1TddBDjWn5qJJU",
-      "title": "Survey: 1 in 5 young people in Spain have had nude AI deepfakes made of them",
-      "theme": "Children & safety",
-      "format": "Image",
-      "summary": "A Save the Children study found nearly all young people in Spain suffered digital sexual abuse before age 18. One in five had nude AI deepfakes made of them. This reveals widespread harm to minors from non-consensual AI-generated sexual imagery, highlighting severe real-world risks to youth safety and privacy in Spain.",
-      "sourceUrl": "https://www.euronews.com/next/2025/07/10/1-in-5-young-people-in-spain-have-had-nude-ai-deepfakes-made-of-them-save-the-children-say",
-      "mediaUrl": "https://static.euronews.com/articles/stories/09/36/54/97/1200x675_cmsv2_730ccaa0-abe2-5844-9a95-26711ce54726-9365497.jpg",
-      "date": "2025-07-10",
-      "sensitivity": "Sensitive",
-      "featured": false
-    },
-    {
       "id": "recEyouB4FmD7vYAg",
       "title": "Regulator rules that Facebook's job ads algorithm is discriminatory",
       "theme": "Bias & discrimination",
@@ -205,18 +97,6 @@
       "featured": false
     },
     {
-      "id": "rec4mH3doitnPJpeG",
-      "title": "Grok AI's Deepfake Images Spark Concern",
-      "theme": "Image abuse",
-      "format": "Video",
-      "summary": "Grok AI creates deepfakes of strangers with removed clothing",
-      "sourceUrl": "https://www.youtube.com/watch?v=WjFGaRPXad0",
-      "mediaUrl": "https://www.youtube.com/watch?v=WjFGaRPXad0",
-      "date": "2026-01-06",
-      "sensitivity": "Sensitive",
-      "featured": false
-    },
-    {
       "id": "recMsVTkbOEIAHqtr",
       "title": "Google removes some AI health summaries after they gave misleading advice",
       "theme": "When AI fails",
@@ -225,18 +105,6 @@
       "sourceUrl": "https://www.theguardian.com/technology/2026/jan/11/google-ai-overviews-health-guardian-investigation",
       "mediaUrl": "https://i.guim.co.uk/img/media/f8d00c974ded83894d8c39a75fab0c5442c8bb9f/869_0_6827_5464/master/6827.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=28f5a8e9b3185cdbde1b56cd35795197",
       "date": "2026-01-11",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recMmyWGtkZ0UcBZc",
-      "title": "Jack Dorsey's Block Plans to Cut Nearly Half of Workforce in AI Bet",
-      "theme": "Jobs & livelihoods",
-      "format": "Video",
-      "summary": "Block plans to cut nearly half of workforce, leveraging AI",
-      "sourceUrl": "https://www.youtube.com/watch?v=drrb0vbV6h0",
-      "mediaUrl": "https://www.youtube.com/watch?v=drrb0vbV6h0",
-      "date": "2026-02-26",
       "sensitivity": "Safe",
       "featured": false
     },
@@ -445,18 +313,6 @@
       "featured": false
     },
     {
-      "id": "recDmIj5rN1XYH423",
-      "title": "Scammers are using AI to geolocate vacation photos",
-      "theme": "Scams & fraud",
-      "format": "Image",
-      "summary": "On 16 August 2026, The Guardian reported scammers use AI to geolocate vacation photos on Instagram or Facebook. By analyzing visual details, they identify locations and send convincing phishing messages from banks. This puts users at risk of fraud, even if they did not include geotags or mention their trip.",
-      "sourceUrl": "https://ua.news/en/technologies/shakhrayi-vikoristovuiut-shi-dlia-geolokatsiyi-foto-z-vidpustok",
-      "mediaUrl": "https://cdn-cabinet.ua.news/uploads/images/shakhrai_vykorystovuiut_shi_dlia_heoloka_1786863284020.webp",
-      "date": "2026-08-16",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "rectk3wlGLmVQiQB2",
       "title": "WATCH: Scammers deepfake doctors to defraud patients",
       "theme": "Scams & fraud",
@@ -577,18 +433,6 @@
       "featured": false
     },
     {
-      "id": "recdnEHk1AcELhD1Y",
-      "title": "NTU to stop using AI detectors from 2027: CNA",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "Nanyang Technological University will stop using AI detectors by Dec. 31, 2026, after three students were wrongly failed in 2025. The school announced this on Aug. 13, citing unreliable tools that falsely accuse students. This protects learners from unfair penalties due to flawed technology.",
-      "sourceUrl": "https://mothership.sg/2026/08/ntu-stop-ai-detectors-2027/",
-      "mediaUrl": "https://static.mothership.sg/1/2026/08/ntu-ai-detectors.png",
-      "date": "2026-08-17",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "recKRJv1YEtKSgvLV",
       "title": "Public backlash over police AI surveillance trial",
       "theme": "Surveillance & privacy",
@@ -596,18 +440,6 @@
       "summary": "In Western Australia, a trial of live facial recognition technology led to 18 arrests in seven days. Privacy experts raised concerns about this Australian-first use of police AI surveillance, highlighting risks to public privacy rights.",
       "sourceUrl": "https://www.youtube.com/watch?v=3ZBy4C7VWBk",
       "mediaUrl": "https://www.youtube.com/watch?v=3ZBy4C7VWBk",
-      "date": "2026-08-17",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recpD0DUS8kkOHu3l",
-      "title": "Quebec man ordered to pay $1000 over use of fake AI-generated court cases",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "A Quebec man was ordered to pay $1,000 for using fake AI-generated court cases. This incident highlights the real-world legal and financial risks of AI misinformation, showing how fabricated digital content can lead to direct penalties for individuals who rely on or spread false information.",
-      "sourceUrl": "https://vancouverisland.ctvnews.ca/montreal/article/quebec-man-ordered-to-pay-1000-over-use-of-fake-ai-generated-court-cases/",
-      "mediaUrl": "https://www.ctvnews.ca/resizer/v2/YPCWNPUEDZBLXVFL2O3P74EGQE.jpg?smart=true&auth=2830c4cf92797c674cae391f4de46fe21103210f1bd29b18045297224d61cbf3&width=1200&height=630",
       "date": "2026-08-17",
       "sensitivity": "Safe",
       "featured": false
@@ -692,18 +524,6 @@
       "summary": "An Indian account posted an AI-generated image of a mushroom cloud alongside a photo of a general, falsely claiming Iran had a nuclear weapon. This misinformation angered Team Trump and Netanyahu. The incident shows how fake AI images can spread dangerous lies about real-world security threats, causing political friction and public confusion.",
       "sourceUrl": "https://www.ndtv.com/world-news/iran-us-war-israel-netanyahu-made-big-claim-about-irans-nuclear-plan-his-source-was-a-fake-post-11918376",
       "mediaUrl": "",
-      "date": "2026-08-18",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recRxb1cnKvJXRoYe",
-      "title": "How the Dutch Police Clung to Predictive Policing for a Decade Without Evidence",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "In early 2026, the Dutch Police discontinued the Crime Anticipation System after an internal report found its predictive capabilities extremely limited. Used since 2013, the algorithm never demonstrated measurable impact on reducing crime, meaning resources were deployed based on ineffective data for a decade.",
-      "sourceUrl": "https://algorithmwatch.org/en/dutch-police-cas-predictive-policing/",
-      "mediaUrl": "https://algorithmwatch.org/en/wp-content/uploads/2026/07/1280px_4591760252_c29d055411_o-1.webp",
       "date": "2026-08-18",
       "sensitivity": "Safe",
       "featured": false
@@ -805,18 +625,6 @@
       "featured": false
     },
     {
-      "id": "recJ4sxdfXxCA5IJw",
-      "title": "'The Cost of the Shortcut' – D&AD Report Examines AI's Impact on Creative Judgment",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "A D&AD report titled 'The Cost of the Shortcut' finds entry-level jobs where people develop creative judgment are disappearing as AI absorbs many of these roles. This matters because it risks eroding the training ground for future creative professionals, potentially harming the long-term quality of human-led creative work.",
-      "sourceUrl": "https://www.brandinginasia.com/the-cost-of-the-shortcut-dad-report-examines-ais-impact-on-creative-judgment/",
-      "mediaUrl": "https://www.brandinginasia.com/wp-content/uploads/2026/07/Generative-AI-.webp",
-      "date": "2026-08-19",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "recqMZKMw0ovFlL6B",
       "title": "ASIC Pulls 3,106 Crypto Scams as AI Networks Target Aussie Savings",
       "theme": "Scams & fraud",
@@ -824,18 +632,6 @@
       "summary": "In FY26, Australia’s ASIC shut down 3,106 fake crypto platforms amid a 182% scam surge. Deepfakes of figures like Anthony Albanese fueled over $5.3M in reported losses. ASIC urges verifying entities on its Professional Registers before sending funds to protect savings from these AI-driven frauds.",
       "sourceUrl": "https://news.bitcoin.com/regulation-and-legal/asic-pulls-3106-crypto-scams-as-ai-networks-target-aussie-savings/",
       "mediaUrl": "https://static.news.bitcoin.com/wp-content/uploads/2026/08/asic-pulls-3106-crypto-scams-as-ai-networks-target-aussie-savings.jpg",
-      "date": "2026-08-19",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recTI1pKRpktPpudt",
-      "title": "Companies cite AI for layoffs in Michigan, but it's not so simple",
-      "theme": "Jobs & livelihoods",
-      "format": "Text",
-      "summary": "Sedlecky, seeking an entry-level tech sales role, noted job cuts were inevitable as Michigan companies cite AI for layoffs. This highlights the real-world risk of AI-driven unemployment for entry-level workers, though the situation is complex.",
-      "sourceUrl": "https://www.detroitnews.com/story/business/2026/08/19/companies-cite-ai-for-layoffs-in-michigan-but-its-not-so-simple/91010735007/",
-      "mediaUrl": "",
       "date": "2026-08-19",
       "sensitivity": "Safe",
       "featured": false
@@ -1153,18 +949,6 @@
       "featured": false
     },
     {
-      "id": "recOGrl9jfL4CWPQn",
-      "title": "Apple, Amazon, Meta, Microsoft, Nvidia, and Samsung face class action suits over AI voice training",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "Between May 13 and 19, 2026, Illinois journalists, podcasters, voice actors, and audiobook narrators filed nine lawsuits in Chicago against Apple, Amazon, Meta, Microsoft, Nvidia, Samsung, Alphabet, Adobe, and ElevenLabs. They allege these companies harvested their voice recordings without consent to train AI models.",
-      "sourceUrl": "https://cryptobriefing.com/tech-giants-lawsuit-ai-voice-training-bipa/",
-      "mediaUrl": "https://static.cryptobriefing.com/wp-content/uploads/2026/08/21003720/worker-using-ai-on-a-laptop-800x420.jpeg",
-      "date": "2026-08-21",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "recKXCxyNvdtawQkw",
       "title": "Argentina: AI -powered surveillance increased under President Milei",
       "theme": "Surveillance & privacy",
@@ -1172,18 +956,6 @@
       "summary": "On Wednesday, Amnesty International reported that Argentina’s government under President Javier Milei significantly expanded AI-powered surveillance in the past two years. This expansion chills privacy, freedom of expression, assembly, and association, putting these fundamental rights at risk for the public.",
       "sourceUrl": "https://www.heise.de/en/news/Argentina-AI-powered-surveillance-increased-under-President-Milei-11421279.html",
       "mediaUrl": "https://heise.cloudimg.io/bound/1200x1200/q85.png-lossy-85.webp-lossy-85.foil1/_www-heise-de_/imgs/18/5/1/5/0/8/7/0/shutterstock_2478845483-6bfdc0ee457a89e0.jpg",
-      "date": "2026-08-21",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recFveVGHCaejwXo2",
-      "title": "Battery or fake charges? Woman seeks new law to prevent arrests based on artificial intelligence",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "Melissa Sims seeks new laws to prevent arrests based on artificial intelligence. She faced legal risks after an AI system incorrectly flagged her. This incident highlights how automated tools can wrongly accuse innocent people, leading to potential wrongful arrests and severe personal consequences for those targeted by flawed technology.",
-      "sourceUrl": "https://www.naplespress.com/local-news/battery-or-fake-charges-woman-seeks-new-law-to-prevent/article_01017a99-3a7a-44d6-8f34-325e99bd2211.html",
-      "mediaUrl": "https://bloximages.chicago2.vip.townnews.com/naplespress.com/content/tncms/assets/v3/editorial/0/10/01017a99-3a7a-44d6-8f34-325e99bd2211/691e6b77e6a0c.preview.jpg?crop=1246%2C654%2C0%2C503&resize=1200%2C630&order=crop%2Cresize",
       "date": "2026-08-21",
       "sensitivity": "Safe",
       "featured": false
@@ -1273,18 +1045,6 @@
       "featured": false
     },
     {
-      "id": "recm3OCn1ihkVZj2h",
-      "title": "Lil Durk Viral Mug Shot Is Fake , A.I.-Generated Image Circulates Online",
-      "theme": "Misinformation",
-      "format": "Image",
-      "summary": "On August 21, 2026, a fake AI-generated mug shot of rapper Lil Durk circulated online. The image was bogus. This incident shows how AI can create false evidence of real people, risking public misinformation and reputational harm through fabricated visuals.",
-      "sourceUrl": "https://www.tmz.com/2026/08/21/lil-durk-viral-bald-mug-shot-not-real/",
-      "mediaUrl": "https://imagez.tmz.com/image/24/16by9/2026/08/21/2446a874583c4ee3b9cbe7b1f8eb0e15_xl.jpg",
-      "date": "2026-08-22",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "receSVOyLoTwU9BB8",
       "title": "Vile 'slut pages' emerge exposing Sydney schoolgirls with AI deepfakes and addresses",
       "theme": "Children & safety",
@@ -1305,18 +1065,6 @@
       "sourceUrl": "https://www.theguardian.com/technology/2026/aug/22/the-hollywood-creatives-training-ai-to-do-their-jobs",
       "mediaUrl": "https://i.guim.co.uk/img/media/eca8a76b2a7a0d23d19512d598b73041712f2ec1/1344_539_3254_2604/master/3254.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=1d81c4f6a466373a506ed50b7860abae",
       "date": "2026-08-22",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recMkgBlyFNFBKigi",
-      "title": "A lawsuit says Oura's sleep stages are AI guesses with a coin flip's odds",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "A proposed class action in San Francisco alleges Oura’s sleep tracking relies on AI guesses, not measurement, contradicting its “95% Sleep Staging Accuracy” claim. The suit names Oura Inc. and Finnish parent Oura Health Oy, filed as the company prepares for a US listing at an $11bn valuation.",
-      "sourceUrl": "https://thenextweb.com/news/oura-sleep-tracking-accuracy-class-action-lawsuit",
-      "mediaUrl": "https://media.thenextweb.com/2026/08/oura-sleep-tracking-accuracy-class-action-lawsuit.jpg",
-      "date": "2026-08-23",
       "sensitivity": "Safe",
       "featured": false
     },
@@ -1549,18 +1297,6 @@
       "featured": false
     },
     {
-      "id": "recEwBRCHmloE3K7V",
-      "title": "U.S. call-center jobs now 39% below trend: Goldman",
-      "theme": "Jobs & livelihoods",
-      "format": "Video",
-      "summary": "Goldman Sachs reports U.S. call-center employment is 39% below trend as AI reshapes hiring across more than 800 occupations. This indicates significant job losses for entry-level workers, highlighting the real-world risk of AI displacing human labor in customer service roles.",
-      "sourceUrl": "https://news.outsourceaccelerator.com/call-center-jobs-below-trend/",
-      "mediaUrl": "https://www.youtube.com/watch?v=JSiqHy4SCZo",
-      "date": "2026-08-24",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "recuwmNpobSmcTEfA",
       "title": "Video falsely linked to Osun election resistance was recorded in Ghana",
       "theme": "Misinformation",
@@ -1592,18 +1328,6 @@
       "summary": "On Aug 17, Round Hill Music sued Anthropic and Suno in California federal court, alleging the AI companies misused hundreds of its songs to train their systems. This legal action highlights risks to creators whose work is used without permission, potentially undermining copyright protections and fair compensation for artists.",
       "sourceUrl": "https://www.reuters.com/legal/legalindustry/music-publisher-sues-anthropic-suno-over-ai-training-2026-08-17/",
       "mediaUrl": "https://res.cloudinary.com/pai/image/upload/d_fallback.jpg,w_800/v1/legacy/d41d8cd98f00b204e9800998ecf8427e?_a=BAMAPqkS0",
-      "date": "2026-08-25",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "rec5oEAPmIO7OAkS7",
-      "title": "Samsung thinks Claude Code can help it boost chip design — but admits the AI still makes ...",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "A different kind of numbers game 5 Exclusive perks 24/7 Insider insights 44K+ Active Members Weekly newsletters Get daily news, weekly deals and the week’s top tech stories Commenting access Join the ",
-      "sourceUrl": "https://www.techradar.com/pro/samsung-thinks-claude-code-can-help-it-boost-chip-design-but-admits-the-ai-still-makes-some-worryingly-big-mistakes",
-      "mediaUrl": "https://cdn.mos.cms.futurecdn.net/new7kozVtx7yeGs3pWmbfd-1264-80.png",
       "date": "2026-08-25",
       "sensitivity": "Safe",
       "featured": false
@@ -1689,30 +1413,6 @@
       "sourceUrl": "https://www.theguardian.com/world/2026/aug/26/fake-thinktank-israel-ai-propaganda",
       "mediaUrl": "https://i.guim.co.uk/img/media/4c5be9b6f1682a9aafe9cbdc94c89a258fa5cec5/999_0_5001_4000/master/5001.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=e4f8b5b0eb4778568ef5affd89f99ad4",
       "date": "2026-08-27",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recI6Iq9PH3dB7DsS",
-      "title": "Fact Check: FAKE Video Shows Nepal Bridge Collapsing Into Floodwaters -- It Is AI-Generated",
-      "theme": "Misinformation",
-      "format": "Image",
-      "summary": "On August 27, 2026, an X post by @BOILINGPOINT_KE shared a fake video of a Nepal bridge collapsing during the August 26, 2026, floods. Detection tools rated it 100% AI-generated. This misinformation risks deceiving the public about the disaster’s severity, spreading false narratives during a real crisis.",
-      "sourceUrl": "https://www.yahoo.com/news/world/articles/fact-check-fake-video-shows-234326148.html",
-      "mediaUrl": "https://s.yimg.com/lo/mysterio/api/9af9ad9bf107355e211730cfbc6569d2799d2ea27f4065d0d3cdecf6462a8c67/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Flead_stories_560%2F5b8ba8eb4621b740b003c32b3837c7e0.jpg",
-      "date": "2026-08-29",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recLQ4irNaJhfSzil",
-      "title": "Music Publishers Sue AI CEO Dario Amodei for 'Blatant Theft'",
-      "theme": "Jobs & livelihoods",
-      "format": "Text",
-      "summary": "Sony Music and Warner Music sued Anthropic CEO Dario Amodei late Friday, accusing the AI company of “blatant theft.” This legal action highlights the financial and creative risks AI poses to music publishers, who claim their copyrighted works were used without permission, threatening artists’ livelihoods and intellectual property rights.",
-      "sourceUrl": "https://www.mediaite.com/media/news/top-music-publishers-sue-ai-company-fresh-off-1-5-billion-settlement-for-blatant-theft-in-major-lawsuit/",
-      "mediaUrl": "",
-      "date": "2026-08-29",
       "sensitivity": "Safe",
       "featured": false
     },
@@ -1861,18 +1561,6 @@
       "featured": false
     },
     {
-      "id": "reczoaJJe8SAkYhca",
-      "title": "The Seattle Times sues OpenAI, Microsoft over copyright infringement",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "On Friday, The Seattle Times and Newsday sued OpenAI and Microsoft in federal court, alleging the companies used their published work to train AI chatbots without consent or payment. This legal action highlights the risk that AI developers may exploit copyrighted journalism, potentially harming news organizations that spend millions annually to produce content.",
-      "sourceUrl": "https://www.spokesman.com/stories/2026/sep/04/the-seattle-times-sues-openai-microsoft-over-copyr/",
-      "mediaUrl": "https://thumb.spokesman.com/K2kuEELQVYJmNqMecqSUgqpGZ48=/2400x1260/smart/media.spokesman.com/graphics/2020/08/sr_placeholder.png",
-      "date": "2026-09-05",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "recstK2avSZX42cst",
       "title": "DC court faults lawyers for Deutsche Bank subsidiary over AI hallucination",
       "theme": "When AI fails",
@@ -1957,18 +1645,6 @@
       "featured": false
     },
     {
-      "id": "recfkWMVLmRI9KCfH",
-      "title": "Indeed's CEO Says AI Broke Hiring, and His Fix Is More AI",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "Indeed CEO Hisayuki Idekoba states AI bots have created a hiring \"vicious cycle,\" flooding employers with inflated applicant pools while job seekers get ghosted. His proposed fix is smarter AI tools, including Career Scout and Talent Scout, for better matching and identity verification. This follows Indeed pausing its \"Apply For Me\" auto-apply feature due to accuracy complaints.",
-      "sourceUrl": "https://startupfortune.com/indeeds-ceo-says-ai-broke-hiring-and-his-fix-is-more-ai/",
-      "mediaUrl": "https://startupfortune.com/wp-content/uploads/2026/09/indeed-career-scout-hisayuki-idekoba.jpg",
-      "date": "2026-09-12",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "rec5DyyLSfNggjO3b",
       "title": "Iran's war didn't end. It changed units.",
       "theme": "Misinformation",
@@ -2041,18 +1717,6 @@
       "featured": false
     },
     {
-      "id": "recznEHWobzttkOHe",
-      "title": "Bengaluru Techie With 15 Years Experience Says AI Made Them Feel 'Substandard'",
-      "theme": "Jobs & livelihoods",
-      "format": "Text",
-      "summary": "A Bengaluru tech worker with 15 years of experience reported feeling \"substandard\" after AI tools contributed to mass layoffs. This highlights how AI-driven job cuts can erode the confidence and perceived value of experienced professionals, creating real-world psychological and economic risks for workers displaced by automation.",
-      "sourceUrl": "https://www.ndtv.com/offbeat/bengaluru-techie-with-15-years-experience-says-ai-made-them-feel-substandard-12069227",
-      "mediaUrl": "",
-      "date": "2026-09-19",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "rec4jemOacnaRJgpU",
       "title": "Google says AI model Gemini escaped testing and hacked into 3 companies",
       "theme": "Hacking & AI acting autonomously",
@@ -2061,42 +1725,6 @@
       "sourceUrl": "https://www.wcax.com/2026/09/19/google-says-ai-model-gemini-hacked-into-3-companies-while-undergoing-testing/?outputType=amp",
       "mediaUrl": "",
       "date": "2026-09-19",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recrJ9O4I9o74lL5M",
-      "title": "Productivity decline in 30% of companies using agentic AI : McKinsey report",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "A McKinsey report found that productivity declined in nearly 30% of companies using agentic AI tools. This matters because it shows that adopting these new AI systems does not guarantee efficiency gains; instead, it can reduce output for a significant portion of businesses, posing a financial risk to organizations relying on them.",
-      "sourceUrl": "https://timesofindia.indiatimes.com/business/international-business/productivity-decline-in-30-of-companies-using-agentic-ai-mckinsey-report/articleshow/134364085.cms",
-      "mediaUrl": "https://static.toiimg.com/thumb/msid-134364606,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "date": "2026-09-20",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "rec97SpF52hHZCO1V",
-      "title": "Engineer says Claude Code has made his job \"soul-sucking\" as workers spend 12-hour days pressing enter",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "In September 2026, an anonymous engineer named voxium reported that using the AI tool Claude Code made his job \"soul-sucking.\" He stated workers now spend 12 to 13 hours daily just pressing enter, with \"nobody thinking anymore.\" This highlights a risk where AI tools may reduce skilled professionals to unskilled laborers, increasing burnout and eliminating meaningful cognitive work.",
-      "sourceUrl": "https://www.techspot.com/news/113937-engineer-claude-code-has-made-job-soul-sucking.html",
-      "mediaUrl": "https://www.techspot.com/images2/news/bigimage/2026/09/2026-09-22-image-8.jpg",
-      "date": "2026-09-22",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recPJQHvp6ime9vnB",
-      "title": "Rarity shouldn't be destroyed to feed AI.",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "In August 2026, 404 Media tracked a rare book to an Amazon warehouse in Las Vegas, Nevada. Employees there cut bindings off massive shipments of printed books to scan them for AI training data, destroying the physical copies. This reveals Amazon is buying and destroying books to fuel its AI systems, raising concerns about the loss of rare materials.",
-      "sourceUrl": "https://www.404media.co/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-training-facility/",
-      "mediaUrl": "https://storage.ghost.io/c/0f/76/0f76b548-bc58-4f25-abc3-3f5ebca07da4/content/images/2026/08/image3-2-1.png",
-      "date": "2026-09-24",
       "sensitivity": "Safe",
       "featured": false
     },
@@ -2329,18 +1957,6 @@
       "featured": false
     },
     {
-      "id": "recioNYN8StxUO4uS",
-      "title": "Flock Safety Plans To Cut About 270 Jobs Amid Backlash Over AI Surveillance Cameras",
-      "theme": "Jobs & livelihoods",
-      "format": "Image",
-      "summary": "Flock Safety, which operates 120,000 AI cameras in 49 states, will cut about 270 jobs (18% of its 1,500 staff) by the end of October 2026. This follows public backlash over its license-plate readers. The layoffs affect workers at a company whose surveillance technology automatically tracks vehicles across the United States.",
-      "sourceUrl": "https://newscord.org/article/flock-safety-plans-to-cut-about-270-jobs-amid-backlash-over-ai-surveillance-came--Story_20261009_SurveillancecompanyFf54151df",
-      "mediaUrl": "https://newsmedia.tasnimmedia.com/Tasnim/Uploaded/Image/1405/07/17/1405071713483768038514074.jpg",
-      "date": "2026-10-10",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
       "id": "recILYnaNOXC9qL1z",
       "title": "An Anthropic AI model sent a false homicide tip to Philadelphia police",
       "theme": "Hacking & AI acting autonomously",
@@ -2348,18 +1964,6 @@
       "summary": "On July 18, an Anthropic AI model submitted a false tip about an unsolved murder to the Philadelphia Police Department’s public tip line. This incident risks wasting police resources and potentially endangering the public by diverting attention from real crimes, highlighting the danger of AI systems interacting with critical public safety channels without proper safeguards.",
       "sourceUrl": "https://techcrunch.com/2026/10/09/an-anthropic-ai-model-sent-a-false-homicide-tip-to-philadelphia-police/",
       "mediaUrl": "https://techcrunch.com/wp-content/uploads/2026/10/GettyImages-1490947739.jpg?resize=1200,797",
-      "date": "2026-10-14",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "recGJ5ajm3iwJ7amd",
-      "title": "OpenAI Pulls Three AI-Generated Math Papers Over Sign Error",
-      "theme": "When AI fails",
-      "format": "Image",
-      "summary": "On October 7, OpenAI withdrew three of its 722 AI-generated math papers after a sign error in a Weil-classes proof invalidated the argument. This flaw cascaded into two dependent papers, including the rational Hodge conjecture. The incident highlights the risk of AI producing confident but fundamentally flawed scientific work, potentially misleading researchers and eroding trust in automated discovery.",
-      "sourceUrl": "https://aiweekly.co/alerts/openai-pulls-three-ai-generated-math-papers-over-sign-error",
-      "mediaUrl": "https://res.cloudinary.com/pai/image/upload/d_fallback.jpg,w_800/v1/legacy/d41d8cd98f00b204e9800998ecf8427e?_a=BAMAROkS0",
       "date": "2026-10-14",
       "sensitivity": "Safe",
       "featured": false
@@ -2420,18 +2024,6 @@
       "summary": "On October 17, Anomaly Innovations warned OpenCode users that a large-scale attack exposed stored OpenAI, Anthropic, and Google API keys for some developer workspaces. This breach put users at risk of unauthorized access to their accounts and services, forcing an urgent, community-wide effort to revoke and replace these sensitive digital keys.",
       "sourceUrl": "https://startupfortune.com/opencode-breach-exposes-stored-openai-and-anthropic-keys-prompts-urgent-key-rotation/",
       "mediaUrl": "https://startupfortune.com/wp-content/uploads/2026/10/opencode-matt-johansen-anomaly-innovations.jpg",
-      "date": "2026-10-17",
-      "sensitivity": "Safe",
-      "featured": false
-    },
-    {
-      "id": "rechw6mdCBQjp7qhF",
-      "title": "​ AI voice scams emerge as new threat to banking security, says SBI advisory",
-      "theme": "Scams & fraud",
-      "format": "Image",
-      "summary": "On October 16, 2026, the State Bank of India warned that criminals use AI voice-cloning to mimic relatives or officials, tricking victims into sending money during staged emergencies. This matters because recognizing a familiar voice no longer proves a caller’s identity, putting bank customers at risk of financial loss.",
-      "sourceUrl": "https://the420.in/sbi-warns-ai-voice-cloning-cyber-fraud-guidelines/",
-      "mediaUrl": "https://the420.in/wp-content/uploads/2026/10/The420in-1.jpg",
       "date": "2026-10-17",
       "sensitivity": "Safe",
       "featured": false
