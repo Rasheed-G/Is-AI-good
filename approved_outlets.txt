@@ -1,0 +1,204 @@
+# Approved outlets: a story from one of these counts as a trusted source (rulebook section 8). Copied 2026-11-02 from the list frozen for the pipeline test (owner approved 2026-10-30).
+# One web address per line. Sub-addresses count (e.g. edition.cnn.com matches cnn.com).
+# suffix: lines match any address ending that way.
+# "paywall" after an address: a reader clicking through usually can't read the article free (hard paywalls, and
+# research papers at journals). Metered outlets (a few free articles a month) are not marked: a reader clicking one
+# story gets through (owner, 2026-11-05). Still trusted, but a free approved copy of the same event is preferred.
+
+
+# Global and US national
+abcnews.com
+abcnews.go.com
+apnews.com
+axios.com
+bbc.co.uk
+bbc.com
+bloomberg.com  paywall
+bostonglobe.com  paywall
+cbsnews.com
+chicagotribune.com
+cnbc.com
+cnn.com
+economist.com  paywall
+ft.com  paywall
+latimes.com
+marketwatch.com
+nbcnews.com
+newyorker.com  paywall
+npr.org
+nytimes.com  paywall
+pbs.org
+politico.com
+politico.eu
+propublica.org
+reuters.com
+theatlantic.com  paywall
+theintercept.com
+time.com
+usatoday.com
+vox.com
+washingtonpost.com  paywall
+wsj.com  paywall
+
+# UK and Ireland
+channel4.com
+cityam.com
+heraldscotland.com  paywall
+independent.co.uk
+irishtimes.com
+itv.com
+lbc.co.uk
+manchestereveningnews.co.uk
+news.sky.com
+rte.ie
+scotsman.com
+standard.co.uk
+telegraph.co.uk  paywall
+theguardian.com
+thetimes.co.uk  paywall
+thetimes.com  paywall
+walesonline.co.uk
+yorkshirepost.co.uk
+
+# Rest of the world (English)
+abc.net.au
+aljazeera.com
+cbc.ca
+channelnewsasia.com
+ctvnews.ca
+dailymaverick.co.za
+dw.com
+english.elpais.com
+france24.com
+indianexpress.com
+indiatoday.in
+japantimes.co.jp
+koreaherald.com
+koreatimes.co.kr
+kyivindependent.com
+livemint.com
+nzherald.co.nz  paywall
+restofworld.org
+rnz.co.nz
+sbs.com.au
+scmp.com
+smh.com.au
+straitstimes.com  paywall
+theage.com.au
+theglobeandmail.com  paywall
+thehindu.com
+
+# Technology and trade reporting
+404media.co
+arstechnica.com
+bloomberglaw.com  paywall
+canarymedia.com
+carbonbrief.org
+courthousenews.com
+datacenterdynamics.com
+floodlightnews.org
+hrdive.com
+ieee.org
+insideclimatenews.org
+krebsonsecurity.com
+law.com  paywall
+law360.com  paywall
+musicbusinessworldwide.com
+securityweek.com
+spectrum.ieee.org
+statnews.com
+techcrunch.com
+technologyreview.com
+themarkup.org
+therecord.media
+theregister.com
+theverge.com
+wired.com
+
+# Regional papers and public media
+ajc.com  paywall
+azcentral.com
+calmatters.org
+dallasnews.com  paywall
+denverpost.com
+gazette.com
+houstonchronicle.com
+inquirer.com
+kqed.org
+miamiherald.com
+michiganpublic.org
+oregonlive.com
+pressdemocrat.com
+seattletimes.com
+sfchronicle.com
+startribune.com
+tampabay.com
+texastribune.org
+vpm.org
+wbur.org
+wnyc.org
+wpr.org
+
+# Local TV
+9news.com
+abc13.com
+abc7.com
+abc7chicago.com
+abc7news.com
+abc7ny.com
+cbslocal.com
+fox17.com
+fox5atlanta.com
+kcra.com
+king5.com
+kron4.com
+ksat.com
+nbclosangeles.com
+nbcnewyork.com
+pix11.com
+wcax.com
+wfaa.com
+wpbf.com
+wsmv.com
+
+# War and investigations (for AI and war)
+972mag.com
+airwars.org
+bellingcat.com
+breakingdefense.com
+defenseone.com
+justsecurity.org
+lawfaremedia.org
+
+# Tech and security (owner approved 2026-11-03)
+bleepingcomputer.com
+
+# Courts, regulators, studies and watchdogs
+suffix:.gov
+suffix:.gov.uk
+suffix:.europa.eu
+suffix:.edu
+suffix:.ac.uk
+aclu.org
+adalovelaceinstitute.org
+amnesty.org
+eff.org
+hrw.org
+ilo.org
+jamanetwork.com
+nature.com  paywall
+nber.org
+oecd.org
+science.org  paywall
+thelancet.com  paywall
+
+# Close calls the owner approved as In
+huffpost.com
+thehill.com
+businessinsider.com  paywall
+fortune.com
+fastcompany.com
+engadget.com
+euronews.com
+ndtv.com
+timesofindia.indiatimes.com

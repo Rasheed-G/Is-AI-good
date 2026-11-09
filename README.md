@@ -13,9 +13,14 @@ The site is fully static — visitors only ever read, and content changes at mos
 is no server or database to run. An autonomous pipeline keeps it fed:
 
 ```
-Daily/weekly (GitHub Actions)
+Every day (GitHub Actions)
   → collect candidates   (Reddit RSS + Google-Alert RSS + news/RSS feeds + YouTube)
-  → AI triage & judge    (theme · a score per criterion · verdict · sensitivity)
+  → same-event check     (one story per event, the more reputable outlet kept)
+  → AI triage & judge    (theme · a score per criterion · verdict · sensitivity; approved outlets trusted)
+  → better source        (a strong story held back by its outlet moves to an approved one)
+  → the week's queue     (pipeline-data branch, not Airtable)
+Every Sunday
+  → weekly pick          (the week's best per theme, ranked by consequence, significance and coverage)
   → AI card copy         (our own title + a short factual summary)
   → review console       (Airtable)
   → editorial gate       (auto-publish what passes the bar; the riskiest held for review)
@@ -49,7 +54,9 @@ Daily/weekly (GitHub Actions)
 |---|---|
 | `site/` | The static website (what visitors see) — `index.html`, `styles.css`, `app.js`, `stories.json`, fonts |
 | `scripts/` | The harvester + editorial pipeline (`harvest_reddit.py`, `publish.py`, `build_data.py`, …) |
-| `.github/workflows/` | The scheduled automation (daily harvest, weekly sweep, publish & deploy) |
+| `.github/workflows/` | The scheduled automation (daily harvest, weekly pick, publish & deploy) and the v3 tests |
+| `approved_outlets.txt` | Outlets that count as a trusted source (owner approved) |
+| `tests/` | v3 tests: they read Airtable, never write it, and save results to a file |
 
 ## Running the site locally
 

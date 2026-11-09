@@ -13,3 +13,6 @@ scripts/summary_backup.json
 node_modules/
 dist/
 .vercel/
+
+# v3: the pipeline working files are checked out here from the pipeline-data branch
+pipeline-data/

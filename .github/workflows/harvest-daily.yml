@@ -1,16 +1,21 @@
 name: Daily harvest
 
-# Runs every night MON–SAT over ALL sources, looking at the last 2 days of content.
-# 01:00 UTC ≈ 1–2 am London (shifts an hour with British Summer Time).
-# SUNDAY is deliberately skipped: the Weekly sweep runs Sunday 02:00 UTC over a 7-day
-# window (which already covers Sunday's daily) — and running BOTH on the same UTC day
-# would stack their judge-model token usage past its 200K/day bucket (a single daily
-# run already uses ~155K). Mon–Sat daily + Sun sweep keeps the two runs on separate days.
-# Also runnable on demand from the Actions tab (workflow_dispatch).
+# v3: runs every night over ALL sources, looking at the last 2 days (rulebook section 8). It judges what's
+# new and queues the stories that pass the bar; Sunday's "Weekly pick" puts the week's best live.
+# 01:00 UTC ≈ 1–2 am London. The pipeline's working files (the week's queue, the seen list, triage's drops)
+# live on the `pipeline-data` branch, not in Airtable. Also runnable on demand (workflow_dispatch).
+# DISABLED on GitHub since 2026-10-23 (row cap): editing this file doesn't re-enable it.
 on:
   schedule:
-    - cron: "0 1 * * 1-6"
+    - cron: "0 1 * * *"
   workflow_dispatch: {}
+
+permissions:
+  contents: write          # push the working files to the pipeline-data branch
+
+concurrency:
+  group: pipeline-data     # the daily harvest and the weekly pick never write the working files at once
+  cancel-in-progress: false
 
 jobs:
   harvest:
@@ -21,11 +26,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Check out the working files (pipeline-data branch)
+        run: bash scripts/pipeline_data.sh checkout
       - name: Run daily harvester
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          PIPELINE_DATA: pipeline-data
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/harvest_reddit.py
+      - name: Save the working files
+        if: always()
+        run: bash scripts/pipeline_data.sh push "Daily harvest"
 # Daily harvest workflow for AI Harm Watch.
