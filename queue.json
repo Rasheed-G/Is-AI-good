@@ -10,7 +10,8 @@
    "subreddit": "",
    "created": "2026-11-10",
    "over_18": false,
-   "feed_image": "https://i.guim.co.uk/img/media/dffa89dc77a6bbaad44df383335bad241ee8e4ac/250_0_2500_2000/master/2500.jpg?width=140&quality=85&auto=format&fit=max&s=8860562d2849d1681cc78614e56d9f4f"
+   "feed_image": "https://i.guim.co.uk/img/media/dffa89dc77a6bbaad44df383335bad241ee8e4ac/250_0_2500_2000/master/2500.jpg?width=140&quality=85&auto=format&fit=max&s=8860562d2849d1681cc78614e56d9f4f",
+   "event": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack"
   },
   "t": {
    "i": 0,
@@ -35,12 +36,17 @@
   "outlets": [
    "aiweekly.co",
    "aljazeera.com",
+   "amp.scmp.com",
+   "bbc.com",
    "economictimes.com",
+   "english.aawsat.com",
    "firstpost.com",
    "ground.news",
+   "hungarianconservative.com",
    "instagram.com",
    "nytimes.com",
    "pm.gov.au",
+   "scmp.com",
    "tech-insider.org",
    "theguardian.com",
    "youtube.com"
@@ -61,7 +67,8 @@
    "subreddit": "",
    "created": "2026-11-10",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.wsj.com/article/the-agentic-ai-era-is-here-risks-and-governance-for-u-s-enterprises-aeeb29a6"
   },
   "t": {
    "i": 1,
@@ -85,6 +92,7 @@
   "judged": "2026-11-11",
   "outlets": [
    "aifire.co",
+   "cdomagazine.tech",
    "hashnode.com",
    "linkedin.com",
    "wsj.com",
@@ -107,7 +115,8 @@
    "subreddit": "",
    "created": "2026-11-10",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.justice.gov/usao-ri/pr/north-smithfield-man-charged-multiple-child-exploitation-offenses-involving"
   },
   "t": {
    "i": 2,
@@ -132,8 +141,12 @@
   "outlets": [
    "facebook.com",
    "justice.gov",
+   "masslive.com",
+   "nbcboston.com",
    "turnto10.com",
    "valleybreeze.com",
+   "wpri.com",
+   "yahoo.com",
    "youtube.com"
   ],
   "approved": true,
@@ -236,7 +249,8 @@
    "subreddit": "",
    "created": "2026-11-10",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.bleepingcomputer.com/news/apple/railway-breach-leads-to-740-000-in-fraudulent-ai-charges/"
   },
   "t": {
    "i": 0,
@@ -259,11 +273,13 @@
   "theme": "Hacking & AI acting autonomously",
   "judged": "2026-11-11",
   "outlets": [
-   "bleepingcomputer.com"
+   "bleepingcomputer.com",
+   "instagram.com",
+   "techradar.com"
   ],
   "approved": true,
   "swapped_from": "",
-  "event": "",
+  "event": "https://www.bleepingcomputer.com/news/apple/railway-breach-leads-to-740-000-in-fraudulent-ai-charges/",
   "twin_of": ""
  },
  {
@@ -441,7 +457,9 @@
    "subreddit": "",
    "created": "2026-11-10",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+   "twin_of": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack"
   },
   "t": {
    "i": 3,
@@ -468,8 +486,8 @@
   ],
   "approved": true,
   "swapped_from": "",
-  "event": "",
-  "twin_of": ""
+  "event": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+  "twin_of": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack"
  },
  {
   "p": {
@@ -646,7 +664,8 @@
    "subreddit": "",
    "created": "2026-11-10",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.yahoo.com/news/us/articles/employees-wired-129-million-fake-184300289.html"
   },
   "t": {
    "i": 3,
@@ -669,6 +688,7 @@
   "theme": "Scams & fraud",
   "judged": "2026-11-11",
   "outlets": [
+   "njtoday.news",
    "thecooldown.com",
    "yahoo.com",
    "youtube.com"
@@ -719,6 +739,1326 @@
   "approved": false,
   "swapped_from": "",
   "event": "https://www.rappler.com/technology/spain-demands-tiktok-suspend-operations-child-sexual-abuse-material-removal/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Rajasthan woman dies by suicide after Rs 13-lakh cyber fraud, threats to frame son",
+   "selftext": "A cyber fraud gang allegedly cheated and threatened a Rajasthan woman before her death by suicide. Six accused, including three minors, were arrested as police traced digital evidence and money transfers. A 56-year-old woman in Rajasthan's Jhalawar died by suicide after being subjected to sustained harassment and threats by a cyber fraud gang that cheated her of money and threatened to implicate her son in a criminal case.According to the victim’s family, the accused used forged documents and AI-generated videos depicting physical assault to intimidate her. Police have arrested six people, including three minors, from Bihar in connection with the case.Superintendent of Police Amit Kumar said the fraudsters initially contacted the woman with an offer to buy old coins, promising her a large sum of money in return. Believing them, she transferred money to their accounts several times.However, when the promised payment never came, she asked for her money back. Instead of returning it, the accused allegedly threatened her, claiming that the Delhi Police had seized the money.The threats continued, with the accused using forged documents bearing the woman's identity and her son's name to scare her. They threatened to frame her son in a case and sent her AI-generated videos showing people being beaten up.The accused also made up an accident story and sent her fake hospital bills to extort more money. The repeated threats and harassment left the woman deeply distressed, police said.After her death by suicide, her family lodged a complaint on November 1.Police formed a Special Investigation Team (SIT) under Additional SP Bhagchand to investigate the case.Separate teams conducted technical and financial investigations to trace the digital communications, money transfers and people involved.The investigation revealed that the accused operated from Bihar's Saharsa, Madhepura and Khagaria districts.With the help of Bihar Police, six accused were arrested, including three minors who have been sent to a juvenile observation home.The arrested accused were brought to Rajasthan on transit remand and taken into police custody for questioning.Police have recovered mobile phones, computers and other digital devices from the accused.Investigators have traced a money trail of Rs 4 lakh so far, while the woman's family has reported that around Rs 13 lakh was defrauded.Police said efforts were underway to identify and arrest other members of the gang, including those involved in withdrawing the money.The police have also appealed to people, particularly families with elderly members, to remain vigilant against cyber fraud and reminded them that no government agency threatens arrest over phone calls. They advised people not to panic or respond to such threats and report them immediately.- EndsWith inputs from Firoz Khan",
+   "permalink": "https://www.indiatoday.in/india/story/rajasthan-woman-suicide-cyber-fraud-gang-arrested-minors-bihar-3036668-2026-11-11",
+   "external_url": "https://www.indiatoday.in/india/story/rajasthan-woman-suicide-cyber-fraud-gang-arrested-minors-bihar-3036668-2026-11-11",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] sextortion & blackmail",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Relationships & mental health",
+   "scores": {
+    "credibility": 90,
+    "consequence": 95,
+    "significance": 70,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 86,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Kept: AI‑generated threats led to adult suicide, clear mental‑health harm."
+  },
+  "theme": "Relationships & mental health",
+  "judged": "2026-11-12",
+  "outlets": [
+   "avenuemail.in",
+   "bhaskarenglish.in",
+   "etvbharat.com",
+   "firstindia.co.in",
+   "indiatoday.in",
+   "rediff.com",
+   "the420.in"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.indiatoday.in/india/story/rajasthan-woman-suicide-cyber-fraud-gang-arrested-minors-bihar-3036668-2026-11-11",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "The next phishing attack won't be an email. It could be a voice you trust. - The Times of India",
+   "selftext": "In recent years, some of the costliest cyberattacks did not use artificial intelligence. They used something else: authority. In recent years, some of the costliest cyberattacks did not use artificial intelligence. They used something else: authority.In 2025, Marks & Spencer warned of a roughly £300 million operating-profit impact before mitigation from a cyberattack. The Co-op reported £206 million in lost first-half revenue. In both cases, attackers reportedly impersonated employees to persuade IT help desks to reset passwords. No public report established that cloned voices were involved.Consider the Arup case from 2024. An employee in Hong Kong transferred US$25.6 million after joining a video call appearing to include the company’s finance chief. Police said the figures on the call were fabricated from prerecorded material. The technology made the deception convincing; the absence of independent verification allowed it to succeed.For AI engineer Sahaj Gandhi, that distinction is central to deepfake security. Gandhi’s work has spanned computer vision and sensing at Waymo, enterprise AI at Uno.AI, where he co-invented a granted U.S. cloud-security patent, smart-contract security at Octane Security, and real-time deepfake and social-engineering detection at DeepTrust. He argues the problem is broader than determining whether a voice or video is synthetic. “The real weakness is not simply the fake,” Gandhi says. “It is a familiar voice or face asking you to transfer money, reset a password or bypass a process.”This is the point many companies seem to miss. Email and payment systems have checks, but phone and video calls often do not. This is the gap that scammers exploit.AI never created this gap, but what changes with AI is that convincing impersonation becomes easier. In a 2025 study in Scientific Reports, UC Berkeley researchers found people spotted AI-made voices only about 60% of the time. That is barely better than guessing. In these cases, telling staff to “listen carefully” cannot be the plan.Gandhi says he has seen companies focus heavily on buying tools that detect fakes. Those tools can help, he says, but their accuracy figures can mislead for a simple reason: real attacks are rare.Imagine a help desk that takes 10,000 calls a week, and only one of them is a scam. Even a detector with a 1% false-positive rate could incorrectly flag around 100 genuine calls. If it also catches the malicious call, staff may still see roughly 100 false alarms for every genuine threat. Within weeks, they may start ignoring the warnings, including the one that matters.Research published in 2026 in Machine Intelligence Research also documented demographic disparities in AI-generated face detection. Real calls add bad connections, background noise and language-switching. In India, where employees may speak several languages, unreliable warnings could quickly become routine.So the right question for any supplier is not “How accurate is your tool?” It is “How ",
+   "permalink": "https://timesofindia.indiatimes.com/toi-blogs/digital-life/the-next-phishing-attack-wont-be-an-email-it-could-be-a-voice-you-trust-/articleshow/135735956.cms",
+   "external_url": "https://timesofindia.indiatimes.com/toi-blogs/digital-life/the-next-phishing-attack-wont-be-an-email-it-could-be-a-voice-you-trust-/articleshow/135735956.cms",
+   "provenance": "Google Alert",
+   "source_label": "[Scams] deepfake video-call fraud",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 90,
+    "consequence": 90,
+    "significance": 80,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 84,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as Scams & fraud example of deepfake voice fraud causing multi‑million loss"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-12",
+  "outlets": [
+   "timesofindia.indiatimes.com",
+   "youtube.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://timesofindia.indiatimes.com/toi-blogs/digital-life/the-next-phishing-attack-wont-be-an-email-it-could-be-a-voice-you-trust-/articleshow/135735956.cms",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Santander warns customers over £5,000 investment scam - Wales Online",
+   "selftext": "Santander has issued a warning to its customers Santander has issued a warning to its customers Santander has issued a warning to its customers regarding online scams, following an incident in which one of its customers narrowly avoided losing £5,000 in an online investment fraud. The banking giant sent out the alert via email, detailing the four stages that scams typically employ to draw people in. It also cautioned that fabricated videos of celebrities are frequently used to entice unsuspecting victims into signing up. The bank stated: \"Famous face promoting cryptocurrency? It might be fake. Fraudsters use fake celebrity endorsements, AI-made videos and social media ads to trick people into cryptocurrency scams - here's how it usually happens: The 2026 Annual Fraud Report showed that fraud is 'the most prevalent crime in the UK', with eight people being defrauded every minute, with almost £2,500 lost in that same minute. In 2025 alone, banks prevented £1.68 billion in unauthorised payment fraud, equivalent to 70p in every £1 of attempted attacks. Despite this, £1.28 billion was stolen through various forms of payment fraud.. \"The scale of the threat and the criminal nature of it damages our economy at a time when we need economic growth. The harm extends well beyond financial losses though: it damages livelihoods, affects victims' mental health and erodes trust in the systems designed to keep customers safe,\" it said. \"Losses from frauds that frequently originate online, where people are manipulated into making payments for seemingly legitimate goods, services, or opportunities - including purchase, investment, and romance scams - reached their highest levels on record. This shows that the tactics criminals deploy evolve and so we need to do more to tackle it. \"There is a clear asymmetry of liability in the UK's fraud landscape. Banks fund major prevention initiatives and are the only sector required to reimburse customers, while other sectors continue to profit from fraudulent activity on their platforms. Santander also released a video discussing someone who 'nearly lost five grand'. One of the people in the video explains: \"It was an investment scam. It was close, he nearly lost five grand to a scammer, reports the Express . \"Look at this. The returns seemed reasonable, maybe slightly high, but no major selling pressure, and he found it by himself. They showed him that the money was growing every day, and he got some small returns at the start, but then when he tried to withdraw it, they wanted him to pay huge fees to release it. Thankfully, that's when he called us just in time. \"If an investment sounds too good to be true, it probably is. Remember, no legitimate investment can guarantee high returns with no risk. \"What they need to do is take time to research before they send any money. Consider getting independent financial advice or guidance before a big financial decision.\" Santander says that, while there's no one-size-fits-all approac",
+   "permalink": "https://www.walesonline.co.uk/news/cost-of-living/santander-warns-customers-over-5000-34897282.amp",
+   "external_url": "https://www.walesonline.co.uk/news/cost-of-living/santander-warns-customers-over-5000-34897282.amp",
+   "provenance": "Google Alert",
+   "source_label": "[Scams] celebrity crypto deepfakes",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 90,
+    "consequence": 60,
+    "significance": 60,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 70,
+   "unproven": false,
+   "harm_documented": false,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as Scams & fraud example of AI‑deepfake celebrity crypto scam attempt"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-12",
+  "outlets": [
+   "express.co.uk",
+   "walesonline.co.uk"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.walesonline.co.uk/news/cost-of-living/santander-warns-customers-over-5000-34897282.amp",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Hackers Hunt for AI Power to Steal and Resell - WSJ",
+   "selftext": "Hackers Are ... Dow Jones & Company , Inc. All Rights Reserved. Copyright ©2026 Dow ...",
+   "permalink": "https://www.wsj.com/pro/cybersecurity/hackers-hunt-for-ai-power-to-steal-and-resell-569ac2bd",
+   "external_url": "https://www.wsj.com/pro/cybersecurity/hackers-hunt-for-ai-power-to-steal-and-resell-569ac2bd",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 90,
+    "theme_fit": 90
+   },
+   "overall": 87,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: real AI-enabled hacking harms reported by credible outlet"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-12",
+  "outlets": [
+   "wsj.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Medicare's AI Experiment | EFFector 38.20 | Electronic Frontier Foundation",
+   "selftext": "When we need medical care, we expect decisions about our treatment to be made by our doctors, not a tech company's algorithm. But in January, the federal government launched a program that uses AI to to evaluate Medicare beneficiaries' requests for certain procedures. When we need medical care, we expect decisions about our treatment to be made by our doctors, not a tech company's algorithm. But in January, the federal government launched a program that uses AI to evaluate Medicare beneficiaries' requests for certain procedures. EFF sued for records on WISeR, seeking badly needed transparency about Medicare's AI experiment. In our latest EFFector newsletter , we're talking about what happens when the government outsources treatment approval to private AI companies —without sufficient transparency, testing, or legal limits. For over 35 years, EFFector has been your guide to understanding the intersection of technology, civil liberties, and the law. This issue covers unconstitutional digital dragnets , a post office surveillance schem e, and what EFF uncovered about Medicare's AI experiment. Prefer to listen in? EFFector is now available on all major podcast platforms. This time we're talking to EFF's Lena Cohen about WISeR records documenting improper denials, operational chaos, and lengthy delays that have left patients waiting in pain. You can find the episode and subscribe on your podcast platform of choice : %3Ciframe%20height%3D%22200px%22%20width%3D%22100%25%22%20frameborder%3D%22no%22%20scrolling%3D%22no%22%20seamless%3D%22%22%20src%3D%22https%3A%2F%2Fplayer.simplecast.com%2Fdd676393-5a53-4517-b42b-6fef4f0f0052%3Fdark%3Dfalse%22%20allow%3D%22autoplay%22%3E%3C%2Fiframe%3E Privacy info. This embed will serve content from simplecast.com Want to protect your right to digital privacy? Sign up for EFF's EFFector newsletter for updates, ways to take action, and new merch drops. You can also fuel the fight for privacy and free speech online when you support EFF today !",
+   "permalink": "https://www.eff.org/deeplinks/2026/11/medicares-ai-experiment-effector-3820",
+   "external_url": "https://www.eff.org/deeplinks/2026/11/medicares-ai-experiment-effector-3820",
+   "provenance": "Google Alert",
+   "source_label": "[Surveillance] border / immigration AI",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Automated decision making",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 80,
+    "audience": 90,
+    "theme_fit": 90
+   },
+   "overall": 85,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: AI‑driven Medicare decision tool causing patient harm"
+  },
+  "theme": "Automated decision making",
+  "judged": "2026-11-12",
+  "outlets": [
+   "eff.org"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.eff.org/deeplinks/2026/11/medicares-ai-experiment-effector-3820",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Facial recognition errors put ethnic minorities at risk of wrongful arrest , police watchdog warns",
+   "selftext": "Inspectors find some officers acted on potential matches from retrospective searches without making enough checks Inspectors find some officers acted on potential matches from retrospective searches without making enough checks Police officers risk arresting innocent people, especially from ethnic minorities, if they treat inaccurate facial recognition data as evidence, an official report has found. Although the technology can help fight crime, the report found it is beset by errors and biases , and operators do not always realise they must make further inquiries to verify the data. The report by His Majesty’s Inspectorate of Constabulary, published on Wednesday, covers only retrospective facial recognition. The technology is seen as less controversial and less tricky to get right than live facial recognition, which is used in real time to find suspects. “Some investigators didn’t know that RFR results were intelligence rather than evidence and required further enquiries before officers took enforcement action,” the report said. “This creates a risk that people could be incorrectly identified or arrested, which could undermine public confidence in the technology. “We found that some investigators didn’t always carry out enough corroborative enquiries before acting on potential matches. In a small number of cases, officers relied too heavily on RFR results, which led to inappropriate investigative action.” The report said there are still issues with bias in the algorithm, including being more likely to wrongly flag people from ethnic minorities as suspects. It said: “More needs to be done to reduce the risks of people being wrongly arrested … Auditors also identified cases where users uploaded poor-quality or unsuitable probe images, including blurred images and images containing multiple faces. These factors reduced the system’s ability to return reliable matches.” Inspectors also found a risk of public confidence being undermined because custody images that should have been deleted were in fact kept. The report says: “Inspectors found that legislation hasn’t kept up with changes in facial recognition technology and there is no comprehensive statutory framework governing this technology’s use. This makes it more difficult for forces to understand the lawful basis for RFR’s use and what safeguards are needed to protect the public.” His Majesty’s Inspector of Constabulary Kathryn Stone said continued public support relied on showing the technology was being used properly: “Police forces must be able to show that appropriate safeguards are in place, risks relating to bias and data retention are effectively managed, and decisions are still subject to human judgment. A clearer statutory framework, stronger national standards and improved governance and oversight arrangements are essential to maintaining public confidence.” Facial recognition is seen by police chiefs as the next big leap forward in crime fighting, and next huge threat to civil libertie",
+   "permalink": "https://www.theguardian.com/technology/2026/nov/12/facial-recognition-errors-put-ethnic-minorities-at-risk-of-wrongful-arrest-police-watchdog-warns",
+   "external_url": "https://www.theguardian.com/technology/2026/nov/12/facial-recognition-errors-put-ethnic-minorities-at-risk-of-wrongful-arrest-police-watchdog-warns",
+   "provenance": "Google Alert",
+   "source_label": "[Surveillance] facial-recognition wrongful arrest",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Bias & discrimination",
+   "scores": {
+    "credibility": 95,
+    "consequence": 90,
+    "significance": 85,
+    "audience": 90,
+    "theme_fit": 90
+   },
+   "overall": 90,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Official report of facial‑recognition bias leading to wrongful arrests"
+  },
+  "theme": "Bias & discrimination",
+  "judged": "2026-11-12",
+  "outlets": [
+   "theguardian.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "'They don't understand hackers ': Cybersecurity pros explain why everyone panicking about ...",
+   "selftext": "... using AI tools to conduct the attacks. The incident, which CrowdStrike subsequently investigated, involved Artex, an open-source AI-powered ...",
+   "permalink": "https://www.fastcompany.com/91636975/they-dont-understand-hackers-cybersecurity-pros-explain-why-everyone-panicking-about-ai-powered-hacks-is-wrong",
+   "external_url": "https://www.fastcompany.com/91636975/they-dont-understand-hackers-cybersecurity-pros-explain-why-everyone-panicking-about-ai-powered-hacks-is-wrong",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 86,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept, credible report of AI‑enabled cyberattack showing real harm"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-12",
+  "outlets": [
+   "fastcompany.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "A 13-Year-Old Asked AI About Suicide on Her School Laptop. It Didn't Get Flagged for Weeks",
+   "selftext": "The young girl’s parents allege that she used Gemini via her school Chromebook to plan her suicide, but the school’s monitoring systems didn’t know until it was almost too late. The lawsuit alleges that Google and parent company Alphabet were negligent in their rollout of a Gemini model, claiming that the AI chatbot “coached” the North Carolina teenager to consider taking her own life. The case, which was previously reported by The New York Times, is one of several that allege harm from AI chatbot use, including claims of delusions and suicide. But it also illustrates the limitations of surveillance tools that thousands of schools have adopted in recent years, which are ostensibly designed to protect students from themselves when browsing and chatting online. Andrew Liddell, a lawyer for the family, tells WIRED that, according to information the school provided to the family, the alert went to the personal phone of a former counselor who had left the school nine months before. The ex-employee was diligent in passing the alert along to current staff, who then notified the girl’s mother, he says. Got a Tip? Are you a current or former Google employee who wants to talk about what's happening? We'd like to hear from you. Using a nonwork phone or computer, contact the reporters securely on Signal at carolinehaskins.61and peard33.24. As classrooms continue to rely on Google’s low-cost offerings, including Gemini, their ability to keep up with the potential risks is front and center. Just last week, parent and teacher groups across the country decried Google’s new requirement that schools must turn on generative AI features if they want to use Search. US senator Ed Markey cited Emma’s lawsuit in a letter to Google demanding the company let schools disable AI Mode and AI Overviews, writing that “Google is recklessly forcing AI on schools and treating kids like collateral damage.” According to the lawsuit, the North Carolina girl, identified as Emma Doe, descended into “a severe psychological crisis” after Google Search routed her to Gemini on her school-issued Google Chromebook. Though Emma’s school had blocked the stand-alone Gemini website, the lawsuit alleges that she was steered into interacting with the chatbot through AI Mode, which lets people ask follow-up questions about a query or begin an unrelated conversation. Emma queried AI Mode about mental health issues starting last December. She asked about “severe depression” and “reasons to live,” and by late January she was asking about suicide, per the lawsuit. Over the course of two days around Valentine’s Day, she began writing a 1,500-word eulogy for herself with help from AI Mode in a Google Doc titled “Funeral.” The lawsuit says she worked on the document for more than four weeks while continuing to interact with the Gemini tool thousands of times. After school on St. Patrick's Day, she deleted most of the file and restarted. But Liddell says the themes and thoughts the girl expressed didn't m",
+   "permalink": "https://www.wired.com/story/teen-girl-asked-gemini-about-suicide-for-months-until-it-was-flagged/",
+   "external_url": "https://www.wired.com/story/teen-girl-asked-gemini-about-suicide-for-months-until-it-was-flagged/",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] companion chatbot & teen suicide",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Children & safety",
+   "scores": {
+    "credibility": 90,
+    "consequence": 90,
+    "significance": 80,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 87,
+   "unproven": true,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "kept, credible Wired story of teen suicide risk linked to AI chatbot"
+  },
+  "theme": "Children & safety",
+  "judged": "2026-11-12",
+  "outlets": [
+   "wired.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.wired.com/story/teen-girl-asked-gemini-about-suicide-for-months-until-it-was-flagged/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AI Layoffs Are Obscured by Euphemisms and Poor Tracking - Bloomberg",
+   "selftext": "'Delayering' Is the New Code Word for ' AI Took Your Job'. November 11 ... Previously, he worked as a Bloomberg journalist in the US, Brazil and Mexico.",
+   "permalink": "https://www.bloomberg.com/opinion/articles/2026-11-11/ai-layoffs-are-obscured-by-euphemisms-and-poor-tracking",
+   "external_url": "https://www.bloomberg.com/opinion/articles/2026-11-11/ai-layoffs-are-obscured-by-euphemisms-and-poor-tracking",
+   "provenance": "Google Alert",
+   "source_label": "[Jobs] writers/translators displaced",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Jobs & livelihoods",
+   "scores": {
+    "credibility": 90,
+    "consequence": 85,
+    "significance": 80,
+    "audience": 90,
+    "theme_fit": 95
+   },
+   "overall": 88,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: documents AI-driven job losses."
+  },
+  "theme": "Jobs & livelihoods",
+  "judged": "2026-11-12",
+  "outlets": [
+   "bloomberg.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Police custody photos wrongly kept in facial recognition searches, watchdog warns - LBC",
+   "selftext": "Retrospective facial recognition is used to compare images from an investigation, for example, from CCTV, with images stored on the Police National Database Retrospective facial recognition is used to compare images from an investigation, for example, from CCTV, with images stored on the Police National Database Some police custody images that should have been deleted are being incorrectly kept and left available in facial recognition searches, a watchdog has warned. Public confidence in the use of retrospective facial recognition by law enforcement could be damaged if custody images are wrongly saved, His Majesty’s Inspectorate of Constabulary and Fire and Rescue Services said. In a report on the use of the technology by police and the National Crime Agency, it found oversight was inconsistent and some junior officers were not aware that matches found using the software cannot be treated as evidence. Retrospective facial recognition is most frequently used to compare images from an investigation, for example from CCTV, with images stored on the Police National Database. Investigators are then expected to carry out their own inquiries to corroborate the finding before taking action. The report said: “We found that forces didn’t use retrospective facial recognition (RFR) consistently. While experienced investigators generally understood its limitations and the need to corroborate potential matches, less experienced investigators often had a weaker understanding. “Some investigators didn’t know that RFR results were intelligence rather than evidence and required further inquiries before officers took enforcement action. “This creates a risk that people could be incorrectly identified or arrested, which could undermine public confidence in the technology.” Inspectors found a small number of cases where officers relied too heavily on the technology “which led to inappropriate investigative action”. The report found some forces were not complying with national audit requirements, referring to figures from the National Police Chiefs’ Council that showed that two forces in England and Wales had audited the correct number of RFR files. Seven forces had not appointed an auditor; two auditors could not access the police national database; 10 forces had audited more than the 1% of records they are required to examine; and 22 either failed to submit a return or sent in incomplete information. Inspectors also raised concerns about the retention of some custody images that should have been deleted. “The retention of custody images remains an area of concern,” the report said. “We found that some images which should have been deleted under existing retention rules remained available for facial recognition searches. “This risks undermining public confidence and highlights the importance of ongoing national work to improve compliance, strengthen image management processes and align the treatment of custody images more closely with other biometric data.” There wer",
+   "permalink": "https://www.lbc.co.uk/article/police-custody-photos-wrongly-kept-facial-recognition-5HjdmGq_2/",
+   "external_url": "https://www.lbc.co.uk/article/police-custody-photos-wrongly-kept-facial-recognition-5HjdmGq_2/",
+   "provenance": "Google Alert",
+   "source_label": "[Surveillance] border / immigration AI",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Surveillance & privacy",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 80,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept: shows real privacy harm from police facial‑recognition misuse"
+  },
+  "theme": "Surveillance & privacy",
+  "judged": "2026-11-12",
+  "outlets": [
+   "lbc.co.uk"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "United Airlines Blocks A.I. Agents From Booking Flights - The New York Times",
+   "selftext": "... customers ' account details. An A.I. agent could also violate regulations from the Federal Aviation Administration or the U.S. Department of ...",
+   "permalink": "https://www.nytimes.com/2026/11/11/business/united-airlines-ai-agents-booking-flights.html",
+   "external_url": "https://www.nytimes.com/2026/11/11/business/united-airlines-ai-agents-booking-flights.html",
+   "provenance": "Google Alert",
+   "source_label": "[Breaches] models hacking in tests",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept – credible report of AI agents misusing airline booking system causing data exposure"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-12",
+  "outlets": [
+   "nytimes.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Huntersville man accused of hiding cameras inside home, taking inappropriate images",
+   "selftext": "A Huntersville man is accused of hiding cameras throughout his home and taking inappropriate pictures and videos of people inside. HUNTERSVILLE, N.C. — A Huntersville man is accused of hiding cameras throughout his home and taking inappropriate pictures and videos of people inside. Investigators found more than a terabyte of footage, according to court documents. The investigation began when a family member found a hard drive containing hidden videos and photos, court documents say. Police said there was so much data that investigators were only able to focus on three victims. Channel 9 is not identifying the victims or their relationship to the suspect, Garth Boes. Court documents say Boes hid secret cameras throughout his home, “capturing video and photographs of [the victims] undressing, using the bathroom, and showering.” Court documents also say Boes confessed to hiding the cameras and taking various “creepshot” and upskirt photos and videos. According to the documents, Boes also confessed to using artificial intelligence to “nudify” various people, including family friends and co-workers. Police believe there could be additional victims. 9 Investigates has looked into hidden camera concerns in the past. There are often ways you can spot devices to protect yourself. Law enforcement officials say to watch out for a red blinking dot, monitor nearby devices for a possible camera signal in Wi-Fi settings, and even buy a hidden lens detector online. Boes was arrested over the weekend but paid a $7,500 bond and got out of jail Monday night. He faces three felony counts of secret peeping. Court documents say the hard drive had 1.5 terabytes of data on it, including folders with names of specific people on them",
+   "permalink": "https://www.wsoctv.com/news/local/huntersville-man-accused-hiding-cameras-inside-home-taking-inappropriate-images/FZULM5DLX5BRVEJDOQTELIOVA4/",
+   "external_url": "https://www.wsoctv.com/news/local/huntersville-man-accused-hiding-cameras-inside-home-taking-inappropriate-images/FZULM5DLX5BRVEJDOQTELIOVA4/",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] nudify/undress apps",
+   "subreddit": "",
+   "created": "2026-11-10",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 65,
+    "consequence": 80,
+    "significance": 60,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 75,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Kept – documented case of AI‑generated nudified images, fits Image abuse theme."
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-12",
+  "outlets": [
+   "hoodline.com",
+   "wsoctv.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "https://www.wsoctv.com/news/local/huntersville-man-accused-hiding-cameras-inside-home-taking-inappropriate-images/FZULM5DLX5BRVEJDOQTELIOVA4/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AntiFox: ARTEX AI Fork Targets AWS Credentials - GitGuardian Blog",
+   "selftext": "AntiFox, a fork of the ARTEX AI framework, probed AWS with hundreds of API requests in about 30 minutes. How to detect, remediate, and prevent it. Last week, Microsoft Threat Intelligence reported attackers using ARTEX, an agentic AI framework, to find exposed credentials on GitHub and abuse them to access cloud environments. Now, less than a week later, BleepingComputer reports attackers using another agentic framework called AntiFox to target AWS environments. AntiFox began as a fork of ARTEX, and researchers at Arctic Wolf have linked infrastructure running the framework to real intrusions involving credential theft and unauthorized cloud access. The attackers used this offensive agentic framework to compromise web applications, steal configuration data, and use any valid AWS identities it could find. In one intrusion, attackers generated hundreds of AWS API requests in approximately 30 minutes. Most requests were denied, but some succeeded, including operations that exposed production secrets. The attackers also used valid credentials to access S3 objects in a separate incident. A new variant of the same AI framework, this time leveraging a different cloud provider. This is likely the tip of an iceberg. We are likely going to see more evidence of a wider shift in how cyberattacks are being conducted. The good news is that the security industry has been preparing for this evolution for years, and there are some mitigation paths anyone can jump on. Unfortunately, the speed and accessibility of these tools are changing faster than many organizations have been able to evolve. We are at a crossroads, and companies need to rethink how access rights and credentials, which are core to any of these attacks, are handled across the whole org. Attackers have always used legitimate security tools for malicious purposes. Legitimate pen testing tools like Burp Suite, Metasploit , and Netcat are essential for penetration testers and security researchers. They help professionals understand how systems communicate, discover vulnerabilities, and test whether security controls work as intended. When used against systems you own, these are powerful learning tools, and the communities and companies that maintain them are doing good work. Those same capabilities are useful to attackers. However, historically, using these tools effectively required deep technical knowledge. Netcat provides powerful networking capabilities, but operators need to understand protocols, connections, and what to do with the resulting access. Metasploit provides extensive exploitation capabilities, but operators still need to understand target environments, identify applicable exploits, and navigate the results. Now, an attacker can give an agent a goal in plain language. The agent can investigate the environment, select tools, execute commands, interpret the results, and decide what to try next. Anyone with access to AntiFox or ARTEX can just verbally say into the dictation, \"find expose",
+   "permalink": "https://blog.gitguardian.com/another-new-ai-hacking-agent-vs-the-same-credential-problem-antifox-targeting-aws-credentials/",
+   "external_url": "https://blog.gitguardian.com/another-new-ai-hacking-agent-vs-the-same-credential-problem-antifox-targeting-aws-credentials/",
+   "provenance": "Google Alert",
+   "source_label": "[Breaches] models hacking in tests",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 80,
+    "consequence": 80,
+    "significance": 70,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 81,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Credible security blog reporting real AI‑driven cloud credential theft"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-12",
+  "outlets": [
+   "blog.gitguardian.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Are AI bots running these Philadelphia and New Jersey news sites? - Billy Penn at WHYY",
+   "selftext": "A group of websites once connected to local papers have seemingly gone rogue. But, how would Philadelphians be able to tell the difference? 💌 Love Philly? So do we. Let’s be friends. Sign up for the Billy Penn newsletter today . Steven Bassin used to work as a sports reporter for centraljersey.com , but he has not been with the company in almost four years. So why are his bylines popping up as recently as this week? “I haven’t worked there, like I said, for three years,” Bassin said. “It’s going to be four years this January. I now see a story done (recently) on Lionel Messi with my name on it, and clear as day, I don’t work there anymore. I, clear as day, didn’t write this story, so I don’t know why I’m being used there.” And Bassin noticed another interesting thing – he and his former coworker, Mark Rosman, had photos listed on their profiles that weren’t them. “It’s kind of ridiculous that they have Mark and me as totally different people and that we’re still on their page as well,” Bassin said. For months, Billy Penn has been keeping tabs on several local news websites – including Northeast Times, Lower Bucks Times , the South Philly Review and centraljersey.com . What we found led us down a local news rabbit hole that had us questioning reality. At least three journalists on the centraljersey.com site had stories under their author pages that they did not write and photos that were not of them — one of whom was WHYY’s own Ken Downey Jr. “That’s not me,” Downey said when he saw his author page. The picture of Downey on centraljersey.com looked around the same age as the real Downey and he was wearing similar glasses. But, it wasn’t him. “That is my name associated with my former publication,” he explained. “That is a bio that looks pretty accurate about myself, but that is not my picture. These two top articles; those are not my work. They are dated as recent as of this year. I haven’t been associated with the company in almost a full seven years.” Multiple regional print publications have operated under the centraljersey.com umbrella, including The Princeton Packet, one of the country’s oldest weekly newspapers that was founded in 1786. Andrew Martins has not written for any of these Central Jersey papers since 2018. Yet his most recent byline on the website at the time of publication is a story published on July 30 . “As someone who’s currently in the job market and in this line of work, my byline is incredibly important, and to see my byline not just be used in a new way, but also to not have my actual photo there, it’s just extremely disconcerting,” he said. What’s more, it was hard to find his past articles on the site. “I’m a four-time New Jersey Press Association Award winner, and none of those award-winning articles are up on the page,” he said. “Most of my work is gone, and if it’s supposed to be a record of what happened in these communities, it’s doing an extreme disservice to those communities.” It was unclear which people listed ",
+   "permalink": "https://billypenn.com/2026/11/11/ai-slop-local-news-philadelphia-new-jersey/",
+   "external_url": "https://billypenn.com/2026/11/11/ai-slop-local-news-philadelphia-new-jersey/",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] school deepfake nudes",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 70,
+    "consequence": 60,
+    "significance": 60,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 70,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Local news outlet documents AI‑generated fake bylines and photos, showing real reputational harm"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-12",
+  "outlets": [
+   "billypenn.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Is this image of flooded tents in Gaza real? | Snopes.com",
+   "selftext": "As winter settles in Gaza, flooding devastated thousands of tents and makeshift shelters. This image was AI-generated — OpenAI detected its own watermark on the image. However, the devastating flooding in Gaza is real, and there are dozens of authentic images illustrating the extent of the damage. As winter flooding hit Gaza — where roughly 65% of the population, about 1.4 million people, lives in tents or makeshift shelters, according to the United Nations — a striking image circulated online in early November purportedly showing the magnitude of the flooding's damage. Apparently shot at night, the image showed blue and white tents flooded by murky water, several buildings standing in the background as light from windows and streetlights appeared to reflect across the surface of the water. Posts of the image shared across social media collectively gained millions of views and reactions, with hundreds of commenters appearing to believe the image was authentic. Prominent accounts, including British Parliament member Jeremy Corbyn, posted the image before deleting it ( archived ). Although intense rainfall in Gaza early November has caused flooding and put thousands of people in danger as Israel continues to blockade crucial supplies — including 150,000 tents waiting just outside, according to the U.N. — this image was a fake. The image contained multiple signs of being generated with artificial intelligrnace, including an OpenAI watermark that OpenAI's verification software identified. It's unclear precisely where it originated. OpenAI reconstructs its images in a systemic grid pattern (autoregressive approach). Upon zooming in more closely, the pixel pattern of the image showed signs of a star-like grid, which digital forensics expert Hany Farid has described as a tell-tale sign of AI-generation. (X user @ahmed_nashwan1 and Heny Farid, Snopes illustration) The image displays other signs of AI generation, including unnatural light interruption, a mottled sky texture, and harsh lines between blurred pixels and textured pixels. (X user ahmed_nashwan1, Snopes illustration) Despite the fact that this image was AI-generated, there are hundreds of publicly available images showing the extent of the flooding destruction in Gaza.",
+   "permalink": "https://www.snopes.com/fact-check/gaza-flooding-tents-image/",
+   "external_url": "https://www.snopes.com/fact-check/gaza-flooding-tents-image/",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 85,
+    "consequence": 70,
+    "significance": 75,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept: credible fact‑check showing AI‑generated image misled many"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-12",
+  "outlets": [
+   "snopes.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Austin artist's music removed from streaming platforms amid UMG, Distrokid ' AI slop ' lawsuit",
+   "selftext": "Austin artist's music removed from streaming platforms amid UMG, Distrokid ' AI slop ' lawsuit · Google's 'Holiday 100' list is in — here's what people …",
+   "permalink": "https://www.kxan.com/news/local/austin/music/austin-artists-music-removed-from-streaming-platforms-amid-umg-distrokid-ai-slop-lawsuit/",
+   "external_url": "https://www.kxan.com/news/local/austin/music/austin-artists-music-removed-from-streaming-platforms-amid-umg-distrokid-ai-slop-lawsuit/",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] AI slop flooding platforms",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Jobs & livelihoods",
+   "scores": {
+    "credibility": 70,
+    "consequence": 60,
+    "significance": 65,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 71,
+   "unproven": true,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as example of AI‑generated music harming creators"
+  },
+  "theme": "Jobs & livelihoods",
+  "judged": "2026-11-12",
+  "outlets": [
+   "kxan.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Another fake publisher's books flagged at Coimbatore's Periyar Arivulagam",
+   "selftext": "Speaking to TNIE, bibliophile K Sathish said more than 10 titles under the tourism category alone had been found to be fake. COIMBATORE: The controversy surrounding the authenticity of books stocked at the Periyar Arivulagam library in Coimbatore has widened, with research students and bibliophiles identifying 257 books published by another publishing house, Vintage Press Ltd, as allegedly fake.The latest findings were made on Wednesday during a further inspection of the library's collection. Researchers said, random checks of the books revealed extensive plagiarism and suspected artificial intelligence (AI)-generated content. They alleged that the books contained more than 60% plagiarised material and over 70% AI-generated content.Speaking to TNIE, bibliophile K Sathish said more than 10 titles under the tourism category alone had been found to be fake. The team had randomly checked and scanned 16 pages using professional tools and software, which indicated 64% plagiarism and over 70% AI-generated content, he said..The researchers also questioned the authenticity of the publisher's ISBN numbers, registered address and website. Though Vintage Press Ltd claims to be headquartered in London, the team found that a different industry was operating at the address mentioned by the publisher after checking the UK's officials government website for industries and verifying the same with the local sources there, Sathish said.He added that all 257 identified titles were English books, published between 2025 and January 2026, and priced between Rs 9,000 and Rs 10,000 each. The books were listed as first editions, which the researchers said raised further suspicion. The authors of these books also seem to be bogus. Despite the findings, the titles continue to remain on the library shelves and are yet to be removed.The latest discovery comes amid growing scrutiny of book procurement at the newly opened library. Despite multiple attempts, Periyar Arivulagam library's librarian didn't respond to TNIE's calls for a comment on the latest issue..Follow The New Indian Express channel on WhatsApp Download the TNIE app to stay with us and follow the latest",
+   "permalink": "https://www.newindianexpress.com/states/tamil-nadu/2026/Nov/12/another-fake-publishers-books-flagged-at-coimbatores-periyar-arivulagam",
+   "external_url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Nov/12/another-fake-publishers-books-flagged-at-coimbatores-periyar-arivulagam",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] election deepfakes",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 85,
+    "consequence": 70,
+    "significance": 70,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 77,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keeps a credible report of AI‑generated fake books causing plagiarism."
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-12",
+  "outlets": [
+   "newindianexpress.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "'Nobody cared': new research shows deepfakes are hurting regular people, not just celebrities",
+   "selftext": "Non-consensual sexual deepfakes are easy to make and share. A study with more than 7,000 people shows how widespread they have become. In 2017, a Reddit user , who went by the name “deepfakes”, shared non-consensual AI-generated videos of celebrities he’d created by “stitching” their faces onto the bodies of pornographic actors. Nearly ten years later, AI tools can generate highly realistic sexualised “deepfake” images in seconds, sometimes using just a single photograph. Often, high-profile people are targeted. Our recently published research – involving more than 7,000 people from Australia, the United Kingdom and the United States – reveals AI-generated image-based abuse is becoming increasingly widespread. It now affects ordinary people as well as public figures. AI-generated image-based sexual abuse refers to the non-consensual creation, distribution, or threatened distribution of synthetic intimate images depicting real people. This is also known as “non-consensual sexual deepfakes”. With little technical skill required, almost anyone can create these images and almost anyone can become a target. These tools include “nudify” apps that digitally remove clothing from photographs, as well as AI generators that create new images or manipulate existing images from text prompts or reference images. These tools are accessible, easy to find and sometimes free, expanding the pool of potential victims and perpetrators, including young people. According to the Australian eSafety Commissioner , the number of reports from children involving digitally altered intimate images, including deepfakes, have more than doubled in the 18 months to June 2025 compared with the total number of reports received in the preceding seven years combined. Four in five of those reports involve girls. Our team surveyed 7,230 adults in Australia, the UK and the US in July 2024. We found 7% reported being victims of non-consensual sexual deepfakes, with higher rates among: The true prevalence is likely to be higher as many victim-survivors may never discover that images of them have been created or shared, while perpetrators may be reluctant to disclose their behaviour, even in an anonymous survey. We also found 3.2% admitted to having created, shared or threatened to share AI-generated intimate images of someone else without their consent. Perpetrators described a range of motivations, not all of which involved revenge or an explicit intention to cause harm. Some “thought it was funny”, while others wanted to “experiment with technology” or “show off” to friends and online peers. These findings suggest deepfakes can occur within peer cultures where sexualised content is used for humour, social bonding or mockery, as well as humiliation and harassment. Most victim-survivors in our study reported anger, humiliation, shame, embarrassment, fear, helplessness and distress. While men were more likely to report victimisation, women were more likely to report a broader range of harms",
+   "permalink": "https://theconversation.com/nobody-cared-new-research-shows-deepfakes-are-hurting-regular-people-not-just-celebrities-296154",
+   "external_url": "https://theconversation.com/nobody-cared-new-research-shows-deepfakes-are-hurting-regular-people-not-just-celebrities-296154",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] non-consensual nudes (adults)",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 85,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": "Risky picture or video",
+   "reason": "Keeps well‑sourced report on non‑consensual sexual deepfakes harming adults."
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-12",
+  "outlets": [
+   "theconversation.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "'Fourth Amendment doesn't allow it': AI facial recognition mistake lands Nebraska man in jail ...",
+   "selftext": "A US federal judge has allowed a lawsuit against a Kentucky police detective to proceed after a man alleged that he was wrongly arrested and jailed for more than two weeks because the officer relied solely on artificial intelligence (AI) facial-recognition technology to identify him as a check-fraud suspect.US District Judge S. Chad Meredith of the Eastern District of Kentucky denied Detective Ryan Kilmer's request to dismiss the lawsuit on November 9, 2026. The judge ruled that the Fourth Amendment does not permit an arrest based solely on an uncorroborated conclusion generated by AI.The judge also rejected Kilmer's claim to qualified immunity, which can protect government officials from personal liability in certain circumstances.The lawsuit was filed by Alain Vizcay Osorio, who has accused Kilmer of false arrest and malicious prosecution. Prosecutors dismissed the criminal charges against Osorio in May 2025 after he provided evidence that he was working in Nebraska when the alleged fraudulent check was presented at a Kentucky bank.What happened?As per the court documents, the case dates back to August 30, 2024, when a man identifying himself as Ernesto Ramirez attempted to cash a suspected fraudulent check at Heritage Bank in Florence, Kentucky. The man presented a Texas driver's licence, but a bank teller suspected that the document was fake and refused to cash the check. The individual then left the bank without receiving any money. Security cameras captured the incident, including an unobstructed view of the man's face.A few weeks later, Detective Ryan Kilmer of the Florence Police Department began investigating the suspected fraud. After discovering that the Texas driver's licence was fake, he turned to the bank's security footage to identify the suspect.According to the court documents, Kilmer took a screenshot of the man's face and used AI facial-recognition technology to compare it with a booking photograph and a Facebook profile image.The detective allegedly relied solely on the AI-generated identification and concluded that the images matched.The Facebook profile belonged to an individual identified as Yony Smith Npoles Charon. For reasons that were not explained in the complaint, Kilmer concluded that the person was actually Alain Vizcay Osorio, whose photograph appeared in the booking records.Kilmer subsequently signed a criminal complaint stating that he had used investigative tools to identify Osorio as the person captured in the bank's security footage.The complaint was used to obtain an arrest warrant. Officers arrested Osorio in Florida on January 9, 2025.Osorio, who lived in Nebraska, was extradited to Boone County, Kentucky, where he faced charges of criminal possession of a forged instrument in the first and second degrees.He was arraigned on January 23 and released on bond the following day. In March 2025, he was indicted on both charges.However, on May 7, 2025, prosecutors dismissed the indictment with prejudice after Osor",
+   "permalink": "https://m.economictimes.com/news/international/world-news/fourth-amendment-doesnt-allow-it-ai-facial-recognition-mistake-lands-nebraska-man-in-jail-for-2-weeks-judge-allows-lawsuit-against-kentucky-cop/articleshow/135737316.cms",
+   "external_url": "https://m.economictimes.com/news/international/world-news/fourth-amendment-doesnt-allow-it-ai-facial-recognition-mistake-lands-nebraska-man-in-jail-for-2-weeks-judge-allows-lawsuit-against-kentucky-cop/articleshow/135737316.cms",
+   "provenance": "Google Alert",
+   "source_label": "[Surveillance] facial-recognition wrongful arrest",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Surveillance & privacy",
+   "scores": {
+    "credibility": 85,
+    "consequence": 90,
+    "significance": 80,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 85,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept, real wrongful arrest due to AI facial‑recognition"
+  },
+  "theme": "Surveillance & privacy",
+  "judged": "2026-11-12",
+  "outlets": [
+   "economictimes.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AI Sectors' Youth Job Losses Filled by 50s",
+   "selftext": "... replaced by workers in their 50s, study finds Is AI artifici. ... His prescription: instead of merely protecting entry-level roles ...",
+   "permalink": "https://www.chosun.com/english/market-money-en/2026/11/12/UQT2VHQ2M5DQFM3OZAAPQZ63C4/",
+   "external_url": "https://www.chosun.com/english/market-money-en/2026/11/12/UQT2VHQ2M5DQFM3OZAAPQZ63C4/",
+   "provenance": "Google Alert",
+   "source_label": "[Jobs] entry-level job collapse",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Jobs & livelihoods",
+   "scores": {
+    "credibility": 80,
+    "consequence": 70,
+    "significance": 75,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept, study shows AI‑driven youth job losses"
+  },
+  "theme": "Jobs & livelihoods",
+  "judged": "2026-11-12",
+  "outlets": [
+   "chosun.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Kenosha County man faces 12 felony counts under Wisconsin AI law | FOX6 Milwaukee",
+   "selftext": "A new Wisconsin law is being used in Kenosha County involving AI-generated intimate images. A new Wisconsin law is being used in Kenosha County involving AI-generated intimate images. Share FOX is partnering with U.S.VETS and its \"Make Camo Your Cause\" campaign for the sixth straight year to help prevent and end veteran homelessness. Here’s what to know. This material may not be published, broadcast, rewritten, or redistributed. ©2026 FOX Television Stations",
+   "permalink": "https://www.fox6now.com/video/fmc-wgefuolmyw1lzckd",
+   "external_url": "https://www.fox6now.com/video/fmc-wgefuolmyw1lzckd",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] school deepfake nudes",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 75,
+    "consequence": 80,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": "Risky picture or video",
+   "reason": "Kept: real legal case of AI‑generated intimate image abuse, fits Image abuse theme."
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-12",
+  "outlets": [
+   "fox6now.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AI-generated rally image falsely claims protest at Thai Government House",
+   "selftext": "An image circulated online claiming to show a mass protest outside Thailand's Government House, where demonstrators were allegedly demanding lower living costs and fuel prices, has been verified as AI-generated and does not depict a real event. Thai PBS Verify traced the image to a Facebook post that claimed large numbers of people from across Thailand had gathered peacefully in front of the Thai Government House to urge the government to reduce taxes, utility bills and fuel costs, including a proposed cut of 10 baht per litre for all types of fuel. The post, published on Nov 7, 2026, received more than 120,000 reactions. According to the post, the demonstration reflected growing public frustration over rising living expenses, including electricity, water and fuel bills, as household incomes struggled to keep pace. It also suggested the government was considering the protesters’ demands. Thai PBS Verify examined the image using Hive Moderation , an AI-detection platform, which found a 99.9% likelihood that it had been generated by artificial intelligence. The analysis further suggested the image was likely created using ChatGPT’s image-generation technology. A separate review using OpenAI’s AI detection tools found a digital watermark indicating that the image had been produced using OpenAI’s AI systems. Investigators compared the viral image with photographs of the actual Government House complex and found significant differences in building details and surrounding elements, indicating that the scene was not authentic. Left, AI-generated image; right, actual Government House Further irregularities were found in the image itself. Several individuals appeared with distorted arms, faces and other facial features, while some body proportions looked unnatural. Another noticeable flaw involved the hands of protesters holding flags. Fingers appeared misshapen, disproportionate and unrealistic, a common characteristic of AI-generated images. Thai PBS Verify also compared aerial views of the Government House area with a video published on Facebook by Kwang Trisulee Trisoranakul in 2024 to assess whether the location shown in the image matched the real site. Investigators additionally reviewed aerial photographs published by Manager Online in 2013 showing People’s Democratic Reform Committee (PDRC) supporters gathering on the lawn outside Thai Khu Fah Building at Government House. When compared with the viral image, the layout and visual elements did not correspond, further indicating that the image had been artificially generated. Comparison of areas surrounding Government House Thai PBS Verify concluded that the image purportedly showing a mass protest outside Government House demanding lower living costs and fuel prices was created using AI and does not depict a real event.",
+   "permalink": "https://www.thaipbs.or.th/verify/en/content/18360",
+   "external_url": "https://www.thaipbs.or.th/verify/en/content/18360",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] election deepfakes",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 85,
+    "consequence": 70,
+    "significance": 75,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 80,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: verified AI‑generated political deepfake image that spread widely, fits Misinformation."
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-12",
+  "outlets": [
+   "thaipbs.or.th"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Documents Reveal the Postal Service's Broad Surveillance of Political Activists (opinion)",
+   "selftext": "Postal investigators monitored social media for protest plans and used facial recognition software. We know that mission creep is a thing, but is it entirely necessary for every federal agency to try to reimagine itself as Big Brother? OK, silly question. Of course, it's not necessary for the Post Office—that's the agency under scrutiny this time—to engage in mass surveillance. It just seems to be an activity in which all government bureaucracies inevitably engage. That's the most logical explanation for why the U.S. Postal Service decided that it should monitor the internet for information about political demonstrations. \"The law enforcement arm of the U.S. Postal Service has been quietly running a program that tracks and collects Americans' social media posts, including those about planned protests,\" Jana Winter first reported in 2021 for Yahoo! News . \"Analysts with the United States Postal Inspection Service (USPIS) Internet Covert Operations Program (iCOP) monitored significant activity regarding planned protests occurring internationally and domestically on March 20, 2021,\" according to a March 2021 bulletin from the iCOP that was included in the article. \"Locations and times have been identified for these protests, which are being distributed online across multiple social media platforms, to include right-wing leaning Parler and Telegram accounts.\" Among the organizations alarmed by the disclosure was the Electronic Frontier Foundation (EFF), which filed suit to learn more about the surveillance program. \"After years of delays and technical failures that led the agency to lose access to a trove of emails discussing the program,\" wrote EFF Deputy Legal Director Aaron Mackey, the organization was finally able to extract some key documents about iCOP from the postal cops this month. Others were apparently destroyed. \"The disclosures include a series of bulletins created from iCOP, which show that the postal service used the program in 2020 and 2021 to monitor and circulate information about a wide range of planned protests\" from \"across the political spectrum,\" Mackey added. \"They included a planned ' Million MAGA March ,' a guns rights advocacy event and counter-protest in Virginia, a nationwide Save the Post Office Saturday protest , and planned protests in front of then-Postmaster General Louis DeJoy's home in Washington, D.C.\" Reports revealed that postal investigators ran keyword searches on social media posts and created \"anonymous, untraceable email and social media accounts,\" the better to monitor Americans' conversations. They applied Clearview AI facial recognition software to photos scraped from online platforms for comparison to a database of billions of images. In testimony , Chief Postal Inspector Gary Barksdale said iCOP \"was developed around 2017 as part of our strategy to combat opioids and other illegal drugs in the mail\" and that \"the iCOP program protects the Postal Service and the public by facilitating the identification",
+   "permalink": "https://www.yahoo.com/news/politics/articles/documents-reveal-postal-services-broad-120011924.html",
+   "external_url": "https://www.yahoo.com/news/politics/articles/documents-reveal-postal-services-broad-120011924.html",
+   "provenance": "Google Alert",
+   "source_label": "[Surveillance] border / immigration AI",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Surveillance & privacy",
+   "scores": {
+    "credibility": 80,
+    "consequence": 75,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 82,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Documented USPS facial‑recognition surveillance of activists"
+  },
+  "theme": "Surveillance & privacy",
+  "judged": "2026-11-12",
+  "outlets": [
+   "yahoo.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Hannah Fry finds out how an AI Algorithm discriminated against Black Patients",
+   "selftext": "The algorithm was designed to identify the patients most in need. What it actually measured was something very different. AI ...",
+   "permalink": "https://www.youtube.com/watch?v=Bly06XYdp0w",
+   "external_url": "https://www.youtube.com/watch?v=Bly06XYdp0w",
+   "provenance": "YouTube search",
+   "source_label": "AI bias discrimination",
+   "subreddit": "",
+   "created": "2026-11-10",
+   "over_18": false
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Bias & discrimination",
+   "scores": {
+    "credibility": 85,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 84,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "SBS documentary shows AI bias against Black patients"
+  },
+  "theme": "Bias & discrimination",
+  "judged": "2026-11-12",
+  "outlets": [
+   "youtube.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Stocks Slide as AI Trade Roars Back | Closing Bell",
+   "selftext": "Comprehensive cross-platform coverage of the U.S. market close on Bloomberg Television, Bloomberg Radio, and YouTube with Romaine Bostick, Vonnie Quinn, Carol Massar and Tim Stenovec. -------- More on Bloomberg Television and Markets Like this video? Subscribe and turn on notifications so you don't miss any videos from Bloomberg Markets & Finance: https://tinyurl.com/ysu5b8a9 Visit http://www.bloomberg.com for business news & analysis, up-to-the-minute market data, features, profiles and more. Connect with Bloomberg Television on: X: https://twitter.com/BloombergTV Facebook: https://www.facebook.com/BloombergTelevision Instagram: https://www.instagram.com/bloombergtv/ Connect with Bloomberg Business on: X: https://twitter.com/business Facebook: https://www.facebook.com/bloombergbusiness Instagram: https://www.instagram.com/bloombergbusiness/ TikTok: https://www.tiktok.com/@bloombergbusiness?lang=en Reddit: https://www.reddit.com/r/bloomberg/ LinkedIn: https://www.linkedin.com/company/bloomberg-news/ More from Bloomberg: Bloomberg Radio: https://twitter.com/BloombergRadio Bloomberg Surveillance: https://twitter.com/bsurveillance Bloomberg Politics: https://twitter.com/bpolitics Bloomberg Originals: https://twitter.com/bbgoriginals Watch more on YouTube: Bloomberg Technology: https://www.youtube.com/@BloombergTechnology Bloomberg Originals: https://www.youtube.com/@business Bloomberg Quicktake: https://www.youtube.com/@BloombergQuicktake Bloomberg Espanol: https://www.youtube.c",
+   "permalink": "https://www.youtube.com/watch?v=AlQpswqoI4I",
+   "external_url": "https://www.youtube.com/watch?v=AlQpswqoI4I",
+   "provenance": "YouTube",
+   "source_label": "[YouTube] Bloomberg Television",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": "https://i2.ytimg.com/vi/AlQpswqoI4I/hqdefault.jpg"
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 95,
+    "consequence": 80,
+    "significance": 90,
+    "audience": 90,
+    "theme_fit": 70
+   },
+   "overall": 85,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Bloomberg report on AI‑driven trading causing market slide, a documented financial harm affecting many investors"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-12",
+  "outlets": [
+   "youtube.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Fake AI 'officers' promising Sheikh Hasina's December return rack up 11.8m Facebook views",
+   "selftext": "AI-Generated Fake Videos About Sheikh Hasina Return: Fake AI-generated army, police and air force officers are spreading claims of Sheikh Hasina’s December 2026 return, with 84 Facebook posts garnering 11.8 million views, a Daily Star analysis finds. A uniformed military officer appears to address Bangladeshis, promising Sheikh Hasina’s return in December 2026. He claims the armed forces will bring her back with respect, as they sent her away on August 5. The caption reads: “We, the Bangladesh Army, will bring Sheikh Hasina back on a military aircraft.” Similar videos have been circulating for more than a month, showing people who appear to be military and police personnel making political statements and assurances. However, the individuals depicted are not real. The videos were made using artificial intelligence. These videos are among 84 Facebook posts collected since October by The Daily Star featuring fabricated representations of army, police, air force and navy personnel making political statements. The videos have collectively garnered more than 11.8 million views, indicating their extensive reach on Facebook. An analysis of the posts found that 61 promoted narratives about Sheikh Hasina's return [ 1 , 2 , 3 , 4 ], while 11 suggested the possibility of a military takeover [ 1 , 2 , 3 , 4 ]. Six expressed regret over the armed forces' role during the July uprising [ 1 , 2 , 3 ] while the remaining six combined multiple narratives. In videos promoting Hasina's return, fabricated officers repeatedly promise to bring her back from India, claim that she remains the legitimate prime minister as she had not resigned, or assure viewers that December will mark her return. Some portray officers responding to supposed public requests for her reinstatement. [ 1 , 2 , 3 ] Some videos go beyond officers making statements to the camera, staging fictional exchanges with citizens seeking answers. In one, a purported farmer tells an army officer that he cannot cultivate his land because of a fertiliser shortage and asks him to bring Hasina back. In another, a schoolgirl appeals to a uniformed officer to bring her back. [ 1 , 2 ] In another post, a man appearing as a senior officer instructs a junior officer to prepare a list of extortionists ahead of Sheikh Hasina’s “return”. A group of people appearing as military personnel in separate videos suggest that the armed forces can take power any time to restore law and order. Some videos present military rule as imminent, with fictional officers telling viewers to remain patient. [ 1 , 2 , 3 ] Several posts also feature people appearing as officers expressing regret over the armed forces' role during the July uprising. [ 1 , 2 ] The accounts in question have a long history of establishing pro-Awami League narrative. Earlier posts from the account named Mahmuda Rafat, in particular, show sustained support for the party. The AI-generated videos of officers began appearing early October across the accounts examine",
+   "permalink": "https://www.thedailystar.net/fact-check/news/fake-ai-officers-promising-sheikh-hasinas-december-return-rack-118m-facebook-views-4321581",
+   "external_url": "https://www.thedailystar.net/fact-check/news/fake-ai-officers-promising-sheikh-hasinas-december-return-rack-118m-facebook-views-4321581",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 80,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 80,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: credible source, clear AI‑generated misinformation with large impact"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-12",
+  "outlets": [
+   "thedailystar.net"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "https://www.thedailystar.net/fact-check/news/fake-ai-officers-promising-sheikh-hasinas-december-return-rack-118m-facebook-views-4321581",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "How Fake Job Interviews Helped Hackers Pull Off a $6.3 Billion Crypto Heist | HackerNoon",
+   "selftext": "Binance says fake job interviews helped hackers steal a record $6.3bn. Here is how it worked, and what to do differently. Binance says fake job interviews helped hackers steal a record $6.3bn. Here is how it worked, and what to do differently. The job interview was real. The interviewers were not. Binance, the world's largest crypto exchange, says hackers who stole a record $6.3bn (about £4.7bn) got in partly through fake job interviews. One of its engineers was contacted through a legitimate job site. The 'company representatives' he met were fake. They even shared social media accounts with personal photos to build trust. In the second interview, he was asked to download an 'assignment'. It was malware. Binance says the attackers then used his computer and an internal AI tool to take over two other engineers' laptops. This is not a story about one careless person. These were patient, convincing people. The lesson applies to everyone, not just engineers: a genuine platform does not make a genuine person. A job site can show that an account exists. It cannot tell you who is behind it. A few habits that help: Never install software or run a 'test' file just because a recruiter asked. If a coding task has to be run, use a separate device, never your work laptop. Check the company through its own website and phone number, not the links they send. A real employer will not mind you checking. If you hire engineers The same lesson applies from the other side of the table. If your process includes a take-home task, make it something candidates can do in a browser or an online sandbox, not a file they have to download and run. Say clearly in writing what you will and will not ask them to install. Give them a named contact they can verify through your company website. Good candidates are learning to be careful. A process that respects that will look more trustworthy, not less. When you have interviewed engineers, have you set take-home tasks, and how did you make sure candidates never had to run untrusted code on their own machines? Source: BBC News, 'Binance says fake job interviews used as part of $6.3bn crypto hack' (3 November 2026) BBC News, 'Binance says fake job interviews used as part of $6.3bn crypto hack' (3 November 2026)",
+   "permalink": "https://hackernoon.com/how-fake-job-interviews-helped-hackers-pull-off-a-$63-billion-crypto-heist",
+   "external_url": "https://hackernoon.com/how-fake-job-interviews-helped-hackers-pull-off-a-$63-billion-crypto-heist",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 65,
+    "consequence": 90,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 80,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept – shows AI used in a massive crypto hack, real harm and clear theme"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-12",
+  "outlets": [
+   "hackernoon.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "App hoster Railway attackers ran up US$740,000 on stolen AI keys - iTnews",
+   "selftext": "AI model gateway OpenRouter declines refunds. Attackers who broke into application hosting platform Railway last month ran up an estimated US$740,000 ($1.07 million) in unauthorised usage on artificial intelligence provider keys stolen from its customers, the company said in an incident post-mortem. Railway's incident report said the intruder obtained and decrypted stored environment variables for at most 1.85 per5cent of workspaces, or about 100,000 of them. The haul also included linked-account tokens, among them GitHub OAuth tokens, for 1852 users. Database logs showed the attacker ran queries that picked out variables whose names matched AI provider keys, and favoured customers with large numbers of stored variables, Railway said. Who will pay for the misused keys depends on the provider. Amazon Web Services and Google have begun refunds under their fraud policies, while OpenAI and SpaceXSI are reviewing claims case by case, Railway said. Meanwhile, OpenRouter is enforcing the no-refund policy in its terms of service, and Anthropic was still in discussions when the report was published. Railway said it would cover losses that providers do not. The intrusion began on October 20, when the attacker exploited a previously unknown flaw in Railway's build infrastructure to read files on a host virtual machine and take a build credential. That credential was meant only for tasks such as pushing container images, but an internal workflow system accepted it as a trusted client, exposing the stored histories of 353 builds and a copy of Railway's source code repository. With the code in hand, the attacker found a wrongly configured identity binding in Railway's deployment pipeline, and from there reached a machine holding a credential that could decrypt customer variables. Railway said it evicted the intruder on October 21. The company described the response as a \"contest of agent speed\", saying evidence which it did not publish indicated the attacker used abliterated AI models, meaning ones with their safety restrictions removed. Railway theorises that the keys were on-sold for distillation, the practice of querying a commercial model at scale to train a copy, but said it had not established whether the attacker ran the resale services involved. Earlier this week, Nvidia-backed AI inference provider Fireworks AI linked a breach of its systems to a criminal group engaged in LLMJacking. LLMJacking is the theft of access to large language models, usually through stolen cloud credentials or API keys, with the access resold and the victim left to pay for the usage. Among the Fireworks customers affected by the breach was Notion, a workspace app combining notes, documents, wikis, databases and project tracking, now with AI features layered on top. Google-owned security vendor Wiz said late last month that at least nine AI developer platforms, Fireworks among them, had disclosed security incidents in October. Wiz said it traced two stolen enterprise keys to o",
+   "permalink": "https://www.itnews.com.au/news/app-hoster-railway-attackers-ran-up-us740000-on-stolen-ai-keys-630277",
+   "external_url": "https://www.itnews.com.au/news/app-hoster-railway-attackers-ran-up-us740000-on-stolen-ai-keys-630277",
+   "provenance": "Google Alert",
+   "source_label": "[Breaches] models hacking in tests",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 65,
+    "consequence": 80,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 75,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept, real hack using stolen AI keys causing large financial loss, fits Hacking & AI acting autonomously"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-12",
+  "outlets": [
+   "itnews.com.au"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Coroner called to scene of tractor trailer crash in Carlisle | fox43.com",
+   "selftext": "Inside a Dauphin County data center as Pennsylvania communities battle AI development ... — Officials have confirmed that at least one person has died ...",
+   "permalink": "https://www.fox43.com/article/news/local/cumberland-county/coroner-called-to-scene-of-tractor-trailer-crash-in-carlisle/521-affb6d16-6ce6-43a4-bd2c-0a46f10a1f91",
+   "external_url": "https://www.fox43.com/article/news/local/cumberland-county/coroner-called-to-scene-of-tractor-trailer-crash-in-carlisle/521-affb6d16-6ce6-43a4-bd2c-0a46f10a1f91",
+   "provenance": "Google Alert",
+   "source_label": "[Breaches] medical / self-driving failures",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 70,
+    "consequence": 90,
+    "significance": 60,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 70,
+   "unproven": true,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as fatal self‑driving AI failure example"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-12",
+  "outlets": [
+   "fox43.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Texas woman loses nearly all her SNAP benefits to theft. State records show thousands of ...",
+   "selftext": "A disabled Texas woman said thieves wiped out nearly all of her monthly food assistance in a matter of hours, leaving her with just 30 cents to feed herself and her husband. Tyree Stehle relies on Supplemental Nutrition Assistance Program (SNAP) benefits , commonly known as food stamps, to help pay for groceries. She typically receives $298 on the ninth of each month. But when her benefits were deposited in September, her electronic benefits transfer (EBT) statement showed several transactions in Minnesota, Brooklyn and the Bronx totaling $297.70. Her husband went to the grocery store, only to discover the money was gone. \"He said there's nothing here,\" Stehle recalled. Stehle said she has been disabled since 2013 and lives on a tight monthly budget. She never expected to become a victim of benefit theft. \"I cried. I couldn't believe it. I said, 'Oh my goodness.' I thought, 'Oh, that'll never happen to me.' But it did,\" Stehle said. Stehle's experience is part of a much larger problem. KHOU 11 Investigates obtained records from the Texas Health and Human Services (HHS) showing the agency received $29,387,346 in requests to replace stolen SNAP benefits between Jan. 1, 2024, and Sept. 7, 2026. The state replaced $16,315,348 of that money. However, those replacements were limited by the expiration of a federal program that allowed states to reimburse victims of stolen benefits. Federal authority to replace stolen SNAP benefits ended after Dec. 20, 2024. Benefits stolen on or after Dec. 21, 2024, are no longer eligible for replacement under that program. Since then, HHS has received 1,836 requests to replace stolen benefits. The agency denied 1,834 of them. That means Texans who have had their food assistance stolen since the federal reimbursement program expired generally have no way to get those benefits back through HHS. HHS said it takes the security of benefits seriously and acknowledges that SNAP card skimming remains a persistent problem across the country, including Texas. The agency said it is continuing to research the possibility of implementing chip-enabled cards to help protect Lone Star cardholders from fraud. For now, HHS encourages SNAP recipients to monitor their transactions, change their PINs regularly and lock their cards between purchases using the Your Texas Benefits website or mobile app. Stehle said she has a new card and PIN. She also freezes her account before and after every grocery trip. But she believes the state needs to do more to protect people who depend on the assistance. \"It's kind of destroyed my faith in the government and what they would do for a person that is in need. I think the state should do something because we live in the State of Texas and we are citizens and we count. We count,\" Stehle said. HHS recommends that SNAP recipients who discover fraudulent transactions take these steps immediately: Cancel your card and change your PIN: Call the Lone Star Help Desk at 800-777-7328. Report the fraud: Call 211, ",
+   "permalink": "https://www.yahoo.com/news/us/articles/texas-woman-loses-nearly-her-001928185.html",
+   "external_url": "https://www.yahoo.com/news/us/articles/texas-woman-loses-nearly-her-001928185.html",
+   "provenance": "Google Alert",
+   "source_label": "[Welfare] benefits wrongly cut by algorithm",
+   "subreddit": "",
+   "created": "2026-11-10",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Automated decision making",
+   "scores": {
+    "credibility": 70,
+    "consequence": 85,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: algorithmic error cut SNAP benefits, fits Automated decision making."
+  },
+  "theme": "Automated decision making",
+  "judged": "2026-11-12",
+  "outlets": [
+   "yahoo.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Non-Consensual Deepfake Content Surges 1,600% in Two Years",
+   "selftext": "Stanford University's Human-Centered AI Institute (HAI) recently reported, “ Non-consensual deepfake sexual images and videos created without the ...",
+   "permalink": "https://www.chosun.com/english/industry-en/2026/11/12/RFHOCUPKVRHI7HZKTBMUQ2O5LU/",
+   "external_url": "https://www.chosun.com/english/industry-en/2026/11/12/RFHOCUPKVRHI7HZKTBMUQ2O5LU/",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] non-consensual nudes (adults)",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 85,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Kept: credible report of surge in non‑consensual adult deepfakes, clear image‑abuse harm."
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-12",
+  "outlets": [
+   "chosun.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Woman, 31, Tragically Passes After ChatGPT Allegedly Assures Her She Has 'No Need To ...",
+   "selftext": "OpenAI faced a major setback on Tuesday, October 27, when Chinese national Quan Wan and his wife, Meiqin Xu , filed a lawsuit against the company, accusing it of contributing to their daughter Bowen Wan’s demise. The legal action came after the 31-year-old software engineer was found unresponsive in her Seattle apartment after drastically reducing her epilepsy medication on ChatGPT’s advice. Bowen had reportedly developed an increasingly close relationship with the Sam Altman-led platform since 2023. “She paid for it with her life,” the family’s lawyer stated in the lawsuit. According to the Cleveland Clinic, epilepsy is a chronic, noncommunicable brain disorder characterized by recurrent, unprovoked seizures. Bowen, who had been living with the condition for over a decade, appeared to experience an episode while speaking to her family over a call in February. However, this one seemed to last longer than usual. After regaining consciousness, she told her father that she would speak to him once she had gotten some rest. However, days passed without any response to her family’s attempts to reach her. Concerned about her whereabouts, her parents arranged for a friend to visit her apartment. According to The New York Times, which examined the family’s lawsuit, Quan and his wife watched through a video call as the individual discovered their daughter lying lifeless, face down. The official cause of her passing was complications associated with her condition, confirming what her parents had feared. Sudden unexpected demise in epilepsy (SUDEP) is one of the most serious complications of the condition. It happens frequently during sleep and is estimated to affect approximately one in every 1,000 adults living with the condition each year. Bowen’s parents believed their daughter had been keeping her epilepsy under control through prescribed treatment. However, their subsequent examination of her conversations with ChatGPT reportedly revealed a troubling sequence of events leading up to her passing. Bowen was laid off from her job in November 2025, after which she had until mid-February 2026 to secure new employment if she wanted to remain in the United States. According to her parents’ lawsuit, she had been concerned about the effects of her epilepsy medication on her cognitive abilities and speech as she prepared for potential job interviews. In January 2026, she began discussing ways to lower her daily dosage with ChatGPT. Although the chatbot initially recommended consulting her doctor, it allegedly went on to help her devise a plan to reduce her 400-milligram dosage to zero over several weeks As Bowen began lowering her medication, she reportedly experienced concerning symptoms, including confusion and difficulty remembering how she had gotten into bed. She repeatedly turned to ChatGPT to discuss these changes, raising concerns a total of 150 times, the lawsuit states. However, rather than urging her to seek medical attention, the chatbot allegedly re",
+   "permalink": "https://www.aol.com/articles/woman-31-tragically-passes-chatgpt-190552000.html",
+   "external_url": "https://www.aol.com/articles/woman-31-tragically-passes-chatgpt-190552000.html",
+   "provenance": "Google Alert",
+   "source_label": "[Companions] AI-encouraged self-harm (adults)",
+   "subreddit": "",
+   "created": "2026-11-11",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Relationships & mental health",
+   "scores": {
+    "credibility": 85,
+    "consequence": 95,
+    "significance": 80,
+    "audience": 85,
+    "theme_fit": 80
+   },
+   "overall": 85,
+   "unproven": true,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Kept: credible news of adult death linked to ChatGPT advice, clear mental‑health harm."
+  },
+  "theme": "Relationships & mental health",
+  "judged": "2026-11-12",
+  "outlets": [
+   "aol.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
   "twin_of": ""
  }
 ]
