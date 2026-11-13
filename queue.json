@@ -95,6 +95,7 @@
    "cdomagazine.tech",
    "hashnode.com",
    "linkedin.com",
+   "medium.com",
    "wsj.com",
    "x.com",
    "youtube.com"
@@ -274,6 +275,7 @@
   "judged": "2026-11-11",
   "outlets": [
    "bleepingcomputer.com",
+   "esecurityplanet.com",
    "instagram.com",
    "techradar.com"
   ],
@@ -689,6 +691,7 @@
   "judged": "2026-11-11",
   "outlets": [
    "njtoday.news",
+   "technobezz.com",
    "thecooldown.com",
    "yahoo.com",
    "youtube.com"
@@ -752,7 +755,8 @@
    "subreddit": "",
    "created": "2026-11-11",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.indiatoday.in/india/story/rajasthan-woman-suicide-cyber-fraud-gang-arrested-minors-bihar-3036668-2026-11-11"
   },
   "t": {
    "i": 0,
@@ -779,6 +783,8 @@
    "bhaskarenglish.in",
    "etvbharat.com",
    "firstindia.co.in",
+   "freepressjournal.in",
+   "indianexpress.com",
    "indiatoday.in",
    "rediff.com",
    "the420.in"
@@ -965,7 +971,8 @@
    "subreddit": "",
    "created": "2026-11-12",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.theguardian.com/technology/2026/nov/12/facial-recognition-errors-put-ethnic-minorities-at-risk-of-wrongful-arrest-police-watchdog-warns"
   },
   "t": {
    "i": 3,
@@ -988,11 +995,18 @@
   "theme": "Bias & discrimination",
   "judged": "2026-11-12",
   "outlets": [
-   "theguardian.com"
+   "aol.com",
+   "bigbrotherwatch.org.uk",
+   "facebook.com",
+   "nuaico.com",
+   "reddit.com",
+   "tce.exchange",
+   "theguardian.com",
+   "x.com"
   ],
   "approved": true,
   "swapped_from": "",
-  "event": "",
+  "event": "https://www.theguardian.com/technology/2026/nov/12/facial-recognition-errors-put-ethnic-minorities-at-risk-of-wrongful-arrest-police-watchdog-warns",
   "twin_of": ""
  },
  {
@@ -1047,7 +1061,8 @@
    "subreddit": "",
    "created": "2026-11-11",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.wired.com/story/teen-girl-asked-gemini-about-suicide-for-months-until-it-was-flagged/"
   },
   "t": {
    "i": 2,
@@ -1070,6 +1085,11 @@
   "theme": "Children & safety",
   "judged": "2026-11-12",
   "outlets": [
+   "instagram.com",
+   "ndtv.com",
+   "newsbytesapp.com",
+   "reddit.com",
+   "techtimes.co.uk",
    "wired.com"
   ],
   "approved": true,
@@ -1163,14 +1183,15 @@
   "p": {
    "title": "United Airlines Blocks A.I. Agents From Booking Flights - The New York Times",
    "selftext": "... customers ' account details. An A.I. agent could also violate regulations from the Federal Aviation Administration or the U.S. Department of ...",
-   "permalink": "https://www.nytimes.com/2026/11/11/business/united-airlines-ai-agents-booking-flights.html",
-   "external_url": "https://www.nytimes.com/2026/11/11/business/united-airlines-ai-agents-booking-flights.html",
+   "permalink": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights",
+   "external_url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights",
    "provenance": "Google Alert",
    "source_label": "[Breaches] models hacking in tests",
    "subreddit": "",
    "created": "2026-11-11",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.nytimes.com/2026/11/11/business/united-airlines-ai-agents-booking-flights.html"
   },
   "t": {
    "i": 0,
@@ -1193,11 +1214,16 @@
   "theme": "Hacking & AI acting autonomously",
   "judged": "2026-11-12",
   "outlets": [
-   "nytimes.com"
+   "cbsnews.com",
+   "finance.yahoo.com",
+   "i.redd.it",
+   "kylesinvestigation.com",
+   "nytimes.com",
+   "paymentsjournal.com"
   ],
   "approved": true,
-  "swapped_from": "",
-  "event": "",
+  "swapped_from": "https://www.nytimes.com/2026/11/11/business/united-airlines-ai-agents-booking-flights.html",
+  "event": "https://www.nytimes.com/2026/11/11/business/united-airlines-ai-agents-booking-flights.html",
   "twin_of": ""
  },
  {
@@ -1458,7 +1484,8 @@
    "subreddit": "",
    "created": "2026-11-12",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://theconversation.com/nobody-cared-new-research-shows-deepfakes-are-hurting-regular-people-not-just-celebrities-296154"
   },
   "t": {
    "i": 3,
@@ -1481,11 +1508,12 @@
   "theme": "Image abuse",
   "judged": "2026-11-12",
   "outlets": [
+   "facebook.com",
    "theconversation.com"
   ],
   "approved": false,
   "swapped_from": "",
-  "event": "",
+  "event": "https://theconversation.com/nobody-cared-new-research-shows-deepfakes-are-hurting-regular-people-not-just-celebrities-296154",
   "twin_of": ""
  },
  {
@@ -1581,7 +1609,8 @@
    "subreddit": "",
    "created": "2026-11-11",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.fox6now.com/video/fmc-wgefuolmyw1lzckd"
   },
   "t": {
    "i": 0,
@@ -1604,11 +1633,12 @@
   "theme": "Image abuse",
   "judged": "2026-11-12",
   "outlets": [
+   "facebook.com",
    "fox6now.com"
   ],
   "approved": false,
   "swapped_from": "",
-  "event": "",
+  "event": "https://www.fox6now.com/video/fmc-wgefuolmyw1lzckd",
   "twin_of": ""
  },
  {
@@ -2031,7 +2061,8 @@
    "subreddit": "",
    "created": "2026-11-11",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.aol.com/articles/woman-31-tragically-passes-chatgpt-190552000.html"
   },
   "t": {
    "i": 3,
@@ -2054,7 +2085,669 @@
   "theme": "Relationships & mental health",
   "judged": "2026-11-12",
   "outlets": [
-   "aol.com"
+   "aol.com",
+   "ibtimes.co.uk",
+   "youtube.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "https://www.aol.com/articles/woman-31-tragically-passes-chatgpt-190552000.html",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Westlake approves agreement, clearing way for controversial North Texas data center",
+   "selftext": "Settlement includes noise limits and emergency funding. A controversial data center project in Westlake will move forward after the Town Council approved a development agreement Thursday, following a recent settlement reached by the developer, the city of Keller and nearby homeowners.The approval clears the way for construction to begin near U.S. Highway 377 and Westport Parkway, following months of delays, legal challenges, and opposition from some residents.According to Westlake officials, the data center will cover nearly 88 acres and is expected to generate about $5 million annually for the town during its first 10 years.Thursday's presentation on the data center is available here.Keller homeowners' concerns lead to additional protectionsEarlier this month, Keller city leaders approved a settlement with Westlake and developer Circle T Owner LP. The agreement includes noise restrictions, environmental safeguards, and other protections for nearby residents.The nearly $2 million settlement provides $1.5 million for noise monitoring and other programs, $300,000 for Keller Fire Rescue, and additional money to cover legal and consulting expenses.Homeowners in Keller's Marshall Ridge neighborhood had opposed the project, saying they were blindsided by plans to build the massive data center just a few hundred feet from their properties.Concerns about noise, environmental impacts, and the approval process led to lawsuits and a temporary court order blocking Westlake from advancing the project's development agreement. The order was later dissolved.The homeowners also agreed to settle their lawsuit.The dispute strained relations between Keller and Westlake. Westlake voted against renewing its police services contract with Keller. The existing contract runs through October 2028.Under the settlement, Keller gains contractual rights to enforce certain noise, screening, and operational requirements at the site, even though the property is outside Keller city limits.According to the City of Keller, the settlement includes:Noise restrictions: Daytime and nighttime noise limits at residential property lines, an independent baseline noise study, and quarterly monitoring for three years after operations begin.Landscaping: A 10-foot landscaping berm to help screen the facility from nearby neighborhoods. Trees that die or sustain significant damage affecting their screening function must be replaced.Community funding: A $1.5 million contribution for noise monitoring, environmental mitigation, and other municipal programs and services benefiting Keller residents.Fire protection: A $300,000 contribution toward Keller Fire Rescue training, equipment, decontamination, and other emergency response costs associated with the project.Generator restrictions: Diesel-powered backup generators must have EPA Tier 4 emissions controls, with generator testing limited to daytime hours.Grading and drainage: Circle T must provide the project's grading plan, including the proposed b",
+   "permalink": "https://www.cbsnews.com/texas/news/westlake-data-center-approved-keller-settlement-noise-restrictions-november-2026/",
+   "external_url": "https://www.cbsnews.com/texas/news/westlake-data-center-approved-keller-settlement-noise-restrictions-november-2026/",
+   "provenance": "Google Alert",
+   "source_label": "[Environment] data-centre noise",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Environment & data centres",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 60,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Real settlement over data‑centre noise shows concrete AI‑related environmental harm"
+  },
+  "theme": "Environment & data centres",
+  "judged": "2026-11-13",
+  "outlets": [
+   "cbsnews.com",
+   "fox4news.com",
+   "instagram.com",
+   "wfaa.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.cbsnews.com/texas/news/westlake-data-center-approved-keller-settlement-noise-restrictions-november-2026/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "A deepfake video network is spreading false information about the U.S. trade war : report",
+   "selftext": "A network that’s likely based outside of Canada is using deepfakes to spread “politically divisive” content to Canadians, says a new report released Thursday. OTTAWA - A network that’s likely based outside of Canada is using deepfakes to spread “politically divisive” content to Canadians, says a new report released Thursday. The report from McGill University’s Centre for Media, Technology and Democracy says the network uses deepfakes of real influencers. It combines the faces of real people with fake lip movements and voices generated by AI. “We do not know what the network is for, but its operators are willing to steal faces and spread falsehoods that set Canadians against the United States, against their own government and against each other,” the report says. Using footage of real people likely keeps the videos from being flagged as AI, the report says, noting that TikTok has only labelled four per cent of such videos as AI. It says many of the videos focus on the U.S.-Canada trade war and the most-watched videos include false information. They include a video about a non-existent 48-hour ultimatum from U.S. President Donald Trump which falsely says Prime Minister Mark Carney responded by cancelling $8 billion in U.S. defence contracts. “This never happened, but the story was shared in 161 videos on 129 accounts and played 5.1 million times,” the report says. The people who comment on the videos don’t seem to realize they are fake, with only 6.3 per cent saying the video is inauthentic or propaganda. “The rest agree or argue with the content in the video, and one in ten speaks to the narrator as a real person: thanking them, praising them, or telling them to check their facts,” the report says. The videos don’t have a consistent perspective on the trade war. The report says the accounts take both sides, “and narrators switch nationality too, presenting themselves as Canadian in some videos and American in others. The effect is that Canadians are shown fabricated and misleading claims on both sides of the trade debate.” The network includes nearly 300 TikTok and Instagram accounts and has posted more than 3,201 videos that have been seen 22.1 million times in the past three months. The report says it’s not clear who is behind the network but it is “almost certainly” run outside of North America. “Its posting and registration times do not fit North American time zones,” the report says. “Activity drops off during the night in East and Southeast Asia, and some accounts carry Chinese-language settings or a registration in China, the only lead we have on a country.” The motivation of those behind the network is also unclear. The accounts don’t push the narratives of any foreign government and have not been monetized, the report says, adding the network could be growing audiences to use later. It says the network could also be used for testing a tool or service, or someone may be paying those behind the operation to influence Canadians. This report ",
+   "permalink": "https://www.ctvnews.ca/canada/article/a-deepfake-video-network-is-spreading-false-information-about-the-us-trade-war-report/",
+   "external_url": "https://www.ctvnews.ca/canada/article/a-deepfake-video-network-is-spreading-false-information-about-the-us-trade-war-report/",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 75,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 82,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept, clear misinformation case with credible source"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-13",
+  "outlets": [
+   "ctvnews.ca",
+   "ground.news"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.ctvnews.ca/canada/article/a-deepfake-video-network-is-spreading-false-information-about-the-us-trade-war-report/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "The morphing menace - The Hindu",
+   "selftext": "The growing prevalence of morphing, sexually explicit deepfakes, and non-consensual intimate images generated using bots and artificial intelligence has become a major privacy concern in Keralam. The atmosphere on the campus was volatile, and the tension palpable. Anger was writ large on the faces of students at a prominent college in central Keralam as they staged a sit-in protest outside the administrative office. The slogans echoed the students’ agony and outrage. The situation started slipping out of control as the agitated students threatened to take the law into their own hands. The college authorities had to seek the help of the police to manage the situation, as the student unrest showed early signs of turning violent. The agitation, feared the college authorities, may evolve into a law-and-order situation.",
+   "permalink": "https://www.thehindu.com/news/national/kerala/kerala-morphing-menace-deepfakes-sexually-explicit-images-artificial-intelligence/article71686863.ece",
+   "external_url": "https://www.thehindu.com/news/national/kerala/kerala-morphing-menace-deepfakes-sexually-explicit-images-artificial-intelligence/article71686863.ece",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] non-consensual nudes (adults)",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 60,
+    "audience": 75,
+    "theme_fit": 90
+   },
+   "overall": 80,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Kept: documented non-consensual deepfake nudes, image abuse"
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-13",
+  "outlets": [
+   "thehindu.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Body-cam video shows Denver police trying to question a driverless Waymo after chain ...",
+   "selftext": "... car chain-reaction crash . Author: Steve Staeger, Aaron Adelson ... Waymo told 9NEWS at the time of the crash that the autonomous vehicle ...",
+   "permalink": "https://www.9news.com/article/news/investigations/driverless-waymo-chain-reaction-crash/73-614350ee-4984-4676-80e3-1d0feb3bada5",
+   "external_url": "https://www.9news.com/article/news/investigations/driverless-waymo-chain-reaction-crash/73-614350ee-4984-4676-80e3-1d0feb3bada5",
+   "provenance": "Google Alert",
+   "source_label": "[Breaches] medical / self-driving failures",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 90,
+    "consequence": 50,
+    "significance": 70,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 72,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as self‑driving car failure with real crash"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-13",
+  "outlets": [
+   "9news.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Notion Customer Data Compromised in Fireworks AI Hack - SecurityWeek",
+   "selftext": "Notion warns customers that chat transcripts for less than 1% of Notion workspaces were accessed in a data breach at Fireworks AI. All-in-one collaborative workspace and productivity platform Notion is notifying a small set of customers that their information was compromised in a data breach involving Fireworks AI. A cloud platform for running and fine-tuning open source AI models, Fireworks AI was hacked twice in October: once through compromised internal credentials, and once through a third-party cloud provider that was hosting Fireworks R&D machines. The second incident , linked to a recent rise in LLMJacking activity , occurred on October 24, when the attackers executed an unauthorized workload leading to the compromise of customer data. Fireworks contained the incident the same day and notified Notion on November 2 that Notion AI data had been accessed. Prior to the incident, Notion used Fireworks as a general inference provider for delivering open-weight models. Notion’s investigation into the compromised data determined that the hackers accessed Notion AI chat transcripts used for the Insights feature, which helps customers understand their AI usage. Fewer than 1% of Notion workspaces were affected, and most of the transcripts were unattributable to a customer or the workspace they came from. Advertisement. Scroll to continue reading. “Beyond what’s in the chat transcript itself, there’s no information tying the chat back to workspaces, users or companies,” Notion says . The company has contacted the affected customers with instructions on how to securely retrieve and review the data in their workspaces, but did not disclose how many customers were affected. “We recommend treating this data as exposed. If you pasted sensitive information, passwords, API keys, or other credentials into Notion AI during the incident, rotate any exposed credentials,” Notion tells customers. SecurityWeek has emailed Notion for additional information on the data breach and will update this article if the company responds. Related: Hackers Deploy Malware in Fresh ScreenConnect Campaign Related: Maersk Confirms Data Theft Amid $5 Million Extortion Attempt Related: Hackers Target N-central Zero-Days as N-able Rushes Patches Related: Malicious Claude Code Extension Served in Cursor Supply Chain Attack Written By Ionut Arghire Ionut Arghire is an international correspondent for SecurityWeek. Subscribe to the SecurityWeek Email Briefing for the latest cybersecurity threats, trends, and expert insights. Subscribe to the SecurityWeek Email Briefing to stay informed on the latest threats, trends, and technology, along with insightful columns from industry experts. Join as we bring together CISOs, senior cybersecurity executives, practitioners, industry experts, and other security leaders to share practical experience and examine the issues shaping enterprise cybersecurity strategy. Join to learn the four levels of architecting security into the agentic SDLC – from secu",
+   "permalink": "https://www.securityweek.com/notion-customer-data-compromised-in-fireworks-ai-hack/",
+   "external_url": "https://www.securityweek.com/notion-customer-data-compromised-in-fireworks-ai-hack/",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 60,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 75,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keep – real AI‑powered supply‑chain hack exposing user data"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-13",
+  "outlets": [
+   "securityweek.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AI deepfake campaign stole influencers' faces to push trade war, Alberta referendum claims: study",
+   "selftext": "McGill University researchers linked more than 3,000 videos as being part of a network of AI deepfakes, drawing over 20 million views in just three months Cole Bennett, an Alberta influencer whose video material has been redubbed with AI-generated voiceovers, says such deepfakes can be “frightening.” John Ulan/The Globe and Mail The words in the TikTok video urging Albertans to get to the polls belong to Cole Bennett, but the voice and face saying them are not his. They belong to AI. During the voting period for last month’s provincial referendum , the Edmonton-based political commentator had posted his own short video encouraging residents to participate. But a different TikTok video recycled Mr. Bennett’s message, using an AI-generated voice and mouth on top of footage of an unrelated content creator. It’s one of more than 3,000 videos that researchers at McGill University have identified as being part of a network of AI deepfakes that drew upwards of 20 million views in just the last three months. The content typically focused on hot-button topics such as the Alberta referendum, provincial elections in British Columbia and Quebec or U.S.-Canada trade tensions. It’s the kind of subject matter that Mr. Bennett – a 29-year-old progressive pundit – often tackles in his own videos. He’s previously seen them ripped off before by accounts trying to generate money from views, as well as ones that dub over him with AI. Such deepfakes can be “frightening,” he said, since “what I say is the most important part of my brand and who I am online.” In a report published on Thursday, researchers at McGill’s Centre for Media, Technology and Democracy uncovered a network of hundreds of Instagram and TikTok accounts that “steals real people’s faces” to push content about politically sensitive issues to Canadians and Americans. A few of the videos simply take popular social media influencers’ existing content, place it on new backgrounds and repost it. Others use creators’ actual faces, but superimpose what the researchers assess to be AI-drawn lips, reading AI-written scripts, using AI-generated voices. “Words are being literally put in their mouths and shown to millions of people,” Aengus Bridgman, the centre’s associate director of research, said in an interview. The centre identified 293 accounts it believes are involved in the network by looking for common titles, captions, video formats and typos that appeared across their content. Researchers used AI tools to analyze the videos and spot when AI had been used to generate or modify them. The centre could not identify the campaign’s source, but said it appeared to stem from time zones in East or Southeast Asia, and that some accounts were registered in China. “It’s not trivial to stand up a network of this size,” said Mr. Bridgman, even when “AI is doing a lot of the work.” The accounts’ behaviour suggest it’s a paid operation, he added, citing a pattern of following users back and a posting schedule that appe",
+   "permalink": "https://www.theglobeandmail.com/business/article-ai-deepfake-campaign-stole-influencers-faces-trade-war-alberta/",
+   "external_url": "https://www.theglobeandmail.com/business/article-ai-deepfake-campaign-stole-influencers-faces-trade-war-alberta/",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] non-consensual nudes (adults)",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 82,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keep – large‑scale non‑consensual deepfake image abuse of influencers"
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-13",
+  "outlets": [
+   "theglobeandmail.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "NHS England deletes ‘misleading’ claim 137 trusts benefiting from Palantir AI tools",
+   "selftext": "Exclusive: The Guardian revealed 29 hospital trusts were not or hardly using the controversial patient data tech Exclusive: The Guardian revealed 29 hospital trusts were not or hardly using the controversial patient data tech NHS England has deleted a claim from its website stating 137 hospital trusts are benefiting from Palantir’s AI health data system after the Guardian revealed 29 of them were not using all or most of the controversial technology. Health bosses had published a list of all the NHS bodies “live” with and “realising benefits” from the AI-powered federated data platform (FDP), a system set up to improve patient outcomes, boost operating theatre efficiency and speed up bed discharges. But after 29 trusts said it was either not live or they were not using any of its applications, the original list of hospitals appears to have been taken down. The move comes as ministers weigh up whether to extend Palantir’s £330m contract to 2029 and after the Office for Statistics Regulation (OSR) said it was examining the NHS claims about the extent of the system’s use, which critics say make it appear more embedded in the health service than it actually is. A less detailed page now says early users were “already seeing real results – reduced admin, faster patient pathways, and more time for care”. A senior Labour MP, calling for the contract to be scrapped, warned the move threatened public trust. Palantir was hired to help manage vast quantities of medical data held by NHS England but campaigners, MPs and doctors’ unions want the deal scrapped – often arguing its effectiveness has been overstated. NHS England was previously warned by the OSR that it has no evidence to support a claim that the technology has helped deliver more than 100,000 extra operations. Some Palantir opponents also object to the presence in the health service of a company, founded by the Donald Trump-supporting billionaire Peter Thiel, which also works for the Israeli military and the US administration’s ICE immigration crackdown. The Labour MP Ben Coleman, a member of the Commons health and social care select committee, said it was “troubling” that NHS England had listed the 137 trusts as benefiting from FDP, but then “apparently pulled the list when 29 said they weren’t using all or most of it”. “When NHS England makes claims like this without checking them, it destroys trust – and it has happened before,” he added. “The statistics watchdog warned there was no evidence for the NHS’s claim of 117,000 extra operations due to the FDP. This latest overclaim could put more hospitals off using the FDP and threaten its viability.” Coleman wants the NHS to drop Palantir and develop an open platform for health data on which NHS trusts and British tech companies can build tools instead. The decision to take down the list of NHS trusts came after the Medact campaign group researched the use of Palantir’s technology by sending freedom of information requests to every hospital and inte",
+   "permalink": "https://www.theguardian.com/technology/2026/nov/12/nhs-england-deletes-misleading-claim-137-trusts-benefiting-from-palantir-ai-tools",
+   "external_url": "https://www.theguardian.com/technology/2026/nov/12/nhs-england-deletes-misleading-claim-137-trusts-benefiting-from-palantir-ai-tools",
+   "provenance": "News/RSS",
+   "source_label": "Guardian — AI",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": "https://i.guim.co.uk/img/media/95c422c3f4ddb97d445e586e9da99aba18c88ab1/373_0_4131_3305/master/4131.jpg?width=140&quality=85&auto=format&fit=max&s=671135c91b04e887ed3f64e0a8b1afd4"
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 90,
+    "consequence": 60,
+    "significance": 80,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 81,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keeps: credible source shows false AI benefit claims causing public trust harm"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-13",
+  "outlets": [
+   "theguardian.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "'They've cut all entry-level jobs ': unlikely seaside town on frontline of AI threat",
+   "selftext": "Bournemouth became a hub for thousands of finance jobs after the 1980s big bang, but new tech risks hurting Dorset’s economy Bournemouth became a hub for thousands of finance jobs after the 1980s big bang, but new tech risks hurting Dorset’s economy A few minutes’ drive from Bournemouth’s sandy beachfront, on the site of a former farm, lies an unlikely nerve centre of international finance. Here, miles from the glass towers of London’s Canary Wharf, more than 5,300 staff including compliance officers, analysts and software engineers help process more than $1tn (£750bn) worth of global transactions each day for the largest US bank, JP Morgan . The sprawling five-hectare (13-acre) campus, which hosted just 650 workers when it opened in 1986, has solidified Dorset’s status as one of Britain’s largest financial hubs outside London. Now, the financial services industry accounts for 10% of the county’s turnover – the total revenue generated by all businesses in the area – with 2,500 companies, including Nationwide Building Society, the insurer LV=, and the asset manager Canaccord Wealth, collectively employing 24,000 staff, according to the Dorset Chamber of Commerce. But along with other regional finance centres outside London, from Leeds to Birmingham, and Swindon to Cardiff, it faces an existential threat from AI. Bosses are considering how the technology can help automate costly human-led jobs, putting at risk a swathe of back-office roles, such as data processors, compliance checkers and entry-level analysts. The Barclays chief executive, CS Venkatakrishnan, last month announced 5,000 job cuts linked to advances in AI , while another London-headquartered bank, Standard Chartered, said in May it was planning to slash 7,000 roles as it doubled down on artificial intelligence. AI now poses the biggest threat to the UK’s financial workforce since the 2008 financial crisis, says Caren Evans, a national officer for the Unite union, referring to an era when banks needed multibillion-pound taxpayer bailouts and subsequently embarked on swingeing cost cuts. Unite members, who include staff at NatWest, Lloyds and Barclays , are “very very worried about AI”, Evans says. “They’re worried about losing their job, they’re worried about having future skills, they’re worried about having sustainable careers.” All that is hitting staff morale. One Barclays employee said they felt “very undervalued and insignificant”, adding: “It’s kind of hard to be enthusiastic about your work when you know, at any moment, senior executives are thinking about how to get rid of you. You’re not seen as an asset, you’re seen as a problem to be removed.” The JP Morgan chief executive, Jamie Dimon, has warned of the fallout from AI, saying widespread job losses could spark “civil unrest” unless governments and business supported displaced workers. He said retraining programmes, and even state-sponsored wage support, relocation schemes and early retirement could be needed to ease the bl",
+   "permalink": "https://www.theguardian.com/business/2026/nov/13/ai-uk-finance-jobs-bournemouth-tech",
+   "external_url": "https://www.theguardian.com/business/2026/nov/13/ai-uk-finance-jobs-bournemouth-tech",
+   "provenance": "Google Alert",
+   "source_label": "[Jobs] entry-level job collapse",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Jobs & livelihoods",
+   "scores": {
+    "credibility": 90,
+    "consequence": 85,
+    "significance": 75,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 81,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keeps: documented AI-driven entry‑level job cuts in finance hub"
+  },
+  "theme": "Jobs & livelihoods",
+  "judged": "2026-11-13",
+  "outlets": [
+   "theguardian.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "New Mexico lawyer used ChatGPT to prepare an appeal for a man serving life in prison, but ...",
+   "selftext": "An appeal filed on behalf of a criminal defendant in New Mexico has taken an unexpected turn after the state An appeal filed on behalf of a criminal defendant in New Mexico has taken an unexpected turn after the state's highest court found that the lawyer representing him had used ChatGPT to prepare legal arguments containing fabricated witnesses, inaccurate testimony and misrepresented court decisions. The brief contained accounts attributed to witnesses who did not exist, inaccurate statements about testimony from people involved in the case and incorrect references to previous court decisions. The attorney admitted that he had used ChatGPT but had not checked the information before filing it. The Supreme Court responded by holding him in direct contempt and referring him for a professional disciplinary investigation.ChatGPT-generated appeal contained names of witnesses who did not existAs reported by the New Mexico Supreme Court, the case involved attorney Stephen D. Aarons, who represented Oscar Renee Sandoval in an appeal before the Supreme Court of New Mexico. The state was represented by Attorney General Raúl Torrez and Assistant Attorney General Eric Orona.The court's concerns centred on the brief Aarons had submitted on Sandoval's behalf. During its examination, the justices identified several factual claims that could not be supported. Some were attributed to people who, according to the court's findings, were entirely fabricated.According to the New Mexico Supreme Court, the names included Officer Michelle Amarillo, Officer Sanchez, Manal Al-Jibury and Teresa Marquez. The brief presented these individuals as witnesses and attributed testimony to them, despite their being fictitious witnesses.There were also problems involving people who were real participants in the proceedings. The filing incorrectly stated that Danny Stanton had received threats from Sandoval and taken them seriously. It also contained false testimony attributed to Linda Stanton about threats allegedly made against her husband.Other disputed claims concerned descriptions of the shooter's clothing and appearance. The court identified inaccurate statements attributed to Mariah Chavez and Teresa Marquez, the latter being one of the fabricated witnesses.Lawyer admitted using ChatGPT but had not checked the briefThe Supreme Court initiated proceedings on its own motion after identifying the problems in the filing. It issued an order requiring Aarons to appear personally and explain why he should not face contempt proceedings and a referral to the Disciplinary Board. The hearing took place on August 21, 2026. Aarons appeared before the justices and acknowledged both in his written response and during his oral arguments that he had used ChatGPT while preparing the brief.He also admitted that he had failed to verify the factual statements and legal references generated with the tool before signing and submitting the document. That admission became a central part of the court",
+   "permalink": "https://timesofindia.indiatimes.com/world/rest-of-world/new-mexico-lawyer-used-chatgpt-to-prepare-an-appeal-for-a-man-serving-life-in-prison-but-fake-witnesses-and-misquoted-court-rulings-led-the-supreme-court-to-impose-a-5000-penalty/amp_articleshow/135762843.cms",
+   "external_url": "https://timesofindia.indiatimes.com/world/rest-of-world/new-mexico-lawyer-used-chatgpt-to-prepare-an-appeal-for-a-man-serving-life-in-prison-but-fake-witnesses-and-misquoted-court-rulings-led-the-supreme-court-to-impose-a-5000-penalty/amp_articleshow/135762843.cms",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 85
+   },
+   "overall": 82,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keeps: court‑verified misuse of ChatGPT produced false legal arguments"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-13",
+  "outlets": [
+   "timesofindia.indiatimes.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Fake Court Orders, Seals: How Fraudsters Got 129 Websites Blocked - NDTV",
+   "selftext": "... Fake Court Orders, Seals: How Fraudsters Got 129 Websites Blocked. The blocking directives were issued on July 21 and September 2. AI Generated .",
+   "permalink": "https://www.ndtv.com/india-news/fake-court-orders-seals-how-fraudsters-got-129-websites-blocked-department-of-telecom-high-court-12315546",
+   "external_url": "https://www.ndtv.com/india-news/fake-court-orders-seals-how-fraudsters-got-129-websites-blocked-department-of-telecom-high-court-12315546",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] election deepfakes",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 75,
+    "audience": 70,
+    "theme_fit": 80
+   },
+   "overall": 74,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keeps: AI‑generated fake court orders led to real website blocks"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-13",
+  "outlets": [
+   "ndtv.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Two men guilty of spying for Iran over plan to target journalists and lawyer - BBC",
+   "selftext": "The men were convicted of engaging in conduct likely to assist an Iranian intelligence service. Two Iranian men have been convicted of spying for an Iranian intelligence service by carrying out surveillance on journalists and a lawyer in the UK. Mostafa Sepahvand, 41, and Farhad Javadi Manesh, 46, were convicted of \"assisting a foreign intelligence service\" at Woolwich Crown Court on Thursday. They were tasked by Iran's Islamic Revolutionary Guard Corps (IRGC) with monitoring the targets. Sepahvand intended to carry out a \"violent attack\" against at least one of them, while Manesh helped with planning. A third man, Shapoor Qalehali Khani Noori, 57, was cleared of the same charge. Sepahvand was in contact with two men with Iranian telephone numbers. Police seized 534GB of data that showed Sapahvand and Manesh were given documents that included pictures of targets, their work addresses, the make and colour of their cars and the names of pets. They then used ChatGPT to carry out further research. The pair, from west London, are asylum seekers who had been granted temporary leave to remain. Sepahvand arrived in the UK in a lorry in 2016, and Manesh arrived via small boat in 2019. Sepahvand conducted surveillance and reconnaissance in preparation for inflicting violence on several \"subjects\" in the UK. These included journalists Mojtaba Pourmohsen and Kambiz Hosseini, who worked for the London-based Persian broadcaster Iran international, Jonathan Turner, a founding member of UK Lawyers for Israel, as well as a media production professional. Deputy Assistant Commissioner Vicki Evans, the senior national co-ordinator for Counter-Terrorism Policing, said it was the first time ChatGPT case search history had been presented in a state threat case. She added: \"It's something we're beginning to see more of as AI tools become more widely available and people become more aware of them.\" It was clear from the evidence at the trial that at times Sepahvand felt he was being mistreated by his Iranian handlers, who had not paid him. Evans said: \"This is a trend we see in these types of cases where people get involved in work on behalf of foreign states and they're often promised money and lots of other things but they rarely receive what they've been offered.\" Sepahvand had claimed he participated in the spying out of fear of the consequences of refusing but the prosecution described this as \"entirely bogus\". In voice notes sent to an Iranian contact, he said he had been promised that a conviction for theft in Iran would be \"sorted out\" - which prosecutors said was part of his motivation for conducting the surveillance. Sepahvand also asked for £150,000 in exchange for \"finishing off\" a target, stressing that he would \"do it\". Frank Ferguson, of the Crown Prosecution Service's counter-terrorism division, said the two men had been promised rewards for sending intelligence back to contacts in Iran. \"Sepahvand himself was willing to go beyond surveillance to commit s",
+   "permalink": "https://www.bbc.com/news/articles/ck9q8g8209l2o",
+   "external_url": "https://www.bbc.com/news/articles/ck9q8g8209l2o",
+   "provenance": "Google Alert",
+   "source_label": "[Surveillance] border / immigration AI",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Surveillance & privacy",
+   "scores": {
+    "credibility": 92,
+    "consequence": 78,
+    "significance": 72,
+    "audience": 84,
+    "theme_fit": 90
+   },
+   "overall": 83,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as real surveillance case showing AI misuse"
+  },
+  "theme": "Surveillance & privacy",
+  "judged": "2026-11-13",
+  "outlets": [
+   "bbc.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Complaint: Investigators link AI deepfake nudes to victim's ex - WISN",
+   "selftext": "According to a criminal complaint, Tristan Preuss ripped images from the woman's social media and used AI to manipulate the photos into pornographic material. A Pleasant Prairie man's admitted misuse of artificial intelligence could cost him more than forty years in prison, according to prosecutors, because the material contained deepfake pornographic images of his ex-girlfriend. According to a criminal complaint filed in Kenosha County Circuit Court, Tristan Preuss ripped existing images from the woman's social media accounts and used artificial intelligence to manipulate the photos into pornographic images and videos. The complaint said the images were shared on fake social media accounts and requested money for the images. The document said the phone number the requests solicited the money for belonged to Preuss. Prosecutors said that connection prompted the woman to contact police after she learned people she knew received the requests and the communications shared information only the victim and Preuss would know. When confronted about the investigation, the complainant said Preuss admitted to creating the images and told investigators, \"He couldn't recall how many times and that he didn't know this was illegal.\" When asked why he did it, the complaint said Preuss told investigators \"he had done it for sexual gratification and would take it all back if he could.\" Preuss faces a dozen felony charges of posting a synthetic intimate representation of an identifiable person. If convicted on each charge, Preuss faces a maximum of 42 years in prison and up to $120,000 in fines. He is due in court Dec. 2 for an initial appearance.",
+   "permalink": "https://www.wisn.com/article/investigators-link-ai-deepfake-nudes-to-victims-ex/74418203",
+   "external_url": "https://www.wisn.com/article/investigators-link-ai-deepfake-nudes-to-victims-ex/74418203",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] celebrity deepfake porn",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 80,
+    "consequence": 85,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 81,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Kept as Image abuse case showing real deepfake porn harm and legal action"
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-13",
+  "outlets": [
+   "wisn.com",
+   "youtube.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "https://www.wisn.com/article/investigators-link-ai-deepfake-nudes-to-victims-ex/74418203",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AI Hiring Under Fire: Six Verdicts on Algorithms, Lawsuits and the Law",
+   "selftext": "In a University of Washington lab study, AI resume screening models favored white-associated names in 85% of cases.",
+   "permalink": "https://www.youtube.com/watch?v=St2tFLRdNYI",
+   "external_url": "https://www.youtube.com/watch?v=St2tFLRdNYI",
+   "provenance": "YouTube search",
+   "source_label": "AI bias discrimination",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Bias & discrimination",
+   "scores": {
+    "credibility": 70,
+    "consequence": 70,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: documented AI hiring bias study showing real discriminatory impact"
+  },
+  "theme": "Bias & discrimination",
+  "judged": "2026-11-13",
+  "outlets": [
+   "youtube.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Kenosha County Man Charged in One of First Cases Under Wisconsin's New AI Deepfake Law",
+   "selftext": "A 23-year-old Pleasant Prairie man has been charged with 12 felony counts under a recently enacted Wisconsin law that criminalizes the distribution of A 23-year-old Pleasant Prairie man has been charged with 12 felony counts under a recently enacted Wisconsin law that criminalizes the distribution of AI-generated sexually explicit images, in what legal experts describe as one of the state’s earliest prosecutions under the statute. Tristan X. Preuss faces 12 counts of posting a synthetic intimate representation of an identifiable person, all Class I felonies, according to court records. Preuss was charged November 4 and his initial appearance is scheduled for December 2 before Kenosha County Court Commissioner Daniel Kellum. The case has been assigned to Circuit Judge David Hughes. Preuss was issued a summons and no bail was set. According to the criminal complaint cited by CBS 58 and FOX6, Preuss allegedly created four fake social media accounts impersonating his ex-girlfriend beginning in August 2025. Investigators say he used artificial intelligence to manipulate ordinary photos of her and making it appear she was nude, and distributed the AI images and sexually explicit videos. He is also accused of offering the images in exchange for money, directing people to a phone number belonging to him. According to Kenosha County Eye , Preuss used Snapchat accounts and attempted to sell the fabricated images to people the couple knew. When questioned by investigators, Preuss said he acted for “sexual gratification” or “his own satisfaction,” claimed there was “no ill intent,” stated he “did not know it was illegal,” and expressed that he was sorry, according to the complaint. The charges fall under 2025 Wisconsin Act 34 , signed by Gov. Tony Evers on October 3, 2025, and went into effect the following day. The bipartisan law, authored by Sen. André Jacque and Rep. Brent Jacobson, expands existing statutes on intimate representations to cover “synthetic intimate representations.” These are defined as realistic, technologically generated images or videos that use a person’s face, likeness, or other distinguishing characteristics to depict them nude or in other intimate situations even if the underlying components are artificial or publicly available. The statute makes it a Class I felony to post, publish, distribute, or exhibit such material with intent to coerce, harass, or intimidate the person depicted. Class I felonies carry a maximum penalty of 3½ years in prison and a $10,000 fine. The law does not criminalize the mere creation of such images, only their distribution under the specified intent. Attorney Jonathan LaVoy of Kim and LaVoy S.C., commenting on the case said the legislation was designed to stop people from taking ordinary social-media photos and turning them into non-consensual pornography via AI. He noted that distribution and attempts to sell the material are key triggers, and predicted “an explosion in AI-related cases” as the technolo",
+   "permalink": "https://heartlandpost.com/kenosha-county-man-charged-in-one-of-first-cases-under-wisconsins-new-ai-deepfake-law/",
+   "external_url": "https://heartlandpost.com/kenosha-county-man-charged-in-one-of-first-cases-under-wisconsins-new-ai-deepfake-law/",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] non-consensual nudes (adults)",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 60,
+    "consequence": 80,
+    "significance": 80,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 76,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "First prosecution under AI deepfake law, non‑consensual image abuse, kept."
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-13",
+  "outlets": [
+   "heartlandpost.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Customer busted for using AI image of burnt pizza to scam restaurant - Yahoo Tech",
+   "selftext": "'its burnt to heck. burnt. black. cant eat it. dont wanna eat cancer…’ Generative artificial intelligence is driving an unprecedented wave of scams , from vocal clone politician phone calls to uncomfortably realistic deepfake images . While most of these are designed and coordinated by groups of bad actors hoping to cast the widest net possible, some are the work of individuals simply attempting to pull one over on specific targets. Many AI con jobs are more convincing than others, but one pizzeria owner in Los Angeles almost immediately suspected a recent patron's complaint once they saw the supposed \"evidence.\" After receiving their pizza from Masa of Echo Park via DoorDash, a customer named \"Dana B\" demanded a full refund for what they claimed was an inedible, burnt pie. Accompanying their grammatically questionable message was a picture of what appeared to be a charred Chicago-style pizza. \"its burnt to heck. burnt. black. cant eat it. dont wanna eat cancer…,\" they wrote in their complaint. However, Masa owner Rhonda Reynolds knew almost instantly that the allegation was categorically false. \"It was impossible. It was absolutely impossible,\" she told local news outlet KTLA 5 . Reynolds uploaded the photo into an app called \"Is This AI,\" which offered a 96 percent certainty that the picture was faked. She even checked the restaurant's kitchen security footage to be sure. The footage showed an employee boxing a clearly uncharred pizza destined for Dana B.Masa then laid out the facts in a complaint that countered the first complaint, and the app soon reversed its automatic refund initially dispersed to the scammer. But while justice was served this time, Reynolds remains worried that the experience is only a preview of AI cons to come. \"If this is a new frontier, we're not gonna make through to the other side if all of our time is spent [on scams],\" she said.",
+   "permalink": "https://tech.yahoo.com/cybersecurity/articles/customer-busted-using-ai-image-200300146.html",
+   "external_url": "https://tech.yahoo.com/cybersecurity/articles/customer-busted-using-ai-image-200300146.html",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 85,
+    "consequence": 60,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 75,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keep: documented AI‑generated image used in a restaurant scam, credible outlet, clear theme fit."
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-13",
+  "outlets": [
+   "tech.yahoo.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AI Hiring Raises Bias Concerns As Experts Demand Transparency And Human Oversight In ...",
+   "selftext": "AI-based recruitment is raising concerns over discrimination and unequal opportunities as companies increasingly rely on automated screening tools. A 2026 Stanford analysis of four million job applications identified racial disparities in AI-based candidate recommendations. Lucknow, November 12, 2026: Artificial Intelligence (AI) is increasingly transforming recruitment in the private sector, but growing dependence on automated hiring tools has raised concerns over discrimination and unequal opportunities for job seekers. Systems designed to screen resumes, assess candidates and shortlist applicants are facing questions about fairness, transparency and accountability.AI-based recruitment platforms are being used by companies to process large volumes of applications, match qualifications with job requirements and evaluate candidates through automated assessments. While these tools can reduce recruitment time and administrative costs, concerns are emerging that algorithmic decisions may disadvantage certain categories of applicants.Algorithmic Bias In RecruitmentOne major concern is that AI systems learn from historical recruitment data. If the data reflects existing workplace inequalities or hiring preferences, algorithms may reproduce those patterns in future selections. Consequently, candidates with similar qualifications may receive different assessments because of factors that are not necessarily relevant to their professional abilities.Another challenge is the lack of transparency in automated screening. Applicants are often unaware of why their applications were rejected or which parameters influenced their rankings. This makes it difficult for candidates to question potentially unfair decisions.Research by Stanford University's Institute for Human-Centered Artificial Intelligence, published in 2026, has highlighted these concerns. An analysis of four million job applications found evidence of racial disparities in AI-based candidate recommendations. Researchers also identified instances of repeated rejection across multiple employers using similar screening systems.The findings underline the risks of relying heavily on a limited number of recruitment technology providers. When several companies use similar algorithms, a candidate's negative assessment could affect opportunities across different organisations.Experts Call For Greater TransparencyIn India, the growing adoption of AI in recruitment has also intensified discussions about responsible technology use. Industry experts have emphasised the need for companies to maintain human supervision, regularly audit recruitment algorithms and ensure that selection criteria remain relevant to job requirements.Transparency in automated assessments, clear explanations for rejection and opportunities for human review could help protect applicants from unfair screening.Uttar Pradesh: Samajwadi Party Leader Azam Khan Gets 4-Day ED Remand As Shivpal Yadav Meets Him In Dasna JailAs AI becomes an integr",
+   "permalink": "https://www.freepressjournal.in/uttar-pradesh/ai-hiring-raises-bias-concerns-as-experts-demand-transparency-and-human-oversight-in-recruitment",
+   "external_url": "https://www.freepressjournal.in/uttar-pradesh/ai-hiring-raises-bias-concerns-as-experts-demand-transparency-and-human-oversight-in-recruitment",
+   "provenance": "Google Alert",
+   "source_label": "[Bias] hiring-algorithm bias",
+   "subreddit": "",
+   "created": "2026-11-12",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Bias & discrimination",
+   "scores": {
+    "credibility": 60,
+    "consequence": 70,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 76,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Documented bias in AI hiring tools, credible Stanford study"
+  },
+  "theme": "Bias & discrimination",
+  "judged": "2026-11-13",
+  "outlets": [
+   "freepressjournal.in"
   ],
   "approved": false,
   "swapped_from": "",
