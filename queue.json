@@ -96,6 +96,7 @@
    "hashnode.com",
    "linkedin.com",
    "medium.com",
+   "producthunt.com",
    "sociable.co",
    "techli.com",
    "wsj.com",
@@ -298,7 +299,8 @@
    "subreddit": "",
    "created": "2026-11-10",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.ctvnews.ca/kitchener/article/ontario-company-dealing-with-surge-of-interest-in-non-existent-product-due-to-ai-video/"
   },
   "t": {
    "i": 1,
@@ -321,11 +323,12 @@
   "theme": "Misinformation",
   "judged": "2026-11-11",
   "outlets": [
+   "cbc.ca",
    "ctvnews.ca"
   ],
   "approved": true,
   "swapped_from": "",
-  "event": "",
+  "event": "https://www.ctvnews.ca/kitchener/article/ontario-company-dealing-with-surge-of-interest-in-non-existent-product-due-to-ai-video/",
   "twin_of": ""
  },
  {
@@ -2944,7 +2947,8 @@
    "subreddit": "",
    "created": "2026-11-13",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://therecord.media/artex-ai-tool-fbi-flash-alert"
   },
   "t": {
    "i": 2,
@@ -2967,11 +2971,12 @@
   "theme": "Hacking & AI acting autonomously",
   "judged": "2026-11-14",
   "outlets": [
+   "mlq.ai",
    "therecord.media"
   ],
   "approved": true,
   "swapped_from": "",
-  "event": "",
+  "event": "https://therecord.media/artex-ai-tool-fbi-flash-alert",
   "twin_of": ""
  },
  {
@@ -3060,14 +3065,15 @@
   "p": {
    "title": "North Korea steals $400m from US tech workers in video call scam - The Telegraph",
    "selftext": "FaceStealer operation used AI deepfakes and identity theft to target more than 900 people over 18 months, FBI reveals Allegra is based in Taiwan. She focuses on cross-Strait relations, defence and regional politics North Korea has stolen more than $400m (£302m) from American tech workers on fake video calls, the FBI has revealed. Using AI deepfakes and identity theft, a scheme known as FaceStealer has targeted more than 900 victims over the past 18 months. “The North Korean regime relies on proceeds from large-scale cryptocurrency theft to fund its illicit weapons programme, stealing billions of dollars in recent years,” Brett Leatherman, the FBI’s cyber director, said. The scheme was revealed weeks after North Korea carried out the largest heist in history , stealing $6.3bn (£4.7bn) from Binance, the world’s largest crypto exchange. The FBI laid out the FaceStealer hack in six detailed stages. First, state-sponsored hackers used fake or hijacked social media accounts on Telegram, LinkedIn, Slack and Discord. They then used AI-powered deepfakes to gain the victim’s trust, pretending to be someone known to the target to lure them on to copycat versions of video meeting platforms such as Zoom, Microsoft Teams and Google Meet. The link appeared legitimate but was a “typo-squatted” domain address, which appeared similar to a real URL but had easy-to-miss spelling mistakes. The hackers then played pre-recorded webcam videos of the person the target knew to simulate a legitimate call, before claiming they were experiencing a technical issue. The North Korean agent then sent a link or a code to “fix” the error, which installed malware on the victim’s computer and opened a back door into the infected device. From there, the hacker could steal cryptocurrency and access communication platforms and contact lists to ensnare the next target. The hackers also recorded the calls to use on their next victims. As one of the most isolated regimes in the world, North Korea relies on illegal schemes such as these to earn foreign currency, which it has used to build up its nuclear programme and expand its conventional military capabilities. Last month, The Telegraph reported that Pyongyang has been deploying fake IT workers to infiltrate British companies in a scheme that had reaped an estimated £600m globally. “North Korea’s government bankrolls its rogue regime and illicit weapons programme through cryptocurrency theft,” said M Scott Proctor, the deputy assistant attorney general for national security. “The National Security Division will use every tool at its disposal to seize and return North Korea’s ill-gotten gains,” he added. As of August, according to South Korea’s estimates, North Korea could have as many as 120 nuclear warheads in its arsenal.",
-   "permalink": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/",
-   "external_url": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/",
+   "permalink": "https://www.dw.com/en/us-disrupts-north-koreas-400-million-crypto-scam-fbi-says/a-79935957",
+   "external_url": "https://www.dw.com/en/us-disrupts-north-koreas-400-million-crypto-scam-fbi-says/a-79935957",
    "provenance": "Google Alert",
    "source_label": "[Scams] deepfake video-call fraud",
    "subreddit": "",
    "created": "2026-11-13",
    "over_18": false,
-   "feed_image": ""
+   "feed_image": "",
+   "event": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/"
   },
   "t": {
    "i": 1,
@@ -3090,11 +3096,22 @@
   "theme": "Scams & fraud",
   "judged": "2026-11-14",
   "outlets": [
-   "telegraph.co.uk"
+   "2-spyware.com",
+   "cryptorank.io",
+   "dawn.com",
+   "deultimominuto.com",
+   "dw.com",
+   "instagram.com",
+   "pressreader.com",
+   "techtimes.co.uk",
+   "telegraph.co.uk",
+   "thestreet.com",
+   "whale-alert.io",
+   "x.com"
   ],
   "approved": true,
-  "swapped_from": "",
-  "event": "",
+  "swapped_from": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/",
+  "event": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/",
   "twin_of": ""
  },
  {
@@ -3260,5 +3277,915 @@
   "swapped_from": "",
   "event": "",
   "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Dead as a prank? Young Koreans turn AI into fake funeral portraits - The Korea Herald",
+   "selftext": "A growing social media trend among young Koreans of using generative AI to make themselves or their friends appear dead as a joke has prompted calls for tighter National Dead as a prank? Young Koreans turn AI into fake funeral portraits Published : Nov. 15, 2026 - 13:36:37 Add The Korea Herald on Google Link copied! Chasing the Korean context AI can’t code Calls grow for tighter social media rules amid criticism over trivializing death A growing social media trend among young Koreans of using generative AI to make themselves or their friends appear dead as a joke has prompted calls for tighter regulation of online platforms, news reports said Sunday. Social media platforms, particularly Instagram, have seen a surge in posts featuring AI-generated images styled as black-and-white funeral portraits, accompanied by memorial messages such as \"Rest in peace\" and \"You will always be remembered.\" Some posts include dates of birth and fabricated dates of death, along with black ribbons and white chrysanthemums, making them difficult to distinguish from genuine death announcements. The practice has recently gained popularity among teenagers and people in their 20s as a prank between close friends. Comment sections show mixed reactions, with those aware of the prank asking questions such as \"What food should I prepare for your memorial service?\" while others, unaware that the posts are fake, offer sincere condolences, saying, \"It's heartbreaking to see someone die so young.\" Experts have warned that the trend trivializes death and called for stronger action from social media platforms. \"Funeral traditions and the significance of death are increasingly being taken lightly among younger generations,\" Kim Si-deok, a professor in the Department of Funeral Services at Eulji University, told local media. He urged online platforms to take steps to prevent such content from spreading. Meta, the parent company of Instagram, responded to the controversy by saying it restricts or removes content that violates its community standards, including AI-generated posts. \"Users can report images of private individuals, including minors, that have been manipulated and shared without their consent. We promptly remove such content following a review and will continue working with relevant outside organizations to maintain a safe platform environment,\" the company told a local news outlet. Top scorer on state exam admits to AI-assisted cheating The top scorer on South Korea’s state-administered tax accountant examination admitted Sunday to using artificial intelligence to cheat. [World Class] Sogang’s next global move pairs AI with a search for top scholars N. Korea-linked hackers target 30 S. Korean servers: report Kim Jong-un's top aide visits Russia ahead of US-China-Russia summit From pills to orbit: Boryung heir's bold space bet Korean War veteran from Australia recalls his duty on war-stricken Han River Herald Interview Sri Lanka invites Korean buyers, machinery suppliers ",
+   "permalink": "https://www.koreaherald.com/article/10937475",
+   "external_url": "https://www.koreaherald.com/article/10937475",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-15",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 90,
+    "consequence": 60,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 77,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: AI‑generated fake funeral portraits mislead public, fits Misinformation"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-15",
+  "outlets": [
+   "koreaherald.com",
+   "thestar.com.my"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.koreaherald.com/article/10937475",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Beware the New AI-Fueled Ransomware Boom - WIRED",
+   "selftext": "Fully automated ransomware hasn’t arrived—yet. But seemingly unsophisticated attackers are using AI tools to wreak havoc. It is difficult to determine exact numbers of ransomware attacks, given that victims don’t always disclose incidents and attackers wildly inflate their claims. But researchers who specialize in tracking and attempting to de-duplicate the field agree that claimed incidents have spiked over the last few months. Some put the number of alleged ransomware attacks on leak sites—where groups post alleged victims—at nearly 3,000 attacks over the summer. This would mean a 20 to 40 percent increase since the spring by some estimates. And, crucially, researchers emphasize that while volume always fluctuates somewhat, ransomware attacks overall have been consistently and concerningly elevated in recent years. “What we see is most of the recent increase was fueled by international attacks; the United States was a little more steady, but still high, still a lot of attacks,” says Cynthia Kaiser, former FBI cyber deputy director who now leads research for the anti-ransomware platform Halcyon. “Internationally we’re seeing a lot more attacks. That to me is the really new part, and I do think it is in part fueled by AI.” Fully AI-powered ransomware attacks have yet to emerge, perhaps because the criminal business model already works so effectively. But cybercriminals do appear to be using LLMs for some of the more mundane aspects of their attacks. “We are seeing AI relied on more heavily in certain aspects of the ransomware attack chain, such as creating better phishing emails and in the negotiation process, but the ‘successful’ ransomware groups are still largely human operated,” says Allan Liska, a longtime ransomware researcher and threat intelligence analyst at Recorded Future. “But the fact that these groups are experimenting heavily with AI means that this could change going forward, and change quickly.” Kaiser notes that broader trends in scamming are always relevant to ransomware, because attackers often use the same types of phishing and social engineering techniques to gain initial access to targeted systems. In Japan, for example, successful scamming has spiked drastically in recent months as AI enables foreign attackers to generate consistently convincing content in Japanese for the first time. A few ransomware groups—namely, the Gentlemen, Qilin, and Akira—have emerged as some of the most prominent and stable operations in recent months. However, in their shadow is a range of smaller groups, emerging actors, and fragmentation of the ransomware ecosystem. In recent weeks, multiple new ransomware groups have appeared and quickly claimed to have attacked dozens of businesses. Halycon’s analysis says around 111 ransomware groups made claims of attacks between July and September this year. One new group calling itself Global Secret Group claimed attacks on 48 victims, with more than half of these being listed on the same day, according ",
+   "permalink": "https://www.wired.com/story/beware-the-new-ai-fueled-ransomware-boom/",
+   "external_url": "https://www.wired.com/story/beware-the-new-ai-fueled-ransomware-boom/",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 75,
+    "significance": 80,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 84,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: Wired report of AI‑assisted ransomware rise, fits Hacking & AI acting autonomously"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-15",
+  "outlets": [
+   "mezha.net",
+   "wired.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.wired.com/story/beware-the-new-ai-fueled-ransomware-boom/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Cursor confirms security breach led to malicious Claude Code extension",
+   "selftext": "Cursor confirmed it suffered a security breach that let hackers distribute a malicious Claude Code extension through its marketplace after stealing credentials from AI infrastructure provider Fireworks AI. Cursor confirmed it suffered a security breach that let hackers distribute a malicious Claude Code extension through its marketplace after stealing credentials from AI infrastructure provider Fireworks AI. The breach also let attackers access internal systems and steal customer data, including historical AI coding-agent traces containing unredacted credentials that were later used to compromise additional services. The breach was disclosed in a new incident report published Friday, which explains how attackers distributed malicious versions of Anthropic's Claude Code extension through Cursor's marketplace on October 29. The attack exposed up to 5,000 developers to malware that installed persistent SSH backdoors. Cursor is an AI-powered code editor built on Microsoft's open-source Visual Studio Code (VS Code), allowing developers to write, modify, and debug software using AI assistants. According to Cursor, the attack began when hackers obtained an access key stored on Fireworks AI, a third-party provider used for AI model training and inference. The attackers used the exposed key to copy data from a read-only storage bucket Cursor used to share information with Fireworks. This bucket contained historical AI coding-agent traces, mostly from 2025, collected from users who had not enabled Privacy Mode and whose data could be used for model training. Some of these traces contained unredacted API credentials, allowing the attackers to access additional Cursor systems. Cursor says fewer than 0.05% of users had coding-agent traces exposed, while fewer than 0.01% of customers had API credentials compromised. Using the exposed credentials, the hackers stole data from several of Cursor's software-as-a-service (SaaS) tools, including: Cursor says its monitoring systems detected the unauthorized activity, leading the company to revoke the Fireworks access key, rotate exposed credentials, and investigate additional unauthorized access. As the investigation progressed, Cursor temporarily turned off some internal and product services as a precaution. However, the attackers had already obtained a credential that allowed them to distribute extensions through Cursor's marketplace. On October 29, the hackers used that credential to publish malicious copies of Anthropic's Claude Code extension on Cursor's VS Code extension marketplace. \"On October 29, using a stolen credential from the exposed data from our internal system, the attacker placed malicious, unauthorized copies of Anthropic's Claude Code extension directly on the cache used to serve the Cursor VS Code extension marketplace,\" Cursor explained. The attack did not compromise Anthropic's legitimate extension or Open VSX, the extension marketplace Cursor uses. The malicious extensions, versions 2.1.312 and",
+   "permalink": "https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/",
+   "external_url": "https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 75,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 79,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: BleepingComputer article on AI code‑editor breach, fits Hacking & AI acting autonomously"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-15",
+  "outlets": [
+   "bleepingcomputer.com",
+   "businessupturn.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Fact check: 'Iranian' content farms reach millions - DW",
+   "selftext": "As fears of regional escalation grew after US strikes on Iran, US President Donald Trump claimed the US-Israel war with Iran was \" effectively over \" on November 9 at a White House briefing . \"We're just keeping it the status quo.\" Periods of heightened public interest, such as the conflict involving Iran, create fertile ground for so-called content farms . Following Trump's statement, posts on the Iran war surged online again. And a growing network of accounts claiming links to Iran's military has accumulated millions of views. DW Fact Check examined a number of these accounts and found recurring signs of content farm behavior. Experts who reviewed the accounts DW provided describe them as part of a broader ecosystem of pro-Iran content aggregators that connect across multiple social media platforms. Content farms are websites or social media accounts, or a network of either, producing large amounts of cheap content in a short time span. They may be driven by economic incentives, but they can also serve as vehicles for political influence campaigns. The internet watchdog NewsGuard has found 165 false claims about the Iran war that collectively have been watched hundreds of millions of times. Only a few of them originated from Iranian state media. NewsGuard identified the majority as pushing a pro-Iran agenda, shifting toward AI-generated images, and increasingly claiming that accurate stories from authentic media are AI-generated and false. An analysis by the London-based Institute for Strategic Dialogue (ISD) identified pro-Iran networks of X accounts which revealed signs of coordination, cross-promotion and engagement tactics while spreading misleading and AI-generated war content. It found no links to state-affiliated actors. Several accounts identified by DW Fact Check use the Iranian flag as their profile picture and a variation of \"Iran Military\" in their username. While ownership cannot always be verified, they share recurring characteristics commonly associated with content farms. Content farms use repetitive and formulaic posting formats, as they are cheaper and easier to produce. Their posts frequently start with the word \"BREAKING\" and imitate the appearance of news updates on the conflict. One account , called \"Iran Military Media,\" is linked to a Facebook account that Iranian state media have verified as authentic. It has built a substantial audience across multiple social media platforms, with over 290,000 followers on X, 597,000 on Facebook and 17,200 followers on Instagram. It posts a handful of times a day, often sharing AI-generated or AI-enhanced videos and frequently adopting the \" BREAKING \" format. Since late 2025, it has published more than 1,600 posts on X, generating over 150 million views and 3.6 million likes. \"The accounts discussed are a central part of this ecosystem as they distribute the pro-Iranian content, state and non-state allied media at relatively low cost and generate millions of views,\" said Moustafa Ayad",
+   "permalink": "https://amp.dw.com/en/fact-check-iranian-content-farms-reach-millions/a-79934190",
+   "external_url": "https://amp.dw.com/en/fact-check-iranian-content-farms-reach-millions/a-79934190",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 85,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 84,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept: DW fact‑check of AI‑generated war misinformation, fits Misinformation"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-15",
+  "outlets": [
+   "amp.dw.com",
+   "dw.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://amp.dw.com/en/fact-check-iranian-content-farms-reach-millions/a-79934190",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Rise in AI-generated child sex abuse fuels real-life risk, police and experts warn | CBC News",
+   "selftext": "Prince Edward Island RCMP say there has been a \"notable increase\" in child sex abuse material made using artificial intelligence across parts of the province. Online exploitation specialists say this surge in illegal AI-generated content could be growing the demand for real-world child abuse. WARNING: This story contains disturbing descriptions of child sex abuse. Resources and supports for anyone who has experienced sexual violence can be found at the bottom of this story. Prince Edward Island RCMP say there has been a \"notable increase\" in child sex abuse material made using artificial intelligence across parts of the province. Online exploitation specialists say this surge in illegal AI-generated content could be growing the demand for real-world child abuse. Internet watchdog reports indicate a trending global rise in AI-generated child sex abuse content, previously known as child pornography. In an email, P.E.I. RCMP senior communications adviser Scott Ferris said it’s a \"safe estimate\" that one third of Island RCMP online child abuse investigations now involve AI-generated material. That estimate considers only areas under RCMP jurisdiction, which excludes Charlottetown, Summerside and Kensington. AI child exploitation cases are surfacing across the Atlantic region. In St. John’s, N.L., this summer, a 17-year-old boy was charged with nearly 60 counts related to the creation and distribution of child sexual abuse material. Police allege he used AI tools to alter images of 19 minors and make them explicit. Const. Stephanie Myers with the Royal Newfoundland Constabulary told CBC News On the Go host Krissy Holmes the case is \"probably one of our first if not the first\" specifically involving AI being used to create child sexual exploitation material. A 17-year-old in St John's, N.L., faces 58 charges related to his alleged use of AI to alter images of teenagers. Const. Stephanie Myers with the Royal Newfoundland Constabulary (RNC) says this is likely one of the RNC's first AI-specific child abuse cases. (Danny Arsenault/CBC) Technological developments have dramatically changed how child sex abuse crimes are committed. With AI, criminals no longer need to make direct contact with an underage victim to create new abusive content. But that doesn’t mean these are victimless crimes. AI-generated material found in one-third of P.E.I. RCMP online child abuse cases Police say 19 victims identified in AI child sexual abuse image investigation \"In many of the cases … AI-generated content is either produced to create material of a child that’s in the family or the neighbourhood of that offender,\" said Mauranne Ste-Marie, senior research analyst with the national RCMP’s sensitive and specialized investigative services unit. \"It increases the demand for the material, it normalizes the abuse.\" Certain generative AI models — which are ultimately trained on images of real people — can create abusive images or videos either in the likeness of a specific person ",
+   "permalink": "https://www.cbc.ca/news/canada/prince-edward-island/pei-artificial-intelligence-child-sexual-abuse-police-experts-9.7419753",
+   "external_url": "https://www.cbc.ca/news/canada/prince-edward-island/pei-artificial-intelligence-child-sexual-abuse-police-experts-9.7419753",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] sextortion & blackmail",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Children & safety",
+   "scores": {
+    "credibility": 90,
+    "consequence": 85,
+    "significance": 80,
+    "audience": 90,
+    "theme_fit": 90
+   },
+   "overall": 87,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Credible CBC report of AI‑generated CSAM and police action; clear child safety harm."
+  },
+  "theme": "Children & safety",
+  "judged": "2026-11-15",
+  "outlets": [
+   "cbc.ca"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Japan-led probe finds 1000 servers likely used for AI-driven cyberattacks",
+   "selftext": "Japan-led probe finds 1,000 servers linked to AI-driven cyberattacks and vulnerability scanning worldwide. Read more at straitstimes.com. Sign up now: Get insights on Asia's fast-moving developments Hacking, which previously required time even for those with specialised knowledge, has become easier with the emergence of high-level AI. TOKYO – Around 1,000 servers suspected of serving as bases for advanced artificial intelligence-driven cyberattacks have been online since October, a Japanese-led international investigation showed Nov 14 . The probe by the Japan Computer Emergency Response Team Coordination Centre (JPCERT/CC), conducted in cooperation with overseas cybersecurity firms, found that the servers may have used AI to search for vulnerabilities and target websites worldwide. Hacking, which previously required time even for those with specialised knowledge, has become easier with the emergence of high-level AI. Servers hosting the tools can be set up in physical facilities or operated through virtual frameworks. JPCERT/CC, which began its investigation in early October, identified AI tools in the discovered servers. It is tracking 600 to 700 of them. According to the centre, most of the servers hosted AI-powered platforms such as the penetration-testing tool Artex. They appeared to be searching for system vulnerabilities and attempting to steal configuration files. One server contained traces of a programming support tool created by AI from US company Anthropic, suggesting that attackers weaponised AI to enhance their hacking capabilities. Some publicly accessible servers contained tools for analysing the internal structure of smartphone applications and programmes for testing system vulnerabilities. Attackers are believed to have analysed apps and attempted unauthorised access through interfaces that exchange information with external systems. Ken Sajo, an analyst at JPCERT/CC, warned that as AI is still in the early stages of being used for cyberattacks, “more sophisticated attacks will increase in the future”. KYODO NEWS",
+   "permalink": "https://www.straitstimes.com/asia/east-asia/japan-led-probe-finds-1000-servers-likely-used-for-ai-driven-cyberattacks",
+   "external_url": "https://www.straitstimes.com/asia/east-asia/japan-led-probe-finds-1000-servers-likely-used-for-ai-driven-cyberattacks",
+   "provenance": "Google Alert",
+   "source_label": "[Hacking] AI-powered cyberattacks",
+   "subreddit": "",
+   "created": "2026-11-15",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 60,
+    "significance": 80,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 76,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Straitstimes investigation shows AI‑enabled servers used for cyber‑attacks; real‑world hacking threat."
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-15",
+  "outlets": [
+   "straitstimes.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Could a picture that never existed still change someone's life? | SBS News",
+   "selftext": "As AI reshapes our lives, who is responsible for the harm it can cause — and who gets to shape its future? From fabricated intimate images to deepfake pornography, AI is creating new ways to target women and girls, with the scale of the problem growing alongside the technology. According to a 2023 study by Security Hero, a United States-focused consumer digital privacy platform and review site, the number of deepfake videos online increased by 550 per cent between 2019 and 2023. Deepfake pornography makes up 98 per cent of all deepfake videos online, with 99 per cent targeting women. The problem extends beyond deepfakes. Research by the Australian National Research Organisation for Women&apos;s Safety (ANROWS) found that sexual and image-based abuse was one of the four most common forms of technology-facilitated abuse, alongside monitoring and controlling behaviours, emotional abuse and threats and harassment. Published in 2022, the study surveyed more than 4,500 Australian adults about their experiences of technology-facilitated abuse. It found more than half had experienced at least one form of abuse, with the rate rising to 71.5 per cent among 18- to-24-year-olds. One in four adults had experienced sexual and image-based abuse. Participants reported feeling controlled, humiliated, depressed and afraid as a result. In a statement to SBS News, ANROWS CEO Tessa Boyd-Caine said: &quot;We are seeing people who use violence quickly adapting their abuse to utilise new technologies such as location tracking, controlling vehicles remotely and image-based sexual abuse.&quot; &quot;Technology can change the reach, persistence and scale of abuse, making it constant, even when people are physically apart. &quot;Often, it&apos;s our everyday devices and platforms that are being used to exert control and inflict harm.&quot; The abuse is also playing out in public life, with some female politicians among its targets. In a joint doorstop interview at Parliament House in Canberra in October, Social Services Minister Tanya Plibersek described the scale of the abuse as &quot;unprecedented&#x201D;. As AI reshapes the digital landscape, experts say the stakes are becoming harder to ignore: why are women disproportionately affected, what responsibility do developers carry, and can regulation keep pace with the technology? While technology-facilitated abuse can affect anyone, its impact is often shaped by existing gender inequalities &#x2014; including who holds power and influence in the technology sector. Jeannie Marie Paterson, professor of law and co-director of the University of Melbourne&apos;s Centre for Artificial Intelligence and Digital Ethics, tells SBS News: &quot;We know that female politicians and leaders are many times more likely to be represented in synthetic, non-consensual intimate images, or deepfakes.&quot; Paterson says the visual nature of deepfakes makes them particularly damaging. &quot;We place so much faith in what we see,&quot; she says. S",
+   "permalink": "https://www.sbs.com.au/news/article/behind-ai-promise-lies-a-harmful-and-hurtful-threat-to-women/uh89jaagr",
+   "external_url": "https://www.sbs.com.au/news/article/behind-ai-promise-lies-a-harmful-and-hurtful-threat-to-women/uh89jaagr",
+   "provenance": "Google Alert",
+   "source_label": "[Deepfakes] non-consensual nudes (adults)",
+   "subreddit": "",
+   "created": "2026-11-15",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 85,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "kept as Image abuse example of real deepfake sexual harm"
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-15",
+  "outlets": [
+   "sbs.com.au"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.sbs.com.au/news/article/behind-ai-promise-lies-a-harmful-and-hurtful-threat-to-women/uh89jaagr",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "AI sees Ireland's graduates pivot: 'Many of the jobs I would have looked to kind of died'",
+   "selftext": "From one-way video screening to fully rendered humanoid interviewers, AI is already a force in Irish graduate recruitment. But is it all bad news for jobseekers? G raduates and students are having to scrap and hustle in a way that their predecessors did not. “I still cut a lot of people’s hair for free – just because I can,” says Amy Kennedy, president of Trinity College Dublin Students’ Union. Kennedy is in her fourth year of an English literature degree and part of a cohort of students who have watched their job prospects change considerably over the past couple of years. Upon leaving school , she had considered a career in barbering – going as far as putting a deposit down on a training course. Ultimately she didn’t take it up professionally and is set on a life in academia and publishing. But she believes so-called “side hustles”, such as cutting hair, may become increasingly necessary for her to make ends meet in the future. “Many of the jobs I would have looked to in the past to sustain me when studying have kind of died. A lot of copy editing is now fed into chatbots – and fired back out. “Creative writing is not something you can live off.” In her role as student union president, Kennedy has encountered numerous students who have had to change their career direction due to the impact of AI. Many have had to pursue their own side hustles. Kennedy says these tend to be physical roles that students feel are less likely to be replicated by AI at some point in the near future – such as carpentry. She mentions a law student who took an abrupt left turn and became a tattoo artist. Another has pursued a career repairing bicycles after their arts degree failed to land the job they thought it would. “I have seen recent graduates really struggling,” she says. “People who came into college with the promise of a degree, who at the time of entry were really employable, are now struggling to get jobs. It is really hitting people from around my age to those around five years older.” She reports that while some students are keen to use AI, there is a large cohort who are negatively disposed towards it – including herself. “I don’t want a robot to do my reading for me – writing my poetry for me. Those are fundamentally human outlets. It dehumanises a lot of things.” Does she regret pursuing a degree around which the options have seemingly narrowed? “I love my course, I love my discipline,” she says. “AI didn’t dissuade me from doing my college course.” David (not his real name) is a 23-year-old master’s student who recently experienced a one-way video job interview for the first time. “When you don’t have an actual person there and you’re just staring at yourself – even if you are given two or three attempts to record your answers – it’s still quite an unnatural process,” he says. David is part of the first generation of university graduates to experience the artificial intelligence recruitment process. The emergence of the one-way video interview has been",
+   "permalink": "https://www.irishtimes.com/life-style/people/2026/11/14/how-ai-is-impacting-irelands-graduate-job-seekers-it-dehumanises-a-lot-of-things/",
+   "external_url": "https://www.irishtimes.com/life-style/people/2026/11/14/how-ai-is-impacting-irelands-graduate-job-seekers-it-dehumanises-a-lot-of-things/",
+   "provenance": "Google Alert",
+   "source_label": "[Jobs] entry-level job collapse",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Jobs & livelihoods",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 75,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 81,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept showing AI impact on graduate job prospects"
+  },
+  "theme": "Jobs & livelihoods",
+  "judged": "2026-11-15",
+  "outlets": [
+   "irishtimes.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "'Unable to determine probable cause': Arizona judge releases DUI suspect over AI ...",
+   "selftext": "An Arizona judge has released a DUI suspect due to uncertainties in an AI-generated police report, raising questions about the use of artificial intelligence in law enforcement documentation. An Arizona judge has ordered the release of a 37-year-old man accused of driving under the influence after discovering that the arresting officer used an artificial intelligence tool to help prepare the police report.Maricopa Superior Court Judge Daniel Fenzel said he could not establish probable cause because the report did not clarify which parts of the account had been written by the officer and which may have been generated by AI.Anthony Edward Rene Quidera was arrested on October 29 after an Arizona Department of Public Safety trooper allegedly spotted his car travelling at 100 miles per hour on Interstate 10 in Phoenix at around 12.33 am.The arrest report stated that the trooper detected the smell of alcohol on Quidera's breath and found several open containers inside the vehicle. It also recorded that he displayed all six indicators of intoxication during field sobriety tests.However, the document included a disclaimer stating: \"This report was generated with assistance from Truleo AI. The content reflects the officer's own observations and recollections,\" as cited by ABC News.During Quidera's initial court appearance, Fenzel questioned the extent to which generative AI had contributed to the report.\"The court is unable to meaningfully weigh whether the factual allegations made in the narrative were authored, whether in whole or in part, by a generative AI,\" the judge said.\"Therefore, the court is unable to determine probable cause at this time.\"Fenzel clarified that the decision did not prevent prosecutors from pursuing the DUI case at a later stage. Quidera was scheduled to appear for arraignment on Thursday.The Arizona Department of Public Safety confirmed that its officers use Truleo, an AI tool, to assist with drafting police reports.Raul Garcia, who represents the department, said its guidelines allow artificial intelligence to support the preparation of reports but require officers to remain responsible for the final document.\"Under Department policy, AI tools may be used only as an aid in preparing a report narrative. The trooper remains the author of the report and is responsible for its accuracy and completeness,\" Garcia said.He added that officers must check the draft against body-worn camera recordings and other available evidence before submitting it. They are also required to verify details such as names, timings, locations and actions, correct inaccuracies and obtain supervisory approval.Garcia said troopers must complete department-approved training before using the technology.The case comes amid wider legal scrutiny of AI-generated material presented in court proceedings in Arizona.In a separate matter, the Arizona Court of Appeals ordered Gabriel Paul Horcasitas to be resentenced following his manslaughter conviction. The decision ca",
+   "permalink": "https://timesofindia.indiatimes.com/world/us/unable-to-determine-probable-cause-arizona-judge-releases-dui-suspect-over-ai-generated-police-report/articleshow/135835795.cms",
+   "external_url": "https://timesofindia.indiatimes.com/world/us/unable-to-determine-probable-cause-arizona-judge-releases-dui-suspect-over-ai-generated-police-report/articleshow/135835795.cms",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 90,
+    "consequence": 60,
+    "significance": 70,
+    "audience": 75,
+    "theme_fit": 85
+   },
+   "overall": 74,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as case of AI‑generated police report causing legal uncertainty"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-15",
+  "outlets": [
+   "timesofindia.indiatimes.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Who is Bilal Kazi, Indian student jailed for 30 years in UK for grooming 70 girls online?",
+   "selftext": "This audio is AI generated . ... The investigation is among the largest online child sexual abuse cases handled by Cheshire Constabulary's specialist ...",
+   "permalink": "https://indianexpress.com/article/world/bilal-kazi-who-is-indian-student-jailed-uk-online-grooming-70-girls-10963357/",
+   "external_url": "https://indianexpress.com/article/world/bilal-kazi-who-is-indian-student-jailed-uk-online-grooming-70-girls-10963357/",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] AI-generated CSAM",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Children & safety",
+   "scores": {
+    "credibility": 90,
+    "consequence": 90,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 86,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "kept as Children & safety example of AI‑generated CSAM"
+  },
+  "theme": "Children & safety",
+  "judged": "2026-11-15",
+  "outlets": [
+   "indianexpress.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Zombie citations: A short empirical investigation",
+   "selftext": "This is part of a larger concern about AI slop polluting the scholarly literature. The usual way this is framed is that you look at the reference ...",
+   "permalink": "https://statmodeling.stat.columbia.edu/2026/11/14/zombie-citations-a-short-empirical-investigation/",
+   "external_url": "https://statmodeling.stat.columbia.edu/2026/11/14/zombie-citations-a-short-empirical-investigation/",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] AI slop flooding platforms",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 90,
+    "consequence": 55,
+    "significance": 65,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 72,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Documented AI‑generated citation errors that mislead scholarly work"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-15",
+  "outlets": [
+   "statmodeling.stat.columbia.edu"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Nigeria's upcoming election marred by rising AI disinformation - DW News",
+   "selftext": "Nigeria has just over two months to go until its general election, with incumbent Bola Tinubu running on a ticket focused on combating raging insecurity and resolving the nation's economic crisis . He faces off against former Vice President Atiku Abubakar and senior opposition figure Peter Obi. The country's electoral body, the Independent National Electoral Commission (INEC), recently released its preliminary voter's register, which reportedly is riddled with images believed to have been generated using artificial intelligence (AI) . Among the telltale signs of AI usage were exaggerated facial features in images and inconsistencies on the electoral registers, such as duplicates of names and even identities of people who since the previous election had died. The development raises concerns about the body's overall preparedness ahead of the country's upcoming 2027 general election. Instead of making the upcoming vote more transparent by allowing access to its procedures, INEC has come under fire amid broader controversies about the expanding influence of AI in elections across the continent. To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video Joash Amupitan, the chairman of the electoral commission, said the body is now investigating the development, focusing on discrepancies potentially created by AI use. To this end, he announced the establishment of a dedicated unit to monitor AI-related threats, detect deepfakes and strengthen the integrity of the electoral process, warning that the credibility of the upcoming election could otherwise be under attack. However, even prior to the proliferation of AI across Africa and the globe, this would not be the first time that Nigeria has found itself in the unfortunate position of having to deal with the circulation of fabricated images , doctored audio and fake videos online. In the run-up to the 2023 election , deepfakes falsely linking candidates to terror-related activities filled social media platforms. These are often designed to promote certain candidates or to discredit opponents in a bid to influence public perception, which now with the use of AI could create disinformation campaigns of new proportions. Lois Ugbede, the assistant editor at the factchecking platform DUBAWA, told DW that \"based on our monitoring so far, AI-driven disinformation is serious and is becoming commonplace.\" \"This could influence political discourse and voter behavior ahead of 2027 because we are already seeing parties using inflated crowds to show that they have a large followership or support,\" she added. To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video At the same time, rather than influencing the vote in favor of any particular candidate, \"the deeper danger is that people may begin to doubt authentic information simply because they know convincing AI-generated fakes are possible,\" said Akintunde Bab",
+   "permalink": "https://www.dw.com/en/nigerias-upcoming-election-marred-by-rising-ai-disinformation/a-79946897",
+   "external_url": "https://www.dw.com/en/nigerias-upcoming-election-marred-by-rising-ai-disinformation/a-79946897",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 81,
+   "unproven": true,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keep: credible report of AI‑generated fake images in election register, fits Misinformation"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-15",
+  "outlets": [
+   "dw.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.dw.com/en/nigerias-upcoming-election-marred-by-rising-ai-disinformation/a-79946897",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Deepfake Video Call Scam and How to Identify Fake Faces During Online Calls",
+   "selftext": "The Arup case shows how convincing these calls can be. A finance worker in Hong Kong joined a video call with people he believed were the company's ...",
+   "permalink": "https://gadgetsnow.indiatimes.com/how-to/deepfake-video-call-scam-and-how-to-identify-fake-faces-during-online-calls/amp_articleshow/135827374.cms",
+   "external_url": "https://gadgetsnow.indiatimes.com/how-to/deepfake-video-call-scam-and-how-to-identify-fake-faces-during-online-calls/amp_articleshow/135827374.cms",
+   "provenance": "Google Alert",
+   "source_label": "[Scams] deepfake video-call fraud",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 60,
+    "consequence": 80,
+    "significance": 70,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 74,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keep: documented deepfake video‑call scam causing financial loss, fits Scams & fraud"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-15",
+  "outlets": [
+   "def.camp",
+   "gadgetsnow.indiatimes.com",
+   "x.com",
+   "youtube.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "https://gadgetsnow.indiatimes.com/how-to/deepfake-video-call-scam-and-how-to-identify-fake-faces-during-online-calls/amp_articleshow/135827374.cms",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Designing Assignments That Don't Depend on an AI Detector - PC Tech Magazine",
+   "selftext": "It’s Sunday night and an instructor has 140 essays to grade. Somewhere in the pile are a few… It’s Sunday night and an instructor has 140 essays to grade. Somewhere in the pile are a few that don’t sound like the students who submitted them, and a dashboard offers a shortcut: a color-coded score next to every name. The temptation to trust it is enormous. So is the cost of getting it wrong. This article is for teachers, lecturers and course designers who want fairness and rigor at once. It looks at what happened when one major university examined detection closely, how widespread student AI use has become, and how to set up coursework so that a software score is the least important evidence you have. In August 2023 Vanderbilt University explained why it was switching off Turnitin’s AI detector. The numbers in its announcement are worth reading slowly. Turnitin had claimed a 1 percent false positive rate. Vanderbilt had submitted 75,000 papers to the service in 2022. A 1 percent error rate on 75,000 papers is roughly 750 student papers that could have been wrongly labelled as partly written by AI (Vanderbilt University, 2023). Nobody doubts that 1 percent sounds small. Applied at the scale of a university, it means hundreds of students sitting across a table from someone who believes a machine over them. Vanderbilt also pointed to the lack of transparency about how the tool worked and to privacy concerns, and it advised instructors to talk with students early and consider redesigning assignments. Instructors aren’t imagining the problem. A Pew Research Center survey of about 1,400 US teens found that 26 percent had used ChatGPT for schoolwork in 2024, double the share from the year before (Pew Research Center, 2025). Habits formed in school travel with students into university, so the question for any course is no longer whether students have access. It’s what the course expects them to do with it. That’s why the answer can’t be a purely technical one. A tool that hands out a verdict without explanation will always lose to a clear policy and a well-built assignment. The most dependable shift is to grade the journey as well as the destination. Ask for a proposal, an annotated source list, a rough draft and a short reflection on what changed between versions. Each stage is small, so grading stays manageable, and together they create a record that no single copied paragraph can fake. Staged work also helps honest students who might otherwise panic at a flag. If every submission arrives with its own history, a conversation about authorship takes two minutes. Questions anchored in class discussion, local data, a specific reading or a recent event are harder to answer generically. A prompt such as “Compare the argument we heard from our guest speaker with the second source on your list” asks for something a general-purpose tool has never seen. Vanderbilt’s guidance suggests exactly this kind of redesign, including in-class writing and topics discussed in",
+   "permalink": "https://pctechmag.com/2026/11/designing-assignments-that-dont-depend-on-an-ai-detector/",
+   "external_url": "https://pctechmag.com/2026/11/designing-assignments-that-dont-depend-on-an-ai-detector/",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] wrongful AI cheating accusations",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 60,
+    "consequence": 65,
+    "significance": 75,
+    "audience": 75,
+    "theme_fit": 90
+   },
+   "overall": 73,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as When AI fails example of AI‑detector false positives harming students"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-15",
+  "outlets": [
+   "pctechmag.com",
+   "universitytimes.ie"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "https://pctechmag.com/2026/11/designing-assignments-that-dont-depend-on-an-ai-detector/",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Age bias in resume screening : are HR professionals more biased than ChatGPT?",
+   "selftext": "Organizations face the dual challenge of an aging workforce and the growing use of artificial intelligence (AI) in personnel selection, urging selection pr Organizations face the dual challenge of an aging workforce and the growing use of artificial intelligence (AI) in personnel selection, urging selection procedures that are both efficient and age-inclusive. Yet it remains unclear whether AI makes hiring decisions less susceptible to age bias than human decision-makers. Across two studies, we compared how HR professionals and ChatGPT-5.4 evaluated younger and older job applicants. We also examined whether these evaluations depended on applicants’ gender and job age-type. When applicants were clearly qualified (study 1), ChatGPT-5.4 ( N = 1600) rated older applicants less favorably than younger applicants, whereas HR professionals ( N = 398) did not show this age bias. When applicants’ qualifications were more ambiguous (study 2), both ChatGPT-5.4 ( N = 1600) and HR professionals ( N = 402) evaluated older applicants less favorably. Under these more ambiguous conditions, ChatGPT-5.4 also took into account applicant gender and job age-type, showing more age bias for men and in young-typed jobs. Overall, ChatGPT-5.4 showed more consistent evidence of an age penalty than HR professionals, but the age bias depends on applicant qualifications. We recommend combining AI‑assisted screening with human oversight to support age‑inclusive hiring. This is a preview of subscription content, log in via an institution to check access. Price excludes VAT (USA) Tax calculation will be finalised during checkout.",
+   "permalink": "https://link.springer.com/article/10.1007/s10869-026-10164-6",
+   "external_url": "https://link.springer.com/article/10.1007/s10869-026-10164-6",
+   "provenance": "Google Alert",
+   "source_label": "[Bias] hiring-algorithm bias",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Bias & discrimination",
+   "scores": {
+    "credibility": 90,
+    "consequence": 70,
+    "significance": 80,
+    "audience": 90,
+    "theme_fit": 90
+   },
+   "overall": 80,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keep: academic study showing age bias in AI hiring, fits Bias & discrimination"
+  },
+  "theme": "Bias & discrimination",
+  "judged": "2026-11-15",
+  "outlets": [
+   "link.springer.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "'False flag operations': Columnist Sushant Singh's video doctored with AI - Alt News",
+   "selftext": "Following a terrorist attack on November 11 at a Central Reserve Police Force (CRPF) checkpoint in Jammu and Kashmir’s Kulgam district, a video went viral on social media with the claim that retired Indian Army officer and journalist Pravin Sawhney described Indian military and counter-terrorism drives in the valley as “false flag operations”. Social media […] Following a terrorist attack on November 11 at a Central Reserve Police Force (CRPF) checkpoint in Jammu and Kashmir’s Kulgam district, a video went viral on social media with the claim that retired Indian Army officer and journalist Pravin Sawhney described Indian military and counter-terrorism drives in the valley as “false flag operations”. Social media users claimed that Sawhney said that operations against the Kulgam attack, the Balakot airstrikes , and Operation Sindoor were orchestrated for political gains. X user @RedDeFactoIND (Red Vanguard) shared the viral clip, which shows an interview conducted by The Wire. ( Archive ) 𝗘𝘅-𝗔𝗿𝗺𝘆 𝗢𝗳𝗳𝗶𝗰𝗲𝗿 𝗗𝗿𝗼𝗽𝘀 𝗕𝗼𝗺𝗯𝘀𝗵𝗲𝗹𝗹🚨: Pravin Sawhney in Recent Interview for Wire said, “Another false flag, just like Pulwama and Pahalgam,This is a pattern” Indian journalists and influencers are now openly questioning the government’s narrative. The voices from within are getting louder. #CRPFSoldiers #CRPFCampAttack #kulgamattack #Kulgam #KulgamTerrorAttack — Red Vanguard (@RedDeFactoIND) November 12, 2026 In the viral clip, the interviewer can first be heard saying (translated from Hindi): “Sushant, I want to know from you…the theme of your latest essay is the politicisation of army…During the false flag operations like Balakot and Pahalgam, the way the Bharatiya Janata Party used the military for political gains. My second question is that today while there is a war-like situation in the world…is testing the Pralay missile is an indication of a new false flag operation?” “On one side China is occupying [Indian land], on the other there are CJP protests…Rahul Gandhi…,” the interviewer goes on to say before his voice is abruptly cut off. The interviewee then seems to respond with, “Two things are very clear. One, for false flag operations like Balakot and Pahalgam, Operation Sindoor was launched but the Indian army failed. Second, my answers are within your questions.” Several other users on X and Facebook also circulated the same video with identical claims. Among them were X handles @KaurUdhoke3 and @HinduReformer , along with multiple public Facebook pages focusing on South Asian geopolitics. [Archives: 1 , 2 ] A closer look at the viral video reveals noticeable lip-sync discrepancies and an unnatural, monotonous cadence in the voices of both men in the interview, which are salient features of AI-generated audio manipulation. Further, columnist and strategic affairs expert Sushant Singh has been misidentified in the viral video as Pravin Sawhney. In the viral video itself, the interviewer refers to the interviewee as Sushant, and not Pravin. Below is an image ",
+   "permalink": "https://www.altnews.in/false-flag-operations-columnist-sushant-singhs-video-doctored-with-ai-singh-misidentified-as-pravin-sawhney/",
+   "external_url": "https://www.altnews.in/false-flag-operations-columnist-sushant-singhs-video-doctored-with-ai-singh-misidentified-as-pravin-sawhney/",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Misinformation",
+   "scores": {
+    "credibility": 70,
+    "consequence": 60,
+    "significance": 80,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 75,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept as Misinformation; fact‑check source confirms AI‑deepfake"
+  },
+  "theme": "Misinformation",
+  "judged": "2026-11-15",
+  "outlets": [
+   "altnews.in"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Asia scam losses hit US$136.5 billion as gangs turn to AI - Thaiger",
+   "selftext": "Asia scam losses reached US$136.5 billion in a year, a survey shown at a Bangkok summit found, as gangs use AI to run scams and spread to new bases. Scam losses in Asia reached an estimated US$136.5 billion (about 4.6 trillion baht) across 13 markets, including Thailand, over the past 12 months, according to a regional survey presented at an anti-scam summit in Bangkok on November 10 and 11. The organisers warned that criminal gangs are increasingly using artificial intelligence (AI) to run entire scams automatically. The Global Anti-Scam Alliance (GASA) carried out the survey with Gogolook, the Taiwan-based maker of the Whoscall app, in markets including Thailand, Singapore, Malaysia, Indonesia, China and India. They presented it at the Global Anti-Scam Summit Asia 2026, which GASA organised with the Royal Thai Police, the Bank of Thailand and the Ministry of Digital Economy and Society. The survey found that 71% of adults in the region had come across a scam, and that 62% had engaged with a scammer even though 66% felt confident they could spot one. Of those who engaged, 26% lost money, and 51% of the people who lost money had been scammed more than once. Phone calls were still the channel scammers used most, at 56%, ahead of text messages at 50% and chat apps at 40%. Shopping, investment and job offers were the most common bait. Photo courtesy of Glenn Carstens-Peters Jorij Abraham, GASA's managing director, told the summit that scammers now use AI for every stage of a scam, from choosing targets and writing personalised messages to chatting with victims and sending fake links. He said AI-written messages were five times more effective at deceiving people than messages written by hand, so public education alone was no longer enough and protection also had to be built into the infrastructure. Abraham added that raids on large scam bases in several countries, including Cambodia, had not ended the gangs. Instead, he said, they had split into smaller groups working out of hotels and rented accommodation in the Middle East, Mexico and Eastern Europe, where they are harder to detect. Jeff Kuo, Gogolook's chief executive, said scammers use AI to clone the voices of company executives and family members, which makes phone scams far more convincing. He also urged technology companies not to put user growth ahead of safety, arguing that traffic may build a platform but only trust keeps it going. Meta, which also spoke at the summit, said it had worked with Thai police to remove more than 150,000 scam accounts. It also shares lists of harmful websites with other platforms, because scam sites stay online for three years on average even after social media networks block them. A separate GASA report on Thailand, produced with Mastercard and Whoscall, estimated that Thai consumers lost 65.86 billion baht to scams over the past year and that 79% of Thai adults had come across a scam, up from 72% in 2025. Facebook (54%) and LINE (48%) were the most common ways",
+   "permalink": "https://thethaiger.com/news/national/asia-scam-losses-hit-us136-5-billion-as-gangs-turn-to-ai",
+   "external_url": "https://thethaiger.com/news/national/asia-scam-losses-hit-us136-5-billion-as-gangs-turn-to-ai",
+   "provenance": "Google Alert",
+   "source_label": "[Scams] AI romance scams",
+   "subreddit": "",
+   "created": "2026-11-15",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 60,
+    "consequence": 70,
+    "significance": 80,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 70,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Keeps as AI‑enabled scam example with regional loss data"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-15",
+  "outlets": [
+   "thethaiger.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "North Korean hackers steal faces for crypto fraud and cyberattacks | Biometric Update",
+   "selftext": "North Korean hackers used stolen webcam recordings, deepfakes and hijacked accounts to steal cryptocurrency and compromise software developers. North Korean hackers have turned hundreds of real people’s faces into reusable tools for cyberattacks, secretly recording victims during counterfeit video meetings and replaying their recordings to impersonate trusted colleagues, compromise new targets, and steal cryptocurrency. The Federal Bureau of Investigation (FBI) says the operation, called “FaceStealer,” has stolen more than $400 million in cryptocurrency over 18 months and amassed more than 900 webcam recordings of victims, exposing an identity attack built around authentic faces, hijacked accounts, synthetic video, and stolen professional relationships. The Department of Justice announced Thursday that authorities had seized cloud infrastructure supporting the operation. An accompanying FBI technical advisory details how North Korean state-sponsored hackers systematically weaponized victims’ identities. The findings expose an impersonation technique that does not require generating artificial faces. Instead, attackers use recordings of real people to persuade colleagues and professional contacts that they are participating in legitimate conversations. Each compromise supplies another recognizable face, a collection of contacts, and potentially another trusted account from which to approach future victims. The FBI says the operation has expanded into attacks against maintainers of widely distributed open-source software, potentially exposing organizations far removed from the original targets. FaceStealer typically begins with a compromised individual whose communications accounts, contact lists, conversation histories, and webcam recordings have been stolen. Using that person’s legitimate Telegram account or another hijacked platform, the hackers invite contacts to what appears to be a routine Zoom or Microsoft Teams meeting. Because the attackers possess previous messages, invitations can reference established business relationships. Legitimate scheduling services such as Calendly add credibility. Shortly before the meeting, the target receives a link that looks like a legitimate conferencing address but leads to an attacker-controlled replica. Once the target joins, hackers play prerecorded footage of the person whose account was compromised. Several recorded participants may appear simultaneously, creating the impression of an ordinary group meeting. The attackers then manufacture a technical problem, often claiming the target’s microphone is malfunctioning. A supposed participant offers instructions to repair it by installing an update, executing a script, or entering commands into a computer terminal. Those instructions install malware that can harvest browser cookies, record keystrokes, capture screens, and establish persistent access. Meanwhile, the counterfeit meeting has already begun recording the new victim’s webcam. The FBI describes ",
+   "permalink": "https://www.biometricupdate.com/202611/north-korean-hackers-steal-faces-for-crypto-fraud-and-cyberattacks",
+   "external_url": "https://www.biometricupdate.com/202611/north-korean-hackers-steal-faces-for-crypto-fraud-and-cyberattacks",
+   "provenance": "Google Alert",
+   "source_label": "[Scams] AI identity theft",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 0,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 75,
+    "consequence": 90,
+    "significance": 90,
+    "audience": 85,
+    "theme_fit": 90
+   },
+   "overall": 84,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept as a real, large‑scale AI‑enabled fraud case"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-15",
+  "outlets": [
+   "biometricupdate.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "Maricopa County judge dismisses DUI case after trooper uses AI - AZ Family",
+   "selftext": "More police departments across the Valley are using AI, which raises questions about what that could mean going forward. PHOENIX (AZFamily) — A Maricopa County judge dismissed a DUI case against Anthony Quidera and explained that the trooper involved used AI to write the probable cause statement. Quidera was released as a result. More police departments across the Valley are using AI, which raises questions about what that could mean going forward. A trooper clocked Quidera going 30 mph over the speed limit, and he was found with several open alcohol containers in his car. The trooper noted Quidera smelled of alcohol. Maricopa County Judge Daniel Fenzel cited the use of AI in dismissing the case. “The court is unable to determine probable cause at this time,” Fenzel said. Fenzel referred to the last paragraph of the probable cause statement, which read, “This report was generated with assistance from Truleo AI.” “The court is unable to meaningfully weigh whether the facts and allegations made in the narrative were authored whether in whole or in part by a generative AI,” Fenzel said. Arizona’s Family Investigates found the Department of Public Safety has been using Truleo since 2024. “I wasn’t super surprised simply because there are just a lot of people that are negative about AI,” said Sean Harrington, director of the AI and Legal Technology Lab at Arizona State University’s law school. “It didn’t really seem to hold water to me,” Harrington said. “There’s nothing in the rules that says an officer can’t use AI when they’re drafting something like a probable cause statement. They’re still responsible for all the facts they put in there.” In April, Arizona’s Family reported on an attorney who was disciplined for filing motions that included AI-generated fake cases. In September, an appeals court threw out a sentence after it found the judge improperly relied on an AI-generated video portraying the victim. Harrington said he expects more situations like these. “Unfortunately, we’re kind of in the awkward teenage phase of AI implementation,” Harrington said. “The guidance in general from Arizona has been not to have that kind of blanket ban and to instead to actually evaluate the reliability of the facts,” Harrington added. Court records show Quidera was scheduled to be arraigned Thursday after his release but did not show up for court. He faces charges of DUI, speeding and possession of an open container in a vehicle. See a spelling or grammatical error in our story? Please click here to report it . Do you have a photo or video of a breaking news story? Send it to us here with a brief description. Do you have a story you want us to investigate? Tell us about it by contacting us . Copyright 2026 KTVK/KPHO. All rights reserved.",
+   "permalink": "https://www.azfamily.com/2026/11/14/maricopa-county-judge-dismisses-dui-case-after-trooper-uses-ai/",
+   "external_url": "https://www.azfamily.com/2026/11/14/maricopa-county-judge-dismisses-dui-case-after-trooper-uses-ai/",
+   "provenance": "Google Alert",
+   "source_label": "[Misinfo] fabricated images of real events",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "When AI fails",
+   "scores": {
+    "credibility": 70,
+    "consequence": 60,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 70,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Credible local news shows AI‑generated police report led to case dismissal, a real legal harm"
+  },
+  "theme": "When AI fails",
+  "judged": "2026-11-15",
+  "outlets": [
+   "azfamily.com"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "",
+  "twin_of": ""
+ },
+ {
+  "p": {
+   "title": "People called this Elora, Ont., company for a washer it supposedly sells. Except it doesn't ... - CBC",
+   "selftext": "This week, hundreds of people were making calls and sending emails and messages to an Elora, Ont., appliance maker wanting to buy their so-called revolutionary washing machine, the \"Keel.\" The problem? Elora's Stirling Marathon doesn't even make washers. The company is a victim of a scam Youtube video generated with artificial intelligence that has since been taken down. The video suggested the \"bombshell washer\" by Stirling Marathon would disrupt North America's washer industry. It would be good news for any other business, except the Elora, Ont., appliance maker doesn't even sell washers. The Ontario business featured in a recent scam powered by artificial intelligence, where someone posted a YouTube video combining real company marketing images with AI-generated content to advertise a fictional washer called \"the Keel.\" The company has received hundreds of emails, calls and social media interactions from people asking where to buy the product — with some even showing up at the facility. The inquiries started last Wednesday, according to Jordan Cuddihy, Stirling Marathon's customer service representative. \"I got here in the morning and started to check the inquiries in the morning and I saw a number of emails and messages from all over the world all over North America asking about this 'Keel' washing machine that we supposedly make,\" Cuddihy told CBC News. \"After the second or third inquiry mentioning the Keel machine, I did a quick Google search and I was led to this YouTube video, so that's when I realized something was up.\" The local appliance maker has sold refrigerators, freezers and coolers since 2016. CBC News reached out to YouTube, which has has since taken down the video and channel. Exposing who’s behind fake job ads online B.C. holiday market vendors targeted in sophisticated imitation scam A screenshot of the fake Stirling Marathon washer video on YouTube. Vice President Phil Greenway says the video had been viewed around 200,000 times before it was taken down. (Youtube) The 16-minute video showcased a supposed Stirling Marathon washer called the \"Keel.\" Using Stirling Marathon's marketing and factory imagery, the video claimed the washer would revolutionize the industry with its replaceable modular electronics, failsafe sensors and lower water usage. Phil Greenway, vice president of sales and marketing at Stirling Marathon and one of the people whose likeness was used in the video, thinks the whole situation is strange. \"It was a weird feeling seeing your face tied to a product that is not ours,\" he said. \"It was definitely bizarre, but it's clear that it was generated by some AI bot or something where it just scraped the internet of all images, previous articles, videos that were posted about our company.\" He thinks the video is \"funny\", especially since he doesn't believe the technology behind the claims exists. Same scam. 2 countries. Why Canadians don’t get their money back Crafters beware, scammers are getting better at imper",
+   "permalink": "https://www.cbc.ca/news/canada/kitchener-waterloo/stirling-marathon-9.7421011",
+   "external_url": "https://www.cbc.ca/news/canada/kitchener-waterloo/stirling-marathon-9.7421011",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] school deepfake nudes",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 1,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 90,
+    "consequence": 60,
+    "significance": 70,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 78,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as AI‑deepfake video scam affecting a company"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-15",
+  "outlets": [
+   "cbc.ca"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.ctvnews.ca/kitchener/article/ontario-company-dealing-with-surge-of-interest-in-non-existent-product-due-to-ai-video/",
+  "twin_of": "https://www.ctvnews.ca/kitchener/article/ontario-company-dealing-with-surge-of-interest-in-non-existent-product-due-to-ai-video/"
+ },
+ {
+  "p": {
+   "title": "US disrupts North Korea's $400 million crypto scam, FBI says - DW News",
+   "selftext": "The United States Justice Department said Thursday it had seized cloud infrastructure used by North Korean hackers in a video-call scam that has stolen more than $400 million (€361 million) in cryptocurrency over 18 months. It also said it had court approval to seize or restrain more than $1.2 billion taken in the recent Binance hack. The Federal Bureau of Investigation calls the scam \"FaceStealer.\" According to the Justice Department, hackers sent meeting invitations from accounts taken over from earlier victims. Once a target joins, the hackers record their webcam video and play a prerecorded clip of a previous victim the target knows, so trusted contacts appear to be present. The FBI says hackers are also starting to use AI-generated deepfakes of well-known crypto figures. The hackers then stage a fake technical error and offer a link to \"fix\" it, which installs malware, the department said. In some cases, they waited months, or over a year, before stealing funds. After that, they use the victim's contacts to find new targets. To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video Most targets work in crypto and other internet-related fields, and the hackers are increasingly going after open-source software developers, apparently to enable supply-chain attacks, the department said. Under a federal warrant, the FBI seized more than 900 webcam videos of victims. \"If you can't imagine a scenario where you might fall prey to it, you are not thinking creatively enough,\" said Patrick Grandy, who heads the FBI's Los Angeles field office. The FBI ties FaceStealer to a hacking cluster known as Sapphire Sleet or UNC1069. It is separate from the North Korean military hackers blamed for the Binance theft. In the Binance case, the FBI said the group known as TraderTraitor stole more than $6 billion (5.4 billion euros) on or around October 29. AP put the figure at about $6.3 billion (5.7 billion euros) and called it the biggest crypto heist on record. US agencies and private firms have since frozen more than $2.7 billion (2.44 billion euros), the department said. Authorities usually file a forfeiture claim in court, after which a judge decides who has a rightful claim to the recovered funds, AP reported. \"North Korea's government bankrolls its rogue regime and illicit weapons program through cryptocurrency theft,\" said M. Scott Proctor, the department's principal deputy assistant attorney general for national security.",
+   "permalink": "https://www.dw.com/en/us-disrupts-north-koreas-400-million-crypto-scam-fbi-says/a-79935957",
+   "external_url": "https://www.dw.com/en/us-disrupts-north-koreas-400-million-crypto-scam-fbi-says/a-79935957",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] school deepfake nudes",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 90,
+    "consequence": 90,
+    "significance": 90,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 87,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as large‑scale AI‑deepfake crypto scam case"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-15",
+  "outlets": [
+   "dw.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/",
+  "twin_of": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/"
+ },
+ {
+  "p": {
+   "title": "Deepfake victims in India: Why ordinary women lack legal protection - ThePrint",
+   "selftext": "Celebrities get swift court orders to remove deepfakes, but ordinary women face high legal costs and long waits, exposing gaps in India's ...",
+   "permalink": "https://theprint.in/campus-voice/deepfake-victims-in-india-why-ordinary-women-lack-legal-protection/3098696/",
+   "external_url": "https://theprint.in/campus-voice/deepfake-victims-in-india-why-ordinary-women-lack-legal-protection/3098696/",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] school deepfake nudes",
+   "subreddit": "",
+   "created": "2026-11-14",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 2,
+   "reject": null,
+   "theme": "Image abuse",
+   "scores": {
+    "credibility": 75,
+    "consequence": 70,
+    "significance": 80,
+    "audience": 70,
+    "theme_fit": 90
+   },
+   "overall": 75,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": true,
+   "hold": null,
+   "reason": "Kept: documented deep‑fake nude abuse of women, credible news outlet"
+  },
+  "theme": "Image abuse",
+  "judged": "2026-11-15",
+  "outlets": [
+   "theprint.in"
+  ],
+  "approved": false,
+  "swapped_from": "",
+  "event": "https://theprint.in/campus-voice/deepfake-victims-in-india-why-ordinary-women-lack-legal-protection/3098696/?amp",
+  "twin_of": "https://theprint.in/campus-voice/deepfake-victims-in-india-why-ordinary-women-lack-legal-protection/3098696/?amp"
  }
 ]
