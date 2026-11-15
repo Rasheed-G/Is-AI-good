@@ -1,0 +1,86 @@
+[
+ {
+  "p": {
+   "title": "Australia considers criminal penalties for rogue AI in wake of OpenAI hack - BBC",
+   "selftext": "AI safety regulator will also be created after a rogue OpenAI agent hacked government websites. Australia plans to create a new AI safety regulator and has flagged criminal penalties for tech companies who do not comply, months after an OpenAI hack. In September, Australia's Prime Minister Anthony Albanese revealed that a rogue OpenAI agent had \"infiltrated\" a government health website and other systems, and criticised the company for taking months to tell them about the hack. On Tuesday, he released the 18 recommendations made after a \"rapid review\" into the breaches including new safety and security standards for AI companies such as mandatory reporting of hacks. AI brings opportunities, he said, but Australia must prepare for the \"new risks\" from this \"rapidly advancing technology\". \"The law needs to get ahead of and, in some cases, make sure that it catches up with, what is a very fast changing world,\" Albanese said. One of the recommendations suggests changes to criminal law to have a standalone \"failure to prevent\" offence . This would criminalise instances where a company develops \"an AI model that engages in harmful conduct\" and \"fails to take reasonable steps to prevent that harm\". The review also recommended \"mandatory, time-bound AI safety reporting\" of hacks. This point addresses what Albanese had earlier called his \"disappointment\" in the months-long delay for OpenAI to tell his government about the breach. OpenAI said it only learnt of the breach in August while reviewing \"misaligned model activity\" and emailed a general inbox of an Australian government agency on 10 September. It took several more days before the email was escalated to Australia's cybersecurity centre, with a message then sent to a government minister ahead of the prime minister being told. Albanese said he spoke to OpenAI boss Sam Altman and raised \"Australia's extreme concern about this incident\", with Altman acknowledging there were \"issues with protocols\" at OpenAI. Days after the hacks were revealed, OpenAI delayed its rollout of a new AI model, citing safety concerns.",
+   "permalink": "https://www.bbc.com/news/articles/cmp3g37l566po",
+   "external_url": "https://www.bbc.com/news/articles/cmp3g37l566po",
+   "provenance": "Google Alert",
+   "source_label": "[Breaches] AI platform hacks / breaches",
+   "subreddit": "",
+   "created": "2026-11-10",
+   "over_18": false,
+   "feed_image": "",
+   "event": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+   "twin_of": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack"
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Hacking & AI acting autonomously",
+   "scores": {
+    "credibility": 90,
+    "consequence": 80,
+    "significance": 85,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 84,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "Kept – BBC report of real OpenAI‑related hack causing government data breach"
+  },
+  "theme": "Hacking & AI acting autonomously",
+  "judged": "2026-11-11",
+  "outlets": [
+   "bbc.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack",
+  "twin_of": "https://www.theguardian.com/technology/2026/nov/10/australia-manadatory-reporting-openai-medicare-hack"
+ },
+ {
+  "p": {
+   "title": "US disrupts North Korea's $400 million crypto scam, FBI says - DW News",
+   "selftext": "The United States Justice Department said Thursday it had seized cloud infrastructure used by North Korean hackers in a video-call scam that has stolen more than $400 million (€361 million) in cryptocurrency over 18 months. It also said it had court approval to seize or restrain more than $1.2 billion taken in the recent Binance hack. The Federal Bureau of Investigation calls the scam \"FaceStealer.\" According to the Justice Department, hackers sent meeting invitations from accounts taken over from earlier victims. Once a target joins, the hackers record their webcam video and play a prerecorded clip of a previous victim the target knows, so trusted contacts appear to be present. The FBI says hackers are also starting to use AI-generated deepfakes of well-known crypto figures. The hackers then stage a fake technical error and offer a link to \"fix\" it, which installs malware, the department said. In some cases, they waited months, or over a year, before stealing funds. After that, they use the victim's contacts to find new targets. To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video Most targets work in crypto and other internet-related fields, and the hackers are increasingly going after open-source software developers, apparently to enable supply-chain attacks, the department said. Under a federal warrant, the FBI seized more than 900 webcam videos of victims. \"If you can't imagine a scenario where you might fall prey to it, you are not thinking creatively enough,\" said Patrick Grandy, who heads the FBI's Los Angeles field office. The FBI ties FaceStealer to a hacking cluster known as Sapphire Sleet or UNC1069. It is separate from the North Korean military hackers blamed for the Binance theft. In the Binance case, the FBI said the group known as TraderTraitor stole more than $6 billion (5.4 billion euros) on or around October 29. AP put the figure at about $6.3 billion (5.7 billion euros) and called it the biggest crypto heist on record. US agencies and private firms have since frozen more than $2.7 billion (2.44 billion euros), the department said. Authorities usually file a forfeiture claim in court, after which a judge decides who has a rightful claim to the recovered funds, AP reported. \"North Korea's government bankrolls its rogue regime and illicit weapons program through cryptocurrency theft,\" said M. Scott Proctor, the department's principal deputy assistant attorney general for national security.",
+   "permalink": "https://www.dw.com/en/us-disrupts-north-koreas-400-million-crypto-scam-fbi-says/a-79935957",
+   "external_url": "https://www.dw.com/en/us-disrupts-north-koreas-400-million-crypto-scam-fbi-says/a-79935957",
+   "provenance": "Google Alert",
+   "source_label": "[Kids] school deepfake nudes",
+   "subreddit": "",
+   "created": "2026-11-13",
+   "over_18": false,
+   "feed_image": ""
+  },
+  "t": {
+   "i": 3,
+   "reject": null,
+   "theme": "Scams & fraud",
+   "scores": {
+    "credibility": 90,
+    "consequence": 90,
+    "significance": 90,
+    "audience": 80,
+    "theme_fit": 90
+   },
+   "overall": 87,
+   "unproven": false,
+   "harm_documented": true,
+   "sensitive": false,
+   "hold": null,
+   "reason": "kept as large‑scale AI‑deepfake crypto scam case"
+  },
+  "theme": "Scams & fraud",
+  "judged": "2026-11-15",
+  "outlets": [
+   "dw.com"
+  ],
+  "approved": true,
+  "swapped_from": "",
+  "event": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/",
+  "twin_of": "https://www.telegraph.co.uk/world-news/2026/11/13/north-korea-steals-400m-from-us-tech-workers-in-video-call/"
+ }
+]

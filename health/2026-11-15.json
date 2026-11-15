@@ -1,0 +1,23 @@
+{
+ "date": "2026-11-15",
+ "rows": {
+  "Stories": 287,
+  "Sources": 111,
+  "Runs": 28,
+  "Gate keywords": 62
+ },
+ "rows_total": 488,
+ "row_cap": 1000,
+ "live_stories": 170,
+ "newest_story": "2026-11-03",
+ "newest_age_days": 12,
+ "links_checked": 30,
+ "links_broken": [
+  "https://www.washingtonpost.com/technology/2026/09/30/openais-ai-agents-attempted-hack-canadian-government-website/",
+  "https://hrtechfeed.com/ai-hiring-tools-can-invent-their-own-bias-research-finds/"
+ ],
+ "warnings": [
+  "newest live story is 12 days old",
+  "2 of 30 checked links look broken"
+ ]
+}
