@@ -39,12 +39,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-        # Push as the repo owner (PUBLISH_TOKEN) so the auto-publish commit clears
-        # main's branch protection. The default bot push is rejected ("must go via a
-        # PR"), and personal repos can't grant a bot bypass, so the owner token stands in.
+      # The publish commit must clear main's protection (changes go via a PR). The default bot can't, so the
+      # push uses a 1-hour token from the repo's own GitHub App, which is allowed to bypass that rule and never
+      # expires. Until the app is set up (repo variable PUBLISH_APP_CLIENT_ID and secret PUBLISH_APP_KEY), the
+      # owner's personal token (PUBLISH_TOKEN) is used as before.
+      - name: Token from the publishing app
+        id: app
+        if: vars.PUBLISH_APP_CLIENT_ID != ''
+        uses: actions/create-github-app-token@v3
         with:
-          token: ${{ secrets.PUBLISH_TOKEN }}
+          client-id: ${{ vars.PUBLISH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.PUBLISH_APP_KEY }}
+          owner: ${{ github.repository_owner }}   # every repo the app is installed on (this one and the archive)
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.app.outputs.token || secrets.PUBLISH_TOKEN }}
           fetch-depth: 100      # enough history to find when site/stories.json last changed
       - uses: actions/setup-python@v5
         with:
@@ -72,7 +81,7 @@ jobs:
           GALLERY_ARCHIVE: "1"
           ARCHIVE_REPO: ${{ secrets.ARCHIVE_REPO }}
           ARCHIVE_PATH: ${{ secrets.ARCHIVE_PATH }}
-          ARCHIVE_TOKEN: ${{ secrets.ARCHIVE_TOKEN || secrets.PUBLISH_TOKEN }}
+          ARCHIVE_TOKEN: ${{ steps.app.outputs.token || secrets.ARCHIVE_TOKEN || secrets.PUBLISH_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/build_data.py
       - name: Theme list on How we choose stories (from the rulebook)
