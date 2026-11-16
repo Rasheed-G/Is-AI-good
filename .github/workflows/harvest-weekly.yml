@@ -6,7 +6,8 @@ name: Weekly pick
 # Replaces the old weekly sweep (same file, so it stays DISABLED on GitHub until the owner turns it on).
 on:
   schedule:
-    - cron: "0 4 * * 0"
+    - cron: "41 4 * * 0"
+  # Odd minute on purpose: GitHub delays scheduled runs set on the hour (by up to 6+ hours).
   workflow_dispatch: {}
 
 permissions:
@@ -35,9 +36,13 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/weekly_pick.py
       - name: Health check
+        # Fails (so GitHub emails a failure notice) on a serious warning: Airtable unreadable or near its row cap,
+        # no new story in 10 days, a Groq model retired, the publish token broken or expiring, a source failing.
         if: always()
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
           PIPELINE_DATA: pipeline-data
         run: python -u scripts/health_check.py
       - name: Save the working files

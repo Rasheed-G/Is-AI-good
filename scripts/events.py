@@ -150,8 +150,9 @@ def ask_same(pairs, docs, chat, sleep=SLEEP):
                     verdicts = {}
             if verdicts or attempt == RETRIES:
                 break
-            print(f"  … same-event call {status or 'failed'}; trying again in 60s")
-            time.sleep(60)
+            wait = 60 if status == "rate_limited" else 5   # a bad reply (e.g. invalid JSON) needs no long pause
+            print(f"  … same-event call {status or 'failed'}; trying again in {wait}s")
+            time.sleep(wait)
         failed_in_row = 0 if verdicts else failed_in_row + 1
         if failed_in_row == GIVE_UP:
             print(f"  ! Same-event check: {GIVE_UP} batches in a row got no answer; skipping the rest.")

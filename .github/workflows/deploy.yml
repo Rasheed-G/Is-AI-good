@@ -23,7 +23,8 @@ on:
     workflows: ["Weekly pick"]   # v3: only the weekly pick writes new stories
     types: [completed]
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "23 6 * * *"
+  # Odd minute on purpose: GitHub delays scheduled runs set on the hour (by up to 6+ hours).
   workflow_dispatch: {}
 
 permissions:

@@ -166,6 +166,21 @@ def add_yields(found, judged):
     _write("source-yields.json", pending)
 
 
+def note_source_failures(failed, read_ok_names):
+    """Count, per source, how many daily runs in a row it has failed (reset when it reads fine again).
+    The weekly health check warns about any source failing 3 runs or more."""
+    streaks = _read("source-failures.json", {})
+    for name in read_ok_names:
+        streaks.pop(name, None)
+    for name in failed:
+        streaks[name] = streaks.get(name, 0) + 1
+    _write("source-failures.json", streaks)
+
+
+def load_source_failures():
+    return _read("source-failures.json", {})
+
+
 def load_yields():
     return _read("source-yields.json", {})
 

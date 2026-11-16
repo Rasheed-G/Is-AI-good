@@ -87,6 +87,7 @@ GROQ_SLEEP = JUDGE_SLEEP  # back-compat alias
 # on clear items; borderline errors mostly systematic but low-stakes). JUDGE_BATCH=1 (env) reverts
 # to the proven single-item path instantly — no code change.
 JUDGE_BATCH = int(os.environ.get("JUDGE_BATCH", "4"))
+JUDGE_TOKEN_BUDGET = 185_000   # of Groq's ~200K tokens/day for the judge model; the judge stops before it
 JUDGE_BATCH_SLEEP = int(os.environ.get("JUDGE_BATCH_SLEEP", "20"))  # sec between batch calls.
                           # A batch ≈ 4×~650 = ~2.6K tok; at the old 15s that's ~10.3K tok/min,
                           # OVER the 120b's 8K-TPM bucket — the 08-20 run thrashed ~20 min in 30s
@@ -375,6 +376,13 @@ def fetch_feed(url, label):
         xml = http_text(url, headers={"User-Agent": BROWSER_UA})
         root = ET.fromstring(xml)
     except (urllib.error.HTTPError, urllib.error.URLError) as e:
+        channel = _yt_channel_id(url)
+        if channel and YOUTUBE_KEY:
+            # YouTube often answers its channel feeds with 404 from cloud servers (GitHub's included)
+            # while they work elsewhere, so read the channel's uploads through the YouTube API instead.
+            posts = fetch_youtube_uploads(channel, label, _provenance(url))
+            if posts is not None:
+                return posts
         print(f"  ! Feed error for {label}: {getattr(e, 'code', e)}")
         return None
     except ET.ParseError as e:
@@ -416,6 +424,33 @@ def fetch_feed(url, label):
                 posts.append(_feed_post(title, _clean(raw_desc, 1500),
                                         link, _parse_date(pd.text if pd is not None else ""), label, prov,
                                         _feed_image(it, raw_desc)))
+    return posts
+
+def _yt_channel_id(url):
+    m = re.search(r"youtube\.com/feeds/videos\.xml\?channel_id=(UC[A-Za-z0-9_-]{22})", url or "")
+    return m.group(1) if m else None
+
+def fetch_youtube_uploads(channel_id, label, prov):
+    """A channel's latest uploads through the YouTube Data API (1 quota unit of the 10,000 a day), used when its
+    RSS feed fails. The uploads playlist id is the channel id with UC changed to UU. None on failure."""
+    params = urllib.parse.urlencode({"key": YOUTUBE_KEY, "part": "snippet", "maxResults": 25,
+                                     "playlistId": "UU" + channel_id[2:]})
+    try:
+        data = http_json("https://www.googleapis.com/youtube/v3/playlistItems?" + params, headers={"User-Agent": UA})
+    except Exception as e:
+        print(f"  ! YouTube API fallback failed for {label}: {getattr(e, 'code', e)}")
+        return None
+    posts = []
+    for it in data.get("items", []):
+        sn = it.get("snippet") or {}
+        vid = (sn.get("resourceId") or {}).get("videoId")
+        if not vid:
+            continue
+        thumb = ((sn.get("thumbnails") or {}).get("high") or {}).get("url", "")
+        posts.append(_feed_post(_clean(html.unescape(sn.get("title", "")), 250),
+                                _clean(html.unescape(sn.get("description", "")), 1500),
+                                f"https://www.youtube.com/watch?v={vid}", (sn.get("publishedAt") or "")[:10],
+                                label, prov, thumb))
     return posts
 
 def _feed_post(title, body, link, date, label, prov, feed_image=""):
@@ -1774,6 +1809,7 @@ def main():
     print(f"  {len(sources)} active sources loaded (weekly copy of the Airtable Sources table).")
 
     seen, posts, failed, read_ok, yt_skipped = set(), [], [], 0, 0
+    ok_names = []
     for s in sources:
         if time.time() > deadline:
             print("  ! Time budget reached during fetch — stopping early.")
@@ -1802,6 +1838,7 @@ def main():
             failed.append(s["name"])       # source failed (429/404/parse/quota)
         else:
             read_ok += 1
+            ok_names.append(s["name"])
             for p in res:
                 if p["permalink"] in seen:
                     continue
@@ -1814,6 +1851,8 @@ def main():
     if yt_skipped:
         print(f"  Lane 2: skipped {yt_skipped} YouTube-search sources (no YOUTUBE_API_KEY set yet).")
     fetched_total = len(posts)
+    if not dry:
+        pipeline_data.note_source_failures(failed, ok_names)   # the weekly health check warns on repeat failures
     print(f"  {read_ok}/{len(sources)} sources read ({len(failed)} failed), {fetched_total} unique posts fetched.")
 
     # Recency window (A): drop anything older than the cutoff so we don't re-judge stale
@@ -1880,7 +1919,16 @@ def main():
     # reflects what a source actually supplied (in-window, deduped), not what survived our own filters.
     found_by_src = Counter(p.get("source_label", "") for p in posts)
 
-    # v3 same-event check (cheapest first: code pairs, then the cheap model on the close calls only).
+    # Stage A — cheap pre-triage (gpt-oss-20b) drops obvious junk so the expensive judge's
+    # scarce budget is spent on plausible candidates. Fail-open; its own rate-limit bucket.
+    # Rulebook section 9: AI Incident Database stories skip triage and go straight to the judge.
+    # Triage runs BEFORE the same-event check: about 7 in 10 items are junk, and asking "same event?" about them
+    # used close to half of the cheap model's daily token allowance.
+    incident = [p for p in posts if p.get("provenance") == "Incident DB"]
+    posts, tok_triage, triage_dropped = pretriage([p for p in posts if p.get("provenance") != "Incident DB"], deadline)
+    posts = incident + posts
+
+    # v3 same-event check on triage's survivors (cheapest first: code pairs, then the cheap model on the close calls).
     queue = pipeline_data.load_queue()
     before_same = list(posts)
     if TRIAGE_ONLY:                          # the triage test checks triage alone (saves the cheap model's tokens)
@@ -1889,13 +1937,6 @@ def main():
         posts, queue, n_same, tok_same = same_event_check(posts, queue)
     kept_ids = {id(p) for p in posts}
     same_dropped = [p for p in before_same if id(p) not in kept_ids]
-
-    # Stage A — cheap pre-triage (gpt-oss-20b) drops obvious junk so the expensive judge's
-    # scarce budget is spent on plausible candidates. Fail-open; its own rate-limit bucket.
-    # Rulebook section 9: AI Incident Database stories skip triage and go straight to the judge.
-    incident = [p for p in posts if p.get("provenance") == "Incident DB"]
-    posts, tok_triage, triage_dropped = pretriage([p for p in posts if p.get("provenance") != "Incident DB"], deadline)
-    posts = incident + posts
     tok_triage += tok_same
     if TRIAGE_ONLY:
         pipeline_data.save_triage_drops(triage_dropped)
@@ -1932,6 +1973,11 @@ def main():
     for start in range(0, len(to_judge), JUDGE_BATCH):
         if judged >= MAX_JUDGE:              # the daily ceiling: the rest wait for tomorrow
             print(f"  ! Daily judge ceiling ({MAX_JUDGE}) reached — the rest wait for tomorrow.")
+            break
+        if n_batches and tok_judge + tok_judge / n_batches > JUDGE_TOKEN_BUDGET:
+            # Groq's free plan gives the judge model about 200K tokens a day; past it every call fails.
+            # Stop while one more call still fits, so the rest wait for tomorrow instead of erroring.
+            print(f"  ! Judge's daily token budget (~{JUDGE_TOKEN_BUDGET:,}) nearly used — the rest wait for tomorrow.")
             break
         if time.time() > deadline:
             print("  ! Time budget reached during judging — stopping early.")
