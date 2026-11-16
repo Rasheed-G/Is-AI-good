@@ -7,7 +7,8 @@ name: Daily harvest
 # DISABLED on GitHub since 2026-10-23 (row cap): editing this file doesn't re-enable it.
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "17 1 * * *"
+  # Odd minute on purpose: GitHub delays scheduled runs set on the hour (by up to 6+ hours).
   workflow_dispatch: {}
 
 permissions:
