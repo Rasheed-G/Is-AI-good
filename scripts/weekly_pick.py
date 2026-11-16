@@ -60,6 +60,8 @@ def main():
     passed = [it for it in passed if not it["q"].get("event") or best[it["q"]["event"]] is it]
     selected, _dropped = H.select_best(passed)
     # A story written to Airtable since it was queued (by hand or a re-run) is not written twice.
+    # The weekly copy of the Stories table is refreshed here (the daily runs only read the copy).
+    H.story_copy(refresh=True)
     known = H.existing_source_urls()
     selected = [it for it in selected if not (H.dedup_keys(it["p"]) & known)]
     by_theme = Counter(it["theme"] for it in selected)
@@ -100,6 +102,7 @@ def main():
     if kept:
         created = H.create_records(kept)
         H.reenrich_new_rows(created, kept_posts)
+        H.add_to_story_copy([k["fields"] for k in kept])   # so this week's stories count as known from tomorrow
 
     # Picked stories leave the queue; anything picked but not reached (time) stays for next week. A pass that
     # wasn't picked gets one more Sunday (owner, 2026-11-05), unless its event was picked or it already had one.
@@ -117,7 +120,14 @@ def main():
             not_picked.append(q)
     pipeline_data.save_not_picked(not_picked)
     pipeline_data.save_queue([q for q in queue if id(q) in picked and id(q) not in reached] + carry)
-    # Per-source "Kept" counts are recomputed from Stories by the next daily run, so nothing to do here.
+    # Once a week: write the daily runs' per-source counts to the Sources table, and refresh the copies of the
+    # Sources and Gate keywords tables the daily runs read (so an edit there takes effect within a week).
+    H.push_yields()
+    for name, load in (("Sources", H.load_sources), ("Gate keywords", H.load_gate_rows)):
+        try:
+            load(refresh=True)
+        except Exception as e:
+            print(f"  ! Could not refresh the {name} copy: {e}")
     H.write_run({
         "run": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), "mode": "Weekly pick",
         "tried": 0, "read": 0, "failed_n": 0, "failed": [], "fetched": 0, "judged": 0,
