@@ -152,11 +152,15 @@ def within_window(post, cutoff):
     d = (post.get("created") or "").strip()[:10]
     return (not d) or (d >= cutoff)
 
-def load_sources():
-    """Active rows from the Airtable Sources table (owner-editable, no code).
+def load_sources(refresh=False):
+    """Active rows of the Airtable Sources table (owner-editable, no code), from the weekly copy in the
+    working files (pipeline_data.copy_of), so the daily run does not ask Airtable every night."""
+    return pipeline_data.copy_of("sources", _fetch_sources, refresh)
+
+def _fetch_sources():
+    """Active rows from the Airtable Sources table.
     Airtable caps a page at 100 records and returns an `offset` when more remain, so we
-    MUST follow it — otherwise sources past the 100th are silently never read (we have
-    137 active). Mirrors the offset loop already used by existing_source_urls et al."""
+    MUST follow it — otherwise sources past the 100th are silently never read."""
     out, offset = [], None
     while True:
         url = (f"https://api.airtable.com/v0/{BASE}/{SOURCES_TABLE}?pageSize=100"
@@ -465,21 +469,31 @@ def fetch_youtube_search(query):
             })
     return posts
 
-def existing_source_urls():
-    urls, offset = set(), None
+STORY_COPY_FIELDS = ("Title", "Source headline", "Summary", "Source URL", "Date Harvested", "Status")
+
+def _fetch_story_copy():
+    """Every story in Airtable (any status), with only the fields the reprint and same-event checks need."""
+    out, offset = [], None
     while True:
-        u = f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100&fields%5B%5D=Source%20URL"
-        if offset:
-            u += f"&offset={offset}"
+        u = (f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100"
+             + "".join(f"&fields%5B%5D={urllib.parse.quote(f)}" for f in STORY_COPY_FIELDS)
+             + (f"&offset={offset}" if offset else ""))
         data = http_json(u, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
-        for r in data.get("records", []):
-            su = r.get("fields", {}).get("Source URL")
-            if su:
-                urls.add(su)
+        out.extend(r.get("fields", {}) for r in data.get("records", []))
         offset = data.get("offset")
         if not offset:
-            break
-    return urls
+            return out
+
+def story_copy(refresh=False):
+    """The weekly copy of the Stories table (refreshed by the weekly pick, which is what adds stories)."""
+    return pipeline_data.copy_of("stories", _fetch_story_copy, refresh)
+
+def add_to_story_copy(fields_list):
+    """Add the stories just written to Airtable to the copy, without asking Airtable again."""
+    pipeline_data.add_to_copy("stories", [{k: f.get(k) for k in STORY_COPY_FIELDS if f.get(k)} for f in fields_list])
+
+def existing_source_urls():
+    return {f["Source URL"] for f in story_copy() if f.get("Source URL")}
 
 # --- AI-relevance pre-gate (YouTube only) -----------------------------------
 # YouTube Lane 1 pulls each trusted channel's WHOLE upload feed — mostly non-AI news
@@ -495,18 +509,25 @@ def existing_source_urls():
 # (\b..\b, case-insensitive, e.g. Sora), Phrase (substring, case-insensitive — default).
 GATE_TABLE = "tblvUIs01rOGsMpnC"
 
+def _fetch_gate_rows():
+    url = (f"https://api.airtable.com/v0/{BASE}/{GATE_TABLE}?pageSize=100"
+           f"&filterByFormula={urllib.parse.quote('{Active}=1')}")
+    data = http_json(url, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
+    return [r.get("fields", {}) for r in data.get("records", [])]
+
+def load_gate_rows(refresh=False):
+    """Active 'Gate keywords' rows, from the weekly copy in the working files."""
+    return pipeline_data.copy_of("gate-keywords", _fetch_gate_rows, refresh)
+
 def load_gate_matchers():
     """Build (acronym_re, terms_re) from Active 'Gate keywords' rows, or None to disable."""
     try:
-        url = (f"https://api.airtable.com/v0/{BASE}/{GATE_TABLE}?pageSize=100"
-               f"&filterByFormula={urllib.parse.quote('{Active}=1')}")
-        data = http_json(url, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
+        rows = load_gate_rows()
     except Exception as e:
         print(f"  ! Gate keywords unreadable ({e}) — gate DISABLED (all YouTube posts pass).")
         return None
     acro, ci = [], []
-    for r in data.get("records", []):
-        f = r.get("fields", {})
+    for f in rows:
         term = (f.get("Term") or "").strip()
         if not term:
             continue
@@ -642,23 +663,13 @@ DEDUP_WINDOW_DAYS = 14
 def existing_signatures():
     """(norm_title, summary_lower) for recent, still-standing rows — the reprint corpus."""
     cut = (datetime.date.today() - datetime.timedelta(days=DEDUP_WINDOW_DAYS)).isoformat()
-    formula = f"AND(IS_AFTER({{Date Harvested}}, '{cut}'), {{Status}}!='Rejected')"
-    sigs, offset = [], None
-    while True:
-        u = (f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100"
-             f"&fields%5B%5D=Title&fields%5B%5D=Source%20headline&fields%5B%5D=Summary"
-             f"&filterByFormula={urllib.parse.quote(formula)}")
-        if offset:
-            u += f"&offset={offset}"
-        data = http_json(u, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
-        for r in data.get("records", []):
-            f = r.get("fields", {})
-            nt = norm_title(f.get("Source headline") or f.get("Title", ""))   # Title is now our own
-            if nt:
-                sigs.append((nt, (f.get("Summary", "") or "").lower().strip()))
-        offset = data.get("offset")
-        if not offset:
-            break
+    sigs = []
+    for f in story_copy():
+        if (f.get("Date Harvested") or "")[:10] <= cut or f.get("Status") == "Rejected":
+            continue
+        nt = norm_title(f.get("Source headline") or f.get("Title", ""))   # Title is now our own
+        if nt:
+            sigs.append((nt, (f.get("Summary", "") or "").lower().strip()))
     return sigs
 
 def is_reprint(title, summary, sigs):
@@ -1371,17 +1382,7 @@ EVENT_WINDOW_DAYS = 60     # how far back in Airtable the same-event check looks
 def recent_stories(days=EVENT_WINDOW_DAYS):
     """Every story stored in the last `days` (any status: a rejected event is not wanted again either)."""
     cut = (datetime.date.today() - datetime.timedelta(days=days)).isoformat()
-    formula = f"IS_AFTER({{Date Harvested}}, '{cut}')"
-    out, offset = [], None
-    while True:
-        u = (f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100"
-             + "".join(f"&fields%5B%5D={urllib.parse.quote(f)}" for f in ("Title", "Source headline", "Summary", "Source URL"))
-             + f"&filterByFormula={urllib.parse.quote(formula)}" + (f"&offset={offset}" if offset else ""))
-        data = http_json(u, headers={"Authorization": f"Bearer {AIRTABLE_TOKEN}"})
-        out.extend(r.get("fields", {}) for r in data.get("records", []))
-        offset = data.get("offset")
-        if not offset:
-            return out
+    return [f for f in story_copy() if (f.get("Date Harvested") or "")[:10] > cut]
 
 def _triage_chat(prompt):
     return groq_chat(TRIAGE_MODEL, prompt)
@@ -1632,30 +1633,30 @@ def _fetch_yield_rows(table_id, key_field, active_only):
             break
     return rows
 
-def _write_yield(table_id, key_field, rows, found_now, kept_now, kept10, kept30,
-                 today_s, cut_short, cut_long, judged_now=None):
+def _write_yield(table_id, key_field, rows, pending, kept10, kept30, cut_short, cut_long):
     """Compute the yield columns + accumulated 'Found daily' / 'Judged daily' for each row (keyed
-    by key_field) and PATCH them. Returns rows written, or -1 if the yield fields are absent
-    (422 → skip, don't raise). 'Found' and 'Judged' are accumulated into history strings; 'Kept'
-    is the exact rolling count passed in."""
+    by key_field) and PATCH them. `pending` = {date: {"found": {src: n}, "judged": {src: n}}}, the
+    daily counts saved since the last write. Returns rows written, or -1 if the yield fields are absent
+    (422 → skip, don't raise). Each pending day's count is SET (not added), so a retry never double
+    counts; 'Kept' is the exact rolling count passed in."""
+    last = pending[max(pending)] if pending else {"found": {}, "judged": {}}
     updates = []
     for r in rows:
         key = (r.get("fields", {}).get(key_field) or "").strip()
         if not key:
             continue
         hist = _parse_found_daily(r.get("fields", {}).get("Found daily", ""))
-        hist[today_s] = hist.get(today_s, 0) + int(found_now.get(key, 0))
+        jh = _parse_found_daily(r.get("fields", {}).get("Judged daily", ""))
+        for d, day in pending.items():
+            hist[d] = int(day.get("found", {}).get(key, 0))
+            jh[d] = int(day.get("judged", {}).get(key, 0))
         hist = {d: c for d, c in hist.items() if d > cut_long}       # trim to long window
-        extra = {}
-        if judged_now is not None:      # how many of the source's items the judge actually read
-            jh = _parse_found_daily(r.get("fields", {}).get("Judged daily", ""))
-            jh[today_s] = jh.get(today_s, 0) + int(judged_now.get(key, 0))
-            jh = {d: c for d, c in jh.items() if d > cut_long}
-            extra = {"Judged last run": int(judged_now.get(key, 0)), "Judged (30d)": sum(jh.values()),
-                     "Judged daily": _fmt_found_daily(jh)}
-        updates.append({"id": r["id"], "fields": {**extra,
-            "Found last run": int(found_now.get(key, 0)),
-            "Kept last run": int(kept_now.get(key, 0)),
+        jh = {d: c for d, c in jh.items() if d > cut_long}
+        updates.append({"id": r["id"], "fields": {
+            "Judged last run": int(last.get("judged", {}).get(key, 0)), "Judged (30d)": sum(jh.values()),
+            "Judged daily": _fmt_found_daily(jh),
+            "Found last run": int(last.get("found", {}).get(key, 0)),
+            "Kept last run": 0,
             "Found (10d)": sum(c for d, c in hist.items() if d > cut_short),
             "Found (30d)": sum(hist.values()),
             "Kept (10d)": int(kept10.get(key, 0)), "Kept (30d)": int(kept30.get(key, 0)),
@@ -1674,27 +1675,33 @@ def _write_yield(table_id, key_field, rows, found_now, kept_now, kept10, kept30,
             raise
     return len(updates)
 
-def update_yields(found_by_src, kept_by_src, judged_by_src):
-    """Roll this run's per-source yield onto the Sources table (keyed by Name, active rows), so the
-    owner can see which sources are actually producing:
-      • Found/Judged/Kept last run — what the source supplied, how much the judge read, what it landed.
+def push_yields():
+    """Write the per-source yield saved by the daily runs onto the Sources table (keyed by Name, active
+    rows), once a week (the weekly pick calls this), so the owner can see which sources are producing:
+      • Found/Judged last run — what the source supplied and how much the judge read on the latest day.
       • Found (10d)/(30d), Judged (30d) — rolling sums. Neither can be recovered from Airtable
         (rejected items aren't stored) so they're ACCUMULATED into 'Found daily' / 'Judged daily'.
       • Kept (10d)/(30d) — exact rolling counts from the Stories table (Rejected excluded).
+    The daily counts wait in the working files (pipeline_data.add_yields) and are cleared once written.
     Best-effort: never breaks the run; self-heals (logs) if the fields are absent."""
+    pending = pipeline_data.load_yields()
+    if not pending:
+        print("  Per-source yield: nothing new to write.")
+        return
     try:
         today = datetime.date.today()
-        today_s = today.isoformat()
         cut_long = (today - datetime.timedelta(days=STATS_WINDOW_LONG)).isoformat()
         cut_short = (today - datetime.timedelta(days=STATS_WINDOW_SHORT)).isoformat()
         kept10, kept30 = kept_windows(STATS_WINDOW_SHORT, STATS_WINDOW_LONG)   # per Source name
         n = _write_yield(SOURCES_TABLE, "Name", _fetch_yield_rows(SOURCES_TABLE, "Name", True),
-                         found_by_src, kept_by_src, kept10, kept30, today_s, cut_short, cut_long,
-                         judged_now=judged_by_src)
-        print("  ! Source-yield fields missing — skipped." if n < 0
-              else f"  Per-source yield → {n} active Sources.")
+                         pending, kept10, kept30, cut_short, cut_long)
+        if n < 0:
+            print("  ! Source-yield fields missing — skipped.")
+        else:
+            pipeline_data.clear_yields()
+            print(f"  Per-source yield ({len(pending)} day(s)) → {n} active Sources.")
     except Exception as e:
-        print(f"  ! Could not update yield stats: {e}")
+        print(f"  ! Could not update yield stats (kept for next week): {e}")
 
 def write_run(s):
     """Log one row to the Runs table so coverage is visible, not silent."""
@@ -1764,7 +1771,7 @@ def main():
           + f"Harvest mode: {mode}. Window: last {WINDOW_DAYS} days. Fetching candidates…")
     deadline = time.time() + MAX_RUNTIME_MIN * 60
     sources = load_sources()
-    print(f"  {len(sources)} active sources loaded from Airtable.")
+    print(f"  {len(sources)} active sources loaded (weekly copy of the Airtable Sources table).")
 
     seen, posts, failed, read_ok, yt_skipped = set(), [], [], 0, 0
     for s in sources:
@@ -2017,9 +2024,9 @@ def main():
     print(f"  Queue: {len(passed)} added, {len(queue)} waiting for Sunday's pick."
           + (f" Triage drops saved to {drops_file.name}." if drops_file else ""))
 
-    # Per-source yield → Sources table. "Found" = this source's share of the pool (snapshotted above);
-    # "Kept" is recomputed from Stories, so it moves on Sundays when the pick writes the week's stories.
-    update_yields(found_by_src, Counter(), judged_by_src)
+    # Per-source yield, saved in the working files; the weekly pick writes it to the Sources table (push_yields).
+    # "Found" = this source's share of the pool (snapshotted above).
+    pipeline_data.add_yields(found_by_src, judged_by_src)
     write_run({
         "run": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), "mode": mode,
         "tried": len(sources), "read": read_ok, "failed_n": len(failed), "failed": failed,

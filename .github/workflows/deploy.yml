@@ -9,12 +9,10 @@ name: Publish & deploy
 # Runs:
 #   * after the weekly pick completes (workflow_run) — the week's stories go live promptly
 #   * once a day (schedule, 06:00 UTC) — picks up manual approvals of Sensitive
-#     items and removals (Status set to Rejected) made in Airtable between harvests.
-#     Was every 6 hours, but each run re-reads the whole Published table (~8 Airtable
-#     calls at 100 rows/page), so 4×/day was the top Airtable API-call consumer and
-#     pushed the Free-plan workspace over its monthly limit. Once daily keeps us well
-#     under; new harvested content still ships promptly via the workflow_run trigger,
-#     and an urgent manual edit can go live at once via workflow_dispatch below.
+#     items and removals (Status set to Rejected) made in Airtable between weekly picks.
+#     A rebuild re-reads every story (several Airtable requests) and the Free plan limits
+#     requests per month, so the daily run first asks one question (stories_changed.py:
+#     has any story been edited since the last rebuild?) and rebuilds only if so.
 #   * on demand (workflow_dispatch) — e.g. to push a removal live immediately
 #
 # HOST WIRING (one-time, owner, host-side — no code here): connect the repo to a
@@ -46,16 +44,25 @@ jobs:
         # PR"), and personal repos can't grant a bot bypass, so the owner token stands in.
         with:
           token: ${{ secrets.PUBLISH_TOKEN }}
+          fetch-depth: 100      # enough history to find when site/stories.json last changed
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Any story edited since the last rebuild? (daily run only)
+        id: check
+        if: github.event_name == 'schedule'
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+        run: python -u scripts/stories_changed.py
       - name: Publish (editorial gate)
+        if: github.event_name != 'schedule' || steps.check.outputs.changed == 'true'
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
           AUTOPUBLISH: "1"
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/publish.py
       - name: Build site data
+        if: github.event_name != 'schedule' || steps.check.outputs.changed == 'true'
         # Gallery limits on: at most 20 stories per theme, none older than 6 months (rulebook section 4).
         # Stories they leave out are archived with every field to the archive repo, then removed from Airtable.
         env:
@@ -68,8 +75,10 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/build_data.py
       - name: Theme list on How we choose stories (from the rulebook)
+        if: github.event_name != 'schedule' || steps.check.outputs.changed == 'true'
         run: python -u scripts/build_frame.py
       - name: Commit refreshed stories.json (triggers host deploy)
+        if: github.event_name != 'schedule' || steps.check.outputs.changed == 'true'
         # NOTE: no [skip ci] in the message. Cloudflare Pages treats [skip ci] as a
         # skip-build token, which suppressed the very deploy this commit exists to fire.
         # No workflow here triggers on: push, so there is no Actions loop to guard against.
