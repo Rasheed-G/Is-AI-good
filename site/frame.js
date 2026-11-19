@@ -6,6 +6,25 @@
 // and visible (in bands), and a few clicks. Nothing identifies a person: no cookies, no IDs, no storage.
 (function () {
   const page = location.pathname;
+  window.countEvent = function () {};
+
+  // "Don't count me": open any page with ?dont-count-me to stop this browser being counted, and
+  // ?count-me to undo it. Kept in this browser only (not a cookie), set only when someone asks.
+  const params = new URLSearchParams(location.search);
+  try {
+    if (params.has("dont-count-me")) {
+      localStorage.setItem("dontCountMe", "1");
+      alert("Done. Visits from this browser won't be counted. Open the site with ?count-me to undo.");
+    } else if (params.has("count-me")) {
+      localStorage.removeItem("dontCountMe");
+      alert("Done. Visits from this browser are counted again.");
+    }
+  } catch (_) {}
+  let skip = false;
+  try { skip = localStorage.getItem("dontCountMe") === "1"; } catch (_) {}
+  // Count only on the live site: previews and local copies would mix test clicks with real ones.
+  if (skip || !/(^|\.)isaigood\.org$/.test(location.hostname)) return;
+
   function send(event, target) {
     const body = JSON.stringify(target ? { page, event, target } : { page, event });
     try {

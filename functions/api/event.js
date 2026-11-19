@@ -15,6 +15,7 @@
 //   METRICS   The D1 database. If it isn't bound, events are dropped quietly; the site is unaffected.
 // The table is created on first use.
 //
+// Only requests to isaigood.org are saved; previews answer as normal but save nothing.
 // Anyone can post here, so the totals are a guide, not proof. Only the events listed below are
 // accepted, and pages and targets must look like site paths.
 
@@ -40,6 +41,9 @@ let ready = false;
 const reply = (status) => new Response(null, { status, headers: { "cache-control": "no-store" } });
 
 export async function onRequestPost({ request, env }) {
+  // Live site only: preview deployments share the database, and their test clicks would mix in.
+  if (!/(^|\.)isaigood\.org$/.test(new URL(request.url).hostname)) return reply(204);
+
   let body;
   try {
     const raw = await request.text();
