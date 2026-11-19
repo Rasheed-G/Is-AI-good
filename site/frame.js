@@ -1,6 +1,64 @@
-// Is AI Good? — the shared site frame, loaded on every page: the menu and the footer sign-up.
+// Is AI Good? — the shared site frame, loaded on every page: the reading counter, the menu and the footer sign-up.
 // Menu: groups open on click (not hover), close on Esc, a click outside, or when focus leaves.
 // On phones the three-bar button opens the whole menu and groups fold open in place.
+// ---- Reading counter: cookieless totals per page per day -> /api/event (functions/api/event.js) ----
+// Counts a page view, how far people scroll (25, 50, 75, 100%), roughly how long the page stays open
+// and visible (in bands), and a few clicks. Nothing identifies a person: no cookies, no IDs, no storage.
+(function () {
+  const page = location.pathname;
+  function send(event, target) {
+    const body = JSON.stringify(target ? { page, event, target } : { page, event });
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon("/api/event", body)) return;
+    } catch (_) {}
+    fetch("/api/event", { method: "POST", body, keepalive: true }).catch(() => {});
+  }
+  window.countEvent = send;
+
+  if (/^Page not found/.test(document.title)) { send("not-found"); return; }
+  send("view");
+
+  // Scroll: each mark counted once per visit. A page that fits on one screen counts as 100%.
+  const marks = [25, 50, 75, 100];
+  let next = 0;
+  function onScroll() {
+    const doc = document.documentElement;
+    const seen = ((window.scrollY + window.innerHeight) / Math.max(doc.scrollHeight, 1)) * 100;
+    while (next < marks.length && seen >= marks[next] - 2) send("scroll-" + marks[next++]);
+    if (next >= marks.length) window.removeEventListener("scroll", onScroll);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("load", onScroll);
+
+  // Time on page: only while the tab is visible; sent once, when the reader leaves or switches away.
+  let shown = 0, since = document.visibilityState === "visible" ? Date.now() : 0, sent = false;
+  function band(s) {
+    return s < 10 ? "time-under-10s" : s < 30 ? "time-10-30s" : s < 120 ? "time-30s-2m" : s < 300 ? "time-2-5m" : "time-over-5m";
+  }
+  function leave() {
+    if (since) { shown += Date.now() - since; since = 0; }
+    if (!sent) { sent = true; send(band(shown / 1000)); }
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") leave();
+    else if (!since) since = Date.now();
+  });
+  window.addEventListener("pagehide", leave);
+
+  // Clicks: topic links on the home page, gallery to topic links, Share, opening feedback.
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest("a, button");
+    if (!el) return;
+    if (el.matches(".share")) return send("click-share");
+    if (el.matches("#fbOpen, [data-feedback]")) return send("click-feedback");
+    const href = el.tagName === "A" ? el.getAttribute("href") || "" : "";
+    if (!href.startsWith("/impact/") || el.closest("header, footer")) return;
+    const target = href.split(/[?#]/)[0];
+    if (page === "/") send("click-topic", target);
+    else if (page.startsWith("/news/")) send("click-theme", target);
+  }, true);
+})();
+
 (function () {
   const menuBtn = document.querySelector(".menu-btn");
   const groupBtns = Array.from(document.querySelectorAll(".nav-group-btn"));
@@ -63,6 +121,7 @@
         if (data.ok) {
           form.reset();
           note.textContent = "Nearly done. Check your inbox and click the link to confirm.";
+          if (window.countEvent) window.countEvent("signup");
         } else {
           note.textContent = fail;
         }
