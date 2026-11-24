@@ -707,6 +707,8 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .text-page .what-now { margin: 0 0 1em; color: var(--muted); }
 /* Line up the lists with the headings (text pages indent lists by default) */
 .text-page .big-steps, .text-page .what-we-do { padding-left: 0; }
+/* The big picture sits in a white box (same edge as card 1) so it stands off the background */
+.text-page .big-steps { padding: 20px 20px 22px; background: var(--surface); border: 2px solid var(--ink); }
 .what-we-do { list-style: none; counter-reset: wwd; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .text-page .what-we-do li + li { margin-top: 0; }
 .what-we-do li {

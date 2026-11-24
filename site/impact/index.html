@@ -7,7 +7,7 @@
   <title>The impact of AI | Is AI Good?</title>
   <meta name="description" content="Real stories and clear explanations of how AI is affecting people today. Read the latest news or pick a topic, from jobs and bias to the environment and war." />
   <!-- frame:head -->
-  <link rel="stylesheet" href="/styles.css?v=20261124b" />
+  <link rel="stylesheet" href="/styles.css?v=20261124c" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -156,7 +156,9 @@
       <p class="footer-feedback"><a href="/contact/" data-feedback aria-haspopup="dialog">Have feedback? Tell us</a></p>
     </div>
   </footer>
-  <!-- Feedback form, opened by "Have feedback? Tell us" and any data-feedback link (site/frame.js) -->
+  <!-- Floating feedback button on every page: opens the feedback form below (site/frame.js) -->
+  <button id="fbOpen" class="fb-open" type="button" aria-haspopup="dialog" aria-controls="fbPanel">Feedback</button>
+  <!-- Feedback form, opened by the Feedback button, "Have feedback? Tell us" and any data-feedback link (site/frame.js) -->
   <div id="fbPanel" class="fb-panel" role="dialog" aria-modal="true" aria-labelledby="fbTitle" hidden>
     <div class="fb-card">
       <div class="fb-head">
@@ -168,7 +170,7 @@
         <label class="fb-field">
           <span>Type</span>
           <select name="type" id="fbType">
-            <option value="Bug">Something's broken (bug)</option>
+            <option value="Bug">Something's broken</option>
             <option value="Suggestion">Suggestion</option>
             <option value="Content issue">Content issue (wrong / should be removed)</option>
             <option value="Other">Other</option>
