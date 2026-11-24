@@ -673,7 +673,7 @@ html:not(.has-tabs) .tab-panel + .tab-panel { margin-top: 18px; }
 .home .site-nav, .home .menu-btn { margin-left: auto; }
 .home-header { padding-bottom: 30px; }
 /* The name is the same size as the other pages' headings, on one line */
-.home-header .masthead { margin-top: 26px; font-size: clamp(34px, 6vw, 60px); line-height: 1.05; }
+.home-header .masthead { margin-top: 26px; font-size: clamp(34px, 6vw, 60px); line-height: 1.05; word-spacing: -.3em; }
 .home-header .masthead .l2 { display: inline; margin-left: .3em; }
 .text-page .home-lead { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.4; color: var(--ink); }
 /* Phones: the name on one line and a shorter band, so the page starts on the first screen */
